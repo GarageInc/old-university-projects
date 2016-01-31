@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="AiB v N">
+</Property><Property Name="Файл решения" Value="D:\C++\14 сентября\AiB v N\AiB v N.sln">
+</Property><Property Name="Файл параметров пользователя" Value="D:\C++\14 сентября\AiB v N\AiB v N.suo">
+</Property><Property Name="Date" Value="4 октября 2012 г.">
+</Property><Property Name="Time" Value="18:14">
+</Property></Properties><Event ErrorLevel="0" Project="" Source="AiB v N.sln" Description="Успешно создана резервная копия файла D:\C++\14 сентября\AiB v N\AiB v N.sln.old">
+</Event><Event ErrorLevel="0" Project="" Source="AiB v N.suo" Description="Успешно создана резервная копия файла D:\C++\14 сентября\AiB v N\AiB v N.suo.old">
+</Event><Event ErrorLevel="0" Project="AiB v N" Source="AiB v N\AiB v N.vcproj" Description="Converting project file 'D:\C++\14 сентября\AiB v N\AiB v N\AiB v N.vcproj'.">
+</Event><Event ErrorLevel="1" Project="AiB v N" Source="AiB v N\AiB v N.vcproj" Description="VCWebServiceProxyGeneratorTool is no longer supported. The tool has been removed from your project settings.">
+</Event><Event ErrorLevel="0" Project="AiB v N" Source="AiB v N\AiB v N.vcproj" Description="Done converting to new project file 'D:\C++\14 сентября\AiB v N\AiB v N\AiB v N.vcxproj'.">
+</Event><Event ErrorLevel="3" Project="AiB v N" Source="AiB v N\AiB v N.vcproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="" Source="AiB v N.sln" Description="Преобразование решения успешно завершено">
+</Event><Event ErrorLevel="3" Project="" Source="AiB v N.sln" Description="Converted">
+</Event></UpgradeLog>

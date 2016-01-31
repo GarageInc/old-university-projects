@@ -1,0 +1,5 @@
+Ivanov    1         923       Æ
+Petrov    3         821       Ì
+Sidorow   4         479       Ì
+Fomenko   2         213       M
+Erevanov  6         678       Ì

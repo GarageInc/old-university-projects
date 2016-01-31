@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="DvoichPoisk">
+</Property><Property Name="Файл решения" Value="C:\Users\WorkOut\Desktop\C++ 921ИБ\DvoichPoisk\DvoichPoisk.sln">
+</Property><Property Name="Файл параметров пользователя" Value="C:\Users\WorkOut\Desktop\C++ 921ИБ\DvoichPoisk\DvoichPoisk.suo">
+</Property><Property Name="Date" Value="15 января 2013 г.">
+</Property><Property Name="Time" Value="19:05">
+</Property></Properties><Event ErrorLevel="0" Project="" Source="DvoichPoisk.sln" Description="Успешно создана резервная копия файла C:\Users\WorkOut\Desktop\C++ 921ИБ\DvoichPoisk\DvoichPoisk.sln.old">
+</Event><Event ErrorLevel="0" Project="" Source="DvoichPoisk.suo" Description="Успешно создана резервная копия файла C:\Users\WorkOut\Desktop\C++ 921ИБ\DvoichPoisk\DvoichPoisk.suo.old">
+</Event><Event ErrorLevel="0" Project="DvoichPoisk" Source="DvoichPoisk\DvoichPoisk.vcproj" Description="Converting project file 'C:\Users\WorkOut\Desktop\C++ 921ИБ\DvoichPoisk\DvoichPoisk\DvoichPoisk.vcproj'.">
+</Event><Event ErrorLevel="1" Project="DvoichPoisk" Source="DvoichPoisk\DvoichPoisk.vcproj" Description="VCWebServiceProxyGeneratorTool is no longer supported. The tool has been removed from your project settings.">
+</Event><Event ErrorLevel="0" Project="DvoichPoisk" Source="DvoichPoisk\DvoichPoisk.vcproj" Description="Done converting to new project file 'C:\Users\WorkOut\Desktop\C++ 921ИБ\DvoichPoisk\DvoichPoisk\DvoichPoisk.vcxproj'.">
+</Event><Event ErrorLevel="3" Project="DvoichPoisk" Source="DvoichPoisk\DvoichPoisk.vcproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="" Source="DvoichPoisk.sln" Description="Преобразование решения успешно завершено">
+</Event><Event ErrorLevel="3" Project="" Source="DvoichPoisk.sln" Description="Converted">
+</Event></UpgradeLog>

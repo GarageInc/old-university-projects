@@ -1,0 +1,8 @@
+﻿"SamostDMZ.Alphavit.exe": Загружено: "C:\Users\WorkOut\Desktop\SamostDMZ.Alphavit\Debug\SamostDMZ.Alphavit.exe", Символы загружены.
+"SamostDMZ.Alphavit.exe": Загружено: "C:\Windows\System32\ntdll.dll", Невозможно найти или открыть файл PDB
+"SamostDMZ.Alphavit.exe": Загружено: "C:\Windows\System32\kernel32.dll", Невозможно найти или открыть файл PDB
+"SamostDMZ.Alphavit.exe": Загружено: "C:\Windows\System32\KernelBase.dll", Невозможно найти или открыть файл PDB
+"SamostDMZ.Alphavit.exe": Загружено: "C:\Windows\System32\msvcp100d.dll", Символы загружены.
+"SamostDMZ.Alphavit.exe": Загружено: "C:\Windows\System32\msvcr100d.dll", Символы загружены.
+Поток 'Поток Win32' (0x31c) завершился с кодом -1073741510 (0xc000013a).
+Программа "[1856] SamostDMZ.Alphavit.exe: Машинный код" завершилась с кодом -1073741510 (0xc000013a).
