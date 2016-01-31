@@ -1,0 +1,25 @@
+C:\Users\7\Desktop\Опытные\C#\Cargo\Cargo\bin\Debug\Cargo.exe.config
+C:\Users\7\Desktop\Опытные\C#\Cargo\Cargo\bin\Debug\Cargo.mdf
+C:\Users\7\Desktop\Опытные\C#\Cargo\Cargo\bin\Debug\Cargo_log.ldf
+C:\Users\7\Desktop\Опытные\C#\Cargo\Cargo\bin\Debug\Cargo.exe
+C:\Users\7\Desktop\Опытные\C#\Cargo\Cargo\bin\Debug\Cargo.pdb
+C:\Users\7\Desktop\Опытные\C#\Cargo\Cargo\obj\Debug\Cargo.csprojResolveAssemblyReference.cache
+C:\Users\7\Desktop\Опытные\C#\Cargo\Cargo\obj\Debug\Cargo.Form1.resources
+C:\Users\7\Desktop\Опытные\C#\Cargo\Cargo\obj\Debug\Cargo.Properties.Resources.resources
+C:\Users\7\Desktop\Опытные\C#\Cargo\Cargo\obj\Debug\Cargo.csproj.GenerateResource.Cache
+C:\Users\7\Desktop\Опытные\C#\Cargo\Cargo\obj\Debug\Cargo.exe
+C:\Users\7\Desktop\Опытные\C#\Cargo\Cargo\obj\Debug\Cargo.pdb
+C:\Users\7\Desktop\Опытные\C#\2. БАЗЫ ДАННЫХ\Грузоперевозки, Маша Николаева\Cargo\bin\Debug\Cargo.mdf
+C:\Users\7\Desktop\Опытные\C#\2. БАЗЫ ДАННЫХ\Грузоперевозки, Маша Николаева\Cargo\bin\Debug\Cargo_log.ldf
+C:\Users\7\Desktop\Опытные\C#\2. БАЗЫ ДАННЫХ\Грузоперевозки, Маша Николаева\Cargo\bin\Debug\Cargo.exe.config
+C:\Users\7\Desktop\Опытные\C#\2. БАЗЫ ДАННЫХ\Грузоперевозки, Маша Николаева\Cargo\bin\Debug\Cargo.exe
+C:\Users\7\Desktop\Опытные\C#\2. БАЗЫ ДАННЫХ\Грузоперевозки, Маша Николаева\Cargo\bin\Debug\Cargo.pdb
+C:\Users\7\Desktop\Опытные\C#\2. БАЗЫ ДАННЫХ\Грузоперевозки, Маша Николаева\Cargo\obj\Debug\Cargo.Form1.resources
+C:\Users\7\Desktop\Опытные\C#\2. БАЗЫ ДАННЫХ\Грузоперевозки, Маша Николаева\Cargo\obj\Debug\Cargo.Properties.Resources.resources
+C:\Users\7\Desktop\Опытные\C#\2. БАЗЫ ДАННЫХ\Грузоперевозки, Маша Николаева\Cargo\obj\Debug\Cargo.csproj.GenerateResource.Cache
+C:\Users\7\Desktop\Опытные\C#\2. БАЗЫ ДАННЫХ\Грузоперевозки, Маша Николаева\Cargo\obj\Debug\Cargo.exe
+C:\Users\7\Desktop\Опытные\C#\2. БАЗЫ ДАННЫХ\Грузоперевозки, Маша Николаева\Cargo\obj\Debug\Cargo.pdb
+C:\Users\7\Desktop\Опытные\C#\2. БАЗЫ ДАННЫХ\Грузоперевозки, Маша Николаева\Cargo\obj\Debug\Cargo.csprojResolveAssemblyReference.cache
+F:\AllProjects\Опытные\C#\2. БАЗЫ ДАННЫХ\Грузоперевозки, Маша Николаева\Cargo\bin\Debug\Cargo.exe.config
+F:\AllProjects\Опытные\C#\2. БАЗЫ ДАННЫХ\Грузоперевозки, Маша Николаева\Cargo\obj\Debug\Cargo.exe
+F:\AllProjects\Опытные\C#\2. БАЗЫ ДАННЫХ\Грузоперевозки, Маша Николаева\Cargo\obj\Debug\Cargo.pdb

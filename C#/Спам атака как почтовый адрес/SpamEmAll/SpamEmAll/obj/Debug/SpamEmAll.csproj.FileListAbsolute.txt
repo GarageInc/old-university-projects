@@ -1,0 +1,8 @@
+c:\users\admin\documents\visual studio 2013\Projects\SpamEmAll\SpamEmAll\bin\Debug\SpamEmAll.exe
+c:\users\admin\documents\visual studio 2013\Projects\SpamEmAll\SpamEmAll\bin\Debug\SpamEmAll.pdb
+c:\users\admin\documents\visual studio 2013\Projects\SpamEmAll\SpamEmAll\obj\Debug\SpamEmAll.csprojResolveAssemblyReference.cache
+c:\users\admin\documents\visual studio 2013\Projects\SpamEmAll\SpamEmAll\obj\Debug\SpamEmAll.Form1.resources
+c:\users\admin\documents\visual studio 2013\Projects\SpamEmAll\SpamEmAll\obj\Debug\SpamEmAll.Properties.Resources.resources
+c:\users\admin\documents\visual studio 2013\Projects\SpamEmAll\SpamEmAll\obj\Debug\SpamEmAll.csproj.GenerateResource.Cache
+c:\users\admin\documents\visual studio 2013\Projects\SpamEmAll\SpamEmAll\obj\Debug\SpamEmAll.exe
+c:\users\admin\documents\visual studio 2013\Projects\SpamEmAll\SpamEmAll\obj\Debug\SpamEmAll.pdb

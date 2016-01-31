@@ -1,0 +1,11 @@
+C:\Users\7\Desktop\Опытные\C#\Library\Library\bin\Debug\Library.exe.config
+C:\Users\7\Desktop\Опытные\C#\Library\Library\bin\Debug\Library.mdf
+C:\Users\7\Desktop\Опытные\C#\Library\Library\bin\Debug\Library_log.ldf
+C:\Users\7\Desktop\Опытные\C#\Library\Library\bin\Debug\Library.exe
+C:\Users\7\Desktop\Опытные\C#\Library\Library\bin\Debug\Library.pdb
+C:\Users\7\Desktop\Опытные\C#\Library\Library\obj\Debug\Library.csprojResolveAssemblyReference.cache
+C:\Users\7\Desktop\Опытные\C#\Library\Library\obj\Debug\Library.Form1.resources
+C:\Users\7\Desktop\Опытные\C#\Library\Library\obj\Debug\Library.Properties.Resources.resources
+C:\Users\7\Desktop\Опытные\C#\Library\Library\obj\Debug\Library.csproj.GenerateResource.Cache
+C:\Users\7\Desktop\Опытные\C#\Library\Library\obj\Debug\Library.exe
+C:\Users\7\Desktop\Опытные\C#\Library\Library\obj\Debug\Library.pdb

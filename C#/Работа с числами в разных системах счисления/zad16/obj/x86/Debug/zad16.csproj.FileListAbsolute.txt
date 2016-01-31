@@ -1,0 +1,10 @@
+C:\Новая папка\проги\zad16\zad16\bin\Debug\zad16.exe
+C:\Новая папка\проги\zad16\zad16\bin\Debug\zad16.pdb
+C:\Новая папка\проги\zad16\zad16\obj\x86\Debug\zad16.exe
+C:\Новая папка\проги\zad16\zad16\obj\x86\Debug\zad16.pdb
+C:\Новая папка\проги\zad16\zad16\obj\x86\Debug\zad16.csprojResolveAssemblyReference.cache
+C:\Users\7\Desktop\zad16\zad16\obj\x86\Debug\zad16.exe
+C:\Users\7\Desktop\zad16\zad16\obj\x86\Debug\zad16.pdb
+C:\Users\7\Desktop\zad16\zad16\bin\Debug\zad16.exe
+C:\Users\7\Desktop\zad16\zad16\bin\Debug\zad16.pdb
+C:\Users\7\Desktop\zad16\zad16\obj\x86\Debug\zad16.csprojResolveAssemblyReference.cache

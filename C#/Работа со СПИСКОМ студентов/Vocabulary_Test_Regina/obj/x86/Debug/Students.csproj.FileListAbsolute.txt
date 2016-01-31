@@ -1,0 +1,4 @@
+C:\Users\7\Desktop\Vocabulary_Test_Regina\Vocabulary_Test_Regina\bin\Debug\Vocabulary_Test_Regina.exe
+C:\Users\7\Desktop\Vocabulary_Test_Regina\Vocabulary_Test_Regina\bin\Debug\Vocabulary_Test_Regina.pdb
+C:\Users\7\Desktop\Vocabulary_Test_Regina\Vocabulary_Test_Regina\obj\x86\Debug\Vocabulary_Test_Regina.exe
+C:\Users\7\Desktop\Vocabulary_Test_Regina\Vocabulary_Test_Regina\obj\x86\Debug\Vocabulary_Test_Regina.pdb

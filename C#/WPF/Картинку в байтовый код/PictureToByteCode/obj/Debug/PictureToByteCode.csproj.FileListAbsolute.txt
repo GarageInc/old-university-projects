@@ -1,0 +1,6 @@
+C:\Users\7\Desktop\Опытные\C#\PictureToByteCode\PictureToByteCode\bin\Debug\PictureToByteCode.exe.config
+C:\Users\7\Desktop\Опытные\C#\PictureToByteCode\PictureToByteCode\bin\Debug\PictureToByteCode.exe
+C:\Users\7\Desktop\Опытные\C#\PictureToByteCode\PictureToByteCode\bin\Debug\PictureToByteCode.pdb
+C:\Users\7\Desktop\Опытные\C#\PictureToByteCode\PictureToByteCode\obj\Debug\PictureToByteCode.csprojResolveAssemblyReference.cache
+C:\Users\7\Desktop\Опытные\C#\PictureToByteCode\PictureToByteCode\obj\Debug\PictureToByteCode.exe
+C:\Users\7\Desktop\Опытные\C#\PictureToByteCode\PictureToByteCode\obj\Debug\PictureToByteCode.pdb

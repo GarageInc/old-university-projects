@@ -1,0 +1,9 @@
+C:\Users\9-b-r_000\Downloads\EpsilonMethod\EpsilonMethod\bin\Debug\EpsilonMethod.exe.config
+C:\Users\9-b-r_000\Downloads\EpsilonMethod\EpsilonMethod\obj\Debug\EpsilonMethod.csprojResolveAssemblyReference.cache
+C:\Users\9-b-r_000\Downloads\EpsilonMethod\EpsilonMethod\obj\Debug\EpsilonMethod.mainForm.resources
+C:\Users\9-b-r_000\Downloads\EpsilonMethod\EpsilonMethod\obj\Debug\EpsilonMethod.Properties.Resources.resources
+C:\Users\9-b-r_000\Downloads\EpsilonMethod\EpsilonMethod\obj\Debug\EpsilonMethod.csproj.GenerateResource.Cache
+C:\Users\9-b-r_000\Downloads\EpsilonMethod\EpsilonMethod\bin\Debug\EpsilonMethod.exe
+C:\Users\9-b-r_000\Downloads\EpsilonMethod\EpsilonMethod\bin\Debug\EpsilonMethod.pdb
+C:\Users\9-b-r_000\Downloads\EpsilonMethod\EpsilonMethod\obj\Debug\EpsilonMethod.exe
+C:\Users\9-b-r_000\Downloads\EpsilonMethod\EpsilonMethod\obj\Debug\EpsilonMethod.pdb

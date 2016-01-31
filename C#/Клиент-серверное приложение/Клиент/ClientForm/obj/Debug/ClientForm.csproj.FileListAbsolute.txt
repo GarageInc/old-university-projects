@@ -1,0 +1,87 @@
+C:\Users\Алия\Desktop\ClientForm\ClientForm\bin\Debug\ClientForm.exe.config
+C:\Users\Алия\Desktop\ClientForm\ClientForm\bin\Debug\ClientForm.exe
+C:\Users\Алия\Desktop\ClientForm\ClientForm\bin\Debug\ClientForm.pdb
+C:\Users\Алия\Desktop\ClientForm\ClientForm\obj\Debug\ClientForm.Properties.Resources.resources
+C:\Users\Алия\Desktop\ClientForm\ClientForm\obj\Debug\ClientForm.csproj.GenerateResource.Cache
+C:\Users\Алия\Desktop\ClientForm\ClientForm\obj\Debug\ClientForm.exe
+C:\Users\Алия\Desktop\ClientForm\ClientForm\obj\Debug\ClientForm.pdb
+C:\Users\Алия\Desktop\ClientForm\ClientForm\obj\Debug\ClientForm.Form1.resources
+C:\Users\Алия\Desktop\ClientForm\ClientForm\obj\Debug\ClientForm.csprojResolveAssemblyReference.cache
+C:\Users\Анастасия\Downloads\ClientForm\ClientForm\bin\Debug\ClientForm.exe.config
+C:\Users\Анастасия\Downloads\ClientForm\ClientForm\obj\Debug\ClientForm.exe
+C:\Users\Анастасия\Downloads\ClientForm\ClientForm\obj\Debug\ClientForm.pdb
+C:\Users\Анастасия\Downloads\ClientForm\ClientForm\bin\Debug\ClientForm.exe
+C:\Users\Анастасия\Downloads\ClientForm\ClientForm\bin\Debug\ClientForm.pdb
+C:\Users\Анастасия\Downloads\ClientForm\ClientForm\obj\Debug\ClientForm.csprojResolveAssemblyReference.cache
+C:\Users\Анастасия\Downloads\ClientForm\ClientForm\obj\Debug\ClientForm.Form1.resources
+C:\Users\Анастасия\Downloads\ClientForm\ClientForm\obj\Debug\ClientForm.Properties.Resources.resources
+C:\Users\Анастасия\Downloads\ClientForm\ClientForm\obj\Debug\ClientForm.csproj.GenerateResource.Cache
+G:\ClientForm\ClientForm\bin\Debug\ClientForm.exe.config
+G:\ClientForm\ClientForm\obj\Debug\ClientForm.exe
+G:\ClientForm\ClientForm\obj\Debug\ClientForm.pdb
+C:\Users\Рамис\Desktop\ClientForm\ClientForm\bin\Debug\ClientForm.exe.config
+C:\Users\Рамис\Desktop\ClientForm\ClientForm\obj\Debug\ClientForm.exe
+C:\Users\Рамис\Desktop\ClientForm\ClientForm\obj\Debug\ClientForm.pdb
+C:\Users\Рамис\Desktop\ClientForm\ClientForm\bin\Debug\ClientForm.exe
+C:\Users\Рамис\Desktop\ClientForm\ClientForm\bin\Debug\ClientForm.pdb
+C:\Users\Рамис\Desktop\ClientForm\ClientForm\obj\Debug\ClientForm.csprojResolveAssemblyReference.cache
+C:\Users\Рамис\Desktop\ClientForm\ClientForm\obj\Debug\ClientForm.Form1.resources
+C:\Users\Рамис\Desktop\ClientForm\ClientForm\obj\Debug\ClientForm.Properties.Resources.resources
+C:\Users\Рамис\Desktop\ClientForm\ClientForm\obj\Debug\ClientForm.csproj.GenerateResource.Cache
+C:\Users\Admin\Desktop\Инф. без\4ая лаба по инфбезу\ClientForm\ClientForm\bin\Debug\ClientForm.exe.config
+C:\Users\Admin\Desktop\Инф. без\4ая лаба по инфбезу\ClientForm\ClientForm\obj\Debug\ClientForm.exe
+C:\Users\Admin\Desktop\Инф. без\4ая лаба по инфбезу\ClientForm\ClientForm\obj\Debug\ClientForm.pdb
+C:\Users\Admin\Desktop\Инф. без\4ая лаба по инфбезу\ClientForm\ClientForm\bin\Debug\ClientForm.exe
+C:\Users\Admin\Desktop\Инф. без\4ая лаба по инфбезу\ClientForm\ClientForm\bin\Debug\ClientForm.pdb
+C:\Users\Admin\Desktop\Инф. без\4ая лаба по инфбезу\ClientForm\ClientForm\obj\Debug\ClientForm.csprojResolveAssemblyReference.cache
+C:\Users\Admin\Desktop\Инф. без\4ая лаба по инфбезу\ClientForm\ClientForm\obj\Debug\ClientForm.Form1.resources
+C:\Users\Admin\Desktop\Инф. без\4ая лаба по инфбезу\ClientForm\ClientForm\obj\Debug\ClientForm.Properties.Resources.resources
+C:\Users\Admin\Desktop\Инф. без\4ая лаба по инфбезу\ClientForm\ClientForm\obj\Debug\ClientForm.csproj.GenerateResource.Cache
+C:\Users\Админиcтратор\Desktop\Инф. без\4ая лаба по инфбезу\ClientForm\ClientForm\bin\Debug\ClientForm.exe.config
+C:\Users\Админиcтратор\Desktop\Инф. без\4ая лаба по инфбезу\ClientForm\ClientForm\obj\Debug\ClientForm.exe
+C:\Users\Админиcтратор\Desktop\Инф. без\4ая лаба по инфбезу\ClientForm\ClientForm\obj\Debug\ClientForm.pdb
+C:\Users\Админиcтратор\Desktop\Инф. без\4ая лаба по инфбезу\ClientForm\ClientForm\bin\Debug\ClientForm.exe
+C:\Users\Админиcтратор\Desktop\Инф. без\4ая лаба по инфбезу\ClientForm\ClientForm\bin\Debug\ClientForm.pdb
+C:\Users\Админиcтратор\Desktop\Инф. без\4ая лаба по инфбезу\ClientForm\ClientForm\obj\Debug\ClientForm.csprojResolveAssemblyReference.cache
+C:\Users\Админиcтратор\Desktop\Инф. без\4ая лаба по инфбезу\ClientForm\ClientForm\obj\Debug\ClientForm.Form1.resources
+C:\Users\Админиcтратор\Desktop\Инф. без\4ая лаба по инфбезу\ClientForm\ClientForm\obj\Debug\ClientForm.Properties.Resources.resources
+C:\Users\Админиcтратор\Desktop\Инф. без\4ая лаба по инфбезу\ClientForm\ClientForm\obj\Debug\ClientForm.csproj.GenerateResource.Cache
+C:\Users\Admin\Desktop\Инф. без\3 задание по ИБКС\Клиент\ClientForm\bin\Debug\ClientForm.exe.config
+C:\Users\Admin\Desktop\Инф. без\3 задание по ИБКС\Клиент\ClientForm\obj\Debug\ClientForm.exe
+C:\Users\Admin\Desktop\Инф. без\3 задание по ИБКС\Клиент\ClientForm\obj\Debug\ClientForm.pdb
+C:\Users\Admin\Desktop\Инф. без\3 задание по ИБКС\Клиент\ClientForm\bin\Debug\ClientForm.exe
+C:\Users\Admin\Desktop\Инф. без\3 задание по ИБКС\Клиент\ClientForm\bin\Debug\ClientForm.pdb
+C:\Users\Admin\Desktop\Инф. без\3 задание по ИБКС\Клиент\ClientForm\obj\Debug\ClientForm.csprojResolveAssemblyReference.cache
+C:\Users\Admin\Desktop\Инф. без\3 задание по ИБКС\Клиент\ClientForm\obj\Debug\ClientForm.Form1.resources
+C:\Users\Admin\Desktop\Инф. без\3 задание по ИБКС\Клиент\ClientForm\obj\Debug\ClientForm.Properties.Resources.resources
+C:\Users\Admin\Desktop\Инф. без\3 задание по ИБКС\Клиент\ClientForm\obj\Debug\ClientForm.csproj.GenerateResource.Cache
+C:\Users\Админиcтратор\Desktop\3 задание по ИБКС\Клиент\ClientForm\bin\Debug\ClientForm.exe.config
+C:\Users\Админиcтратор\Desktop\3 задание по ИБКС\Клиент\ClientForm\obj\Debug\ClientForm.exe
+C:\Users\Админиcтратор\Desktop\3 задание по ИБКС\Клиент\ClientForm\obj\Debug\ClientForm.pdb
+C:\Users\Админиcтратор\Desktop\3 задание по ИБКС\Клиент\ClientForm\bin\Debug\ClientForm.exe
+C:\Users\Админиcтратор\Desktop\3 задание по ИБКС\Клиент\ClientForm\bin\Debug\ClientForm.pdb
+C:\Users\Админиcтратор\Desktop\3 задание по ИБКС\Клиент\ClientForm\obj\Debug\ClientForm.csprojResolveAssemblyReference.cache
+C:\Users\Админиcтратор\Desktop\3 задание по ИБКС\Клиент\ClientForm\obj\Debug\ClientForm.Form1.resources
+C:\Users\Админиcтратор\Desktop\3 задание по ИБКС\Клиент\ClientForm\obj\Debug\ClientForm.Properties.Resources.resources
+C:\Users\Админиcтратор\Desktop\3 задание по ИБКС\Клиент\ClientForm\obj\Debug\ClientForm.csproj.GenerateResource.Cache
+C:\Users\Admin\Desktop\3 задание по ИБКС\Клиент\ClientForm\bin\Debug\ClientForm.exe.config
+C:\Users\Admin\Desktop\3 задание по ИБКС\Клиент\ClientForm\obj\Debug\ClientForm.exe
+C:\Users\Admin\Desktop\3 задание по ИБКС\Клиент\ClientForm\obj\Debug\ClientForm.pdb
+C:\Users\Admin\Desktop\3 задание по ИБКС\Клиент\ClientForm\bin\Debug\ClientForm.exe
+C:\Users\Admin\Desktop\3 задание по ИБКС\Клиент\ClientForm\bin\Debug\ClientForm.pdb
+C:\Users\Admin\Desktop\3 задание по ИБКС\Клиент\ClientForm\obj\Debug\ClientForm.csprojResolveAssemblyReference.cache
+C:\Users\Admin\Desktop\3 задание по ИБКС\Клиент\ClientForm\obj\Debug\ClientForm.Form1.resources
+C:\Users\Admin\Desktop\3 задание по ИБКС\Клиент\ClientForm\obj\Debug\ClientForm.Properties.Resources.resources
+C:\Users\Admin\Desktop\3 задание по ИБКС\Клиент\ClientForm\obj\Debug\ClientForm.csproj.GenerateResource.Cache
+C:\Users\PC\Desktop\3 задание по ИБКС\Клиент\ClientForm\bin\Debug\ClientForm.exe.config
+C:\Users\PC\Desktop\3 задание по ИБКС\Клиент\ClientForm\obj\Debug\ClientForm.exe
+C:\Users\PC\Desktop\3 задание по ИБКС\Клиент\ClientForm\obj\Debug\ClientForm.pdb
+C:\Users\PC\Desktop\3 задание по ИБКС\Клиент\ClientForm\bin\Debug\ClientForm.exe
+C:\Users\PC\Desktop\3 задание по ИБКС\Клиент\ClientForm\bin\Debug\ClientForm.pdb
+C:\Users\PC\Desktop\3 задание по ИБКС\Клиент\ClientForm\obj\Debug\ClientForm.csprojResolveAssemblyReference.cache
+C:\Users\PC\Desktop\3 задание по ИБКС\Клиент\ClientForm\obj\Debug\ClientForm.Form1.resources
+C:\Users\PC\Desktop\3 задание по ИБКС\Клиент\ClientForm\obj\Debug\ClientForm.Properties.Resources.resources
+C:\Users\PC\Desktop\3 задание по ИБКС\Клиент\ClientForm\obj\Debug\ClientForm.csproj.GenerateResource.Cache
+C:\Users\9-b-r_000\Downloads\Клиент-серверное приложение\Клиент\ClientForm\bin\Debug\ClientForm.exe.config
+C:\Users\9-b-r_000\Downloads\Клиент-серверное приложение\Клиент\ClientForm\obj\Debug\ClientForm.exe
+C:\Users\9-b-r_000\Downloads\Клиент-серверное приложение\Клиент\ClientForm\obj\Debug\ClientForm.pdb

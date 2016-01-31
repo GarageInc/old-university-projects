@@ -1,0 +1,17 @@
+C:\Новая папка\проги\zad16\zad16\bin\Debug\zad16.exe
+C:\Новая папка\проги\zad16\zad16\bin\Debug\zad16.pdb
+C:\Новая папка\проги\zad16\zad16\obj\x86\Debug\zad16.exe
+C:\Новая папка\проги\zad16\zad16\obj\x86\Debug\zad16.pdb
+C:\Новая папка\проги\zad16\zad16\obj\x86\Debug\zad16.csprojResolveAssemblyReference.cache
+C:\Новая папка\проги\Миля\zad16\obj\x86\Debug\zad16.exe
+C:\Новая папка\проги\Миля\zad16\obj\x86\Debug\zad16.pdb
+C:\Новая папка\проги\Миля\zad16\obj\x86\Debug\zad16.csprojResolveAssemblyReference.cache
+C:\Новая папка\проги\Миля\zad16\bin\Debug\zad16.exe
+C:\Новая папка\проги\Миля\zad16\bin\Debug\zad16.pdb
+C:\Новая папка\проги\Регина\zad16\obj\x86\Debug\zad16.exe
+C:\Новая папка\проги\Регина\zad16\obj\x86\Debug\zad16.pdb
+C:\Новая папка\проги\Регина\zad16\obj\x86\Debug\zad16.csprojResolveAssemblyReference.cache
+C:\Новая папка\проги\Регина\zad16\bin\Debug\zad16.exe
+C:\Новая папка\проги\Регина\zad16\bin\Debug\zad16.pdb
+F:\Регина\zad16\obj\x86\Debug\zad16.exe
+F:\Регина\zad16\obj\x86\Debug\zad16.pdb

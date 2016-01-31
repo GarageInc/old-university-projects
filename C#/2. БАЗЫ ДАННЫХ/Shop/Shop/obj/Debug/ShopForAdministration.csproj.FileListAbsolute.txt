@@ -1,0 +1,17 @@
+C:\Users\9-b-r_000\Desktop\Shop\Shop\bin\Debug\Shop.exe.config
+C:\Users\9-b-r_000\Desktop\Shop\Shop\obj\Debug\Shop.exe
+C:\Users\9-b-r_000\Desktop\Shop\Shop\obj\Debug\Shop.pdb
+C:\Users\9-b-r_000\Desktop\Shop\Shop\bin\Debug\App_Data\Database.mdf
+C:\Users\9-b-r_000\Desktop\Shop\Shop\bin\Debug\App_Data\Database_log.ldf
+C:\Users\9-b-r_000\Desktop\Shop\Shop\bin\Debug\Shop.exe
+C:\Users\9-b-r_000\Desktop\Shop\Shop\bin\Debug\Shop.pdb
+C:\Users\9-b-r_000\Desktop\Shop\Shop\bin\Debug\EntityFramework.dll
+C:\Users\9-b-r_000\Desktop\Shop\Shop\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\9-b-r_000\Desktop\Shop\Shop\bin\Debug\EntityFramework.xml
+C:\Users\9-b-r_000\Desktop\Shop\Shop\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\9-b-r_000\Desktop\Shop\Shop\obj\Debug\ShopForAdministration.csprojResolveAssemblyReference.cache
+C:\Users\9-b-r_000\Desktop\Shop\Shop\obj\Debug\Shop.MainWindow.resources
+C:\Users\9-b-r_000\Desktop\Shop\Shop\obj\Debug\Shop.Properties.Resources.resources
+C:\Users\9-b-r_000\Desktop\Shop\Shop\obj\Debug\ShopForAdministration.csproj.GenerateResource.Cache
+C:\Users\9-b-r_000\Desktop\Shop\Shop\obj\Debug\Shop.Migrations.Initial.resources
+C:\Users\9-b-r_000\Desktop\Shop\Shop\obj\Debug\Shop.Migrations.Initial1.resources

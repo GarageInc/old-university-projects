@@ -1,0 +1,24 @@
+﻿<Window x:Name="Напитки" x:Class="WpfApplication6.Window4"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Напитки" Height="325" Width="445.628">
+    <Grid Margin="0,0,2,0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="217*"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Button Content="Кока-кола" Height="29" HorizontalAlignment="Left" Margin="12,27,0,0" x:Name="Кока_кола" VerticalAlignment="Top" Width="170" Click="Кока_кола_Click" />
+        <Button Content="Фанта" Height="31" HorizontalAlignment="Left" Margin="12,71,0,0" x:Name="Фанта" VerticalAlignment="Top" Width="170" Click="Фанта_Click" />
+        <Button Content="Спрайт" Height="29" HorizontalAlignment="Left" Margin="12,118,0,0" x:Name="Спрайт" VerticalAlignment="Top" Width="170" Click="Спрайт_Click" />
+        <Button Content="Чай" Height="33" HorizontalAlignment="Left" Margin="12,167,0,0" x:Name="Чай" VerticalAlignment="Top" Width="170" Click="Чай_Click" />
+        <Button Content="Ок" Height="37" HorizontalAlignment="Left" Margin="12,237,0,0" x:Name="Ок" VerticalAlignment="Top" Width="124" Click="Ок_Click" />
+        <Button Content="Отмена" Height="37" HorizontalAlignment="Left" Margin="222,237,0,0" x:Name="Отмена" VerticalAlignment="Top" Width="123" Click="Отмена_Click" />
+        <CheckBox Content="Лёд" Height="16" HorizontalAlignment="Left" Margin="222,71,0,0" x:Name="Лёд" VerticalAlignment="Top" Width="69" />
+        <ComboBox x:Name="Объем" HorizontalAlignment="Left" Margin="222,27,0,0" VerticalAlignment="Top" Width="202" SelectedIndex="0">
+            <ComboBoxItem Content="0.5"/>
+            <ComboBoxItem Content="0.6"/>
+            <ComboBoxItem Content="0.8"/>
+        </ComboBox>
+        <ListBox Height="114" HorizontalAlignment="Left" Margin="222,103,0,0" x:Name="ОкноВывода" VerticalAlignment="Top" Width="202" />
+    </Grid>
+</Window>

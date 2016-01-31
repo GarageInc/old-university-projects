@@ -1,0 +1,5 @@
+C:\Users\7\Desktop\Nikolaeva_Masha\Nikolaeva_Masha\bin\Debug\Nikolaeva_Masha.exe
+C:\Users\7\Desktop\Nikolaeva_Masha\Nikolaeva_Masha\bin\Debug\Nikolaeva_Masha.pdb
+C:\Users\7\Desktop\Nikolaeva_Masha\Nikolaeva_Masha\obj\x86\Debug\Nikolaeva_Masha.exe
+C:\Users\7\Desktop\Nikolaeva_Masha\Nikolaeva_Masha\obj\x86\Debug\Nikolaeva_Masha.pdb
+C:\Users\7\Desktop\Nikolaeva_Masha\Nikolaeva_Masha\obj\x86\Debug\Nikolaeva_Masha.csprojResolveAssemblyReference.cache

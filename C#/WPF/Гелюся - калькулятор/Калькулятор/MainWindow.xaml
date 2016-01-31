@@ -1,0 +1,25 @@
+﻿<Window x:Class="Калькулятор.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Калькулятор" Height="380.063" Width="571.937">
+    <Grid Margin="0,0,2,-2">
+        <TextBox x:Name="окноВывода" HorizontalAlignment="Right" Height="50" Margin="0,43,16,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="521" PreviewTextInput="textBox1_PrewievTextInput" TextAlignment="Right" FontSize="36" TextChanged="окноВывода_TextChanged"/>
+        <Button Content="1" HorizontalAlignment="Left" Margin="25,124,0,0" VerticalAlignment="Top" Width="124" RenderTransformOrigin="-0.56,-2.285" Click="button1_Click" Height="44"/>
+        <Button Content="2" HorizontalAlignment="Left" Margin="157,124,0,0" VerticalAlignment="Top" Width="124" RenderTransformOrigin="-0.56,-2.285" Click="button2_Click" Height="44"/>
+        <Button Content="3" HorizontalAlignment="Left" Margin="291,124,0,0" VerticalAlignment="Top" Width="124" RenderTransformOrigin="-0.56,-2.285" Click="button3_Click" Height="44"/>
+        <Button Content="4" HorizontalAlignment="Left" Margin="423,124,0,0" VerticalAlignment="Top" Width="124" RenderTransformOrigin="-0.56,-2.285" Click="button4_Click" Height="44"/>
+        <Button Content="5" HorizontalAlignment="Left" Margin="25,179,0,0" VerticalAlignment="Top" Width="124" RenderTransformOrigin="-0.56,-2.285" Click="button5_Click" Height="44"/>
+        <Button Content="6" HorizontalAlignment="Left" Margin="157,179,0,0" VerticalAlignment="Top" Width="124" RenderTransformOrigin="-0.56,-2.285" Click="button6_Click" Height="44"/>
+        <Button Content="7" HorizontalAlignment="Left" Margin="291,179,0,0" VerticalAlignment="Top" Width="124" RenderTransformOrigin="-0.56,-2.285" Click="button7_Click" Height="44"/>
+        <Button Content="8" HorizontalAlignment="Left" Margin="423,179,0,0" VerticalAlignment="Top" Width="124" RenderTransformOrigin="-0.56,-2.285" Click="button8_Click" Height="44"/>
+        <Button Content="9" HorizontalAlignment="Left" Margin="25,233,0,0" VerticalAlignment="Top" Width="124" RenderTransformOrigin="-0.56,-2.285" Click="button9_Click" Height="42"/>
+        <Button Content="0" HorizontalAlignment="Left" Margin="157,233,0,0" VerticalAlignment="Top" Width="124" RenderTransformOrigin="-0.56,-2.285" Click="button0_Click" Height="42"/>
+        <Button Content="*" HorizontalAlignment="Left" Margin="291,286,0,0" VerticalAlignment="Top" Width="124" RenderTransformOrigin="-0.56,-2.285" Click="multiplicationButton_Click" Height="44"/>
+        <Button Content="-" HorizontalAlignment="Left" Margin="25,286,0,0" VerticalAlignment="Top" Width="124" RenderTransformOrigin="-0.56,-2.285" Click="subtractionButton_Click" Height="44"/>
+        <Button Content="/" HorizontalAlignment="Left" Margin="423,286,0,0" VerticalAlignment="Top" Width="124" RenderTransformOrigin="-0.56,-2.285" Click="divideButton_Click" Height="44"/>
+        <Button Content="Clear" HorizontalAlignment="Left" Margin="423,233,0,0" VerticalAlignment="Top" Width="124" RenderTransformOrigin="-0.56,-2.285" Click="ClearAllButton_Click" Height="42"/>
+        <Button Content="=" HorizontalAlignment="Left" Margin="291,233,0,0" VerticalAlignment="Top" Width="124" RenderTransformOrigin="-0.56,-2.285" Click="button16_Click" Height="42"/>
+        <Button Content="+" HorizontalAlignment="Left" Margin="157,284,0,0" VerticalAlignment="Top" Width="124" RenderTransformOrigin="-0.56,-2.285" Click="additionButton_Click" Height="44"/>
+        <Button Content="," HorizontalAlignment="Left" Margin="423,98,0,0" VerticalAlignment="Top" Width="123" Click="Button_Click"/>
+    </Grid>
+</Window>

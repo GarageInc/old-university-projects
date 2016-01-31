@@ -1,0 +1,8 @@
+C:\Users\7\Desktop\Сглаживание\Сглаживание\bin\Debug\Сглаживание.exe
+C:\Users\7\Desktop\Сглаживание\Сглаживание\bin\Debug\Сглаживание.pdb
+C:\Users\7\Desktop\Сглаживание\Сглаживание\obj\x86\Debug\Сглаживание.Form1.resources
+C:\Users\7\Desktop\Сглаживание\Сглаживание\obj\x86\Debug\Сглаживание.Properties.Resources.resources
+C:\Users\7\Desktop\Сглаживание\Сглаживание\obj\x86\Debug\Сглаживание.csproj.GenerateResource.Cache
+C:\Users\7\Desktop\Сглаживание\Сглаживание\obj\x86\Debug\Сглаживание.exe
+C:\Users\7\Desktop\Сглаживание\Сглаживание\obj\x86\Debug\Сглаживание.pdb
+C:\Users\7\Desktop\Сглаживание\Сглаживание\obj\x86\Debug\Сглаживание.csprojResolveAssemblyReference.cache

@@ -1,0 +1,219 @@
+using System;
+
+namespace Matrix
+
+{
+//Класс матрица
+    class Matrix
+
+    {
+
+        private int[,] matr;
+
+        private int w,h;//Размерность высоты и ширины
+
+        //Функции взять-вернуть параметры матрицы
+
+        public int W
+
+        {
+
+            get{return w;}
+
+            set { w = value; }
+
+        }
+
+        public int H
+
+        {
+
+            get { return h; }
+
+            set { h = value; }
+
+        }
+
+        //Конструктор - передается массив двумерный и его размерность(Высота h и ширина w)
+
+        public Matrix(int[,] a, int h=0, int w=0)
+
+        {
+
+            this.matr = a;
+
+            this.w = w;
+
+            this.h = h;
+
+        }
+
+        //Получаем элемент
+
+        public int GetElement(int i, int j)
+
+        {
+
+            return matr[i, j];
+
+        }
+
+        //Изменяем элемент
+
+        public void SetElement(int value, int i, int j)
+
+        {
+
+            matr[i, j] = value;
+
+        }
+
+        //Перегружаем операции сложения матриц
+
+        //По умолчанию - матрицы должны быть одной размерности
+
+        public static Matrix operator +(Matrix a, Matrix b)
+
+        {
+
+            //Проверяем размерности матриц
+
+            if (a.W != b.W || a.H!= b.H) //Нужно только одно соответствие
+
+                throw new System.ArgumentException("Не совпадают размерности складываемых матриц");
+
+            int[,] new_mass=new int[a.H, b.W];
+
+            for(int i=0; i<a.H & i<b.H; i++)
+
+                for (int j = 0; j < a.W & j < b.W; j++)
+
+                    new_mass[i, j] = a.GetElement(i, j) + b.GetElement(i, j);
+
+            return new Matrix(new_mass,a.h,a.w);
+
+        }
+
+        //Перегружаем умножение матриц
+
+        public static Matrix operator *(Matrix A, Matrix B)
+
+        {
+
+            int[,] new_mass = new int[A.h, B.w];
+
+            if (A.h != B.W) //Нужно только одно соответствие
+
+                throw new System.ArgumentException("Не совпадают размерности умножаемых матриц");
+
+            for (int i = 0; i < A.W; ++i)
+
+            {
+
+                for (int j = 0; j < B.H; ++j)
+
+                {
+
+                    new_mass[i, j] = 0;
+
+                    //Непосредственное суммирование
+
+                    for (int k = 0; k < A.w; ++k)
+
+                    { //ТРЕТИЙ цикл, до A.m=B.n
+
+                        new_mass[i, j] += A.GetElement(i, k) * B.GetElement(k, j); //Собираем сумму произведений
+
+                    }
+
+                }
+
+            }
+
+            return new Matrix(new_mass, A.H, B.W);
+
+        }
+
+        //Вывод матрицы на экран
+
+        public void Print()
+
+        {
+
+            for (int i = 0; i < h & i < h; i++)
+
+            {
+
+                for (int j = 0; j < w & j < w; j++)
+
+                    //печатаем
+
+                {
+
+                    Console.Write(matr[i,j]+"  ");
+
+                }
+
+                Console.WriteLine();
+
+            }
+
+        }
+
+        
+
+    }
+
+    class Program
+
+    {
+
+        static void Main(string[] args)
+
+        {
+
+            //Инициализируем матрицы и действия с ними
+
+            Matrix A=new Matrix(new int[,]{ { 1, 2 ,3 }, { 3, 4, 5 }, { 6, 7, 8  }, },3,3);
+
+            A.Print();
+
+            Console.WriteLine();
+
+            Matrix B = new Matrix(new int[,] { { 1, 2, 3 }, { 3, 4, 5 }, { 6, 7, 8 }, }, 3,3);
+
+            B.Print();
+
+            Console.WriteLine();
+
+            Matrix C=A+B;
+
+            Console.WriteLine("Сумма:");
+
+            C.Print();
+
+            Console.WriteLine();
+
+            
+
+            Console.WriteLine("Умножение:");
+
+            C = A*B;
+
+            C.Print();
+
+            Console.WriteLine();
+
+            Console.WriteLine("Получим первый элемент последней матрицы с индексами (0,0):  ");
+
+            Console.Write(C.GetElement(0, 0));
+
+            Console.ReadKey();
+
+        }
+
+    }
+
+}
+
+

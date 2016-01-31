@@ -1,0 +1,45 @@
+C:\Users\7\Desktop\Опытные\C#\CryptoChat\CryptoChat\obj\Debug\CryptoChat.Form1.resources
+C:\Users\7\Desktop\Опытные\C#\CryptoChat\CryptoChat\obj\Debug\CryptoChat.Properties.Resources.resources
+C:\Users\7\Desktop\Опытные\C#\CryptoChat\CryptoChat\obj\Debug\CryptoChat.csproj.GenerateResource.Cache
+C:\Users\7\Desktop\Опытные\C#\CryptoChat\CryptoChat\bin\Debug\CryptoChat.exe.config
+C:\Users\7\Desktop\Опытные\C#\CryptoChat\CryptoChat\bin\Debug\CryptoChat.exe
+C:\Users\7\Desktop\Опытные\C#\CryptoChat\CryptoChat\bin\Debug\CryptoChat.pdb
+C:\Users\7\Desktop\Опытные\C#\CryptoChat\CryptoChat\obj\Debug\CryptoChat.exe
+C:\Users\7\Desktop\Опытные\C#\CryptoChat\CryptoChat\obj\Debug\CryptoChat.pdb
+C:\Users\7\Desktop\Опытные\C#\CryptoChat\CryptoChat\obj\Debug\CryptoChat.csprojResolveAssemblyReference.cache
+C:\Users\7\Desktop\Опытные\C#\1. Криптография, сжатие, шифры\Имитовставка ECBC\CryptoChat\bin\Debug\CryptoChat.exe.config
+C:\Users\7\Desktop\Опытные\C#\1. Криптография, сжатие, шифры\Имитовставка ECBC\CryptoChat\obj\Debug\CryptoChat.exe
+C:\Users\7\Desktop\Опытные\C#\1. Криптография, сжатие, шифры\Имитовставка ECBC\CryptoChat\obj\Debug\CryptoChat.pdb
+C:\Users\7\Desktop\Опытные\C#\1. Криптография, сжатие, шифры\Имитовставка ECBC\CryptoChat\bin\Debug\CryptoChat.exe
+C:\Users\7\Desktop\Опытные\C#\1. Криптография, сжатие, шифры\Имитовставка ECBC\CryptoChat\bin\Debug\CryptoChat.pdb
+C:\Users\7\Desktop\Опытные\C#\1. Криптография, сжатие, шифры\Имитовставка ECBC\CryptoChat\obj\Debug\CryptoChat.csprojResolveAssemblyReference.cache
+C:\Users\7\Desktop\Опытные\C#\1. Криптография, сжатие, шифры\Имитовставка ECBC\CryptoChat\obj\Debug\CryptoChat.Form1.resources
+C:\Users\7\Desktop\Опытные\C#\1. Криптография, сжатие, шифры\Имитовставка ECBC\CryptoChat\obj\Debug\CryptoChat.Properties.Resources.resources
+C:\Users\7\Desktop\Опытные\C#\1. Криптография, сжатие, шифры\Имитовставка ECBC\CryptoChat\obj\Debug\CryptoChat.csproj.GenerateResource.Cache
+C:\Users\7\Desktop\Лабы Долгова\1 Чат с использованием ECBS\Имитовставка ECBC\CryptoChat\bin\Debug\CryptoChat.exe.config
+C:\Users\7\Desktop\Лабы Долгова\1 Чат с использованием ECBS\Имитовставка ECBC\CryptoChat\obj\Debug\CryptoChat.exe
+C:\Users\7\Desktop\Лабы Долгова\1 Чат с использованием ECBS\Имитовставка ECBC\CryptoChat\obj\Debug\CryptoChat.pdb
+C:\Users\7\Desktop\Лабы Долгова\1 Чат с использованием ECBS\Имитовставка ECBC\CryptoChat\bin\Debug\CryptoChat.exe
+C:\Users\7\Desktop\Лабы Долгова\1 Чат с использованием ECBS\Имитовставка ECBC\CryptoChat\bin\Debug\CryptoChat.pdb
+C:\Users\7\Desktop\Лабы Долгова\1 Чат с использованием ECBS\Имитовставка ECBC\CryptoChat\obj\Debug\CryptoChat.csprojResolveAssemblyReference.cache
+C:\Users\7\Desktop\Лабы Долгова\1 Чат с использованием ECBS\Имитовставка ECBC\CryptoChat\obj\Debug\CryptoChat.Form1.resources
+C:\Users\7\Desktop\Лабы Долгова\1 Чат с использованием ECBS\Имитовставка ECBC\CryptoChat\obj\Debug\CryptoChat.Properties.Resources.resources
+C:\Users\7\Desktop\Лабы Долгова\1 Чат с использованием ECBS\Имитовставка ECBC\CryptoChat\obj\Debug\CryptoChat.csproj.GenerateResource.Cache
+C:\Users\9-b-r_000\Desktop\Лабы Долгова\1 Чат с использованием ECBS\Имитовставка ECBC\CryptoChat\bin\Debug\CryptoChat.exe.config
+C:\Users\9-b-r_000\Desktop\Лабы Долгова\1 Чат с использованием ECBS\Имитовставка ECBC\CryptoChat\obj\Debug\CryptoChat.exe
+C:\Users\9-b-r_000\Desktop\Лабы Долгова\1 Чат с использованием ECBS\Имитовставка ECBC\CryptoChat\obj\Debug\CryptoChat.pdb
+C:\Users\9-b-r_000\Desktop\Лабы Долгова\1 Чат с использованием ECBS\Имитовставка ECBC\CryptoChat\bin\Debug\CryptoChat.exe
+C:\Users\9-b-r_000\Desktop\Лабы Долгова\1 Чат с использованием ECBS\Имитовставка ECBC\CryptoChat\bin\Debug\CryptoChat.pdb
+C:\Users\9-b-r_000\Desktop\Лабы Долгова\1 Чат с использованием ECBS\Имитовставка ECBC\CryptoChat\obj\Debug\CryptoChat.csprojResolveAssemblyReference.cache
+C:\Users\9-b-r_000\Desktop\Лабы Долгова\1 Чат с использованием ECBS\Имитовставка ECBC\CryptoChat\obj\Debug\CryptoChat.Form1.resources
+C:\Users\9-b-r_000\Desktop\Лабы Долгова\1 Чат с использованием ECBS\Имитовставка ECBC\CryptoChat\obj\Debug\CryptoChat.Properties.Resources.resources
+C:\Users\9-b-r_000\Desktop\Лабы Долгова\1 Чат с использованием ECBS\Имитовставка ECBC\CryptoChat\obj\Debug\CryptoChat.csproj.GenerateResource.Cache
+C:\Users\9-b-r_000\Desktop\1 Чат с использованием ECBS\1 Чат с использованием ECBS\Имитовставка ECBC\CryptoChat\bin\Debug\CryptoChat.exe.config
+C:\Users\9-b-r_000\Desktop\1 Чат с использованием ECBS\1 Чат с использованием ECBS\Имитовставка ECBC\CryptoChat\obj\Debug\CryptoChat.exe
+C:\Users\9-b-r_000\Desktop\1 Чат с использованием ECBS\1 Чат с использованием ECBS\Имитовставка ECBC\CryptoChat\obj\Debug\CryptoChat.pdb
+C:\Users\9-b-r_000\Desktop\1 Чат с использованием ECBS\1 Чат с использованием ECBS\Имитовставка ECBC\CryptoChat\bin\Debug\CryptoChat.exe
+C:\Users\9-b-r_000\Desktop\1 Чат с использованием ECBS\1 Чат с использованием ECBS\Имитовставка ECBC\CryptoChat\bin\Debug\CryptoChat.pdb
+C:\Users\9-b-r_000\Desktop\1 Чат с использованием ECBS\1 Чат с использованием ECBS\Имитовставка ECBC\CryptoChat\obj\Debug\CryptoChat.csprojResolveAssemblyReference.cache
+C:\Users\9-b-r_000\Desktop\1 Чат с использованием ECBS\1 Чат с использованием ECBS\Имитовставка ECBC\CryptoChat\obj\Debug\CryptoChat.Form1.resources
+C:\Users\9-b-r_000\Desktop\1 Чат с использованием ECBS\1 Чат с использованием ECBS\Имитовставка ECBC\CryptoChat\obj\Debug\CryptoChat.Properties.Resources.resources
+C:\Users\9-b-r_000\Desktop\1 Чат с использованием ECBS\1 Чат с использованием ECBS\Имитовставка ECBC\CryptoChat\obj\Debug\CryptoChat.csproj.GenerateResource.Cache

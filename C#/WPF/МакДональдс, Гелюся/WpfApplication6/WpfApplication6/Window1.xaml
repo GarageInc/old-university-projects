@@ -1,0 +1,21 @@
+﻿<Window x:Name="Сандвичи" x:Class="WpfApplication6.ОкноСендвичей"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Сендвичи" Height="440.217" Width="882.638">
+    <Grid Margin="10,0,-19,-3">
+        <Button Content="Большой_Бутерброд" Height="57" HorizontalAlignment="Left" Margin="22,17,0,0" x:Name="Большой_Бутерброд" VerticalAlignment="Top" Width="202" Click="F1" />
+        <Button Content="Бутерброд_с_колбасой" Height="57" HorizontalAlignment="Left" Margin="230,17,0,0" x:Name="Бутерброд_с_колбасой" VerticalAlignment="Top" Width="203" Click="F2" />
+        <CheckBox Content="С соусом" Height="27" HorizontalAlignment="Left" Margin="513,85,0,0" x:Name="Соус" VerticalAlignment="Top" Width="143" />
+        <Button Content="Ок" Height="53" HorizontalAlignment="Left" Margin="516,335,0,0" x:Name="Ок" VerticalAlignment="Top" Width="140" Click="Ок_Click" />
+        <Button Content="Отмена" Height="53" HorizontalAlignment="Left" Margin="711,335,0,0" x:Name="Отмена" VerticalAlignment="Top" Width="117" Click="Отмена_Click" />
+        <ListBox Height="303" HorizontalAlignment="Left" Margin="22,85,0,0" x:Name="ОкноВывода" VerticalAlignment="Top" Width="475" />
+        <ComboBox x:Name="Объем" HorizontalAlignment="Left" Margin="513,112,0,0" VerticalAlignment="Top" Width="129" SelectedIndex="0" Height="39">
+            <ComboBoxItem Content="Огромный"/>
+            <ComboBoxItem Content="Большой"/>
+            <ComboBoxItem Content="Средний"/>
+            <ComboBoxItem Content="Маленький"/>
+        </ComboBox>
+        <Button x:Name="Бутерброд_с_сыром" Content="Бутерброд_с_сыром" HorizontalAlignment="Left" Margin="440,17,0,0" VerticalAlignment="Top" Width="202" Height="57" Click="F3"/>
+        <Button x:Name="Биф_Ролл" Content="Сендвич_английский" HorizontalAlignment="Left" Margin="648,17,0,0" VerticalAlignment="Top" Width="202" Height="57" Click="F4"/>
+    </Grid>
+</Window>

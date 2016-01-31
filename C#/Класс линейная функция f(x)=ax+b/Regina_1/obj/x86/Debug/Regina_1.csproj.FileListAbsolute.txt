@@ -1,0 +1,5 @@
+C:\Users\7\Desktop\Regina_1\Regina_1\bin\Debug\Regina_1.exe
+C:\Users\7\Desktop\Regina_1\Regina_1\bin\Debug\Regina_1.pdb
+C:\Users\7\Desktop\Regina_1\Regina_1\obj\x86\Debug\Regina_1.exe
+C:\Users\7\Desktop\Regina_1\Regina_1\obj\x86\Debug\Regina_1.pdb
+C:\Users\7\Desktop\Regina_1\Regina_1\obj\x86\Debug\Regina_1.csprojResolveAssemblyReference.cache

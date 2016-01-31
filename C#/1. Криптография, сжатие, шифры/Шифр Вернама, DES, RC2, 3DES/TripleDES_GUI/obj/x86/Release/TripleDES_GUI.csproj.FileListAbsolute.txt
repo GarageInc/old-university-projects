@@ -1,0 +1,7 @@
+C:\Users\7\Desktop\Опытные\C#\TripleDES_GUI\TripleDES_GUI\bin\Release\TripleDES_GUI.exe
+C:\Users\7\Desktop\Опытные\C#\TripleDES_GUI\TripleDES_GUI\bin\Release\TripleDES_GUI.pdb
+C:\Users\7\Desktop\Опытные\C#\TripleDES_GUI\TripleDES_GUI\obj\x86\Release\TripleDES_GUI.Form1.resources
+C:\Users\7\Desktop\Опытные\C#\TripleDES_GUI\TripleDES_GUI\obj\x86\Release\TripleDES_GUI.Properties.Resources.resources
+C:\Users\7\Desktop\Опытные\C#\TripleDES_GUI\TripleDES_GUI\obj\x86\Release\TripleDES_GUI.csproj.GenerateResource.Cache
+C:\Users\7\Desktop\Опытные\C#\TripleDES_GUI\TripleDES_GUI\obj\x86\Release\TripleDES_GUI.exe
+C:\Users\7\Desktop\Опытные\C#\TripleDES_GUI\TripleDES_GUI\obj\x86\Release\TripleDES_GUI.pdb

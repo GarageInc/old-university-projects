@@ -1,0 +1,16 @@
+C:\Users\9-b-r_000\Desktop\Shop\Shop\bin\Debug\Shop.exe.config
+C:\Users\9-b-r_000\Desktop\Shop\Shop\bin\Debug\Shop.exe
+C:\Users\9-b-r_000\Desktop\Shop\Shop\bin\Debug\Shop.pdb
+C:\Users\9-b-r_000\Desktop\Shop\Shop\bin\Debug\EntityFramework.dll
+C:\Users\9-b-r_000\Desktop\Shop\Shop\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\9-b-r_000\Desktop\Shop\Shop\bin\Debug\EntityFramework.xml
+C:\Users\9-b-r_000\Desktop\Shop\Shop\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\9-b-r_000\Desktop\Shop\Shop\obj\Debug\Shop.csprojResolveAssemblyReference.cache
+C:\Users\9-b-r_000\Desktop\Shop\Shop\obj\Debug\Shop.Properties.Resources.resources
+C:\Users\9-b-r_000\Desktop\Shop\Shop\obj\Debug\Shop.AuthorizationWindow.resources
+C:\Users\9-b-r_000\Desktop\Shop\Shop\obj\Debug\Shop.MainAdminWindow.resources
+C:\Users\9-b-r_000\Desktop\Shop\Shop\obj\Debug\Shop.MainClientWindow.resources
+C:\Users\9-b-r_000\Desktop\Shop\Shop\obj\Debug\Shop.csproj.GenerateResource.Cache
+C:\Users\9-b-r_000\Desktop\Shop\Shop\obj\Debug\Shop.exe
+C:\Users\9-b-r_000\Desktop\Shop\Shop\obj\Debug\Shop.pdb
+C:\Users\9-b-r_000\Desktop\Shop\Shop\obj\Debug\Shop.Migrations.Initial.resources

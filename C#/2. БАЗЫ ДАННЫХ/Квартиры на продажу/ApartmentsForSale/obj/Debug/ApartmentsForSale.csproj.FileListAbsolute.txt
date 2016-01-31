@@ -1,0 +1,11 @@
+C:\Users\7\Desktop\Опытные\C#\2. БАЗЫ ДАННЫХ\ApartmentsForSale\ApartmentsForSale\bin\Debug\ApartmentsForSale.exe.config
+C:\Users\7\Desktop\Опытные\C#\2. БАЗЫ ДАННЫХ\ApartmentsForSale\ApartmentsForSale\obj\Debug\ApartmentsForSale.csprojResolveAssemblyReference.cache
+C:\Users\7\Desktop\Опытные\C#\2. БАЗЫ ДАННЫХ\ApartmentsForSale\ApartmentsForSale\obj\Debug\ApartmentsForSale.Properties.Resources.resources
+C:\Users\7\Desktop\Опытные\C#\2. БАЗЫ ДАННЫХ\ApartmentsForSale\ApartmentsForSale\obj\Debug\ApartmentsForSale.csproj.GenerateResource.Cache
+C:\Users\7\Desktop\Опытные\C#\2. БАЗЫ ДАННЫХ\ApartmentsForSale\ApartmentsForSale\obj\Debug\ApartmentsForSale.Form1.resources
+C:\Users\7\Desktop\Опытные\C#\2. БАЗЫ ДАННЫХ\ApartmentsForSale\ApartmentsForSale\bin\Debug\APARTMENTSFORSALE.mdf
+C:\Users\7\Desktop\Опытные\C#\2. БАЗЫ ДАННЫХ\ApartmentsForSale\ApartmentsForSale\bin\Debug\APARTMENTSFORSALE_log.ldf
+C:\Users\7\Desktop\Опытные\C#\2. БАЗЫ ДАННЫХ\ApartmentsForSale\ApartmentsForSale\bin\Debug\ApartmentsForSale.exe
+C:\Users\7\Desktop\Опытные\C#\2. БАЗЫ ДАННЫХ\ApartmentsForSale\ApartmentsForSale\bin\Debug\ApartmentsForSale.pdb
+C:\Users\7\Desktop\Опытные\C#\2. БАЗЫ ДАННЫХ\ApartmentsForSale\ApartmentsForSale\obj\Debug\ApartmentsForSale.exe
+C:\Users\7\Desktop\Опытные\C#\2. БАЗЫ ДАННЫХ\ApartmentsForSale\ApartmentsForSale\obj\Debug\ApartmentsForSale.pdb

@@ -1,0 +1,5 @@
+C:\Users\7\Desktop\Опытные\Brut\Brut\bin\Debug\Brut.exe
+C:\Users\7\Desktop\Опытные\Brut\Brut\bin\Debug\Brut.pdb
+C:\Users\7\Desktop\Опытные\Brut\Brut\obj\x86\Debug\Brut.exe
+C:\Users\7\Desktop\Опытные\Brut\Brut\obj\x86\Debug\Brut.pdb
+C:\Users\7\Desktop\Опытные\Brut\Brut\obj\x86\Debug\Brut.csprojResolveAssemblyReference.cache

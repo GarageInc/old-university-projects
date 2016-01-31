@@ -1,0 +1,12 @@
+C:\Users\UFox\Documents\Visual Studio 2015\Projects\WPF\WPF\bin\Debug\WPF.exe.config
+C:\Users\UFox\Documents\Visual Studio 2015\Projects\WPF\WPF\bin\Debug\WPF.exe
+C:\Users\UFox\Documents\Visual Studio 2015\Projects\WPF\WPF\bin\Debug\WPF.pdb
+C:\Users\UFox\Documents\Visual Studio 2015\Projects\WPF\WPF\obj\Debug\MainWindow.baml
+C:\Users\UFox\Documents\Visual Studio 2015\Projects\WPF\WPF\obj\Debug\MainWindow.g.cs
+C:\Users\UFox\Documents\Visual Studio 2015\Projects\WPF\WPF\obj\Debug\App.g.cs
+C:\Users\UFox\Documents\Visual Studio 2015\Projects\WPF\WPF\obj\Debug\WPF_MarkupCompile.cache
+C:\Users\UFox\Documents\Visual Studio 2015\Projects\WPF\WPF\obj\Debug\WPF.g.resources
+C:\Users\UFox\Documents\Visual Studio 2015\Projects\WPF\WPF\obj\Debug\WPF.Properties.Resources.resources
+C:\Users\UFox\Documents\Visual Studio 2015\Projects\WPF\WPF\obj\Debug\WPF.csproj.GenerateResource.Cache
+C:\Users\UFox\Documents\Visual Studio 2015\Projects\WPF\WPF\obj\Debug\WPF.exe
+C:\Users\UFox\Documents\Visual Studio 2015\Projects\WPF\WPF\obj\Debug\WPF.pdb

@@ -1,0 +1,10 @@
+C:\Users\7\Desktop\Опытные\C#\Работа с базой данных, Харитонова\OurProject_Part1\bin\Release\OurProject_Part1.exe
+C:\Users\7\Desktop\Опытные\C#\Работа с базой данных, Харитонова\OurProject_Part1\bin\Release\OurProject_Part1.pdb
+C:\Users\7\Desktop\Опытные\C#\Работа с базой данных, Харитонова\OurProject_Part1\obj\x86\Release\Компании.csproj.ResolveComReference.cache
+C:\Users\7\Desktop\Опытные\C#\Работа с базой данных, Харитонова\OurProject_Part1\obj\x86\Release\OurProject_Part1.Form1.resources
+C:\Users\7\Desktop\Опытные\C#\Работа с базой данных, Харитонова\OurProject_Part1\obj\x86\Release\OurProject_Part1.Form2.resources
+C:\Users\7\Desktop\Опытные\C#\Работа с базой данных, Харитонова\OurProject_Part1\obj\x86\Release\OurProject_Part1.Form3.resources
+C:\Users\7\Desktop\Опытные\C#\Работа с базой данных, Харитонова\OurProject_Part1\obj\x86\Release\OurProject_Part1.Properties.Resources.resources
+C:\Users\7\Desktop\Опытные\C#\Работа с базой данных, Харитонова\OurProject_Part1\obj\x86\Release\Компании.csproj.GenerateResource.Cache
+C:\Users\7\Desktop\Опытные\C#\Работа с базой данных, Харитонова\OurProject_Part1\obj\x86\Release\OurProject_Part1.exe
+C:\Users\7\Desktop\Опытные\C#\Работа с базой данных, Харитонова\OurProject_Part1\obj\x86\Release\OurProject_Part1.pdb

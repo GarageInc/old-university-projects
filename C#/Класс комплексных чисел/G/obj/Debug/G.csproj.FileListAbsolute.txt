@@ -1,0 +1,12 @@
+C:\Users\7\Desktop\Опытные\C#\G\G\bin\Debug\G.exe.config
+C:\Users\7\Desktop\Опытные\C#\G\G\obj\Debug\G.csprojResolveAssemblyReference.cache
+C:\Users\7\Desktop\Опытные\C#\G\G\bin\Debug\G.exe
+C:\Users\7\Desktop\Опытные\C#\G\G\bin\Debug\G.pdb
+C:\Users\7\Desktop\Опытные\C#\G\G\obj\Debug\G.exe
+C:\Users\7\Desktop\Опытные\C#\G\G\obj\Debug\G.pdb
+C:\Users\7\Desktop\Опытные\C#\Класс комплексных чисел\G\bin\Debug\G.exe.config
+C:\Users\7\Desktop\Опытные\C#\Класс комплексных чисел\G\obj\Debug\G.exe
+C:\Users\7\Desktop\Опытные\C#\Класс комплексных чисел\G\obj\Debug\G.pdb
+C:\Users\7\Desktop\Опытные\C#\Класс комплексных чисел\G\bin\Debug\G.exe
+C:\Users\7\Desktop\Опытные\C#\Класс комплексных чисел\G\bin\Debug\G.pdb
+C:\Users\7\Desktop\Опытные\C#\Класс комплексных чисел\G\obj\Debug\G.csprojResolveAssemblyReference.cache

@@ -1,0 +1,9 @@
+C:\Users\7\Desktop\Опытные\Калькулятор\Калькулятор\obj\x86\Debug\Калькулятор.Properties.Resources.resources
+C:\Users\7\Desktop\Опытные\Калькулятор\Калькулятор\obj\x86\Debug\Калькулятор.csproj.GenerateResource.Cache
+C:\Users\7\Desktop\Опытные\Калькулятор\Калькулятор\bin\Debug\Калькулятор.exe
+C:\Users\7\Desktop\Опытные\Калькулятор\Калькулятор\bin\Debug\Калькулятор.pdb
+C:\Users\7\Desktop\Опытные\Калькулятор\Калькулятор\obj\x86\Debug\Калькулятор.Form1.resources
+C:\Users\7\Desktop\Опытные\Калькулятор\Калькулятор\obj\x86\Debug\Калькулятор.exe
+C:\Users\7\Desktop\Опытные\Калькулятор\Калькулятор\obj\x86\Debug\Калькулятор.pdb
+C:\Users\7\Desktop\Опытные\C#\Калькулятор\Калькулятор\obj\x86\Debug\Калькулятор.exe
+C:\Users\7\Desktop\Опытные\C#\Калькулятор\Калькулятор\obj\x86\Debug\Калькулятор.pdb

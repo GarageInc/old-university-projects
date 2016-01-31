@@ -1,0 +1,10 @@
+C:\Users\7\Desktop\KW_C_Sharp\KW_C_Sharp\bin\Debug\KW_C_Sharp.exe
+C:\Users\7\Desktop\KW_C_Sharp\KW_C_Sharp\bin\Debug\KW_C_Sharp.pdb
+C:\Users\7\Desktop\KW_C_Sharp\KW_C_Sharp\obj\x86\Debug\KW_C_Sharp.exe
+C:\Users\7\Desktop\KW_C_Sharp\KW_C_Sharp\obj\x86\Debug\KW_C_Sharp.pdb
+C:\Users\7\Desktop\KW_C_Sharp\KW_C_Sharp\obj\x86\Debug\KW_C_Sharp.csprojResolveAssemblyReference.cache
+C:\Users\7\Desktop\123\KW_C_Sharp\obj\x86\Debug\KW_C_Sharp.exe
+C:\Users\7\Desktop\123\KW_C_Sharp\obj\x86\Debug\KW_C_Sharp.pdb
+C:\Users\7\Desktop\123\KW_C_Sharp\bin\Debug\KW_C_Sharp.exe
+C:\Users\7\Desktop\123\KW_C_Sharp\bin\Debug\KW_C_Sharp.pdb
+C:\Users\7\Desktop\123\KW_C_Sharp\obj\x86\Debug\KW_C_Sharp.csprojResolveAssemblyReference.cache

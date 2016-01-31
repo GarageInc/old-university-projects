@@ -1,0 +1,3 @@
+word слово
+change изменить
+Regina Регина

@@ -1,0 +1,7 @@
+﻿namespace MarkAlgoritm
+{
+    class MarkovAlgorithm
+    {
+        
+    }
+}

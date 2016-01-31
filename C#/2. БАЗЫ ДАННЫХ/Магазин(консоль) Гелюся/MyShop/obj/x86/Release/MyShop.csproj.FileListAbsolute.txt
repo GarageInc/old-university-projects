@@ -1,0 +1,7 @@
+C:\Users\7\Desktop\Опытные\C#\Магазин Базы данных\MyShop\bin\Release\Torgovlya.mdf
+C:\Users\7\Desktop\Опытные\C#\Магазин Базы данных\MyShop\bin\Release\Torgovlya_log.ldf
+C:\Users\7\Desktop\Опытные\C#\Магазин Базы данных\MyShop\bin\Release\MyShop.exe.config
+C:\Users\7\Desktop\Опытные\C#\Магазин Базы данных\MyShop\bin\Release\MyShop.exe
+C:\Users\7\Desktop\Опытные\C#\Магазин Базы данных\MyShop\bin\Release\MyShop.pdb
+C:\Users\7\Desktop\Опытные\C#\Магазин Базы данных\MyShop\obj\x86\Release\MyShop.exe
+C:\Users\7\Desktop\Опытные\C#\Магазин Базы данных\MyShop\obj\x86\Release\MyShop.pdb

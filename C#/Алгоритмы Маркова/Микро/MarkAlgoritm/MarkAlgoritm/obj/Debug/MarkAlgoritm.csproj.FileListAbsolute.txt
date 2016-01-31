@@ -1,0 +1,13 @@
+c:\users\almaz\documents\visual studio 2015\Projects\MarkAlgoritm\MarkAlgoritm\bin\Debug\MarkAlgoritm.exe.config
+C:\Users\Almaz\documents\visual studio 2015\Projects\MarkAlgoritm\MarkAlgoritm\bin\Debug\MarkAlgoritm.exe
+C:\Users\Almaz\documents\visual studio 2015\Projects\MarkAlgoritm\MarkAlgoritm\bin\Debug\MarkAlgoritm.pdb
+C:\Users\Almaz\documents\visual studio 2015\Projects\MarkAlgoritm\MarkAlgoritm\obj\Debug\MarkAlgoritm.csprojResolveAssemblyReference.cache
+C:\Users\Almaz\documents\visual studio 2015\Projects\MarkAlgoritm\MarkAlgoritm\obj\Debug\MainWindow.g.cs
+C:\Users\Almaz\documents\visual studio 2015\Projects\MarkAlgoritm\MarkAlgoritm\obj\Debug\App.g.cs
+C:\Users\Almaz\documents\visual studio 2015\Projects\MarkAlgoritm\MarkAlgoritm\obj\Debug\MarkAlgoritm_MarkupCompile.cache
+C:\Users\Almaz\documents\visual studio 2015\Projects\MarkAlgoritm\MarkAlgoritm\obj\Debug\MainWindow.baml
+C:\Users\Almaz\documents\visual studio 2015\Projects\MarkAlgoritm\MarkAlgoritm\obj\Debug\MarkAlgoritm.g.resources
+C:\Users\Almaz\documents\visual studio 2015\Projects\MarkAlgoritm\MarkAlgoritm\obj\Debug\MarkAlgoritm.Properties.Resources.resources
+C:\Users\Almaz\documents\visual studio 2015\Projects\MarkAlgoritm\MarkAlgoritm\obj\Debug\MarkAlgoritm.csproj.GenerateResource.Cache
+C:\Users\Almaz\documents\visual studio 2015\Projects\MarkAlgoritm\MarkAlgoritm\obj\Debug\MarkAlgoritm.exe
+C:\Users\Almaz\documents\visual studio 2015\Projects\MarkAlgoritm\MarkAlgoritm\obj\Debug\MarkAlgoritm.pdb

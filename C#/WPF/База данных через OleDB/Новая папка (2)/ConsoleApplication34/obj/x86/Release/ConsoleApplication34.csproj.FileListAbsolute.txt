@@ -1,0 +1,4 @@
+C:\Users\7\Downloads\Новая папка (2)\Новая папка (2)\ConsoleApplication34\bin\Release\ConsoleApplication34.exe
+C:\Users\7\Downloads\Новая папка (2)\Новая папка (2)\ConsoleApplication34\bin\Release\ConsoleApplication34.pdb
+C:\Users\7\Downloads\Новая папка (2)\Новая папка (2)\ConsoleApplication34\obj\x86\Release\ConsoleApplication34.exe
+C:\Users\7\Downloads\Новая папка (2)\Новая папка (2)\ConsoleApplication34\obj\x86\Release\ConsoleApplication34.pdb

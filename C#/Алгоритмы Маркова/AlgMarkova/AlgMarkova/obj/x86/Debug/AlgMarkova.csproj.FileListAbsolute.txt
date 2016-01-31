@@ -1,0 +1,8 @@
+C:\Users\7\Desktop\Опытные\AlgMarkova\AlgMarkova\bin\Debug\AlgMarkova.exe
+C:\Users\7\Desktop\Опытные\AlgMarkova\AlgMarkova\bin\Debug\AlgMarkova.pdb
+C:\Users\7\Desktop\Опытные\AlgMarkova\AlgMarkova\obj\x86\Debug\AlgMarkova.Form1.resources
+C:\Users\7\Desktop\Опытные\AlgMarkova\AlgMarkova\obj\x86\Debug\AlgMarkova.Properties.Resources.resources
+C:\Users\7\Desktop\Опытные\AlgMarkova\AlgMarkova\obj\x86\Debug\AlgMarkova.csproj.GenerateResource.Cache
+C:\Users\7\Desktop\Опытные\AlgMarkova\AlgMarkova\obj\x86\Debug\AlgMarkova.exe
+C:\Users\7\Desktop\Опытные\AlgMarkova\AlgMarkova\obj\x86\Debug\AlgMarkova.pdb
+C:\Users\7\Desktop\Опытные\AlgMarkova\AlgMarkova\obj\x86\Debug\AlgMarkova.csprojResolveAssemblyReference.cache

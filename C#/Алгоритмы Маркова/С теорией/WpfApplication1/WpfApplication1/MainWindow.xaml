@@ -1,0 +1,117 @@
+﻿<Window x:Class="WpfApplication1.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApplication1"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="491.818" Width="980.92">
+    <Grid>
+        <Label Content="Входное (выходное) слово:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="164"/>
+        <TextBox x:Name="InputWord" HorizontalAlignment="Left" Height="23" Margin="10,36,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="497" />
+        <TextBox x:Name="CodeArea"  AcceptsReturn="True"
+  VerticalScrollBarVisibility="Visible" HorizontalAlignment="Left" Height="168" Margin="10,106,0,0" VerticalAlignment="Top" Width="247" TextOptions.TextFormattingMode="Display" IsManipulationEnabled="True"/>
+        <Button x:Name="Step" Content="Шаг" HorizontalAlignment="Left" Margin="10,290,0,0" VerticalAlignment="Top" Width="75" Click="Step_Click"/>
+        <Button x:Name="Launch" Content="Запуск" HorizontalAlignment="Left" Margin="99,290,0,0" VerticalAlignment="Top" Width="75" Click="Launch_Click"/>
+        <TextBox x:Name="ErrorMsg" HorizontalAlignment="Left" Height="72" Margin="10,323,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="497"/>
+        <Label Content="Правила:&#xD;&#xA;" HorizontalAlignment="Left" Margin="10,75,0,0" VerticalAlignment="Top" Width="135" Height="26"/>
+        <WebBrowser x:Name="ParceCode" HorizontalAlignment="Left" Height="168" Margin="262,106,0,0" VerticalAlignment="Top" Width="245"/>
+        <Label x:Name="label" Content="Максимальное количество обрабатываемых правил: 20." HorizontalAlignment="Left" Margin="10,400,0,0" VerticalAlignment="Top" Height="28" Width="394"/>
+        <Label x:Name="label_Copy" Content="Максимальное количество циклов выполнения: 250." HorizontalAlignment="Left" Margin="10,428,0,0" VerticalAlignment="Top" Height="28" Width="394"/>
+        <RichTextBox x:Name="richTextBox" HorizontalAlignment="Left" Height="380" Margin="522,36,0,0" VerticalAlignment="Top" Width="441">
+            <FlowDocument>
+                <Paragraph>
+                    <Run Text="Краткие теоретические сведения"/>
+                </Paragraph>
+                <Paragraph>
+                    <Run Text="Нормальные алгоритмы Маркова (далее — НАМ), введенные советским математиком А. А. Марковым, представляют собой класс алгоритмов, применимых к словам некоторого алфавита. Каждый НАМ определяется указанием алфавита, в котором он действует, и схемы НАМ. Алфавитом НАМ может служить любой конечный алфав"/>
+                    <Run Text="и"/>
+                    <Run Text="т A. Формулой подстановки в алфавите A называется выражение типа p → q (простая подстановка, в эмуляторе обозначена как -&gt;) или p ↦ q (заключительная подстановка, в эмуляторе обозначена как =&gt;), где p и q — некоторые слова в алфавите A, называемые, соответственно, левой и правой частями формулы подстановки. Каждый НАМ в алфавите A имеет конечное число формул подстановки. Их записывают в виде списка, который называется схемой алгоритма."/>
+                </Paragraph>
+                <Paragraph>
+                    <Run Text="Применение НАМ к некоторому слову S заключается в следующем. В списке формул подстановки ищется первая из тех формул, в которой левая часть входит в S. Находится 1-е вхождение левой части формулы в S и вместо этого вхождения подставляется правая часть формулы. Получается новое слово S'. Cо словом S' производятся те же действия и т.д."/>
+                </Paragraph>
+                <Paragraph>
+                    <Run Text="Данный процесс обрывается в 2-х случаях:"/>
+                </Paragraph>
+                <Paragraph>
+                    <Run Text="к очередному слову применена одна из заключительных формул подстановки;"/>
+                </Paragraph>
+                <Paragraph>
+                    <Run Text="в слово не входит ни одна из левых частей формул подстановки."/>
+                </Paragraph>
+                <Paragraph>
+                    <Run Text="Получаемое последнее слово является результатом применения НАМ к исходному слову S."/>
+                </Paragraph>
+                <Paragraph>
+                    <Run Text="Примеры на составление нормальных алгоритмов Маркова"/>
+                </Paragraph>
+                <Paragraph>
+                    <Run Text="Пример 1. В произвольном слове, состоящем из букв {a, b, c}, все подряд стоящие одинаковые буквы заменить одной буквой (например, слово «abbbcaa» преобразовать в «abca»). Схема НАМ. имеет вид:"/>
+                </Paragraph>
+                <Paragraph>
+                    <Run Text="1.aa→a"/>
+                </Paragraph>
+                <Paragraph>
+                    <Run Text="2.bb→b"/>
+                </Paragraph>
+                <Paragraph>
+                    <Run Text="3.cc→c"/>
+                </Paragraph>
+                <Paragraph Focusable="True">
+                    <Run Text="Пример 1"/>
+                </Paragraph>
+                <Paragraph>
+                    <Run Text="Применение этой схемы с слову «abbbcaa» последовательно даст слова: «abbbca», «abbca» и «abca», после чего выполнение НАМ завершится. Для проверки данного алгоритма загрузите его текст в эмулятор."/>
+                </Paragraph>
+                <Paragraph>
+                    <Run/>
+                </Paragraph>
+                <Paragraph>
+                    <Run Text="Пример 2. Удвоить слово, состоящее из одинаковых символов (для определенности — «x»). Т.е. слово «x» надо преобразовать в «xx», слово «xx» — в «xxxx» и т.д."/>
+                </Paragraph>
+                <Paragraph>
+                    <Run/>
+                </Paragraph>
+                <Paragraph>
+                    <Run Text="Схема НАМ для этого примера намного сложнее, чем для примера 1. Нельзя написать x → xx, т.к. в этом случае на каждом шаге НАМ к слову будет добавляться символ «x» и этот процесс будет бесконечным. Необходимо контролировать удвоение каждого символа слова так, чтобы каждый символ удвоился только один раз. Для это введём маркер, с помощью которого будем обеспечивать контекст применения удваивающего правила."/>
+                </Paragraph>
+                <Paragraph>
+                    <Run/>
+                </Paragraph>
+                <Paragraph>
+                    <Run Text="1.&#x9;*x&#x9;→&#x9;xx*"/>
+                </Paragraph>
+                <Paragraph>
+                    <Run Text="2.&#x9;*&#x9;↦&#x9;"/>
+                </Paragraph>
+                <Paragraph>
+                    <Run Text="3.&#x9;&#x9;→&#x9;*"/>
+                </Paragraph>
+                <Paragraph>
+                    <Run Text="Пример 2"/>
+                </Paragraph>
+                <Paragraph>
+                    <Run Text="Последнее правило вводит «маркер» '*' (или «курсор»), который с помощью первого правила «перескакивает» через текущий символ слова и удваивает его. Применение этой схемы, например, к слову «xx» последовательно даст слова: (3) «*xx», (1) «xx*x», (1) «xxxx*», (2) «xxxx» (в скобках указан номер применяемой формулы подстановки)."/>
+                </Paragraph>
+                <Paragraph>
+                    <Run/>
+                </Paragraph>
+                <Paragraph>
+                    <Run Text="Пример 3. Дано слово в алфавите {a, b, c}. Упорядочить буквы входного слова в лексикографическом порядке"/>
+                </Paragraph>
+                <Paragraph>
+                    <Run/>
+                </Paragraph>
+                <Paragraph>
+                    <Run Text="Пример 3"/>
+                </Paragraph>
+            </FlowDocument>
+        </RichTextBox>
+        <Button x:Name="button" Content="Пример 1" HorizontalAlignment="Left" Margin="522,428,0,0" VerticalAlignment="Top" Width="134" Click="button_Click"/>
+        <Button x:Name="button_Copy" Content="Пример 2" HorizontalAlignment="Left" Margin="678,428,0,0" VerticalAlignment="Top" Width="133" Click="button_Copy_Click"/>
+        <Button x:Name="button_Copy1" Content="Пример 3" HorizontalAlignment="Left" Margin="831,428,0,0" VerticalAlignment="Top" Width="132" Click="button_Copy1_Click"/>
+        <Button x:Name="button1" Content="Очитстить поля" HorizontalAlignment="Left" Margin="401,290,0,0" VerticalAlignment="Top" Width="106" RenderTransformOrigin="-0.067,0.25" Click="button1_Click"/>
+
+    </Grid>
+</Window>

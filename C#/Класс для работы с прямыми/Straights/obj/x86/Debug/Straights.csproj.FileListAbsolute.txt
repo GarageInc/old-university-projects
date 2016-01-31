@@ -1,0 +1,10 @@
+C:\Users\7\Desktop\Straights\Straights\bin\Debug\Straights.exe
+C:\Users\7\Desktop\Straights\Straights\bin\Debug\Straights.pdb
+C:\Users\7\Desktop\Straights\Straights\obj\x86\Debug\Straights.exe
+C:\Users\7\Desktop\Straights\Straights\obj\x86\Debug\Straights.pdb
+C:\Users\7\Desktop\Straights\Straights\obj\x86\Debug\Straights.csprojResolveAssemblyReference.cache
+C:\Users\7\Desktop\База готовых работ\Straights\Straights\obj\x86\Debug\Straights.exe
+C:\Users\7\Desktop\База готовых работ\Straights\Straights\obj\x86\Debug\Straights.pdb
+C:\Users\7\Desktop\База готовых работ\Straights\Straights\bin\Debug\Straights.exe
+C:\Users\7\Desktop\База готовых работ\Straights\Straights\bin\Debug\Straights.pdb
+C:\Users\7\Desktop\База готовых работ\Straights\Straights\obj\x86\Debug\Straights.csprojResolveAssemblyReference.cache

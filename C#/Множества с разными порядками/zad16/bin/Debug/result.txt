@@ -1,0 +1,18 @@
+First set:
+Elements of set:
+1 4 765 31432 664645 
+Second set:
+Elements of set:
+111 123 426 444 664645 
+Result:
+Elements of set:
+1 4 111 123 426 444 765 31432 664645 
+First set:
+Elements of set:
+1 4 765 31432 664645 
+Second set:
+Elements of set:
+111 123 426 444 664645 
+Result:
+Elements of set:
+664645 

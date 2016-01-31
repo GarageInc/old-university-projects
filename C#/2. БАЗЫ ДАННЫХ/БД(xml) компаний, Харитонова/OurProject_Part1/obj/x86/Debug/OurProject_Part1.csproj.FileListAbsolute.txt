@@ -1,0 +1,33 @@
+C:\Users\7\Desktop\Документоведение\OurProject_Part1\OurProject_Part1\bin\Debug\OurProject_Part1.exe
+C:\Users\7\Desktop\Документоведение\OurProject_Part1\OurProject_Part1\bin\Debug\OurProject_Part1.pdb
+C:\Users\7\Desktop\Документоведение\OurProject_Part1\OurProject_Part1\obj\x86\Debug\OurProject_Part1.Form1.resources
+C:\Users\7\Desktop\Документоведение\OurProject_Part1\OurProject_Part1\obj\x86\Debug\OurProject_Part1.Properties.Resources.resources
+C:\Users\7\Desktop\Документоведение\OurProject_Part1\OurProject_Part1\obj\x86\Debug\OurProject_Part1.csproj.GenerateResource.Cache
+C:\Users\7\Desktop\Документоведение\OurProject_Part1\OurProject_Part1\obj\x86\Debug\OurProject_Part1.exe
+C:\Users\7\Desktop\Документоведение\OurProject_Part1\OurProject_Part1\obj\x86\Debug\OurProject_Part1.pdb
+C:\Users\7\Desktop\Документоведение\OurProject_Part1\OurProject_Part1\obj\x86\Debug\OurProject_Part1.csprojResolveAssemblyReference.cache
+C:\Users\7\Desktop\Документоведение\OurProject_Part1\OurProject_Part1\obj\x86\Debug\OurProject_Part1.Form2.resources
+C:\Users\7\Desktop\Документоведение\OurProject_Part1\OurProject_Part1\obj\x86\Debug\OurProject_Part1.Form3.resources
+C:\Users\7\Desktop\Документоведение\OurProject_Part1\OurProject_Part1\obj\x86\Debug\OurProject_Part1.csproj.ResolveComReference.cache
+D:\Basket\2COURSE\Документоведение\OurProject_Part1\OurProject_Part1\obj\x86\Debug\OurProject_Part1.csproj.ResolveComReference.cache
+D:\Basket\2COURSE\Документоведение\OurProject_Part1\OurProject_Part1\obj\x86\Debug\OurProject_Part1.exe
+D:\Basket\2COURSE\Документоведение\OurProject_Part1\OurProject_Part1\obj\x86\Debug\OurProject_Part1.pdb
+D:\Basket\2COURSE\Документоведение\OurProject_Part1\OurProject_Part1\bin\Debug\OurProject_Part1.exe
+D:\Basket\2COURSE\Документоведение\OurProject_Part1\OurProject_Part1\obj\x86\Debug\OurProject_Part1.csprojResolveAssemblyReference.cache
+D:\Basket\2COURSE\Документоведение\OurProject_Part1\OurProject_Part1\obj\x86\Debug\OurProject_Part1.Form1.resources
+D:\Basket\2COURSE\Документоведение\OurProject_Part1\OurProject_Part1\obj\x86\Debug\OurProject_Part1.Form2.resources
+D:\Basket\2COURSE\Документоведение\OurProject_Part1\OurProject_Part1\obj\x86\Debug\OurProject_Part1.Form3.resources
+D:\Basket\2COURSE\Документоведение\OurProject_Part1\OurProject_Part1\obj\x86\Debug\OurProject_Part1.Properties.Resources.resources
+D:\Basket\2COURSE\Документоведение\OurProject_Part1\OurProject_Part1\obj\x86\Debug\OurProject_Part1.csproj.GenerateResource.Cache
+D:\Basket\2COURSE\Документоведение\OurProject_Part1\OurProject_Part1\bin\Debug\OurProject_Part1.pdb
+C:\Users\7\Desktop\Опытные\C#\Работа с базой данных, Харитонова\OurProject_Part1\obj\x86\Debug\OurProject_Part1.csproj.ResolveComReference.cache
+C:\Users\7\Desktop\Опытные\C#\Работа с базой данных, Харитонова\OurProject_Part1\obj\x86\Debug\OurProject_Part1.exe
+C:\Users\7\Desktop\Опытные\C#\Работа с базой данных, Харитонова\OurProject_Part1\obj\x86\Debug\OurProject_Part1.pdb
+C:\Users\7\Desktop\Опытные\C#\Работа с базой данных, Харитонова\OurProject_Part1\bin\Debug\OurProject_Part1.exe
+C:\Users\7\Desktop\Опытные\C#\Работа с базой данных, Харитонова\OurProject_Part1\bin\Debug\OurProject_Part1.pdb
+C:\Users\7\Desktop\Опытные\C#\Работа с базой данных, Харитонова\OurProject_Part1\obj\x86\Debug\OurProject_Part1.csprojResolveAssemblyReference.cache
+C:\Users\7\Desktop\Опытные\C#\Работа с базой данных, Харитонова\OurProject_Part1\obj\x86\Debug\OurProject_Part1.Form1.resources
+C:\Users\7\Desktop\Опытные\C#\Работа с базой данных, Харитонова\OurProject_Part1\obj\x86\Debug\OurProject_Part1.Form2.resources
+C:\Users\7\Desktop\Опытные\C#\Работа с базой данных, Харитонова\OurProject_Part1\obj\x86\Debug\OurProject_Part1.Form3.resources
+C:\Users\7\Desktop\Опытные\C#\Работа с базой данных, Харитонова\OurProject_Part1\obj\x86\Debug\OurProject_Part1.Properties.Resources.resources
+C:\Users\7\Desktop\Опытные\C#\Работа с базой данных, Харитонова\OurProject_Part1\obj\x86\Debug\OurProject_Part1.csproj.GenerateResource.Cache

@@ -1,0 +1,4 @@
+C:\Users\7\Desktop\Опытные\Array\Array\bin\Debug\Array.exe
+C:\Users\7\Desktop\Опытные\Array\Array\bin\Debug\Array.pdb
+C:\Users\7\Desktop\Опытные\Array\Array\obj\x86\Debug\Array.exe
+C:\Users\7\Desktop\Опытные\Array\Array\obj\x86\Debug\Array.pdb

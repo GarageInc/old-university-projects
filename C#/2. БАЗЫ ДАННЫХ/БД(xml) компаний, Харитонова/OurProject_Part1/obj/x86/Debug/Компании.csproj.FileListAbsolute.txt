@@ -1,0 +1,13 @@
+C:\Users\7\Desktop\Опытные\C#\Работа с базой данных, Харитонова\OurProject_Part1\bin\Debug\OurProject_Part1.exe
+C:\Users\7\Desktop\Опытные\C#\Работа с базой данных, Харитонова\OurProject_Part1\bin\Debug\OurProject_Part1.pdb
+C:\Users\7\Desktop\Опытные\C#\Работа с базой данных, Харитонова\OurProject_Part1\obj\x86\Debug\Компании.csproj.ResolveComReference.cache
+C:\Users\7\Desktop\Опытные\C#\Работа с базой данных, Харитонова\OurProject_Part1\obj\x86\Debug\OurProject_Part1.Form1.resources
+C:\Users\7\Desktop\Опытные\C#\Работа с базой данных, Харитонова\OurProject_Part1\obj\x86\Debug\OurProject_Part1.Form2.resources
+C:\Users\7\Desktop\Опытные\C#\Работа с базой данных, Харитонова\OurProject_Part1\obj\x86\Debug\OurProject_Part1.Form3.resources
+C:\Users\7\Desktop\Опытные\C#\Работа с базой данных, Харитонова\OurProject_Part1\obj\x86\Debug\OurProject_Part1.Properties.Resources.resources
+C:\Users\7\Desktop\Опытные\C#\Работа с базой данных, Харитонова\OurProject_Part1\obj\x86\Debug\Компании.csproj.GenerateResource.Cache
+C:\Users\7\Desktop\Опытные\C#\Работа с базой данных, Харитонова\OurProject_Part1\obj\x86\Debug\OurProject_Part1.exe
+C:\Users\7\Desktop\Опытные\C#\Работа с базой данных, Харитонова\OurProject_Part1\obj\x86\Debug\OurProject_Part1.pdb
+F:\AllProjects\Опытные\C#\2. БАЗЫ ДАННЫХ\БД(xml) компаний, Харитонова\OurProject_Part1\obj\x86\Debug\Компании.csproj.ResolveComReference.cache
+F:\AllProjects\Опытные\C#\2. БАЗЫ ДАННЫХ\БД(xml) компаний, Харитонова\OurProject_Part1\obj\x86\Debug\OurProject_Part1.exe
+F:\AllProjects\Опытные\C#\2. БАЗЫ ДАННЫХ\БД(xml) компаний, Харитонова\OurProject_Part1\obj\x86\Debug\OurProject_Part1.pdb

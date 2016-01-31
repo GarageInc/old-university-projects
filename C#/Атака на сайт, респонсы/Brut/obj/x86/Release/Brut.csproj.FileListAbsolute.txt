@@ -1,0 +1,4 @@
+C:\Users\7\Desktop\Опытные\Brut\Brut\bin\Release\Brut.exe
+C:\Users\7\Desktop\Опытные\Brut\Brut\bin\Release\Brut.pdb
+C:\Users\7\Desktop\Опытные\Brut\Brut\obj\x86\Release\Brut.exe
+C:\Users\7\Desktop\Опытные\Brut\Brut\obj\x86\Release\Brut.pdb

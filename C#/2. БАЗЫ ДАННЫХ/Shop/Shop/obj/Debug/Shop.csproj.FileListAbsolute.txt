@@ -1,0 +1,41 @@
+C:\Users\9-b-r_000\Desktop\Shop\Shop\bin\Debug\Shop.exe.config
+C:\Users\9-b-r_000\Desktop\Shop\Shop\bin\Debug\Shop.exe
+C:\Users\9-b-r_000\Desktop\Shop\Shop\bin\Debug\Shop.pdb
+C:\Users\9-b-r_000\Desktop\Shop\Shop\obj\Debug\Shop.Properties.Resources.resources
+C:\Users\9-b-r_000\Desktop\Shop\Shop\obj\Debug\Shop.csproj.GenerateResource.Cache
+C:\Users\9-b-r_000\Desktop\Shop\Shop\obj\Debug\Shop.exe
+C:\Users\9-b-r_000\Desktop\Shop\Shop\obj\Debug\Shop.pdb
+C:\Users\9-b-r_000\Desktop\Shop\Shop\obj\Debug\Shop.AuthorizationWindow.resources
+C:\Users\9-b-r_000\Desktop\Shop\Shop\obj\Debug\Shop.MainClientWindow.resources
+C:\Users\9-b-r_000\Desktop\Shop\Shop\bin\Debug\EntityFramework.dll
+C:\Users\9-b-r_000\Desktop\Shop\Shop\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\9-b-r_000\Desktop\Shop\Shop\bin\Debug\EntityFramework.xml
+C:\Users\9-b-r_000\Desktop\Shop\Shop\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\9-b-r_000\Desktop\Shop\Shop\obj\Debug\Shop.MainAdminWindow.resources
+C:\Users\9-b-r_000\Desktop\Shop\Shop\obj\Debug\Shop.csprojResolveAssemblyReference.cache
+F:\AllProjects\Опытные\C#\2. БАЗЫ ДАННЫХ\Магазин товаров, маленький аналог 1С\Shop\obj\Debug\Shop.csprojResolveAssemblyReference.cache
+F:\AllProjects\Опытные\C#\2. БАЗЫ ДАННЫХ\Магазин товаров, маленький аналог 1С\Shop\obj\Debug\Shop.AuthorizationWindow.resources
+F:\AllProjects\Опытные\C#\2. БАЗЫ ДАННЫХ\Магазин товаров, маленький аналог 1С\Shop\obj\Debug\Shop.MainAdminWindow.resources
+F:\AllProjects\Опытные\C#\2. БАЗЫ ДАННЫХ\Магазин товаров, маленький аналог 1С\Shop\obj\Debug\Shop.Properties.Resources.resources
+F:\AllProjects\Опытные\C#\2. БАЗЫ ДАННЫХ\Магазин товаров, маленький аналог 1С\Shop\obj\Debug\Shop.MainClientWindow.resources
+F:\AllProjects\Опытные\C#\2. БАЗЫ ДАННЫХ\Магазин товаров, маленький аналог 1С\Shop\obj\Debug\Shop.csproj.GenerateResource.Cache
+F:\AllProjects\Опытные\C#\2. БАЗЫ ДАННЫХ\Shop\Shop\bin\Debug\Shop.exe.config
+F:\AllProjects\Опытные\C#\2. БАЗЫ ДАННЫХ\Shop\Shop\bin\Debug\Shop.exe
+F:\AllProjects\Опытные\C#\2. БАЗЫ ДАННЫХ\Shop\Shop\bin\Debug\Shop.pdb
+F:\AllProjects\Опытные\C#\2. БАЗЫ ДАННЫХ\Shop\Shop\bin\Debug\EntityFramework.dll
+F:\AllProjects\Опытные\C#\2. БАЗЫ ДАННЫХ\Shop\Shop\bin\Debug\EntityFramework.SqlServer.dll
+F:\AllProjects\Опытные\C#\2. БАЗЫ ДАННЫХ\Shop\Shop\bin\Debug\EntityFramework.xml
+F:\AllProjects\Опытные\C#\2. БАЗЫ ДАННЫХ\Shop\Shop\bin\Debug\EntityFramework.SqlServer.xml
+F:\AllProjects\Опытные\C#\2. БАЗЫ ДАННЫХ\Shop\Shop\bin\Debug\ru\EntityFramework.resources.dll
+F:\AllProjects\Опытные\C#\2. БАЗЫ ДАННЫХ\Shop\Shop\bin\Debug\ru\EntityFramework.SqlServer.resources.dll
+F:\AllProjects\Опытные\C#\2. БАЗЫ ДАННЫХ\Shop\Shop\obj\Debug\Shop.csprojResolveAssemblyReference.cache
+F:\AllProjects\Опытные\C#\2. БАЗЫ ДАННЫХ\Shop\Shop\obj\Debug\Shop.AuthorizationWindow.resources
+F:\AllProjects\Опытные\C#\2. БАЗЫ ДАННЫХ\Shop\Shop\obj\Debug\Shop.MainAdminWindow.resources
+F:\AllProjects\Опытные\C#\2. БАЗЫ ДАННЫХ\Shop\Shop\obj\Debug\Shop.Properties.Resources.resources
+F:\AllProjects\Опытные\C#\2. БАЗЫ ДАННЫХ\Shop\Shop\obj\Debug\Shop.MainClientWindow.resources
+F:\AllProjects\Опытные\C#\2. БАЗЫ ДАННЫХ\Shop\Shop\obj\Debug\Shop.csproj.GenerateResource.Cache
+F:\AllProjects\Опытные\C#\2. БАЗЫ ДАННЫХ\Shop\Shop\obj\Debug\Shop.exe
+F:\AllProjects\Опытные\C#\2. БАЗЫ ДАННЫХ\Shop\Shop\obj\Debug\Shop.pdb
+F:\AllProjects\Опытные\C#\2. БАЗЫ ДАННЫХ\Shop\Shop\obj\Debug\Shop.Migrations.Initial.resources
+F:\AllProjects\Опытные\C#\2. БАЗЫ ДАННЫХ\Shop\Shop\bin\Debug\Database.mdf
+F:\AllProjects\Опытные\C#\2. БАЗЫ ДАННЫХ\Shop\Shop\bin\Debug\Database_log.ldf

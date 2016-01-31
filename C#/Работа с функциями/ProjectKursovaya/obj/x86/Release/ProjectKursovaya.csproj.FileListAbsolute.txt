@@ -1,0 +1,4 @@
+C:\Users\7\Desktop\Опытные\ProjectKursovaya\ProjectKursovaya\bin\Release\ProjectKursovaya.exe
+C:\Users\7\Desktop\Опытные\ProjectKursovaya\ProjectKursovaya\bin\Release\ProjectKursovaya.pdb
+C:\Users\7\Desktop\Опытные\ProjectKursovaya\ProjectKursovaya\obj\x86\Release\ProjectKursovaya.exe
+C:\Users\7\Desktop\Опытные\ProjectKursovaya\ProjectKursovaya\obj\x86\Release\ProjectKursovaya.pdb

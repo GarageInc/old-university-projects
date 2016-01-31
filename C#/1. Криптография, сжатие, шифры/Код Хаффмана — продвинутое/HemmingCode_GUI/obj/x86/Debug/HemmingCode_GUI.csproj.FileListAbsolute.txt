@@ -1,0 +1,37 @@
+C:\Users\7\Desktop\Опытные\HemmingCode_GUI\HemmingCode_GUI\bin\Debug\HemmingCode_GUI.exe
+C:\Users\7\Desktop\Опытные\HemmingCode_GUI\HemmingCode_GUI\bin\Debug\HemmingCode_GUI.pdb
+C:\Users\7\Desktop\Опытные\HemmingCode_GUI\HemmingCode_GUI\obj\x86\Debug\HemmingCode_GUI.Form1.resources
+C:\Users\7\Desktop\Опытные\HemmingCode_GUI\HemmingCode_GUI\obj\x86\Debug\HemmingCode_GUI.Properties.Resources.resources
+C:\Users\7\Desktop\Опытные\HemmingCode_GUI\HemmingCode_GUI\obj\x86\Debug\HemmingCode_GUI.csproj.GenerateResource.Cache
+C:\Users\7\Desktop\Опытные\HemmingCode_GUI\HemmingCode_GUI\obj\x86\Debug\HemmingCode_GUI.exe
+C:\Users\7\Desktop\Опытные\HemmingCode_GUI\HemmingCode_GUI\obj\x86\Debug\HemmingCode_GUI.pdb
+C:\Users\7\Desktop\Опытные\HaffmaneCode_GUI\HemmingCode_GUI\obj\x86\Debug\HemmingCode_GUI.exe
+C:\Users\7\Desktop\Опытные\HaffmaneCode_GUI\HemmingCode_GUI\obj\x86\Debug\HemmingCode_GUI.pdb
+C:\Users\7\Desktop\Опытные\HaffmaneCode_GUI\HemmingCode_GUI\obj\x86\Debug\HaffmaneCode_GUI.Form1.resources
+C:\Users\7\Desktop\Опытные\HaffmaneCode_GUI\HemmingCode_GUI\obj\x86\Debug\HaffmaneCode_GUI.Properties.Resources.resources
+C:\Users\7\Desktop\Опытные\HaffmaneCode_GUI\HemmingCode_GUI\obj\x86\Debug\HemmingCode_GUI.csproj.GenerateResource.Cache
+C:\Users\7\Desktop\Опытные\HaffmaneCode_GUI\HemmingCode_GUI\bin\Debug\HemmingCode_GUI.exe
+C:\Users\7\Desktop\Опытные\HaffmaneCode_GUI\HemmingCode_GUI\bin\Debug\HemmingCode_GUI.pdb
+D:\Basket\Опытные\HaffmaneCode_GUI\HemmingCode_GUI\obj\x86\Debug\HemmingCode_GUI.pdb
+D:\Basket\Опытные\HaffmaneCode_GUI\HemmingCode_GUI\bin\Debug\HemmingCode_GUI.exe
+D:\Basket\Опытные\HaffmaneCode_GUI\HemmingCode_GUI\bin\Debug\HemmingCode_GUI.pdb
+D:\Basket\Опытные\HaffmaneCode_GUI\HemmingCode_GUI\obj\x86\Debug\HaffmaneCode_GUI.Form1.resources
+D:\Basket\Опытные\HaffmaneCode_GUI\HemmingCode_GUI\obj\x86\Debug\HaffmaneCode_GUI.Properties.Resources.resources
+D:\Basket\Опытные\HaffmaneCode_GUI\HemmingCode_GUI\obj\x86\Debug\HemmingCode_GUI.csproj.GenerateResource.Cache
+D:\Basket\Опытные\HaffmaneCode_GUI\HemmingCode_GUI\obj\x86\Debug\HemmingCode_GUI.exe
+F:\Projects\Опытные\C#\1. Криптография, сжатие, шифры\Код Хаффмана или Хемминга\HemmingCode_GUI\obj\x86\Debug\HemmingCode_GUI.exe
+F:\Projects\Опытные\C#\1. Криптография, сжатие, шифры\Код Хаффмана или Хемминга\HemmingCode_GUI\obj\x86\Debug\HemmingCode_GUI.pdb
+F:\Projects\Опытные\C#\1. Криптография, сжатие, шифры\Код Хаффмана или Хемминга\HemmingCode_GUI\bin\Debug\HemmingCode_GUI.exe
+F:\Projects\Опытные\C#\1. Криптография, сжатие, шифры\Код Хаффмана или Хемминга\HemmingCode_GUI\bin\Debug\HemmingCode_GUI.pdb
+F:\Projects\Опытные\C#\1. Криптография, сжатие, шифры\Код Хаффмана или Хемминга\HemmingCode_GUI\obj\x86\Debug\HemmingCode_GUI.csprojResolveAssemblyReference.cache
+F:\Projects\Опытные\C#\1. Криптография, сжатие, шифры\Код Хаффмана или Хемминга\HemmingCode_GUI\obj\x86\Debug\HaffmaneCode_GUI.Form1.resources
+F:\Projects\Опытные\C#\1. Криптография, сжатие, шифры\Код Хаффмана или Хемминга\HemmingCode_GUI\obj\x86\Debug\HaffmaneCode_GUI.Properties.Resources.resources
+F:\Projects\Опытные\C#\1. Криптография, сжатие, шифры\Код Хаффмана или Хемминга\HemmingCode_GUI\obj\x86\Debug\HemmingCode_GUI.csproj.GenerateResource.Cache
+F:\Projects\Опытные\C#\1. Криптография, сжатие, шифры\Код Хаффмана — продвинутое\HemmingCode_GUI\obj\x86\Debug\HemmingCode_GUI.exe
+F:\Projects\Опытные\C#\1. Криптография, сжатие, шифры\Код Хаффмана — продвинутое\HemmingCode_GUI\obj\x86\Debug\HemmingCode_GUI.pdb
+F:\Projects\Опытные\C#\1. Криптография, сжатие, шифры\Код Хаффмана — продвинутое\HemmingCode_GUI\bin\Debug\HemmingCode_GUI.exe
+F:\Projects\Опытные\C#\1. Криптография, сжатие, шифры\Код Хаффмана — продвинутое\HemmingCode_GUI\bin\Debug\HemmingCode_GUI.pdb
+F:\Projects\Опытные\C#\1. Криптография, сжатие, шифры\Код Хаффмана — продвинутое\HemmingCode_GUI\obj\x86\Debug\HemmingCode_GUI.csprojResolveAssemblyReference.cache
+F:\Projects\Опытные\C#\1. Криптография, сжатие, шифры\Код Хаффмана — продвинутое\HemmingCode_GUI\obj\x86\Debug\HaffmaneCode_GUI.Form1.resources
+F:\Projects\Опытные\C#\1. Криптография, сжатие, шифры\Код Хаффмана — продвинутое\HemmingCode_GUI\obj\x86\Debug\HaffmaneCode_GUI.Properties.Resources.resources
+F:\Projects\Опытные\C#\1. Криптография, сжатие, шифры\Код Хаффмана — продвинутое\HemmingCode_GUI\obj\x86\Debug\HemmingCode_GUI.csproj.GenerateResource.Cache

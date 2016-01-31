@@ -1,0 +1,16 @@
+﻿<Window x:Name="Десерты" x:Class="WpfApplication6.Window3"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Десерты" Height="321" Width="448">
+    <Grid>
+        <Button Content="Мороженое шоколадное" Height="36" HorizontalAlignment="Left" Margin="12,23,0,0" x:Name="МШоколадное" VerticalAlignment="Top" Width="157" Click="МШоколадное_Click" />
+        <Button Content="Мороженое карамельное" Height="36" HorizontalAlignment="Left" Margin="12,76,0,0" x:Name="МКарамельное" VerticalAlignment="Top" Width="157" Click="МКарамельное_Click" />
+        <Button Content="Мороженое клубничное" Height="37" HorizontalAlignment="Left" Margin="12,126,0,0" x:Name="МКлубничное" VerticalAlignment="Top" Width="157" Click="МКлубничное_Click" />
+        <Button Content="Вафельный рожок" Height="36" HorizontalAlignment="Left" Margin="262,23,0,0" x:Name="ВРожок" VerticalAlignment="Top" Width="168" Click="ВРожок_Click" />
+        <Button Content="Вишневый пирожок" Height="36" HorizontalAlignment="Left" Margin="262,76,0,0" x:Name="ВПирожок" VerticalAlignment="Top" Width="168" Click="ВПирожок_Click" />
+        <Button Content="Маффин с шоколадом" Height="39" HorizontalAlignment="Left" Margin="262,126,0,0" x:Name="МсШоколадом" VerticalAlignment="Top" Width="168" Click="МсШоколадом_Click" />
+        <Button Content="Ок" Height="55" HorizontalAlignment="Left" Margin="12,215,0,0" x:Name="Ок" VerticalAlignment="Top" Width="75" Click="Ок_Click" />
+        <Button Content="Отмена" Height="55" HorizontalAlignment="Left" Margin="355,215,0,0" x:Name="Отмена" VerticalAlignment="Top" Width="75" Click="Отмена_Click" />
+        <ListBox Height="90" HorizontalAlignment="Left" Margin="92,180,0,0" x:Name="ОкноВывода" VerticalAlignment="Top" Width="258" />
+    </Grid>
+</Window>

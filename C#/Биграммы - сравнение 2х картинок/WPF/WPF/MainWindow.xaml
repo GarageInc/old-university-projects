@@ -1,0 +1,31 @@
+﻿<Window x:Class="WPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="537.209" Width="1157.283">
+    <Grid Width="1157" HorizontalAlignment="Left" Margin="0,0,-8,-3" Height="509" VerticalAlignment="Top">
+
+        <Button Content="График изображения #1" Height="65" HorizontalAlignment="Left" Margin="412,268,0,0" Name="button1" VerticalAlignment="Top" Width="152" Click="button1_Click" />
+        <TextBox Height="240" Margin="78,19,0,0" Name="textBox1" VerticalAlignment="Top" AcceptsReturn="True" HorizontalAlignment="Left" Width="486" />
+        <Button Content="Из файла первое изображение .jpg" Height="240" Margin="17,19,0,0" Name="Iz_file" VerticalAlignment="Top" FontStretch="Normal" Click="Iz_file_Click" HorizontalAlignment="Left" Width="63" />
+        <TextBox Height="39" HorizontalAlignment="Left" Margin="17,294,0,0" Name="textBox_Количество_символов" VerticalAlignment="Top" Width="150" Text="1000" />
+        <TextBox Height="39" Margin="175,294,0,0" Name="textBox_Коэффициент" VerticalAlignment="Top" Text="75" HorizontalAlignment="Left" Width="150" />
+        <TextBlock Height="25" HorizontalAlignment="Left" Margin="17,268,0,0" Name="textBlock_КоличествоСимволов" Text="Количество символов:" VerticalAlignment="Top" Width="150" FontSize="10" />
+        <TextBlock Height="25" HorizontalAlignment="Left" Margin="175,268,0,0" Name="textBlock_КоэффициентУмножения" Text="Коэффициент:" VerticalAlignment="Top" Width="150" FontSize="10" />
+        <ProgressBar Height="31" HorizontalAlignment="Left" Margin="12,491,0,0" Name="progressBar1" VerticalAlignment="Top" Width="260" Visibility="Hidden" />
+        <Label Height="81" HorizontalAlignment="Left" Name="Текст_Ошибка" VerticalAlignment="Top" Width="547" Margin="17,343,0,0" />
+        <Button Content="График изображения #2" Height="65" HorizontalAlignment="Left" Margin="981,268,-474,0" x:Name="button1_Copy" VerticalAlignment="Top" Width="152" Click="button1_Click_Copy" />
+        <TextBox Height="240" Margin="647,19,-474,0" x:Name="textBox1_Copy" VerticalAlignment="Top" AcceptsReturn="True" HorizontalAlignment="Left" Width="486" />
+        <Button Content="Из файла первое изображение .jpg" Height="240" Margin="586,19,0,0" x:Name="Iz_file_Copy" VerticalAlignment="Top" FontStretch="Normal" Click="Iz_file_Copy_Click" HorizontalAlignment="Left" Width="63" />
+        <TextBox Height="39" HorizontalAlignment="Left" Margin="586,294,-77,0" x:Name="textBox_Количество_символов_Copy" VerticalAlignment="Top" Width="150" Text="1000" />
+        <TextBox Height="39" Margin="744,294,-235,0" x:Name="textBox_Коэффициент_Copy" VerticalAlignment="Top" Text="75" HorizontalAlignment="Left" Width="150" />
+        <TextBlock Height="25" HorizontalAlignment="Left" Margin="586,268,-77,0" x:Name="textBlock_КоличествоСимволов_Copy" Text="Количество символов:" VerticalAlignment="Top" Width="150" FontSize="10" />
+        <TextBlock Height="25" HorizontalAlignment="Left" Margin="744,268,-235,0" x:Name="textBlock_КоэффициентУмножения_Copy" Text="Коэффициент:" VerticalAlignment="Top" Width="150" FontSize="10" />
+        <Label Height="81" HorizontalAlignment="Left" x:Name="Текст_Ошибка_Copy" VerticalAlignment="Top" Width="547" Margin="586,343,0,0" />
+        <Button x:Name="CompareButton" Content="Сравнить изображения" HorizontalAlignment="Left" Height="58" Margin="311,437,0,0" VerticalAlignment="Top" Width="176" Click="CompareButton_Click"/>
+        <Label x:Name="label" Content="0%" HorizontalAlignment="Left" Margin="840,455,0,0" VerticalAlignment="Top"/>
+        <TextBox Height="39" HorizontalAlignment="Left" Margin="514,455,0,0" x:Name="textBox_Количество_символов_Copy1" VerticalAlignment="Top" Width="150" Text="1000" />
+        <TextBox Height="39" Margin="672,455,0,0" x:Name="textBox_Коэффициент_Copy1" VerticalAlignment="Top" Text="75" HorizontalAlignment="Left" Width="150" />
+        <TextBlock Height="17" HorizontalAlignment="Left" Margin="514,437,0,0" x:Name="textBlock_КоличествоСимволов_Copy1" Text="Количество символов:" VerticalAlignment="Top" Width="150" FontSize="10" />
+        <TextBlock Height="17" HorizontalAlignment="Left" Margin="672,437,0,0" x:Name="textBlock_КоэффициентУмножения_Copy1" Text="Коэффициент:" VerticalAlignment="Top" Width="150" FontSize="10" />
+    </Grid>
+</Window>

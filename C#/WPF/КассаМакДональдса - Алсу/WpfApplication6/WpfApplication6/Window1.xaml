@@ -1,0 +1,20 @@
+﻿<Window x:Name="Сандвичи" x:Class="WpfApplication6.Window1"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Сендвичи" Height="300" Width="595.681">
+    <Grid Margin="10,0,-19,-3">
+        <Button Content="Биг Мак" Height="32" HorizontalAlignment="Left" Margin="22,17,0,0" x:Name="БигМак" VerticalAlignment="Top" Width="99" Click="БигМак_Click" />
+        <Button Content="Роял Чизбургер" Height="32" HorizontalAlignment="Left" Margin="22,65,0,0" x:Name="РоялЧизбургер" VerticalAlignment="Top" Width="99" Click="РоялЧизбургер_Click" />
+        <CheckBox Content="Соус" Height="15" HorizontalAlignment="Left" Margin="146,64,0,0" x:Name="Соус" VerticalAlignment="Top" Width="92" />
+        <Button Content="Ок" Height="30" HorizontalAlignment="Left" Margin="146,198,0,0" x:Name="Ок" VerticalAlignment="Top" Width="90" Click="Ок_Click" />
+        <Button Content="Отмена" Height="30" HorizontalAlignment="Left" Margin="477,198,0,0" x:Name="Отмена" VerticalAlignment="Top" Width="75" Click="Отмена_Click" />
+        <ListBox Height="108" HorizontalAlignment="Left" Margin="146,85,0,0" x:Name="ОкноВывода" VerticalAlignment="Top" Width="406" />
+        <ComboBox x:Name="Объем" HorizontalAlignment="Left" Margin="146,17,0,0" VerticalAlignment="Top" Width="202" SelectedIndex="0">
+            <ComboBoxItem Content="Большой"/>
+            <ComboBoxItem Content="Средний"/>
+            <ComboBoxItem Content="Маленький"/>
+        </ComboBox>
+        <Button x:Name="ЧикенБекон" Content="Чикен Бекон" HorizontalAlignment="Left" Margin="22,110,0,0" VerticalAlignment="Top" Width="99" Height="35" Click="ЧикенБекон_Click"/>
+        <Button x:Name="Биф_Ролл" Content="Button" HorizontalAlignment="Left" Margin="22,157,0,0" VerticalAlignment="Top" Width="99" Height="36" Click="БифРолл_Click"/>
+    </Grid>
+</Window>

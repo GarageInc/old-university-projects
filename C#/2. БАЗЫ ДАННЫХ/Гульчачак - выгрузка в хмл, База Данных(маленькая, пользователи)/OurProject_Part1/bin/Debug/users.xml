@@ -1,0 +1,49 @@
+<?xml version="1.0" standalone="yes"?>
+<NewDataSet>
+  <xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
+      <xs:complexType>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:element name="Пользователи">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="Номер" type="xs:int" />
+                <xs:element name="Имя" type="xs:string" minOccurs="0" />
+                <xs:element name="Фамилия" type="xs:string" minOccurs="0" />
+                <xs:element name="ДатаРождения" type="xs:string" minOccurs="0" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:choice>
+      </xs:complexType>
+      <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+        <xs:selector xpath=".//Пользователи" />
+        <xs:field xpath="Номер" />
+      </xs:unique>
+    </xs:element>
+  </xs:schema>
+  <Пользователи>
+    <Номер>0</Номер>
+    <Имя>имя</Имя>
+    <Фамилия>фамилия</Фамилия>
+    <ДатаРождения>112015</ДатаРождения>
+  </Пользователи>
+  <Пользователи>
+    <Номер>2</Номер>
+    <Имя>имя</Имя>
+    <Фамилия>фамилия</Фамилия>
+    <ДатаРождения>112015</ДатаРождения>
+  </Пользователи>
+  <Пользователи>
+    <Номер>3</Номер>
+    <Имя>имя</Имя>
+    <Фамилия>фамилия</Фамилия>
+    <ДатаРождения>112015</ДатаРождения>
+  </Пользователи>
+  <Пользователи>
+    <Номер>1</Номер>
+    <Имя>имя</Имя>
+    <Фамилия>фамилия</Фамилия>
+    <ДатаРождения>112015</ДатаРождения>
+  </Пользователи>
+</NewDataSet>

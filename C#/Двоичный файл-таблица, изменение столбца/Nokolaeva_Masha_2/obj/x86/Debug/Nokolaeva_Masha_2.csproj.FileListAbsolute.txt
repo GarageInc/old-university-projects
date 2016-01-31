@@ -1,0 +1,4 @@
+C:\Users\7\Desktop\Nokolaeva_Masha_2\Nokolaeva_Masha_2\bin\Debug\Nokolaeva_Masha_2.exe
+C:\Users\7\Desktop\Nokolaeva_Masha_2\Nokolaeva_Masha_2\bin\Debug\Nokolaeva_Masha_2.pdb
+C:\Users\7\Desktop\Nokolaeva_Masha_2\Nokolaeva_Masha_2\obj\x86\Debug\Nokolaeva_Masha_2.exe
+C:\Users\7\Desktop\Nokolaeva_Masha_2\Nokolaeva_Masha_2\obj\x86\Debug\Nokolaeva_Masha_2.pdb

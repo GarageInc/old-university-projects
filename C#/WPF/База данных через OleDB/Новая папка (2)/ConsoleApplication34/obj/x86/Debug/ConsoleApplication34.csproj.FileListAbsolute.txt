@@ -1,0 +1,10 @@
+c:\users\пользователь\documents\visual studio 2010\Projects\ConsoleApplication34\bin\Debug\ConsoleApplication34.exe
+c:\users\пользователь\documents\visual studio 2010\Projects\ConsoleApplication34\bin\Debug\ConsoleApplication34.pdb
+c:\users\пользователь\documents\visual studio 2010\Projects\ConsoleApplication34\obj\x86\Debug\ConsoleApplication34.exe
+c:\users\пользователь\documents\visual studio 2010\Projects\ConsoleApplication34\obj\x86\Debug\ConsoleApplication34.pdb
+C:\Users\Пользователь\Documents\Visual Studio 2010\Projects\ConsoleApplication34\obj\x86\Debug\ConsoleApplication34.csprojResolveAssemblyReference.cache
+C:\Users\7\Downloads\Новая папка (2)\Новая папка (2)\ConsoleApplication34\obj\x86\Debug\ConsoleApplication34.exe
+C:\Users\7\Downloads\Новая папка (2)\Новая папка (2)\ConsoleApplication34\obj\x86\Debug\ConsoleApplication34.pdb
+C:\Users\7\Downloads\Новая папка (2)\Новая папка (2)\ConsoleApplication34\bin\Debug\ConsoleApplication34.exe
+C:\Users\7\Downloads\Новая папка (2)\Новая папка (2)\ConsoleApplication34\bin\Debug\ConsoleApplication34.pdb
+C:\Users\7\Downloads\Новая папка (2)\Новая папка (2)\ConsoleApplication34\obj\x86\Debug\ConsoleApplication34.csprojResolveAssemblyReference.cache

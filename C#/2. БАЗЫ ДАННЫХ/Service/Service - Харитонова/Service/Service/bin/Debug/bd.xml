@@ -1,0 +1,113 @@
+<?xml version="1.0" standalone="yes"?>
+<NewDataSet>
+  <xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
+      <xs:complexType>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:element name="Заказы">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="НомерЗаказа" type="xs:int" />
+                <xs:element name="IDКомпанииИсполнителя" type="xs:int" minOccurs="0" />
+                <xs:element name="IDКомпанииЗаказчика" type="xs:int" minOccurs="0" />
+                <xs:element name="Выполнено_x002F_НеВыполнено" type="xs:boolean" minOccurs="0" />
+                <xs:element name="ДатаСдачиЗаказа" type="xs:dateTime" minOccurs="0" />
+                <xs:element name="ДатаПриёмаЗаказа" type="xs:dateTime" />
+                <xs:element name="Название_x002F_Описание" type="xs:string" minOccurs="0" />
+                <xs:element name="Стоимость" type="xs:int" minOccurs="0" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="ЗаписьОплаты">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="НомерЗаказа" type="xs:int" />
+                <xs:element name="ДатаПриёмаЗаказа" type="xs:dateTime" />
+                <xs:element name="Оплачено_x002F_НеОплачено" type="xs:boolean" minOccurs="0" />
+                <xs:element name="Предоплата" type="xs:int" minOccurs="0" />
+                <xs:element name="ДатаОплаты" type="xs:dateTime" minOccurs="0" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="КомпанииЗаказчики">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="IDКомпанииЗаказчика" type="xs:int" />
+                <xs:element name="НазваниеКомпанииЗаказчика" type="xs:string" minOccurs="0" />
+                <xs:element name="СпецификацияКомпании" type="xs:string" minOccurs="0" />
+                <xs:element name="СредстваСвязи" type="xs:string" minOccurs="0" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="КомпанииИсполнители">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="IDКомпанииИсполнителя" type="xs:int" />
+                <xs:element name="НазваниеКомпанииИсполнителя" type="xs:string" minOccurs="0" />
+                <xs:element name="СпецификацияКомпании" type="xs:string" minOccurs="0" />
+                <xs:element name="СредстваСвязи" type="xs:string" minOccurs="0" />
+                <xs:element name="СчетчикКомпанииИсполнителя" type="xs:int" minOccurs="0" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:choice>
+      </xs:complexType>
+      <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+        <xs:selector xpath=".//Заказы" />
+        <xs:field xpath="НомерЗаказа" />
+        <xs:field xpath="ДатаПриёмаЗаказа" />
+      </xs:unique>
+      <xs:unique name="Constraint2">
+        <xs:selector xpath=".//Заказы" />
+        <xs:field xpath="НомерЗаказа" />
+      </xs:unique>
+      <xs:unique name="ЗаписьОплаты_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+        <xs:selector xpath=".//ЗаписьОплаты" />
+        <xs:field xpath="НомерЗаказа" />
+        <xs:field xpath="ДатаПриёмаЗаказа" />
+      </xs:unique>
+      <xs:unique name="КомпанииЗаказчики_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+        <xs:selector xpath=".//КомпанииЗаказчики" />
+        <xs:field xpath="IDКомпанииЗаказчика" />
+      </xs:unique>
+      <xs:unique name="КомпанииИсполнители_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+        <xs:selector xpath=".//КомпанииИсполнители" />
+        <xs:field xpath="IDКомпанииИсполнителя" />
+      </xs:unique>
+      <xs:keyref name="СвязьЗаказаСОплатойЗаказа" refer="Constraint2">
+        <xs:selector xpath=".//ЗаписьОплаты" />
+        <xs:field xpath="НомерЗаказа" />
+      </xs:keyref>
+    </xs:element>
+  </xs:schema>
+  <КомпанииЗаказчики>
+    <IDКомпанииЗаказчика>11</IDКомпанииЗаказчика>
+    <НазваниеКомпанииЗаказчика>12</НазваниеКомпанииЗаказчика>
+  </КомпанииЗаказчики>
+  <КомпанииЗаказчики>
+    <IDКомпанииЗаказчика>2</IDКомпанииЗаказчика>
+    <НазваниеКомпанииЗаказчика />
+    <СпецификацияКомпании />
+    <СредстваСвязи />
+  </КомпанииЗаказчики>
+  <КомпанииЗаказчики>
+    <IDКомпанииЗаказчика>123</IDКомпанииЗаказчика>
+    <НазваниеКомпанииЗаказчика />
+    <СпецификацияКомпании />
+    <СредстваСвязи />
+  </КомпанииЗаказчики>
+  <КомпанииИсполнители>
+    <IDКомпанииИсполнителя>12</IDКомпанииИсполнителя>
+    <НазваниеКомпанииИсполнителя>12</НазваниеКомпанииИсполнителя>
+    <СпецификацияКомпании />
+    <СредстваСвязи />
+    <СчетчикКомпанииИсполнителя>0</СчетчикКомпанииИсполнителя>
+  </КомпанииИсполнители>
+  <КомпанииИсполнители>
+    <IDКомпанииИсполнителя>2</IDКомпанииИсполнителя>
+    <НазваниеКомпанииИсполнителя>12</НазваниеКомпанииИсполнителя>
+    <СпецификацияКомпании />
+    <СредстваСвязи />
+    <СчетчикКомпанииИсполнителя>0</СчетчикКомпанииИсполнителя>
+  </КомпанииИсполнители>
+</NewDataSet>

@@ -1,0 +1,5 @@
+C:\Users\7\Desktop\BulatSal\BulatSal\bin\Debug\BulatSal.exe
+C:\Users\7\Desktop\BulatSal\BulatSal\bin\Debug\BulatSal.pdb
+C:\Users\7\Desktop\BulatSal\BulatSal\obj\x86\Debug\BulatSal.exe
+C:\Users\7\Desktop\BulatSal\BulatSal\obj\x86\Debug\BulatSal.pdb
+C:\Users\7\Desktop\BulatSal\BulatSal\obj\x86\Debug\BulatSal.csprojResolveAssemblyReference.cache

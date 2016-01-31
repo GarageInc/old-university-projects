@@ -1,0 +1,95 @@
+using System;
+
+namespace Algorithms
+{
+    public class Box
+    {
+        private double _x;
+
+        private double _y;
+
+        private double _w;
+
+        private double _h;
+
+        public double X
+        {
+            get { return _x; }
+        }
+
+        public double Y
+        {
+            get { return _y; }
+        }
+
+        public double W
+        {
+            get { return _w; }
+        }
+
+        public double H
+        {
+            get { return _h; }
+        }
+
+        public Box()
+        {
+            _x = 0;
+            _y = 0;
+            _w = 5;
+            _h = 7;
+        }
+
+        public Box(double x, double y, double w, double h)
+        {
+            if (w > 0 && h > 0)
+            {
+                _x = x;
+                _y = y;
+                _w = w;
+                _h = h;
+            }
+            else
+            {
+                Console.WriteLine("Invalid width or height");
+            }
+        }
+
+        public bool Test(double x, double y)
+        {
+            return x > _x && y > _y && x < (_x + _w) && y < (_y + _h);
+        }
+
+        public void Display()
+        {
+            Console.WriteLine("x={0} y={1} w={2} h={3}", _x, _y, _w, _h);
+        }
+
+        public static Box operator +(Box b1, Box b2)
+        {
+            double x = Math.Min(b1.X, b2.X);
+            double y = Math.Max(b1.Y, b2.Y);
+            double x1 = Math.Max(b1.X + b1.W, b2.X + b2.W);
+            double y1 = Math.Min(b1.Y - b1.H, b2.Y - b2.H);
+            return new Box(x, y, Math.Abs(x1 - x), Math.Abs(y1 - y));
+        }
+    }
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Box b = new Box(-5, 4, 1, 2);
+            Box b1 = new Box();
+
+            b.Display();
+            b1.Display();
+            (b + b1).Display();
+
+            Console.WriteLine("{0}", b.Test(1, 1));
+            Console.WriteLine("{0}", b.Test(100, 100));
+
+            Console.ReadKey();
+        }
+    }
+}

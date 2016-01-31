@@ -1,0 +1,12 @@
+C:\Users\7\Desktop\Опытные\MyShop\MyShop\bin\Debug\MyShop.exe
+C:\Users\7\Desktop\Опытные\MyShop\MyShop\bin\Debug\MyShop.pdb
+C:\Users\7\Desktop\Опытные\MyShop\MyShop\obj\x86\Debug\MyShop.exe
+C:\Users\7\Desktop\Опытные\MyShop\MyShop\obj\x86\Debug\MyShop.pdb
+C:\Users\7\Desktop\Опытные\C#\Магазин Базы данных\MyShop\obj\x86\Debug\MyShop.exe
+C:\Users\7\Desktop\Опытные\C#\Магазин Базы данных\MyShop\obj\x86\Debug\MyShop.pdb
+C:\Users\7\Desktop\Опытные\C#\Магазин Базы данных\MyShop\bin\Debug\Torgovlya.mdf
+C:\Users\7\Desktop\Опытные\C#\Магазин Базы данных\MyShop\bin\Debug\Torgovlya_log.ldf
+C:\Users\7\Desktop\Опытные\C#\Магазин Базы данных\MyShop\bin\Debug\MyShop.exe.config
+C:\Users\7\Desktop\Опытные\C#\Магазин Базы данных\MyShop\bin\Debug\MyShop.exe
+C:\Users\7\Desktop\Опытные\C#\Магазин Базы данных\MyShop\bin\Debug\MyShop.pdb
+C:\Users\7\Desktop\Опытные\C#\Магазин Базы данных\MyShop\obj\x86\Debug\MyShop.csprojResolveAssemblyReference.cache

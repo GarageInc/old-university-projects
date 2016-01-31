@@ -1,0 +1,33 @@
+C:\Users\м .видео\Desktop\Service\Service\bin\Debug\Service.exe.config
+C:\Users\м .видео\Desktop\Service\Service\obj\Debug\Service.csprojResolveAssemblyReference.cache
+C:\Users\м .видео\Desktop\Service\Service\obj\Debug\Service.Properties.Resources.resources
+C:\Users\м .видео\Desktop\Service\Service\obj\Debug\Service.csproj.GenerateResource.Cache
+C:\Users\м .видео\Desktop\Service\Service\bin\Debug\Service.exe
+C:\Users\м .видео\Desktop\Service\Service\bin\Debug\Service.pdb
+C:\Users\м .видео\Desktop\Service\Service\obj\Debug\Service.Form2.resources
+C:\Users\м .видео\Desktop\Service\Service\obj\Debug\Service.Form3.resources
+C:\Users\м .видео\Desktop\Service\Service\obj\Debug\Service.exe
+C:\Users\м .видео\Desktop\Service\Service\obj\Debug\Service.pdb
+C:\Users\м .видео\Desktop\Service\Service\obj\Debug\Service.Form1.resources
+C:\Users\7\Downloads\Service\Service\Service\bin\Debug\Service.exe.config
+C:\Users\7\Downloads\Service\Service\Service\obj\Debug\Service.exe
+C:\Users\7\Downloads\Service\Service\Service\obj\Debug\Service.pdb
+C:\Users\7\Downloads\Service\Service\Service\bin\Debug\Service.exe
+C:\Users\7\Downloads\Service\Service\Service\bin\Debug\Service.pdb
+C:\Users\7\Downloads\Service\Service\Service\obj\Debug\Service.csprojResolveAssemblyReference.cache
+C:\Users\7\Downloads\Service\Service\Service\obj\Debug\Service.Form1.resources
+C:\Users\7\Downloads\Service\Service\Service\obj\Debug\Service.Form2.resources
+C:\Users\7\Downloads\Service\Service\Service\obj\Debug\Service.Form3.resources
+C:\Users\7\Downloads\Service\Service\Service\obj\Debug\Service.Properties.Resources.resources
+C:\Users\7\Downloads\Service\Service\Service\obj\Debug\Service.csproj.GenerateResource.Cache
+C:\Users\7\Desktop\Опытные\C#\2. БАЗЫ ДАННЫХ\Service - Харитонова\Service\Service\bin\Debug\Service.exe.config
+C:\Users\7\Desktop\Опытные\C#\2. БАЗЫ ДАННЫХ\Service - Харитонова\Service\Service\obj\Debug\Service.exe
+C:\Users\7\Desktop\Опытные\C#\2. БАЗЫ ДАННЫХ\Service - Харитонова\Service\Service\obj\Debug\Service.pdb
+C:\Users\7\Desktop\Опытные\C#\2. БАЗЫ ДАННЫХ\Service - Харитонова\Service\Service\bin\Debug\Service.exe
+C:\Users\7\Desktop\Опытные\C#\2. БАЗЫ ДАННЫХ\Service - Харитонова\Service\Service\bin\Debug\Service.pdb
+C:\Users\7\Desktop\Опытные\C#\2. БАЗЫ ДАННЫХ\Service - Харитонова\Service\Service\obj\Debug\Service.csprojResolveAssemblyReference.cache
+C:\Users\7\Desktop\Опытные\C#\2. БАЗЫ ДАННЫХ\Service - Харитонова\Service\Service\obj\Debug\Service.Form1.resources
+C:\Users\7\Desktop\Опытные\C#\2. БАЗЫ ДАННЫХ\Service - Харитонова\Service\Service\obj\Debug\Service.Form2.resources
+C:\Users\7\Desktop\Опытные\C#\2. БАЗЫ ДАННЫХ\Service - Харитонова\Service\Service\obj\Debug\Service.Form3.resources
+C:\Users\7\Desktop\Опытные\C#\2. БАЗЫ ДАННЫХ\Service - Харитонова\Service\Service\obj\Debug\Service.Properties.Resources.resources
+C:\Users\7\Desktop\Опытные\C#\2. БАЗЫ ДАННЫХ\Service - Харитонова\Service\Service\obj\Debug\Service.csproj.GenerateResource.Cache

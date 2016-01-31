@@ -1,0 +1,4 @@
+C:\Users\7\Desktop\Project_1\Project_1\bin\Debug\Project_1.exe
+C:\Users\7\Desktop\Project_1\Project_1\bin\Debug\Project_1.pdb
+C:\Users\7\Desktop\Project_1\Project_1\obj\x86\Debug\Project_1.exe
+C:\Users\7\Desktop\Project_1\Project_1\obj\x86\Debug\Project_1.pdb

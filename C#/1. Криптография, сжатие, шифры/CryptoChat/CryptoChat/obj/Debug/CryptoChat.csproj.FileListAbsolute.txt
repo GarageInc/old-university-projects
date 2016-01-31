@@ -1,0 +1,9 @@
+C:\Users\7\Desktop\Опытные\C#\CryptoChat\CryptoChat\obj\Debug\CryptoChat.Form1.resources
+C:\Users\7\Desktop\Опытные\C#\CryptoChat\CryptoChat\obj\Debug\CryptoChat.Properties.Resources.resources
+C:\Users\7\Desktop\Опытные\C#\CryptoChat\CryptoChat\obj\Debug\CryptoChat.csproj.GenerateResource.Cache
+C:\Users\7\Desktop\Опытные\C#\CryptoChat\CryptoChat\bin\Debug\CryptoChat.exe.config
+C:\Users\7\Desktop\Опытные\C#\CryptoChat\CryptoChat\bin\Debug\CryptoChat.exe
+C:\Users\7\Desktop\Опытные\C#\CryptoChat\CryptoChat\bin\Debug\CryptoChat.pdb
+C:\Users\7\Desktop\Опытные\C#\CryptoChat\CryptoChat\obj\Debug\CryptoChat.exe
+C:\Users\7\Desktop\Опытные\C#\CryptoChat\CryptoChat\obj\Debug\CryptoChat.pdb
+C:\Users\7\Desktop\Опытные\C#\CryptoChat\CryptoChat\obj\Debug\CryptoChat.csprojResolveAssemblyReference.cache

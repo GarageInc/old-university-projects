@@ -1,0 +1,7 @@
+C:\Users\7\Desktop\Fractions\Fractions\bin\Debug\Fractions.exe
+C:\Users\7\Desktop\Fractions\Fractions\bin\Debug\Fractions.pdb
+C:\Users\7\Desktop\Fractions\Fractions\obj\x86\Debug\Fractions.exe
+C:\Users\7\Desktop\Fractions\Fractions\obj\x86\Debug\Fractions.pdb
+C:\Users\7\Desktop\Fractions\Fractions\obj\x86\Debug\Fractions.csprojResolveAssemblyReference.cache
+C:\Users\7\Desktop\База готовых работ\Fractions\Fractions\obj\x86\Debug\Fractions.exe
+C:\Users\7\Desktop\База готовых работ\Fractions\Fractions\obj\x86\Debug\Fractions.pdb

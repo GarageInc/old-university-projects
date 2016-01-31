@@ -1,0 +1,15 @@
+﻿<Window x:Name="Картофель" x:Class="WpfApplication6.ОкноКартофеля"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Картофель" Height="454.419" Width="880.159">
+    <Grid Margin="0,0,0,24">
+        <Button Content="Картофель по-деревенски большая порция" Height="62" HorizontalAlignment="Left" Margin="571,10,0,0" x:Name="КартФириБПорция" VerticalAlignment="Top" Width="280" Click="F1" />
+        <Button Content="Картофель  по-деревенски средняя порция" Height="62" HorizontalAlignment="Left" Margin="571,80,0,0" x:Name="КартФриСредПорц" VerticalAlignment="Top" Width="280" Click="F3" />
+        <Button Content="Картофель  по-деревенски
+ маленькая порция" Height="57" HorizontalAlignment="Left" Margin="571,151,0,0" x:Name="КартФриМалПорция" VerticalAlignment="Top" Width="280" Click="F2" />
+        <Button Content="Картошка в мундире" Height="57" HorizontalAlignment="Left" Margin="571,216,0,0" x:Name="КартПоДерев" VerticalAlignment="Top" Width="280" Click="F4" />
+        <Button Content="Ок" Height="49" HorizontalAlignment="Left" Margin="571,326,0,0" Name="button5" VerticalAlignment="Top" Width="124" Click="button5_Click" />
+        <Button Content="Отмена" Height="49" HorizontalAlignment="Left" Margin="745,326,0,0" Name="button6" VerticalAlignment="Top" Width="106" Click="button6_Click" />
+        <ListBox Height="365" HorizontalAlignment="Left" Margin="12,10,0,0" x:Name="ОкноВывода" VerticalAlignment="Top" Width="554" />
+    </Grid>
+</Window>

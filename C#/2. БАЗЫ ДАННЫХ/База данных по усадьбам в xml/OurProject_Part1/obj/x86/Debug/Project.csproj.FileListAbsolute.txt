@@ -1,0 +1,25 @@
+C:\Users\7\Desktop\Опытные\C#\Гюльчачак\OurProject_Part1\bin\Debug\OurProject_Part1.exe
+C:\Users\7\Desktop\Опытные\C#\Гюльчачак\OurProject_Part1\bin\Debug\OurProject_Part1.pdb
+C:\Users\7\Desktop\Опытные\C#\Гюльчачак\OurProject_Part1\obj\x86\Debug\Project.csproj.ResolveComReference.cache
+C:\Users\7\Desktop\Опытные\C#\Гюльчачак\OurProject_Part1\obj\x86\Debug\OurProject_Part1.Form1.resources
+C:\Users\7\Desktop\Опытные\C#\Гюльчачак\OurProject_Part1\obj\x86\Debug\OurProject_Part1.Properties.Resources.resources
+C:\Users\7\Desktop\Опытные\C#\Гюльчачак\OurProject_Part1\obj\x86\Debug\Project.csproj.GenerateResource.Cache
+C:\Users\7\Desktop\Опытные\C#\Гюльчачак\OurProject_Part1\obj\x86\Debug\OurProject_Part1.exe
+C:\Users\7\Desktop\Опытные\C#\Гюльчачак\OurProject_Part1\obj\x86\Debug\OurProject_Part1.pdb
+C:\Users\7\Desktop\Опытные\C#\Гульчачак\OurProject_Part1\obj\x86\Debug\Project.csproj.ResolveComReference.cache
+C:\Users\7\Desktop\Опытные\C#\Гульчачак\OurProject_Part1\obj\x86\Debug\OurProject_Part1.exe
+C:\Users\7\Desktop\Опытные\C#\Гульчачак\OurProject_Part1\obj\x86\Debug\OurProject_Part1.pdb
+C:\Users\7\Desktop\Опытные\C#\Гульчачак\OurProject_Part1\bin\Debug\OurProject_Part1.exe
+C:\Users\7\Desktop\Опытные\C#\Гульчачак\OurProject_Part1\bin\Debug\OurProject_Part1.pdb
+C:\Users\7\Desktop\Опытные\C#\Гульчачак\OurProject_Part1\obj\x86\Debug\OurProject_Part1.Form1.resources
+C:\Users\7\Desktop\Опытные\C#\Гульчачак\OurProject_Part1\obj\x86\Debug\OurProject_Part1.Properties.Resources.resources
+C:\Users\7\Desktop\Опытные\C#\Гульчачак\OurProject_Part1\obj\x86\Debug\Project.csproj.GenerateResource.Cache
+C:\Users\7\Desktop\Опытные\C#\2. БАЗЫ ДАННЫХ\Проект\OurProject_Part1\obj\x86\Debug\Project.csproj.ResolveComReference.cache
+C:\Users\7\Desktop\Опытные\C#\2. БАЗЫ ДАННЫХ\Проект\OurProject_Part1\obj\x86\Debug\OurProject_Part1.exe
+C:\Users\7\Desktop\Опытные\C#\2. БАЗЫ ДАННЫХ\Проект\OurProject_Part1\obj\x86\Debug\OurProject_Part1.pdb
+C:\Users\7\Desktop\Опытные\C#\2. БАЗЫ ДАННЫХ\Проект\OurProject_Part1\obj\x86\Debug\Project.csprojResolveAssemblyReference.cache
+C:\Users\7\Desktop\Опытные\C#\2. БАЗЫ ДАННЫХ\Проект\OurProject_Part1\obj\x86\Debug\OurProject_Part1.Form1.resources
+C:\Users\7\Desktop\Опытные\C#\2. БАЗЫ ДАННЫХ\Проект\OurProject_Part1\obj\x86\Debug\OurProject_Part1.Properties.Resources.resources
+C:\Users\7\Desktop\Опытные\C#\2. БАЗЫ ДАННЫХ\Проект\OurProject_Part1\obj\x86\Debug\Project.csproj.GenerateResource.Cache
+C:\Users\7\Desktop\Опытные\C#\2. БАЗЫ ДАННЫХ\Проект\OurProject_Part1\bin\Debug\OurProject_Part1.exe
+C:\Users\7\Desktop\Опытные\C#\2. БАЗЫ ДАННЫХ\Проект\OurProject_Part1\bin\Debug\OurProject_Part1.pdb
