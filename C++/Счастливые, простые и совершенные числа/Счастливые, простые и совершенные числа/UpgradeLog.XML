@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="Счастливые, простые и совершенные числа">
+</Property><Property Name="Файл решения" Value="D:\C++\20 сентября\Счастливые, простые и совершенные числа\Счастливые, простые и совершенные числа\Счастливые, простые и совершенные числа.sln">
+</Property><Property Name="Файл параметров пользователя" Value="D:\C++\20 сентября\Счастливые, простые и совершенные числа\Счастливые, простые и совершенные числа\Счастливые, простые и совершенные числа.suo">
+</Property><Property Name="Date" Value="21 октября 2012 г.">
+</Property><Property Name="Time" Value="21:18">
+</Property></Properties><Event ErrorLevel="0" Project="" Source="Счастливые, простые и совершенные числа.sln" Description="Успешно создана резервная копия файла D:\C++\20 сентября\Счастливые, простые и совершенные числа\Счастливые, простые и совершенные числа\Счастливые, простые и совершенные числа.sln.old">
+</Event><Event ErrorLevel="0" Project="" Source="Счастливые, простые и совершенные числа.suo" Description="Успешно создана резервная копия файла D:\C++\20 сентября\Счастливые, простые и совершенные числа\Счастливые, простые и совершенные числа\Счастливые, простые и совершенные числа.suo.old">
+</Event><Event ErrorLevel="0" Project="Счастливые, простые и совершенные числа" Source="Счастливые, простые и совершенные числа\Счастливые, простые и совершенные числа.vcproj" Description="Converting project file 'D:\C++\20 сентября\Счастливые, простые и совершенные числа\Счастливые, простые и совершенные числа\Счастливые, простые и совершенные числа\Счастливые, простые и совершенные числа.vcproj'.">
+</Event><Event ErrorLevel="1" Project="Счастливые, простые и совершенные числа" Source="Счастливые, простые и совершенные числа\Счастливые, простые и совершенные числа.vcproj" Description="VCWebServiceProxyGeneratorTool is no longer supported. The tool has been removed from your project settings.">
+</Event><Event ErrorLevel="0" Project="Счастливые, простые и совершенные числа" Source="Счастливые, простые и совершенные числа\Счастливые, простые и совершенные числа.vcproj" Description="Done converting to new project file 'D:\C++\20 сентября\Счастливые, простые и совершенные числа\Счастливые, простые и совершенные числа\Счастливые, простые и совершенные числа\Счастливые, простые и совершенные числа.vcxproj'.">
+</Event><Event ErrorLevel="3" Project="Счастливые, простые и совершенные числа" Source="Счастливые, простые и совершенные числа\Счастливые, простые и совершенные числа.vcproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="" Source="Счастливые, простые и совершенные числа.sln" Description="Преобразование решения успешно завершено">
+</Event><Event ErrorLevel="3" Project="" Source="Счастливые, простые и совершенные числа.sln" Description="Converted">
+</Event></UpgradeLog>

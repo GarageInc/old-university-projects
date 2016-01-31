@@ -1,0 +1,6 @@
+Moskva    123       Boing
+Astana    321       ABus
+Astana    479       SuperJet
+Pleseck   213       AirLines
+Moskva    678       Charter
+Astana    772       Charter

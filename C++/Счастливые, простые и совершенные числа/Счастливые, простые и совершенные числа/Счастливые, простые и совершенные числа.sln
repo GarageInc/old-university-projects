@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Счастливые, простые и совершенные числа", "Счастливые, простые и совершенные числа\Счастливые, простые и совершенные числа.vcxproj", "{3AE5CF6D-4160-4C16-BD05-4275E78D9D80}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3AE5CF6D-4160-4C16-BD05-4275E78D9D80}.Debug|Win32.ActiveCfg = Debug|Win32
+		{3AE5CF6D-4160-4C16-BD05-4275E78D9D80}.Debug|Win32.Build.0 = Debug|Win32
+		{3AE5CF6D-4160-4C16-BD05-4275E78D9D80}.Release|Win32.ActiveCfg = Release|Win32
+		{3AE5CF6D-4160-4C16-BD05-4275E78D9D80}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

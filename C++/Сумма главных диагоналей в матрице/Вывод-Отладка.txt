@@ -1,0 +1,37 @@
+﻿"SamostDMZ.exe": Загружено: "D:\C++\11 октября. ЗАВАЛ ЗАДАЧ!\SamostDMZ\Debug\SamostDMZ.exe", Символы загружены.
+"SamostDMZ.exe": Загружено: "C:\Windows\System32\ntdll.dll", Невозможно найти или открыть файл PDB
+"SamostDMZ.exe": Загружено: "C:\Windows\System32\kernel32.dll", Невозможно найти или открыть файл PDB
+"SamostDMZ.exe": Загружено: "C:\Windows\System32\KernelBase.dll", Невозможно найти или открыть файл PDB
+"SamostDMZ.exe": Загружено: "C:\Windows\System32\msvcp100d.dll", Символы загружены.
+"SamostDMZ.exe": Загружено: "C:\Windows\System32\msvcr100d.dll", Символы загружены.
+"SamostDMZ.exe": Загружено: "C:\Windows\System32\apphelp.dll", Невозможно найти или открыть файл PDB
+"SamostDMZ.exe": Загружено: "C:\Windows\AppPatch\AcLayers.dll", Невозможно найти или открыть файл PDB
+"SamostDMZ.exe": Загружено: "C:\Windows\System32\sspicli.dll", Невозможно найти или открыть файл PDB
+"SamostDMZ.exe": Загружено: "C:\Windows\System32\msvcrt.dll", Невозможно найти или открыть файл PDB
+"SamostDMZ.exe": Загружено: "C:\Windows\System32\rpcrt4.dll", Невозможно найти или открыть файл PDB
+"SamostDMZ.exe": Загружено: "C:\Windows\System32\user32.dll", Невозможно найти или открыть файл PDB
+"SamostDMZ.exe": Загружено: "C:\Windows\System32\gdi32.dll", Невозможно найти или открыть файл PDB
+"SamostDMZ.exe": Загружено: "C:\Windows\System32\lpk.dll", Невозможно найти или открыть файл PDB
+"SamostDMZ.exe": Загружено: "C:\Windows\System32\usp10.dll", Невозможно найти или открыть файл PDB
+"SamostDMZ.exe": Загружено: "C:\Windows\System32\shell32.dll", Невозможно найти или открыть файл PDB
+"SamostDMZ.exe": Загружено: "C:\Windows\System32\shlwapi.dll", Невозможно найти или открыть файл PDB
+"SamostDMZ.exe": Загружено: "C:\Windows\System32\ole32.dll", Невозможно найти или открыть файл PDB
+"SamostDMZ.exe": Загружено: "C:\Windows\System32\oleaut32.dll", Невозможно найти или открыть файл PDB
+"SamostDMZ.exe": Загружено: "C:\Windows\System32\userenv.dll", Невозможно найти или открыть файл PDB
+"SamostDMZ.exe": Загружено: "C:\Windows\System32\profapi.dll", Невозможно найти или открыть файл PDB
+"SamostDMZ.exe": Загружено: "C:\Windows\System32\winspool.drv", Невозможно найти или открыть файл PDB
+"SamostDMZ.exe": Загружено: "C:\Windows\System32\mpr.dll", Невозможно найти или открыть файл PDB
+"SamostDMZ.exe": Загружено: "C:\Windows\System32\imm32.dll", Невозможно найти или открыть файл PDB
+"SamostDMZ.exe": Загружено: "C:\Windows\System32\msctf.dll", Невозможно найти или открыть файл PDB
+"SamostDMZ.exe": Загружено: "C:\Program Files\Kaspersky Lab\Kaspersky Internet Security 2011\kloehk.dll", Невозможно найти или открыть файл PDB
+"SamostDMZ.exe": Загружено: "C:\Windows\System32\psapi.dll", Невозможно найти или открыть файл PDB
+"SamostDMZ.exe": Загружено: "C:\Windows\System32\advapi32.dll", Невозможно найти или открыть файл PDB
+"SamostDMZ.exe": Загружено: "C:\Windows\System32\sechost.dll", Невозможно найти или открыть файл PDB
+"SamostDMZ.exe": Загружено: "C:\Windows\winsxs\x86_microsoft.vc80.crt_1fc8b3b9a1e18e3b_8.0.50727.4927_none_d08a205e442db5b5\msvcr80.dll", Невозможно найти или открыть файл PDB
+"SamostDMZ.exe": Выгружено: "C:\Program Files\Kaspersky Lab\Kaspersky Internet Security 2011\kloehk.dll"
+"SamostDMZ.exe": Выгружено: "C:\Windows\winsxs\x86_microsoft.vc80.crt_1fc8b3b9a1e18e3b_8.0.50727.4927_none_d08a205e442db5b5\msvcr80.dll"
+"SamostDMZ.exe": Выгружено: "C:\Windows\System32\advapi32.dll"
+"SamostDMZ.exe": Выгружено: "C:\Windows\System32\sechost.dll"
+"SamostDMZ.exe": Выгружено: "C:\Windows\System32\psapi.dll"
+Поток 'Поток Win32' (0x41c) завершился с кодом -1073741510 (0xc000013a).
+Программа "[8852] SamostDMZ.exe: Машинный код" завершилась с кодом -1073741510 (0xc000013a).
