@@ -1,0 +1,389 @@
+#include <iostream>
+#include <fstream>
+#include <cstring>
+using namespace std;
+
+struct var{
+	char *name;
+	int val;
+	var *next;
+	var(){
+		next=NULL;
+	}
+};
+
+struct elem{
+	int val;
+	char op;
+	elem *next;
+	elem(){
+		next=NULL;
+	}
+};
+
+typedef elem *stek;
+
+void create(stek &s){
+	s=NULL;
+}
+
+void push(stek &s, int x, char op){
+	if (s==NULL){
+		s=new elem;
+		s->val=x;
+		s->op=op;
+	}
+	else{
+		elem *p=new elem;
+		p->val=x;
+		p->op=op;
+		p->next=s;
+		s=p;
+	}
+}
+
+int pop(stek &s, char &op){
+	int x=s->val;
+	op=s->op;
+	elem *p=s;
+	s=s->next;
+	delete p;
+	return x;
+}
+
+bool empty(stek s){
+	return s==NULL;
+}
+
+
+
+void addvar(var *&top, char *name, int m, int val){ //добавляет переменную
+	if (top==NULL){
+		top=new var;
+		top->name=new char[m];
+		strcpy(top->name, name);
+		top->val=val;
+	}
+	else{
+		var *q=top;
+		while (q){
+			if (strcmp(q->name, name)==0){
+				q->val=val;
+				return;
+			}
+			q=q->next;
+		}
+		var *p=new var;
+		p->name=new char[m];
+		strcpy(p->name, name);
+		p->val=val;
+		p->next=top;
+		top=p;
+	}
+}
+
+int convert(char val[6]){
+	int sum=0;
+	for (int i=1; i<6; i++){
+		sum=sum*10+(val[i]-'0');
+	}
+	if (val[0]=='-'){
+		sum=sum*(-1);
+	}
+	return sum;
+}
+bool findvar(var *top, char *name, int &val){
+	while (top){
+		if (strcmp(top->name, name)==0){
+			val=top->val;
+			return true;
+		}
+		top=top->next;
+	}
+	return false;
+}
+
+void showlist(var *top){
+	while (top){
+		cout<<top->name<<" = "<<top->val<<endl;
+		top=top->next;
+	}
+}
+void deletelist(var *&top){
+	while (top){
+		var *q=top;
+		top=top->next;
+		delete []q->name;
+		delete q;
+	}
+}
+int main(int argc, char** argv) {
+	ifstream in("input.txt");
+	setlocale(0, "");
+	char c;
+	int s=0, id=0, k=0, j=0, indicator=0; //indicator=0, значит простая структура, 1 - считались цифры, 2 - переменная
+	bool b=true, t=false; //t=false - значит считалась простая переменная, true если арифм операция
+	int m;
+	cout<<"Введите длинну переменной"<<endl;
+	cin>>m;
+	char *bufname=new char[m+1];
+	char *basename=new char[m+1];
+	char bufval[6];
+	char op;
+	var *top=NULL;
+	stek eq;
+	create(eq);
+	in.get(c);
+	if (!(c>='A' && c<='Z')){
+		b=false;
+		id=1;
+	}
+	basename[k]=c;
+	k++;
+	while (in.get(c) && b){
+		switch(s){
+			case 0: if ((c>='A' && c<='Z') || (c>='0' && c<='9')){
+						if (k>m-1){
+							b=false;
+							id=1;
+						}
+						basename[k]=c;
+						k++;
+					}
+					else if (c==':'){
+							basename[k]='\0';
+							k=0;
+							s=1;
+						}
+						else{
+							if (c=='=')
+							id=2;
+							else id=3;
+							b=false;
+						}
+			break;
+			case 1:
+				if (c=='='){
+					s=2;
+				}
+				else{
+					id=5;
+					b=false;
+				}
+			break;
+			case 2: if (t){
+				if (indicator==1){
+					int a=convert(bufval);
+					push(eq, a, op);
+				}
+				else{
+					int a;
+					bool f=findvar(top, bufname, a);
+					if (f){
+						push(eq, a, op);
+					}
+					else{
+						b=false;
+						id=5;
+					}
+				}
+				
+			}
+				if (c>='A' && c<='Z'){
+					bufname[k]=c;
+					k++;
+					s=3;
+				}
+				else if (c=='+' || c=='-'){
+						s=4;
+						bufval[0]=c;
+					}
+					else{
+						id=6;
+						b=false;
+					}
+			break;
+			case 3: if ((c>='A' && c<='Z') || (c>='0' && c<='9')){
+						if (k>m-1){
+							b=false;
+							id=1;
+						}
+						bufname[k]=c;
+						k++;
+					}
+					else if (c=='.'){
+						bufname[k]='\0';
+						b=false;
+						id=0;
+						int a;
+						bool f=findvar(top, bufname, a);
+						if (f && t){
+							while (!empty(eq)){
+								int x=pop(eq, op);
+								switch(op){
+									case '+': a=x+a; break;
+									case '-': a=x-a; break;
+									case '*': a=x*a; break;
+									case '/': a=x/a;
+								}
+							}
+							addvar(top, basename, m, a);
+						}
+						else if (f && !t){
+								addvar(top, basename, m, a);
+							}
+							else{
+								id=5;
+								b=false;
+							}
+					}
+						else if (c==';'){
+								bufname[k]='\0';
+								k=0;
+								s=5;
+								indicator=2;
+							}
+							else if (c=='+' || c=='-' || c=='*' || c=='/'){
+									bufname[k]='\0';
+									op=c;
+									k=0;
+									s=2;
+									t=true;
+									indicator=2;
+								}
+								else{
+									id=6;
+									b=false;
+								}
+			break;
+			case 4:
+				for (int i=1; i<6; i++){
+					if (!(c>='0' && c<='9')){
+						b=false;
+						id=7;
+						break;
+					}
+					bufval[i]=c;
+					in.get(c);
+				}
+				if (c=='.'){
+					b=false;
+					id=0;
+					int a=convert(bufval);
+					if (t){
+						while (!empty(eq)){
+							int x=pop(eq, op);
+							switch(op){
+								case '+': a=x+a; break;
+								case '-': a=x-a; break;
+								case '*': a=x*a; break;
+								case '/': a=x/a;
+							}
+						}
+						addvar(top, basename, m, a);
+					}
+					else addvar(top, basename, m, a);
+				}
+				else if (c=='+' || c=='-' || c=='*' || c=='/'){
+						s=2;
+						t=true;
+						indicator=1;
+						op=c;
+					}
+					else if (c==';'){
+						    indicator=1;
+							k=0;
+							s=5;
+						}
+						else{
+							if (c>='0' && c<='9'){
+								id=8;
+							} 
+							else id=6;
+							b=false;
+						}
+			break;
+			case 5:
+				if (c>='A' && c<='Z'){
+					int a;
+					if (t==false){
+						if (indicator==1){
+							a=convert(bufval);
+							addvar(top, basename, m, a);
+							id=0;
+						}
+						else{
+							bool f=findvar(top, bufname, a);
+							if (f){
+								addvar(top, basename, m, a);
+							}
+							else{
+								id=5;
+								b=false;
+							}
+						}
+					}
+					else{
+						if (indicator==1){
+							a=convert(bufval);
+							while (!empty(eq)){
+								int x=pop(eq, op);
+								switch(op){
+									case '+': a=x+a; break;
+									case '-': a=x-a; break;
+									case '*': a=x*a; break;
+									case '/': a=x/a;
+								}
+							}
+							addvar(top, basename, m, a);
+						}
+						else{
+							bool f=findvar(top, bufname, a);
+							if (f){
+								while (!empty(eq)){
+									int x=pop(eq, op);
+									switch(op){
+										case '+': a=x+a; break;
+										case '-': a=x-a; break;
+										case '*': a=x*a; break;
+										case '/': a=x/a;
+									}
+								}
+								addvar(top, basename, m, a);
+							}
+							else{
+								id=5;
+								b=false;
+							}
+						}
+						
+					}
+					basename[k]=c;
+					k++;
+					s=0;
+					t=false;
+					indicator=0;
+				}
+				else{
+					id=3;
+					b=false;
+				}
+		}
+	}
+	in.close();
+	switch(id){
+		case 0: cout<<"Код верен"<<endl; showlist(top); break;
+		case 1: cout<<"Недопустимое количество символов в переменной"<<endl; break;
+		case 2: cout<<"Отсутствует двоеточие перед '=' у переменной "<<basename<<endl; break;
+		case 3: cout<<"В записи переменной использованы недопустимые символы"<<endl; break;
+		case 4: cout<<"Отсутствует '=' после ':'"<<endl; break;
+		case 5: cout<<"Неинициализированная переменная "<<endl; break;
+		case 6: cout<<"В присваемваемом выражении использованы недопустимые символы "<<endl; break;
+		case 7: cout<<"Недопустимые символы при записи числа"<<endl; break;
+		case 8: cout<<"Количество цифр в числе превышает 5"<<endl;
+	}
+	delete []bufname;
+	delete []basename;
+	deletelist(top);
+	return 0;
+}

@@ -1,0 +1,33 @@
+#include<iostream>
+using namespace std;
+double DET(int N, double **A) {
+	int i,j,k,n;
+	double d,t,l;
+	d=1;
+	for (k=N-1; k>=0; k--) {
+		for (i=k; i>=0; i--) {
+			if (A[k][i]!=0) break;
+		}
+		if (i==-1) d*=0;
+		else 
+		for (j=i; j<k; j++) {
+			for (n=0; n<N; n++) {
+				t=A[n][j];
+				A[n][j]=A[n][j+1];
+				A[n][j+1]=t;
+			}
+			d*=(-1);
+		}
+		for (j=0; j<k; j++) {
+			for (n=0; n<N; n++) {
+				l=A[n][k]*A[k][j];
+				l/=A[k][k];
+				A[n][j]-=l;
+			}
+		}
+	}
+	for (i=0; i<N; i++) {
+		d*=A[i][i];
+	}
+	return d;
+}

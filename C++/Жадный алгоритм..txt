@@ -1,0 +1,57 @@
+#include<iostream>
+#include<conio.h>
+using namespace std;
+
+int main()
+{
+	int const N=100;
+	int x[N],sum[N],vivod[N], max=0;
+	int n;
+	cout<<"Vvedite kolichestvo elementov:";
+		cin>>n;
+
+	cout<<"Vvedite MASSIV:";
+	for(int i=0; i<n; i++)
+		cin>>x[i];
+//Сам поиск.
+for(int r=0, n2=n-1; r<n2; r++)
+{
+		int i=r, j=i+1;
+	
+		int z=0;
+		sum[z]=x[i];
+		z++;
+
+		for (;j<n;)
+		{
+			if(x[i]<x[j]) {sum[z]=x[j], i=j, j++, z++} else {j++,}; 
+		}
+		
+		//Если созданная последоватеLьность максимальна, то сохраним её, если нет - удалим.
+		if (z>max) 
+		{
+			max=z;
+			for(int t=0; t<z; t++)
+			{
+				vivod[t]=sum[t];
+			}
+		}
+		else
+		{
+			//Не трогаем. В будущем она "забьётся".
+			/*for(int t=0; t<z; t++)
+			{
+				delete sum[t];
+			}*/
+		}
+			
+}
+
+//Вывод.
+	cout<<endl;
+	for(int i=0; i<max; max++)
+		cout<<vivod[max]<<" ";
+
+getch();
+return 0;
+}

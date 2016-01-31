@@ -1,0 +1,36 @@
+//Процесс сортировки массива
+bool comp=true;
+int R;
+int x[R];
+int el, n, k, i=0;
+
+int m=n;
+L2:
+m=m-i;
+R=0;
+k=0;
+
+L1:
+comp=(m-i!=1);
+if (comp)
+	{
+		comp=(k<m);
+		if (comp) 
+		{
+			comp=(x[R]>x[R+k]);if (comp) {
+						    	el=x[R]; x[R]=x[R+k]; x[R+k]=el; k=k+1; goto L1;
+						     }
+	
+					   else {
+							k=k+1; goto L1;
+					        } 
+		}
+		else 
+		{
+			i=i+1;goto L2;
+		};
+	}
+else goto L3;
+
+L3: //Визуальный вывод.
+//Перебор завершён!
