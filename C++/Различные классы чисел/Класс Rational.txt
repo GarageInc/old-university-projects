@@ -1,0 +1,146 @@
+#include <iostream>
+
+using namespace std;
+
+class Rational
+{
+private:
+    int n;
+    int m;
+public:
+    Rational();
+    Rational(int m, int n);
+    ~Rational();
+    void read();
+    void output();
+    int getnum();
+    int getden();
+    void reduction();
+};
+
+int GCD(int a, int b);
+Rational sum(Rational a, Rational b);
+Rational dif(Rational a, Rational b);
+Rational mult(Rational a, Rational b);
+
+int main()
+{
+    Rational a, b, c;
+    char d;
+    cout << "¬ведите два числа:" << endl;
+    a.read();
+    b.read();
+    cout << "¬ведите знак действи€:" << endl;
+    cin >> d;
+    switch(d)
+    {
+        case '+':
+        {
+            c = sum(a, b);
+            c.output();
+        }
+        break;
+        case '-':
+        {
+            c = dif(a, b);
+            c.output();
+        }
+        break;
+        case '*':
+        {
+            c = mult(a, b);
+            c.output();
+        }
+        break;
+    }
+    return 0;
+}
+
+Rational::Rational()
+{
+    m = 0;
+    n = 1;
+}
+
+Rational::Rational(int m, int n)
+{
+    this -> m = m;
+    this -> n = n;
+}
+
+Rational::~Rational()
+{
+    m = 0;
+    n = 1;
+}
+
+void Rational::read()
+{
+    cin >> m;
+    cin >> n;
+    this->reduction();
+}
+
+void Rational::output()
+{
+    cout << m << '/' << n << endl;
+}
+
+int Rational::getnum()
+{
+    return m;
+}
+
+int Rational::getden()
+{
+    return n;
+}
+
+void Rational::reduction()
+{
+    int k = GCD(abs(n), abs(m));
+    m/= k;
+    n/= k;
+    if(n < 0)
+    {
+        n*= -1;
+        m*= -1;
+    }
+}
+
+int GCD(int a, int b)
+{
+    while(a != b)
+    {
+        if(!a)
+            return b;
+        if(!b)
+            return a;
+        if(a > b)
+            a%= b;
+        else
+            b%= a;
+    }
+    return a;
+}
+
+Rational sum(Rational a, Rational b)
+{
+    Rational c(a.getnum() * b.getden() + a.getden() * b.getnum(), a.getden() * b.getden());
+    c.reduction();
+    return c;
+}
+
+Rational dif(Rational a, Rational b)
+{
+    Rational c(a.getnum() * b.getden() - a.getden() * b.getnum(), a.getden() * b.getden());
+    c.reduction();
+    return c;
+}
+
+Rational mult(Rational a, Rational b)
+{
+    Rational c(a.getnum() * b.getnum(), a.getden() * b.getden());
+    c.reduction();
+    return c;
+}

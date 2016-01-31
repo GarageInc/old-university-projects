@@ -1,0 +1,206 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+const int N = 100;
+
+class BigInt
+{
+private:
+    int dig[N];
+    bool sign;
+public:
+    BigInt();
+    ~BigInt();
+    void read();
+    void output();
+    void changesign(bool q);
+    int getdig(int i);
+    void setdig(int i, int n);
+};
+
+BigInt sum(BigInt a, BigInt b);
+bool comp(BigInt a, BigInt b);
+BigInt dif(BigInt a, BigInt b);
+BigInt mult(BigInt a, BigInt b);
+
+int main()
+{
+    BigInt a, b, c;
+    char d;
+    cout << "¬ведите два числа:" << endl;
+    a.read();
+    b.read();
+    cout << "¬ведите знак действи€:" << endl;
+    cin >> d;
+    switch(d)
+    {
+        case '+':
+        {
+            c = sum(a, b);
+            c.output();
+        }
+        break;
+        case '-':
+        {
+            c = dif(a, b);
+            c.output();
+        }
+        break;
+        case '*':
+        {
+            c = mult(a, b);
+            c.output();
+        }
+        break;
+    }
+    return 0;
+}
+
+BigInt::BigInt()
+{
+    for(int i = 0;i < N;dig[i] = 0, i++);
+    sign = true;
+}
+
+BigInt::~BigInt()
+{
+    for(int i = 0;i < N;dig[i] = 0, i++);
+    sign = true;
+}
+
+void BigInt::read()
+{
+    string s;
+    int i = 0;
+    cin >> s;
+    if(s[0] == '-')
+    {
+        sign = false;
+        i++;
+    }
+    dig[0] = s.size() - !sign;
+    for(;i < s.size();dig[dig[0] - i + !sign] = s[i] - '0',i++);
+}
+
+void BigInt::output()
+{
+    if(!sign)
+        cout << '-';
+    if(dig[0] == 0)
+        cout << 0;
+    for(int i = dig[0];i > 0;i--)
+        cout << dig[i];
+    cout << endl;
+}
+
+void BigInt::changesign(bool q)
+{
+    sign = q;
+}
+
+int BigInt::getdig(int i)
+{
+    return dig[i];
+}
+
+void BigInt::setdig(int i, int n)
+{
+    dig[i] = n;
+}
+
+BigInt sum(BigInt a, BigInt b)
+{
+    BigInt c;
+    c.setdig(0, max(a.getdig(0), b.getdig(0)));
+    for(int i = 1;i <= c.getdig(0);i++)
+        c.setdig(i, a.getdig(i) + b.getdig(i));
+    for(int i = 1;i < c.getdig(0);i++)
+    {
+        c.setdig(i + 1,c.getdig(i + 1) + c.getdig(i) / 10);
+        c.setdig(i, c.getdig(i) % 10);
+    }
+    for(;c.getdig(c.getdig(0)) > 9;c.setdig(0, c.getdig(0) + 1))
+    {
+        c.setdig(c.getdig(0) + 1, c.getdig(c.getdig(0)) / 10);
+        c.setdig(c.getdig(0), c.getdig(c.getdig(0)) % 10);
+    }
+    return c;
+};
+
+bool comp(BigInt a, BigInt b)
+{
+    if(a.getdig(0) > b.getdig(0))
+        return true;
+    if(a.getdig(0) < b.getdig(0))
+        return false;
+    for(int i = a.getdig(0);i > 0;i--)
+    {
+        if(a.getdig(i) < b.getdig(i))
+            return false;
+        if(a.getdig(i) > b.getdig(i))
+            return true;
+    }
+    return true;
+}
+
+BigInt dif(BigInt a, BigInt b)
+{
+    BigInt c;
+    if(comp(a, b))
+    {
+        c.setdig(0, a.getdig(0));
+        c.changesign(true);
+        for(int i = 1;i <= c.getdig(0);i++)
+            c.setdig(i, a.getdig(i) - b.getdig(i));
+        for(int i = 1;i <= c.getdig(0);i++)
+            if(c.getdig(i) < 0)
+            {
+                c.setdig(i, c.getdig(i) + 10);
+                c.setdig(i + 1, c.getdig(i + 1) - 1);
+            }
+        for(;c.getdig(c.getdig(0)) == 0;c.setdig(0, c.getdig(0) - 1));
+        if(c.getdig(0) == -1)
+            c.setdig(0, 0);
+    }
+    else
+    {
+        c.setdig(0, b.getdig(0));
+        c.changesign(false);
+        for(int i = 1;i <= c.getdig(0);i++)
+            c.setdig(i, b.getdig(i) - a.getdig(i));
+        for(int i = 1;i <= c.getdig(0);i++)
+            if(c.getdig(i) < 0)
+            {
+                c.setdig(i, c.getdig(i) + 10);
+                c.setdig(i + 1, c.getdig(i + 1) - 1);
+            }
+        for(;c.getdig(c.getdig(0)) == 0;c.setdig(0, c.getdig(0) - 1));
+        if(c.getdig(0) == -1)
+            c.setdig(0, 0);
+    }
+    return c;
+}
+
+BigInt mult(BigInt a, BigInt b)
+{
+    BigInt c;
+    c.setdig(0, a.getdig(0) + b.getdig(0) - 1);
+    for(int i = 1;i <= a.getdig(0);i++)
+    {
+        for(int j = 1;j <= b.getdig(0);j++)
+            c.setdig(i + j - 1, c.getdig(i + j - 1) + a.getdig(i) * b.getdig(j));
+    }
+    for(int i = 1;i < c.getdig(0);i++)
+    {
+        c.setdig(i + 1, c.getdig(i + 1) + c.getdig(i) / 10);
+        c.setdig(i, c.getdig(i) % 10);
+    }
+    for(;c.getdig(c.getdig(0)) > 9;c.setdig(0, c.getdig(0) + 1))
+    {
+        c.setdig(c.getdig(0) + 1, c.getdig(c.getdig(0)) / 10);
+        c.setdig(c.getdig(0), c.getdig(c.getdig(0)) % 10);
+    }
+    return c;
+}

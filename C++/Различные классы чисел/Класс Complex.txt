@@ -1,0 +1,140 @@
+#include <iostream>
+
+using namespace std;
+
+class Complex
+{
+private:
+    double real;
+    double imag;
+public:
+    Complex();
+    Complex(double real, double imag);
+    ~Complex();
+    void read();
+    void output();
+    double getreal();
+    double getimag();
+};
+
+Complex sum(Complex a, Complex b);
+Complex dif(Complex a, Complex b);
+Complex mult(Complex a, Complex b);
+
+int main()
+{
+    Complex a, b, c;
+    char d;
+    cout << "¬ведите два числа:" << endl;
+    a.read();
+    b.read();
+    cout << "¬ведите знак действи€:" << endl;
+    cin >> d;
+    switch(d)
+    {
+        case '+':
+        {
+            c = sum(a, b);
+            c.output();
+        }
+        break;
+        case '-':
+        {
+            c = dif(a, b);
+            c.output();
+        }
+        break;
+        case '*':
+        {
+            c = mult(a, b);
+            c.output();
+        }
+        break;
+    }
+    return 0;
+}
+
+Complex::Complex()
+{
+    real = 0;
+    imag = 0;
+}
+
+Complex::Complex(double real, double imag)
+{
+    this->real = real;
+    this->imag = imag;
+}
+
+Complex::~Complex()
+{
+    real = 0;
+    imag = 0;
+}
+
+void Complex::read()
+{
+    cin >> real;
+    cin >> imag;
+}
+
+void Complex::output()
+{
+    if(real && imag)
+    {
+        cout << real;
+        if(imag > 0)
+            cout << '+';
+        if((imag != 1) && (imag != -1))
+            cout << imag << 'i' << endl;
+        if(imag == 1)
+            cout << 'i' << endl;
+        if(imag == -1)
+            cout << "-i" << endl;
+        return;
+    }
+    if(real)
+    {
+        cout << real << endl;
+        return;
+    }
+    if(imag)
+    {
+        if((imag != 1) && (imag != -1))
+            cout << imag << 'i' << endl;
+        if(imag == 1)
+            cout << 'i' << endl;
+        if(imag == -1)
+            cout << "-i" << endl;
+        return;
+    }
+    cout << 0 << endl;
+}
+
+double Complex::getreal()
+{
+    return real;
+}
+
+double Complex::getimag()
+{
+    return imag;
+}
+
+Complex sum(Complex a, Complex b)
+{
+    Complex c(a.getreal() + b.getreal(), a.getimag() + b.getimag());
+    return c;
+};
+
+Complex dif(Complex a, Complex b)
+{
+    Complex c(a.getreal() - b.getreal(), a.getimag() - b.getimag());
+    return c;
+}
+
+Complex mult(Complex a, Complex b)
+{
+    Complex c(a.getreal() * b.getreal() - a.getimag() * b.getimag(), a.getreal() * b.getimag() + a.getimag() * b.getreal());
+    return c;
+}
