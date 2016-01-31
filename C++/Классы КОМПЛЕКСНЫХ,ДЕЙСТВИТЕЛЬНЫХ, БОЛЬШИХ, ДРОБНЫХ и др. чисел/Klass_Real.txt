@@ -1,0 +1,325 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+const int N = 100;
+const int M = 20;
+
+class Real
+{
+private:
+    int cel[N];
+    int size;
+    int drob[M];
+    bool sign;
+public:
+    Real();
+    ~Real();
+    void read();
+    void output();
+    void changesign(bool q);
+    int getsize();
+    void setsize(int n);
+    int getcel(int i);
+    void setcel(int i, int n);
+    int getdrob(int i);
+    void setdrob(int i, int n);
+};
+
+Real sum(Real a, Real b);
+bool comp(Real a, Real b);
+Real dif(Real a, Real b);
+Real mult(Real a, Real b);
+
+int main()
+{
+    Real a, b, c;
+    char d;
+    cout << "¬ведите два числа:" << endl;
+    a.read();
+    b.read();
+    cout << "¬ведите знак действи€:" << endl;
+    cin >> d;
+    switch(d)
+    {
+        case '+':
+        {
+            c = sum(a, b);
+            c.output();
+        }
+        break;
+        case '-':
+        {
+            c = dif(a, b);
+            c.output();
+        }
+        break;
+        case '*':
+        {
+            c = mult(a, b);
+            c.output();
+        }
+        break;
+    }
+    return 0;
+}
+
+Real::Real()
+{
+    for(int i = 0;i < N;cel[i] = 0, i++);
+    for(int i = 0;i < M;drob[i] = 0, i++);
+    size = 0;
+    sign = true;
+}
+
+Real::~Real()
+{
+    for(int i = 0;i < N;cel[i] = 0, i++);
+    for(int i = 0;i < M;drob[i] = 0, i++);
+    sign = true;
+    size = 0;
+}
+
+void Real::read()
+{
+    string s;
+    int i = 0;
+    cin >> s;
+    if(s[0] == '-')
+    {
+        sign = false;
+        i++;
+    }
+    for(;(i < s.size()) && (s[i] != '.');i++);
+    size = i;
+    for(int j = i - 1;j >= 0;cel[j] = s[i - j - 1] - '0',j--);
+    i++;
+    drob[0] = s.size() - i;
+    if(drob[0] < 0)
+        drob[0] = 0;
+    for(;i < s.size();drob[i - size] = s[i] - '0',i++);
+    
+}
+
+void Real::output()
+{
+    if(!sign)
+        cout << '-';
+    if((size == 0) && (cel[0] == 0))
+        cout << 0;
+    for(int i = size - 1;i >= 0;i--)
+        cout << cel[i];
+    if(drob[0] != 0)
+    {
+        cout << '.';
+        for(int i = 1;i <= drob[0];i++)
+            cout << drob[i];
+    }
+    cout << endl;
+}
+
+void Real::changesign(bool q)
+{
+    sign = q;
+}
+
+int Real::getsize()
+{
+    return size;
+}
+
+void Real::setsize(int n)
+{
+    size = n;
+}
+
+int Real::getcel(int i)
+{
+    return cel[i];
+}
+
+void Real::setcel(int i, int n)
+{
+    cel[i] = n;
+}
+
+int Real::getdrob(int i)
+{
+    return drob[i];
+}
+
+void Real::setdrob(int i, int n)
+{
+    drob[i] = n;
+}
+
+Real sum(Real a, Real b)
+{
+    Real c;
+    c.setsize(max(a.getsize(), b.getsize()));
+    for(int i = 0;i < c.getsize();i++)
+        c.setcel(i, a.getcel(i) + b.getcel(i));
+    c.setdrob(0, max(a.getdrob(0), b.getdrob(0)));
+    for(int i = 1;i <= c.getdrob(0);i++)
+        c.setdrob(i, a.getdrob(i) + b.getdrob(i));
+    for(int i = c.getdrob(0);i > 1;i--)
+    {
+        c.setdrob(i - 1,c.getdrob(i - 1) + c.getdrob(i) / 10);
+        c.setdrob(i, c.getdrob(i) % 10);
+    }
+    c.setcel(0, c.getcel(0) + c.getdrob(1) / 10);
+    c.setdrob(1, c.getdrob(1) % 10);
+    for(;c.getdrob(c.getdrob(0)) == 0;c.setdrob(0, c.getdrob(0) - 1));
+    if(c.getdrob(0) == -1)
+        c.setdrob(0, 0);
+    for(int i = 0;i < c.getsize() - 1;i++)
+    {
+        c.setcel(i + 1,c.getcel(i + 1) + c.getcel(i) / 10);
+        c.setcel(i, c.getcel(i) % 10);
+    }
+    for(;c.getcel(c.getsize() - 1) > 9;c.setsize(c.getsize() + 1))
+    {
+        c.setcel(c.getsize(), c.getcel(c.getsize() - 1) / 10);
+        c.setcel(c.getsize() - 1, c.getcel(c.getsize() - 1) % 10);
+    }
+    return c;
+};
+
+bool comp(Real a, Real b)
+{
+    if(a.getsize() > b.getsize())
+        return true;
+    if(a.getsize() < b.getsize())
+        return false;
+    for(int i = a.getsize() - 1;i >= 0;i--)
+    {
+        if(a.getcel(i) < b.getcel(i))
+            return false;
+        if(a.getcel(i) > b.getcel(i))
+            return true;
+    }
+    for(int i = 1;i < b.getdrob(0);i++)
+    {
+        if(a.getdrob(i) > b.getdrob(i))
+            return true;
+        if(a.getdrob(i) < b.getdrob(i))
+            return false;
+    }
+    return true;
+}
+
+Real dif(Real a, Real b)
+{
+    Real c;
+    if(comp(a, b))
+    {
+        c.setsize(a.getsize());
+        c.setdrob(0, max(a.getdrob(0), b.getdrob(0)));
+        for(int i = 0;i < c.getsize();i++)
+            c.setcel(i, a.getcel(i) - b.getcel(i));
+        for(int i = 1;i <= c.getdrob(0);i++)
+            c.setdrob(i, a.getdrob(i) - b.getdrob(i));
+        for(int i = c.getdrob(0);i > 1;i--)
+            if(c.getdrob(i) < 0)
+            {
+                c.setdrob(i, c.getdrob(i) + 10);
+                c.setdrob(i - 1, c.getdrob(i - 1) - 1);
+            }
+        if(c.getdrob(1) < 0)
+        {
+            c.setdrob(1, c.getdrob(1) + 10);
+            c.setcel(0, c.getcel(0) - 1);
+        }
+        for(int i = 0;i < c.getsize();i++)
+            if(c.getcel(i) < 0)
+            {
+                c.setcel(i, c.getcel(i) + 10);
+                c.setcel(i + 1, c.getcel(i + 1) - 1);
+            }
+        for(;c.getdrob(c.getdrob(0)) == 0;c.setdrob(0, c.getdrob(0) - 1));
+        if(c.getdrob(0) == -1)
+            c.setdrob(0, 0);
+        for(;c.getcel(c.getsize() - 1) == 0;c.setsize(c.getsize() - 1));
+    }
+    else
+    {
+        c.changesign(false);
+        c.setsize(b.getsize());
+        c.setdrob(0, max(a.getdrob(0), b.getdrob(0)));
+        for(int i = 0;i < c.getsize();i++)
+            c.setcel(i, b.getcel(i) - a.getcel(i));
+        for(int i = 1;i <= c.getdrob(0);i++)
+            c.setdrob(i, b.getdrob(i) - a.getdrob(i));
+        for(int i = c.getdrob(0);i > 1;i--)
+            if(c.getdrob(i) < 0)
+            {
+                c.setdrob(i, c.getdrob(i) + 10);
+                c.setdrob(i - 1, c.getdrob(i - 1) - 1);
+            }
+        if(c.getdrob(1) < 0)
+        {
+            c.setdrob(1, c.getdrob(1) + 10);
+            c.setcel(0, c.getcel(0) - 1);
+        }
+        for(int i = 0;i < c.getsize();i++)
+            if(c.getcel(i) < 0)
+            {
+                c.setcel(i, c.getcel(i) + 10);
+                c.setcel(i + 1, c.getcel(i + 1) - 1);
+            }
+        for(;c.getdrob(c.getdrob(0)) == 0;c.setdrob(0, c.getdrob(0) - 1));
+        if(c.getdrob(0) == -1)
+            c.setdrob(0, 0);
+        for(;c.getcel(c.getsize() - 1) == 0;c.setsize(c.getsize() - 1));
+    }
+    return c;
+}
+
+Real mult(Real a, Real b)
+{
+    Real c;
+    c.setsize(a.getsize() + b.getsize() - 1);
+    c.setdrob(0, a.getdrob(0) + b.getdrob(0));
+    for(int i = 0;i < a.getsize();i++)
+    {
+        for(int j = 0;j < b.getsize();j++)
+            c.setcel(i + j, c.getcel(i + j) + a.getcel(i) * b.getcel(j));
+        for(int j = 1;j <= b.getdrob(0);j++)
+            if(i < j)
+                c.setdrob(j - i, c.getdrob(j - i) + a.getcel(i) * b.getdrob(j));
+            else
+                c.setcel(i - j, c.getcel(i - j) + a.getcel(i) * b.getdrob(j));
+    }
+    for(int i = 1;i <= a.getdrob(0);i++)
+    {
+        for(int j = 0;j < b.getsize();j++)
+            if(j < i)
+                c.setdrob(i - j, c.getdrob(i - j) + a.getdrob(i) * b.getcel(j));
+            else
+                c.setcel(j - i, c.getcel(j - i) + a.getdrob(i) * b.getcel(j));
+        for(int j = 1;j <= b.getdrob(0);j++)
+            c.setdrob(i + j, c.getdrob(i + j) + a.getdrob(i) * b.getdrob(j));
+    }
+    for(int i = c.getdrob(0);i > 1;i--)
+    {
+        c.setdrob(i - 1, c.getdrob(i - 1) + c.getdrob(i) / 10);
+        c.setdrob(i, c.getdrob(i) % 10);
+    }
+    c.setcel(0, c.getcel(0) + c.getdrob(1) / 10);
+    c.setdrob(1, c.getdrob(1) % 10);
+    for(;c.getdrob(c.getdrob(0)) == 0;c.setdrob(0, c.getdrob(0) - 1));
+    if(c.getdrob(0) == -1)
+        c.setdrob(0, 0);
+    for(int i = 0;i < c.getsize() - 1;i++)
+    {
+        c.setcel(i + 1,c.getcel(i + 1) + c.getcel(i) / 10);
+        c.setcel(i, c.getcel(i) % 10);
+    }
+    for(;c.getcel(c.getsize() - 1) > 9;c.setsize(c.getsize() + 1))
+    {
+        c.setcel(c.getsize(), c.getcel(c.getsize() - 1) / 10);
+        c.setcel(c.getsize() - 1, c.getcel(c.getsize() - 1) % 10);
+    }
+    return c;
+}

@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Z1Kinoteatr", "Z1Kinoteatr\Z1Kinoteatr.vcxproj", "{AFC0B43E-75CA-496B-A85A-35472BCFC650}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AFC0B43E-75CA-496B-A85A-35472BCFC650}.Debug|Win32.ActiveCfg = Debug|Win32
+		{AFC0B43E-75CA-496B-A85A-35472BCFC650}.Debug|Win32.Build.0 = Debug|Win32
+		{AFC0B43E-75CA-496B-A85A-35472BCFC650}.Release|Win32.ActiveCfg = Release|Win32
+		{AFC0B43E-75CA-496B-A85A-35472BCFC650}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

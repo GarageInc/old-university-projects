@@ -1,0 +1,127 @@
+05268663791758601715
+int main()
+{
+	setlocale(LC_ALL, "RUSSIAN");//Чтобы можно было использовать русский язык
+
+//КОМПЛЕКСНЫЕ ЧИСЛА
+	Complex a, b, c;
+	char d;
+	cout << "Введите два комплексных числа:" << endl;
+	a.read();
+	b.read();
+
+	cout << "Введите знак действия:" << endl;
+	cin >> d;//Вводишь знак + или - или *
+	switch (d)
+	{
+	case '+':
+	{
+				c = sum(a, b);
+				c.output();
+	}
+		break;
+	case '-':
+	{
+				c = dif(a, b);
+				c.output();
+	}
+		break;
+	case '*':
+	{
+				c = mult(a, b);
+				c.output();
+	}
+		break;
+	}
+//ВЕЩЕСТВЕННЫЕ ЧИСЛА
+Real a, b, c;
+	char d;
+	cout << "Введите два вещественных числа:" << endl;
+	a.read();
+	b.read();
+	cout << "Введите знак действия:" << endl;
+	cin >> d;
+	switch (d)//Смотрим по знаку - какое действие сделать
+	{
+	case '+':
+	{
+				c = sum(a, b);
+				c.output();
+	}
+		break;
+	case '-':
+	{
+				c = dif(a, b);
+				c.output();
+	}
+		break;
+	case '*':
+	{
+				c = mult(a, b);
+				c.output();
+	}
+		break;
+	}
+//ДРОБНЫЕ ЧИСЛА
+	Rational a, b, c;
+	char d;
+	cout << "Введите два дробных(числитель\знаменатель)числа:" << endl;
+	a.read();
+	b.read();
+	cout << "Введите знак действия:" << endl;
+	cin >> d;
+	switch (d)
+	{
+	case '+':
+	{
+				c = sum(a, b);
+				c.output();
+	}
+		break;
+	case '-':
+	{
+				c = dif(a, b);
+				c.output();
+	}
+		break;
+	case '*':
+	{
+				c = mult(a, b);
+				c.output();
+	}
+		break;
+	};
+//БОЛЬШИЕ ЦЕЛЫЕ ЧИСЛА
+	BigInt a, b, c;
+	char d;
+	cout << "Введите два числа:" << endl;
+	a.read();
+	b.read();
+	cout << "Введите знак действия:" << endl;
+	cin >> d;
+	switch (d)//Выбирает по введенном знаку действие
+	{
+	case '+':
+	{
+				c = sum(a, b);//Сумма и вывод
+				c.output();
+	}
+		break;
+	case '-':
+	{
+				c = dif(a, b);//Разность и вывод
+				c.output();
+	}
+		break;
+	case '*':
+	{
+				c = mult(a, b);//Произведение и вывод
+				c.output();
+	}
+		break;
+	}
+
+	system("PAUSE");
+	return 0;
+	
+}
