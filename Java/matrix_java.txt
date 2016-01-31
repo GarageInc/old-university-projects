@@ -1,0 +1,163 @@
+package Matrix;
+
+	//Класс матрица
+	class MyMatrix
+	{
+		private int[][] matr;
+		private int w,h; //Размерность высоты и ширины
+
+		//Функции взять-вернуть параметры матрицы
+		public final int getW()
+		{
+			return w;
+		}
+
+		public final void setW(int value)
+		{
+			w = value;
+		}
+
+		public final int getH()
+		{
+			return h;
+		}
+
+		public final void setH(int value)
+		{
+			h = value;
+		}
+
+
+		//Конструктор - передается массив двумерный и его размерность(Высота h и ширина w)
+		public Matrix(int[][] a, int h)
+		{
+			this(a, h, 0);
+		}
+
+		public Matrix(int[][] a)
+		{
+			this(a, 0, 0);
+		}
+
+		//C# TO JAVA CONVERTER NOTE: Java does not support optional parameters. Overloaded method(s) are created above:
+		//ORIGINAL LINE: public Matrix(int[,] a, int h=0, int w=0)
+		public Matrix(int[][] a, int h, int w)
+		{
+			this.matr = a;
+			this.w = w;
+			this.h = h;
+		}
+
+		//Получаем элемент
+		public final int GetElement(int i, int j)
+		{
+			return matr[i][j];
+		}
+
+		//Изменяем элемент
+		public final void SetElement(int value, int i, int j)
+		{
+			matr[i][j] = value;
+		}
+
+		//Перегружаем операции сложения матриц
+		//По умолчанию - матрицы должны быть одной размерности
+		public static Matrix OpAddition(Matrix a, Matrix b)
+		{
+			//Проверяем размерности матриц
+			if (a.getW() != b.getW() || a.getH() != b.getH()) //Нужно только одно соответствие
+			{
+				throw new IllegalArgumentException("Не совпадают размерности складываемых матриц");
+			}
+			int[][] new_mass = new int[a.getH()][b.getW()];
+			for (int i = 0; i < a.getH() & i < b.getH(); i++)
+			{
+				for (int j = 0; j < a.getW() & j < b.getW(); j++)
+				{
+					new_mass[i][j] = a.GetElement(i, j) + b.GetElement(i, j);
+				}
+			}
+
+			return new Matrix(new_mass, a.h, a.w);
+		}
+
+		//Перегружаем умножение матриц
+		public static Matrix OpMultiply(Matrix A, Matrix B)
+		{
+			int[][] new_mass = new int[A.h][B.w];
+			if (A.h != B.getW()) //Нужно только одно соответствие
+			{
+				throw new IllegalArgumentException("Не совпадают размерности умножаемых матриц");
+			}
+
+			for (int i = 0; i < A.getW(); ++i)
+			{
+				for (int j = 0; j < B.getH(); ++j)
+				{
+					new_mass[i][j] = 0;
+					//Непосредственное суммирование
+					for (int k = 0; k < A.w; ++k)
+					{ //ТРЕТИЙ цикл, до A.m=B.n
+						new_mass[i][j] += A.GetElement(i, k) * B.GetElement(k, j); //Собираем сумму произведений
+					}
+				}
+			}
+			return new Matrix(new_mass, A.getH(), B.getW());
+		}
+
+		//Вывод матрицы на экран
+		public final void Print()
+		{
+			for (int i = 0; i < h & i < h; i++)
+			{
+				for (int j = 0; j < w & j < w; j++)
+				//печатаем
+				{
+					System.out.print(matr[i][j] + "  ");
+				}
+				System.out.println();
+			}
+		}
+	}
+
+	class Matrix
+	{
+		public static void main (String[] args)
+		{
+			//Инициализируем матрицы и действия с ними
+			MyMatrix A = new MyMatrix(new int[][]
+			{
+				{1, 2,3},
+				{3, 4, 5},
+				{6, 7, 8}
+			},
+			3, 3);
+
+			A.Print();
+			System.out.println();
+
+			MyMatrixB = new MyMatrix(new int[][]
+			{
+				{1, 2, 3},
+				{3, 4, 5},
+				{6, 7, 8}
+			},
+			3, 3);
+			B.Print();
+
+			System.out.println();
+
+			MyMatrixC = MyMatrix.OpAddition(A, B);
+			System.out.println("Сумма:");
+			C.Print();
+
+			System.out.println();
+			System.out.println("Умножение:");
+			C = Matrix.OpMultiply(A, B);
+			C.Print();
+
+			System.out.println();
+			System.out.println("Получим первый элемент последней матрицы с индексами (0,0):  ");
+			System.out.print(C.GetElement(0, 0));
+		}
+	}

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jnlp spec="1.0" xmlns:jfx="http://javafx.com" href="VernamCipher.jnlp">
+  <information>
+    <title>VernamCipher</title>
+    <vendor>7</vendor>
+    <description>null</description>
+    <offline-allowed/>
+  </information>
+  <resources>
+    <jfx:javafx-runtime version="2.2+" href="http://javadl.sun.com/webapps/download/GetFile/javafx-latest/windows-i586/javafx2.jnlp"/>
+  </resources>
+  <resources>
+    <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
+    <jar href="VernamCipher.jar" size="30921" download="eager" />
+  </resources>
+<security>
+  <all-permissions/>
+</security>
+  <application-desc main-class="View.VernamCipher"  name="VernamCipher" >
+  </application-desc>
+  <update check="always"/>
+</jnlp>

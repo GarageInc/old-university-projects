@@ -1,0 +1,58 @@
+package myproject;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.FileInputStream;
+import java.io.File;
+import java.io.IOException;
+import java.util.Scanner;
+
+class MyProject {
+
+    public static void main(String[] args)
+	{
+            try{
+                File file = new File( "text.txt" );
+                String text="";
+                BufferedReader br = new BufferedReader (
+                   new InputStreamReader(
+                       new FileInputStream( file ), "Cp1251"
+                   )
+                );
+                
+                // Считываем в строку текстовый файл со всем его содержимым
+                String line = "";
+                while ((line = br.readLine()) != null) {
+                    text=text+line;
+                }
+                br.close();
+                
+                System.out.println("Выводим только цитаты:");
+                int i = 0; // Счетчик, который проходит по тексту
+                for (; i<text.length();i++)
+		{
+			String buffer = "";// Строка, в которую на всякий случай считываем буквы
+                        if(text.charAt(i)=='"')// Если встретили первую кавычку, то идем до второй
+                        {
+                            i++;
+                            while (i<text.length()// Пока мы можем идти по строке-тексту
+                                    && (int)text.charAt(i) != (int)'"')// и пока не встретили пробел
+                            {   
+                                buffer=buffer+text.charAt(i);// Считываем в нашу строкубуфер буквы
+                                i++;
+                            }
+                        }
+                        // Если встретили вторую кавычку - выводим текст(цитату)
+                        if(i<text.length() && text.charAt(i)=='"')
+                        {
+                            System.out.print(buffer+"(с)\n");// \n - перенос на новую строку
+                        }
+		}
+                
+            }
+            catch(IOException e)
+            {
+                System.out.println(e.getLocalizedMessage()+" Данный файл не найден");
+            }
+	}    
+}
+
