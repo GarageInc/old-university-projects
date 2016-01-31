@@ -1,0 +1,61 @@
+ 
+ Sub Main()
+    Dim stroka As String
+    Dim x(8) As Single
+    Dim y(5) As Single
+    Dim d(5) As Single
+    Dim c(5) As Single
+    Dim max(5) As Single
+    Dim sumSingle As Single
+    Dim iInteger As Single
+    
+    Dim sum As Single
+    sum = 0
+    stroka = ""
+    x(1) = 11
+    x(2) = 5.5
+    x(3) = 6
+    x(4) = 4.9
+    x(5) = 3.8
+    x(6) = 0.6
+    x(7) = 2.3
+    x(8) = 0.4
+    y(1) = 2.3
+    y(2) = -4.8
+    y(3) = 0.3
+    y(4) = 6.4
+    y(5) = -7.4
+    sum = x(1) + x(2) + x(3) + x(4) + x(5) + x(6) + x(7) + x(8)
+    For i = 1 To 5
+        c(i) = sum * y(i)
+        max(1) = c(1)
+        If c(2) > c(1) Then
+            max(2) = c(2)
+            Else
+                max(2) = c(1)
+                End If
+            If c(3) > max(2) Then
+                max(3) = c(3)
+            Else
+                max(3) = max(2)
+                End If
+            If c(4) > max(3) Then
+                max(4) = c(4)
+            Else
+                max(4) = max(3)
+                End If
+            If c(5) > max(4) Then
+                max(5) = c(5)
+            Else
+                max(5) = max(4)
+            End If
+        Next i
+    For i = 1 To 5
+        d(i) = c(i) / max(i)
+        Next i
+    For i = 1 To 5
+        stroka = stroka & d(i) & "; "
+        Next i
+    
+    MsgBox stroka, vbOKOnly = 0, "Auaia ?acoeuoaoa"
+ End Sub

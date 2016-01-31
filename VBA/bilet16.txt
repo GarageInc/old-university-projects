@@ -1,0 +1,49 @@
+program p1;
+
+var x:array[1..8] of real;
+y:array[1..5] of real;
+d:array[1..5] of real;
+c:array[1..5] of real;
+max:array[1..5]of real;
+sum:real;
+i:Integer;
+begin
+sum:=0;
+x[1]:=11;
+x[2]:=5.5;
+x[3]:=6;
+x[4]:=4.9;
+x[5]:=3.8;
+x[6]:=0.6;
+x[7]:=2.3;
+x[8]:=0.4;
+y[1]:=2.3;
+y[2]:=-4.8;
+y[3]:=0.3;
+y[4]:=6.4;
+y[5]:=-7.4;
+sum:=x[1]+x[2]+x[3]+x[4]+x[5]+x[6]+x[7]+x[8];
+for i:=1 to 5 do
+c[i]:=sum*y[i];
+max[1]:=c[1];
+if c[2]>c[1] then
+max[2]:=c[2]
+else
+max[2]:=c[1];
+if c[3]>max[2] then
+max[3]:=c[3]
+else
+max[3]:=max[2];
+if c[4]>max[3] then
+max[4]:=c[4]
+else
+max[4]:=max[3];
+if c[5]>max[4] then
+max[5]:=c[5]
+else
+max[5]:=max[4];
+for i:=1 to 5 do
+d[i]:=c[i]/max[i];
+for i:=1 to 5 do
+writeln(d[i]:6:3);
+end.

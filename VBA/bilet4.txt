@@ -1,0 +1,22 @@
+program p1;
+
+var
+d:array[1..6] of real;
+y:array[1..6] of real;
+i:integer;
+sum:real;
+begin
+sum:=0;
+d[1]:=1;
+d[2]:=1.4;
+d[3]:=-2.2;
+d[4]:=-1.5;
+d[5]:=-3.5;
+d[6]:=1.6;
+for i:=1 to 6 do
+y[i]:=Exp(2*d[i])+4*arctan(d[i]);
+for i:=1 to 6 do
+if y[i]>0 then
+sum:=sum+y[i];
+writeln(sum:6:2);
+end.

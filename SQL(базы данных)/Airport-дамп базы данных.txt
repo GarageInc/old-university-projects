@@ -1,0 +1,188 @@
+﻿create table plane_manufacturers
+(
+	id NUMERIC IDENTITY PRIMARY KEY,
+	name VARCHAR(30)
+)
+
+create table cities
+(
+	id NUMERIC IDENTITY PRIMARY KEY,
+	city_name VARCHAR(30)
+)
+
+create table employees
+(
+	id NUMERIC IDENTITY PRIMARY KEY,
+	name VARCHAR(30),
+	birthday DATE,
+	experience_years INT
+)
+
+create table flight_crews
+(
+	id NUMERIC IDENTITY PRIMARY KEY,
+	capitain_id NUMERIC FOREIGN KEY REFERENCES employees(id),
+	navigator_id NUMERIC FOREIGN KEY REFERENCES employees(id),
+	chief_steward_id NUMERIC FOREIGN KEY REFERENCES employees(id)
+)
+
+create table planes
+(
+	id NUMERIC IDENTITY PRIMARY KEY,
+	manufacturer_id NUMERIC FOREIGN KEY REFERENCES plane_manufacturers(id),
+	model VARCHAR(30),
+	production_date DATE,
+	passangers INT 
+)
+
+--drop table flights
+create table flights
+(
+	id NUMERIC IDENTITY PRIMARY KEY,
+	plane_id NUMERIC FOREIGN KEY REFERENCES planes(id),
+	destination_city_id NUMERIC FOREIGN KEY REFERENCES cities(id),
+	flight_crew_id NUMERIC FOREIGN KEY REFERENCES flight_crews(id),
+	arrival_time DATETIME,
+	passangers INT
+) 
+
+
+insert into plane_manufacturers(name)
+values ('Сухой');
+insert into plane_manufacturers(name)
+values ('Боинг');
+insert into plane_manufacturers(name)
+values ('Аэробус');
+insert into plane_manufacturers(name)
+values ('Туполев');
+insert into plane_manufacturers(name)
+values ('Локхид');
+
+
+insert into cities(city_name)
+values ('Москва');
+insert into cities(city_name)
+values ('Казань');
+insert into cities(city_name)
+values ('Лондон');
+insert into cities(city_name)
+values ('Берлин');
+insert into cities(city_name)
+values ('Париж');
+insert into cities(city_name)
+values ('Вашингтон');
+
+
+insert into employees(name, birthday, experience_years)
+values ('Вайкуле Лайма Станиславовна', '10-30-1980', 3);
+insert into employees(name, birthday, experience_years)
+values ('Газманов Олег Михайлович', '02-26-1968', 25);
+insert into employees(name, birthday, experience_years)
+values ('Боярский Михаил Сергеевич', '05-13-1950', 10);
+insert into employees(name, birthday, experience_years)
+values ('Кельми Крис', '01-31-1975', 8);
+insert into employees(name, birthday, experience_years)
+values ('Корнелюк Игорь Евгеньевич', '08-19-1985', 17);
+insert into employees(name, birthday, experience_years)
+values ('Пьеха Эдита Станиславовна', '12-08-1948', 23);
+
+
+insert into flight_crews(capitain_id, navigator_id, chief_steward_id)
+values (2, 5, 6);
+insert into flight_crews(capitain_id, navigator_id, chief_steward_id)
+values (3, 2, 1);
+insert into flight_crews(capitain_id, navigator_id, chief_steward_id)
+values (4, 5, 3);
+insert into flight_crews(capitain_id, navigator_id, chief_steward_id)
+values (3, 4, 6);
+
+
+insert into planes(manufacturer_id, model, production_date, passangers)
+values (3, 'А-380', '03-28-2005', 300);
+insert into planes(manufacturer_id, model, production_date, passangers)
+values (1, 'Суперджет-100', '10-03-2010', 580);
+insert into planes(manufacturer_id, model, production_date, passangers)
+values (4, 'ТУ-135', '02-11-2015', 165);
+insert into planes(manufacturer_id, model, production_date, passangers)
+values (2, '737', '12-05-1997', 98);
+insert into planes(manufacturer_id, model, production_date, passangers)
+values (5, 'Л-1011', '07-08-2004', 603);
+
+
+insert into flights(plane_id, destination_city_id, flight_crew_id, arrival_time, passangers)
+values (3, 6, 2, '05-03-2015 08:42', 105);
+insert into flights(plane_id, destination_city_id, flight_crew_id, arrival_time, passangers)
+values (2, 3, 1, '05-01-2015 23:01', 580);
+insert into flights(plane_id, destination_city_id, flight_crew_id, arrival_time, passangers)
+values (5, 1, 4, '05-05-2015 16:27', 230);
+insert into flights(plane_id, destination_city_id, flight_crew_id, arrival_time, passangers)
+values (1, 5, 3, '05-02-2015 15:33', 247);
+insert into flights(plane_id, destination_city_id, flight_crew_id, arrival_time, passangers)
+values (4, 2, 2, '05-04-2015 03:50', 93);
+insert into flights(plane_id, destination_city_id, flight_crew_id, arrival_time, passangers)
+values (3, 4, 1, '04-26-2015 20:10', 152);
+
+
+-- удаление неэффективных рейсов (число пассажиров меньше заданного passengerCount)
+create procedure RemoveIneffectiveFlights @passengerCount NUMERIC 
+as
+begin
+delete from flights where passangers < @passengerCount
+end
+go
+-- exec RemoveIneffectiveFlights 100
+
+-- повышение срока работы сотрудников на n лет
+create procedure UpdateEmployeeExperienceYears @n NUMERIC 
+as
+begin
+update employees set experience_years = experience_years + @n
+end
+go
+
+-- добавление нового города, если его нет в базе данных
+create procedure AddCity @city VARCHAR(30)
+as
+DECLARE @n NUMERIC
+select @n = count(*) from cities where city_name = @city
+begin
+if @n > 0
+print 'Такой город уже есть в базе данных!'
+else
+insert into cities(city_name) values (@city)
+end
+go
+
+
+
+-- триггер на добавление рейса
+-- в рейсе не может быть пассажиров больше, чем вмещает самолёт
+create trigger add_flight
+on flights for insert
+as
+DECLARE @i NUMERIC, @p_flight INT, @p_plane INT 
+select @i = plane_id, @p_flight = passangers from inserted
+select @p_plane = passangers from planes where id = @i
+
+if @p_flight > @p_plane
+begin
+delete from flights where plane_id = @i and passangers = @p_flight
+print 'Пассажиры не вмещаются в самолёт!'
+end
+go
+
+
+-- если удаляем человека из бд
+-- удаляем и рейсы в которой он был капитаном
+-- ТОЛЬКО ЭТОТ ЧЕЛОВЕК НЕ МОЖЕТ БЫТЬ КАКИМ-ЛИБО ДРУГИМ
+-- ЧЛЕНОМ ЭКИПАЖА
+create trigger remove_flight
+on employees for delete
+as
+DECLARE @i NUMERIC
+select @i = id from flight_crews where capitain_id in (select id from deleted)
+begin
+delete from flights where flight_crew_id = @i
+print 'Рейс удалён!'
+end
+go

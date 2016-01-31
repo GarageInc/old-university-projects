@@ -1,0 +1,42 @@
+ 
+ Sub Main()
+    Dim a(5, 5) As Integer
+    Dim min, i, j, k, l, posi, posjinteger As Integer
+    Dim stroka As String
+    
+    stroka = " "
+    For i = 1 To 5
+        For j = 1 To 5
+            a(i, j) = InputBox("Введите число")
+            Next j
+        Next i
+    min = a(i - 1, j - 1)
+    For i = 1 To 5
+        For j = 1 To 5
+            If a(i, j) <= min Then
+            min = a(i, j)
+            posi = i
+            posj = j
+            End If
+            Next j
+        Next i
+    
+    For k = 1 To 5
+        a(posi, k) = 0
+        Next k
+    For l = 1 To 5
+        a(l, posj) = 0
+        Next l
+    For i = 1 To 5
+        For j = 1 To 5
+            stroka = stroka & a(i, j) & " "
+            Next j
+            stroka = stroka & Chr(13)
+        Next i
+    
+    
+    MsgBox stroka, vbOKOnly = 0, "Вывод массива"
+ End Sub
+
+
+
