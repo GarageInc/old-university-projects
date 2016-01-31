@@ -1,0 +1,69 @@
+﻿
+import scipy.io.wavfile as sw 
+from scipy.signal import * 
+import scipy.io.wavfile as sw
+import numpy as np
+import pylab as plb
+
+import wave 
+import struct 
+
+
+# Функция записи в файл
+def writeInWav(name, outN):
+    fwrt = wave.open(name,'wb')
+    pck = []
+    for i in xrange(len(outN)):
+        val = outN[i]
+        pck.append(struct.pack('h',val))
+    
+    strOut = ''.join(pck)
+    
+    fwrt.setparams((1,2, fr,0, 'NONE', 'not compressed'))
+    fwrt.writeframes(strOut)
+    fwrt.close()
+
+
+N=1024
+
+# ОТКРЫВАЕМ ФАЙЛЫ ДЛЯ ЧТЕНИЯ
+name = 'voice.wav'
+f=open(name,'rb')
+[fr,dti] = sw.read(f)
+f.close()
+
+order=4
+freq=[0.1]#частота отсечения
+
+t=range(55000-30000)
+s= dti[30000:55000] #берем учасок с голосом
+
+# ВЫВЕДЕМ ЭТОТ УЧАСТОК НА ПЕЧАТЬ
+plb.figure()
+plb.plot(s)
+
+# Создаем фильтр Баттерворта, для аналогового сигнала
+b, a = butter(order, freq, btype="lowpass", analog=True)
+
+# вывод разных типов передаточных функций этого фильтра
+w, h = freqs(b, a)
+plb.figure()
+plb.plot(w/np.pi,abs(h))
+
+plb.figure()
+plb.plot(w, 20 * np.log10(abs(h)))
+
+# применение фильтра
+sig_ff = filtfilt(a, 1, s)
+sig_lf = lfilter(a, 1, s)
+
+plb.figure()
+plb.plot(sig_ff, color='red', label='filtfilt')
+plb.plot(sig_lf, color='green', label='lfilter')
+plb.plot(s, color='blue', label='Original')
+plb.legend()
+
+#Выводим в файлы - усиление звучания
+writeInWav("Original.wav",s)
+writeInWav("sig_ff.wav",sig_ff)
+writeInWav("sig_lf.wav",sig_lf)

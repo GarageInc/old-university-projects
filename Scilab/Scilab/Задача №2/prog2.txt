@@ -1,0 +1,8 @@
+function [r] = prog2(A)
+
+    r = min(A) - max(A);
+
+endfunction
+
+A = [873 37 36 38 26 743 7237 36 347 3];
+prog2(A)

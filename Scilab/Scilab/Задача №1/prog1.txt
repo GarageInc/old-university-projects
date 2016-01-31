@@ -1,0 +1,12 @@
+function [r] = prog1(d, O, y)
+    i = 1;
+    for a = (d + 2):0.5:(d + 4)
+        r(i) = sin(a + O + y) * sin(a + O + y) + sin((O + y) / a);
+        i = i + 1;
+    end
+endfunction
+
+alpha = 10;
+teta = 0;
+gamma = 0.001;
+prog1(alpha, teta, gamma)

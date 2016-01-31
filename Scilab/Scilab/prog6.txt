@@ -1,0 +1,16 @@
+clc
+function [p] = prog6(A)
+    n = length(A(1,:));
+    p = 1;
+    for i = 1:n
+        q = A(i, 1);
+        for j = 2:n
+            if q > A(i, j) then q = A(i,j);
+            end
+        end
+        p = p * q;
+    end
+endfunction
+
+A = [34 56 4 3 536 45;524 54 34 32 43 65;544 45 45 425 3 542;425 53 4 536 452 5;45 54 42 4 45 65;634 326 237 74 73 6];
+pr = prog6(A)

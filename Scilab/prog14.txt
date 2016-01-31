@@ -1,0 +1,13 @@
+//Программа считает минимальную разницу соседних элементов в массиве
+clc
+function [r] = neighmin(A)
+    n = length(A)//n - длина массива
+    r = abs(A(2) - A(1))//r - искомая разница
+    for i = 3:n
+        if r > abs(A(i) - A(i - 1)) then
+            r = abs(A(i) - A(i - 1))
+        end
+    end
+endfunction
+A = [874 34 498 5 4 845 34 5];//объявление массива
+neighmin(A)

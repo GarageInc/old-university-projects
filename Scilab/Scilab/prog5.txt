@@ -1,0 +1,23 @@
+clc
+function [r, imax] = prog5(A)
+    n = length(A);
+    i = 1;
+    while (i <= n) & (A(i) > 0)
+        i = i + 1;
+    end
+    if i <= n then r = A(i);
+    else
+        r = 0;
+    end
+    imax = modulo(i, n + 1);
+    while (i < n)
+        i = i + 1;
+        if (A(i) < 0) & (A(i) > r) then 
+            r = A(i);
+            imax = i;
+        end
+    end
+endfunction
+
+A = [-47 34 34 45 -45 6 -56 45 -6 73 -443 -454 4];
+[x, i] = prog5(A)

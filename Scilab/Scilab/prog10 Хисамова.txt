@@ -1,0 +1,26 @@
+clc
+function [s] = prog10(A, B)
+    k1 = 0;
+    k2 = 0;
+    n1 = length(A);
+    n2 = length(B);
+    for i = 2:n1
+        if A(i) < A(i - 1) then
+            k1 = k1 + 1;
+        end
+    end
+    for i = 2:n2
+        if B(i) < B(i - 1) then
+            k2 = k2 + 1;
+        end
+    end
+    if k1 > k2 then
+        s = "Это второй массив";
+    else
+        s = "Это первый массив";
+    end
+endfunction
+
+A = [86 5 4 3 6 57 8];
+B = [874 34 498 5 4 845 34 5];
+prog10(A,B)

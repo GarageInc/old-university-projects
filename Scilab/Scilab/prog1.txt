@@ -1,0 +1,8 @@
+clc
+function [r] = prog1(x, a)
+        r = sin(a + x) * sin(a + x) + sin(x / a);
+endfunction
+
+x = 6;
+for a = 8:0.5:10
+y = prog1(x, a)

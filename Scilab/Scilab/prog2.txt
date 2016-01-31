@@ -1,0 +1,19 @@
+function [r] = prog2(A)
+
+    amin = A(1);
+    amax = A(1);
+    n = length(A);
+    for i = 2:n
+        if A(i) > amax then
+            amax = A(i);
+        end
+        if A(i) < amin then
+            amin = A(i);
+        end
+    end
+    r = amax - amin;
+endfunction
+
+
+A = [873 37 36 38 26 743 7237 36 347 3];
+prog2(A)
