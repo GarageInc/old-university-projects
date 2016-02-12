@@ -3,6 +3,7 @@
 #include <math.h>
 #include <fstream>
 #include <conio.h>
+#include <string>
 
 #include <time.h>
 
@@ -13,12 +14,13 @@
 
 using namespace std;
 
-mutex g_lock;
-int a[] = { 2, 3 };
-ofstream fout;
+int A[] = { 2, 3 };
 
-int countThreads = 16;
-std::thread myThreads[100];
+int THREADS_COUNT = 0;
+const int MAX_THREADS_COUNT = 100;
+
+thread THREADS[ MAX_THREADS_COUNT ];
+
 
 // Функция для умножения двух чисел x,y по модулю m
 long long mulmod(long long *x, long long *y, long long *m)
@@ -92,7 +94,7 @@ bool ПровереноТестомМиллераРабина(long long *number)
 	for (int i = 0; i < 2; i++)
 	{
 		// Запускаем тест
-		if (!test_Miller_Rabin(number, &a[i]))
+		if (!test_Miller_Rabin(number, &A[i]))
 		{
 			return false;
 		}
@@ -115,16 +117,12 @@ bool ПровереноПростымДелением(long long *number) {
 	return true;
 }
 
-void printValue(long long *i) {
-	g_lock.lock();
+void printValue(long long *i, FILE *fout) {
 
-	//cout << *i << endl;
-	fout << *i << endl;
-
-	g_lock.unlock();
+	fprintf(fout, "%d \n", i);
 }
 
-void threadFunction( long long start, long long finish)//atomic<bool>& ab)
+void threadFunction( long long start, long long finish, FILE *fout)//atomic<bool>& ab)
 {
 	if (start % 2 == 0) start++;
 
@@ -132,7 +130,7 @@ void threadFunction( long long start, long long finish)//atomic<bool>& ab)
 
 		if (ПровереноТестомМиллераРабина(&i) && !ПровереноПростымДелением(&i)) {
 			
-			printValue( &i );
+			printValue( &i, fout);
 		}
 		else {
 
@@ -142,75 +140,101 @@ void threadFunction( long long start, long long finish)//atomic<bool>& ab)
 }
 
 
-
-int main()
-{
-	setlocale(LC_ALL, "Russian");// Чтобы выводился текст на русском языке
-
-	fout.open("mytest.txt", ios::out);
-
-	int num_cores = ::thread::hardware_concurrency();
-	fout << endl << "Количество ядер: " << num_cores << endl << endl;
-
-	countThreads = num_cores;
-	fout << endl << "Количество потоков: " << countThreads << endl << endl;
-	
-	long long start = 3;
-	long long finish = pow(10, 12);
-	long long step = pow(10,9);
-
-	fout << start << " to "<< finish << " by step " << step << endl << endl;
-
+void run(long long *start, long long *finish, long long *step, FILE **FOUT_FILES, atomic<bool> *COMPLETED_THREADS) {
+	double koef = 1 + 1 / (double)THREADS_COUNT;
 	int j = 0;
 
-	atomic<bool> doned[100];//;(false); // Use an atomic flag.
+	for (long long i = *start; i < *finish; ) {
 
-	for (j = 0; j < countThreads; j++) {
-		doned[j] = false;// = std::atomic<bool>(false);
-	}
+		for (j = 0; j < THREADS_COUNT && i <= *finish; j++) {
 
-	double koef = 1 + 1 / (double)countThreads;
-	cout << koef;
+			if (COMPLETED_THREADS[j] = true) {
+				COMPLETED_THREADS[j] = false;
+				THREADS[j] = thread([&COMPLETED_THREADS, &FOUT_FILES, i, &step, j] {threadFunction(i + 1, i + *step, FOUT_FILES[j]);  COMPLETED_THREADS[j] = true; });
+				THREADS[j].detach();
 
-	clock_t t1, t2;
-	t1 = clock();
-	
-	for (long long i = start; i < finish; ) {
+				//cout << "Запущен: " << j << " на промежутке [" << (i+1) << " - " << (i + step) <<"]"<< endl;
+				i += *step;
 
-		for (j = 0; j < countThreads && i + step <= finish; j++ ) {
-			
-			if ( doned[j] = true ) {
-				doned[j] = false;
-				myThreads[j] = std::thread([&doned, i, step, j] {threadFunction(i + 1, i + step);  doned[j] = true; });
-				myThreads[j].detach();
-
-				cout << "Запущен: " << j << " на промежутке [" << (i+1) << " - " << (i + step) <<"]"<< endl;
-				i += step;
-
-				if (step > 10000000) {
-					step = step / ( koef );
+				if (*step > 10000000) {
+					*step = (*step) / (koef);
 				}
 			}
 		}
 	}
+}
 
-	for (j = 0; j < countThreads; j++) {
-		while( !doned[j] ) {
-			this_thread::sleep_for( 1ms );
-			//cout <<"Не спит: "<< j<< endl;
-			//myThreads[j].join();
+void waitEnding( atomic<bool> *COMPLETED_THREADS) {
+
+	for (int j = 0; j < THREADS_COUNT; j++) {
+
+		while (!COMPLETED_THREADS[j]) {
+			this_thread::sleep_for(1ms);
 		}
 	}
+}
 
-	t2 = clock();
-	float diff((float)t2 - (float)t1);
-	fout << "Time:" << diff << " milliseconds"<< endl;
-		
-	fout.close();
+void initFiles( FILE **FOUT_FILES) {
 
-	cout << endl << "END";
+	char tmp[20];
 
-	getch();
+	for (int j = 0; j < THREADS_COUNT; j++) {
+
+		string name = std::to_string(j) + ".txt";
+		strcpy(tmp, name.c_str());
+
+		FOUT_FILES[j] = fopen(tmp, "w");
+	}
+
+	FOUT_FILES[THREADS_COUNT] = fopen("stats.txt", "w");
+
+}
+
+void closeFiles( FILE **FOUT_FILES ) {
+
+	for (int j = 0; j <= THREADS_COUNT; j++) {
+		fclose(FOUT_FILES[j]);
+	};
+}
+
+int main(){
+
+	setlocale(LC_ALL, "Russian");// Чтобы выводился текст на русском языке
+
+	int NUM_CORES = thread::hardware_concurrency();
+	THREADS_COUNT = NUM_CORES;
+
+	FILE* FOUT_FILES[MAX_THREADS_COUNT];
+	atomic<bool> COMPLETED_THREADS[ MAX_THREADS_COUNT ];
+
+	for (int j = 0; j < THREADS_COUNT; j++) {
+		COMPLETED_THREADS[j] = false;
+	}
+	
+	initFiles(FOUT_FILES);
+
+	fprintf(FOUT_FILES[THREADS_COUNT], "Количество ядер %d \n Количество потоков: %d \n", NUM_CORES, THREADS_COUNT);
+
+	long long leftBorder = 3;
+	long long rightBorder = pow(10, 6);//12
+	long long step = pow(10, 5);//9
+
+	fprintf(FOUT_FILES[THREADS_COUNT], "%d to %d by %d\n", leftBorder, rightBorder, step);
+	
+	clock_t start_at = clock();
+
+	run(&leftBorder,&rightBorder,&step,FOUT_FILES,COMPLETED_THREADS);
+
+	waitEnding(COMPLETED_THREADS);
+
+	clock_t finish_at = clock();
+
+	float diff((float)finish_at - (float)start_at);
+
+	fprintf(FOUT_FILES[THREADS_COUNT], "Time: %d milliseconds\n", diff);
+
+	closeFiles(FOUT_FILES);
+
 	return 0;
 }
 
