@@ -25,3 +25,12 @@ C:\Users\9-b-r_000\Downloads\Лабы Долгова\2 ЭЦП с RSA+ Полла
 C:\Users\9-b-r_000\Downloads\Лабы Долгова\2 ЭЦП с RSA+ Поллард\ЭЦП на основе алгоритма RSA\Application\Application\obj\Debug\ApplicationMain.Form1.resources
 C:\Users\9-b-r_000\Downloads\Лабы Долгова\2 ЭЦП с RSA+ Поллард\ЭЦП на основе алгоритма RSA\Application\Application\obj\Debug\Application.Properties.Resources.resources
 C:\Users\9-b-r_000\Downloads\Лабы Долгова\2 ЭЦП с RSA+ Поллард\ЭЦП на основе алгоритма RSA\Application\Application\obj\Debug\Application.csproj.GenerateResource.Cache
+C:\Data\Новая папка\all\C#\1. Криптография, сжатие, шифры\RSA-общение\Application\bin\Debug\Application.exe.config
+C:\Data\Новая папка\all\C#\1. Криптография, сжатие, шифры\RSA-общение\Application\bin\Debug\Application.exe
+C:\Data\Новая папка\all\C#\1. Криптография, сжатие, шифры\RSA-общение\Application\bin\Debug\Application.pdb
+C:\Data\Новая папка\all\C#\1. Криптография, сжатие, шифры\RSA-общение\Application\obj\Debug\Application.csprojResolveAssemblyReference.cache
+C:\Data\Новая папка\all\C#\1. Криптография, сжатие, шифры\RSA-общение\Application\obj\Debug\ApplicationMain.Form1.resources
+C:\Data\Новая папка\all\C#\1. Криптография, сжатие, шифры\RSA-общение\Application\obj\Debug\Application.Properties.Resources.resources
+C:\Data\Новая папка\all\C#\1. Криптография, сжатие, шифры\RSA-общение\Application\obj\Debug\Application.csproj.GenerateResource.Cache
+C:\Data\Новая папка\all\C#\1. Криптография, сжатие, шифры\RSA-общение\Application\obj\Debug\Application.exe
+C:\Data\Новая папка\all\C#\1. Криптография, сжатие, шифры\RSA-общение\Application\obj\Debug\Application.pdb
