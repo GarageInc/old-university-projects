@@ -1,0 +1,75 @@
+C:\Users\Алия\Desktop\ServerForm\ServerForm\bin\Debug\ServerForm.exe.config
+C:\Users\Алия\Desktop\ServerForm\ServerForm\bin\Debug\ServerForm.exe
+C:\Users\Алия\Desktop\ServerForm\ServerForm\bin\Debug\ServerForm.pdb
+C:\Users\Алия\Desktop\ServerForm\ServerForm\obj\Debug\ServerForm.Properties.Resources.resources
+C:\Users\Алия\Desktop\ServerForm\ServerForm\obj\Debug\ServerForm.csproj.GenerateResource.Cache
+C:\Users\Алия\Desktop\ServerForm\ServerForm\obj\Debug\ServerForm.exe
+C:\Users\Алия\Desktop\ServerForm\ServerForm\obj\Debug\ServerForm.pdb
+C:\Users\Алия\Desktop\ServerForm\ServerForm\obj\Debug\ServerForm.Form1.resources
+C:\Users\Алия\Desktop\ServerForm\ServerForm\obj\Debug\ServerForm.csprojResolveAssemblyReference.cache
+C:\Users\Анастасия\Downloads\ServerForm\ServerForm\bin\Debug\ServerForm.exe.config
+C:\Users\Анастасия\Downloads\ServerForm\ServerForm\obj\Debug\ServerForm.exe
+C:\Users\Анастасия\Downloads\ServerForm\ServerForm\obj\Debug\ServerForm.pdb
+C:\Users\Анастасия\Downloads\ServerForm\ServerForm\bin\Debug\ServerForm.exe
+C:\Users\Анастасия\Downloads\ServerForm\ServerForm\bin\Debug\ServerForm.pdb
+C:\Users\Анастасия\Downloads\ServerForm\ServerForm\obj\Debug\ServerForm.csprojResolveAssemblyReference.cache
+C:\Users\Анастасия\Downloads\ServerForm\ServerForm\obj\Debug\ServerForm.Form1.resources
+C:\Users\Анастасия\Downloads\ServerForm\ServerForm\obj\Debug\ServerForm.Properties.Resources.resources
+C:\Users\Анастасия\Downloads\ServerForm\ServerForm\obj\Debug\ServerForm.csproj.GenerateResource.Cache
+G:\ServerForm\ServerForm\bin\Debug\ServerForm.exe.config
+G:\ServerForm\ServerForm\obj\Debug\ServerForm.exe
+G:\ServerForm\ServerForm\obj\Debug\ServerForm.pdb
+C:\Users\Рамис\Desktop\ServerForm\ServerForm\bin\Debug\ServerForm.exe.config
+C:\Users\Рамис\Desktop\ServerForm\ServerForm\obj\Debug\ServerForm.exe
+C:\Users\Рамис\Desktop\ServerForm\ServerForm\obj\Debug\ServerForm.pdb
+C:\Users\Рамис\Desktop\ServerForm\ServerForm\bin\Debug\ServerForm.exe
+C:\Users\Рамис\Desktop\ServerForm\ServerForm\bin\Debug\ServerForm.pdb
+C:\Users\Рамис\Desktop\ServerForm\ServerForm\obj\Debug\ServerForm.csprojResolveAssemblyReference.cache
+C:\Users\Рамис\Desktop\ServerForm\ServerForm\obj\Debug\ServerForm.Form1.resources
+C:\Users\Рамис\Desktop\ServerForm\ServerForm\obj\Debug\ServerForm.Properties.Resources.resources
+C:\Users\Рамис\Desktop\ServerForm\ServerForm\obj\Debug\ServerForm.csproj.GenerateResource.Cache
+C:\Users\Admin\Desktop\Инф. без\4ая лаба по инфбезу\ServerForm\ServerForm\bin\Debug\ServerForm.exe.config
+C:\Users\Admin\Desktop\Инф. без\4ая лаба по инфбезу\ServerForm\ServerForm\obj\Debug\ServerForm.exe
+C:\Users\Admin\Desktop\Инф. без\4ая лаба по инфбезу\ServerForm\ServerForm\obj\Debug\ServerForm.pdb
+C:\Users\Admin\Desktop\Инф. без\4ая лаба по инфбезу\ServerForm\ServerForm\bin\Debug\ServerForm.exe
+C:\Users\Admin\Desktop\Инф. без\4ая лаба по инфбезу\ServerForm\ServerForm\bin\Debug\ServerForm.pdb
+C:\Users\Admin\Desktop\Инф. без\4ая лаба по инфбезу\ServerForm\ServerForm\obj\Debug\ServerForm.csprojResolveAssemblyReference.cache
+C:\Users\Admin\Desktop\Инф. без\4ая лаба по инфбезу\ServerForm\ServerForm\obj\Debug\ServerForm.Form1.resources
+C:\Users\Admin\Desktop\Инф. без\4ая лаба по инфбезу\ServerForm\ServerForm\obj\Debug\ServerForm.Properties.Resources.resources
+C:\Users\Admin\Desktop\Инф. без\4ая лаба по инфбезу\ServerForm\ServerForm\obj\Debug\ServerForm.csproj.GenerateResource.Cache
+C:\Users\Admin\Desktop\Инф. без\3 задание по ИБКС\Сервер\ServerForm\bin\Debug\ServerForm.exe.config
+C:\Users\Admin\Desktop\Инф. без\3 задание по ИБКС\Сервер\ServerForm\obj\Debug\ServerForm.exe
+C:\Users\Admin\Desktop\Инф. без\3 задание по ИБКС\Сервер\ServerForm\obj\Debug\ServerForm.pdb
+C:\Users\Admin\Desktop\Инф. без\3 задание по ИБКС\Сервер\ServerForm\bin\Debug\ServerForm.exe
+C:\Users\Admin\Desktop\Инф. без\3 задание по ИБКС\Сервер\ServerForm\bin\Debug\ServerForm.pdb
+C:\Users\Admin\Desktop\Инф. без\3 задание по ИБКС\Сервер\ServerForm\obj\Debug\ServerForm.csprojResolveAssemblyReference.cache
+C:\Users\Admin\Desktop\Инф. без\3 задание по ИБКС\Сервер\ServerForm\obj\Debug\ServerForm.Form1.resources
+C:\Users\Admin\Desktop\Инф. без\3 задание по ИБКС\Сервер\ServerForm\obj\Debug\ServerForm.Properties.Resources.resources
+C:\Users\Admin\Desktop\Инф. без\3 задание по ИБКС\Сервер\ServerForm\obj\Debug\ServerForm.csproj.GenerateResource.Cache
+C:\Users\Admin\Desktop\3 задание по ИБКС\Сервер\ServerForm\bin\Debug\ServerForm.exe.config
+C:\Users\Admin\Desktop\3 задание по ИБКС\Сервер\ServerForm\obj\Debug\ServerForm.exe
+C:\Users\Admin\Desktop\3 задание по ИБКС\Сервер\ServerForm\obj\Debug\ServerForm.pdb
+C:\Users\Admin\Desktop\3 задание по ИБКС\Сервер\ServerForm\bin\Debug\ServerForm.exe
+C:\Users\Admin\Desktop\3 задание по ИБКС\Сервер\ServerForm\bin\Debug\ServerForm.pdb
+C:\Users\Admin\Desktop\3 задание по ИБКС\Сервер\ServerForm\obj\Debug\ServerForm.csprojResolveAssemblyReference.cache
+C:\Users\Admin\Desktop\3 задание по ИБКС\Сервер\ServerForm\obj\Debug\ServerForm.Form1.resources
+C:\Users\Admin\Desktop\3 задание по ИБКС\Сервер\ServerForm\obj\Debug\ServerForm.Properties.Resources.resources
+C:\Users\Admin\Desktop\3 задание по ИБКС\Сервер\ServerForm\obj\Debug\ServerForm.csproj.GenerateResource.Cache
+C:\Users\PC\Desktop\3 задание по ИБКС\Сервер\ServerForm\bin\Debug\ServerForm.exe.config
+C:\Users\PC\Desktop\3 задание по ИБКС\Сервер\ServerForm\obj\Debug\ServerForm.exe
+C:\Users\PC\Desktop\3 задание по ИБКС\Сервер\ServerForm\obj\Debug\ServerForm.pdb
+C:\Users\PC\Desktop\3 задание по ИБКС\Сервер\ServerForm\bin\Debug\ServerForm.exe
+C:\Users\PC\Desktop\3 задание по ИБКС\Сервер\ServerForm\bin\Debug\ServerForm.pdb
+C:\Users\PC\Desktop\3 задание по ИБКС\Сервер\ServerForm\obj\Debug\ServerForm.csprojResolveAssemblyReference.cache
+C:\Users\PC\Desktop\3 задание по ИБКС\Сервер\ServerForm\obj\Debug\ServerForm.Form1.resources
+C:\Users\PC\Desktop\3 задание по ИБКС\Сервер\ServerForm\obj\Debug\ServerForm.Properties.Resources.resources
+C:\Users\PC\Desktop\3 задание по ИБКС\Сервер\ServerForm\obj\Debug\ServerForm.csproj.GenerateResource.Cache
+C:\Users\9-b-r_000\Desktop\Klient-servernoe\Сервер\ServerForm\bin\Debug\ServerForm.exe.config
+C:\Users\9-b-r_000\Desktop\Klient-servernoe\Сервер\ServerForm\obj\Debug\ServerForm.exe
+C:\Users\9-b-r_000\Desktop\Klient-servernoe\Сервер\ServerForm\obj\Debug\ServerForm.pdb
+C:\Users\9-b-r_000\Desktop\Klient-servernoe\Сервер\ServerForm\bin\Debug\ServerForm.exe
+C:\Users\9-b-r_000\Desktop\Klient-servernoe\Сервер\ServerForm\bin\Debug\ServerForm.pdb
+C:\Users\9-b-r_000\Desktop\Klient-servernoe\Сервер\ServerForm\obj\Debug\ServerForm.csprojResolveAssemblyReference.cache
+C:\Users\9-b-r_000\Desktop\Klient-servernoe\Сервер\ServerForm\obj\Debug\ServerForm.Form1.resources
+C:\Users\9-b-r_000\Desktop\Klient-servernoe\Сервер\ServerForm\obj\Debug\ServerForm.Properties.Resources.resources
+C:\Users\9-b-r_000\Desktop\Klient-servernoe\Сервер\ServerForm\obj\Debug\ServerForm.csproj.GenerateResource.Cache
