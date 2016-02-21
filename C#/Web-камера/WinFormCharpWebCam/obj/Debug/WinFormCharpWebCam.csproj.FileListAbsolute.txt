@@ -1,0 +1,24 @@
+C:\Users\7\Desktop\Аппаратные средства и контроллеры\Резерв\primweb\WinFormCharpWebCam\bin\Debug\WinFormCharpWebCam.exe
+C:\Users\7\Desktop\Аппаратные средства и контроллеры\Резерв\primweb\WinFormCharpWebCam\bin\Debug\WinFormCharpWebCam.pdb
+C:\Users\7\Desktop\Аппаратные средства и контроллеры\Резерв\primweb\WinFormCharpWebCam\obj\Debug\WinFormCharpWebCam.csprojResolveAssemblyReference.cache
+C:\Users\7\Desktop\Аппаратные средства и контроллеры\Резерв\primweb\WinFormCharpWebCam\obj\Debug\WinFormCharpWebCam.mainWinForm.resources
+C:\Users\7\Desktop\Аппаратные средства и контроллеры\Резерв\primweb\WinFormCharpWebCam\obj\Debug\WinFormCharpWebCam.Properties.Resources.resources
+C:\Users\7\Desktop\Аппаратные средства и контроллеры\Резерв\primweb\WinFormCharpWebCam\obj\Debug\WinFormCharpWebCam.csproj.GenerateResource.Cache
+C:\Users\7\Desktop\Аппаратные средства и контроллеры\Резерв\primweb\WinFormCharpWebCam\obj\Debug\WinFormCharpWebCam.exe
+C:\Users\7\Desktop\Аппаратные средства и контроллеры\Резерв\primweb\WinFormCharpWebCam\obj\Debug\WinFormCharpWebCam.pdb
+F:\Basket\2COURSE\Аппаратные средства и контроллеры\Резерв\primweb\WinFormCharpWebCam\obj\Debug\WinFormCharpWebCam.exe
+F:\Basket\2COURSE\Аппаратные средства и контроллеры\Резерв\primweb\WinFormCharpWebCam\obj\Debug\WinFormCharpWebCam.pdb
+F:\Basket\2COURSE\Аппаратные средства и контроллеры\Резерв\primweb\WinFormCharpWebCam\bin\Debug\WinFormCharpWebCam.exe
+F:\Basket\2COURSE\Аппаратные средства и контроллеры\Резерв\primweb\WinFormCharpWebCam\bin\Debug\WinFormCharpWebCam.pdb
+F:\Basket\2COURSE\Аппаратные средства и контроллеры\Резерв\primweb\WinFormCharpWebCam\obj\Debug\WinFormCharpWebCam.csprojResolveAssemblyReference.cache
+F:\Basket\2COURSE\Аппаратные средства и контроллеры\Резерв\primweb\WinFormCharpWebCam\obj\Debug\WinFormCharpWebCam.mainWinForm.resources
+F:\Basket\2COURSE\Аппаратные средства и контроллеры\Резерв\primweb\WinFormCharpWebCam\obj\Debug\WinFormCharpWebCam.Properties.Resources.resources
+F:\Basket\2COURSE\Аппаратные средства и контроллеры\Резерв\primweb\WinFormCharpWebCam\obj\Debug\WinFormCharpWebCam.csproj.GenerateResource.Cache
+F:\Projects\Опытные\all\C#\Web-камера\WinFormCharpWebCam\bin\Debug\WinFormCharpWebCam.exe
+F:\Projects\Опытные\all\C#\Web-камера\WinFormCharpWebCam\bin\Debug\WinFormCharpWebCam.pdb
+F:\Projects\Опытные\all\C#\Web-камера\WinFormCharpWebCam\obj\Debug\WinFormCharpWebCam.csprojResolveAssemblyReference.cache
+F:\Projects\Опытные\all\C#\Web-камера\WinFormCharpWebCam\obj\Debug\WinFormCharpWebCam.mainWinForm.resources
+F:\Projects\Опытные\all\C#\Web-камера\WinFormCharpWebCam\obj\Debug\WinFormCharpWebCam.Properties.Resources.resources
+F:\Projects\Опытные\all\C#\Web-камера\WinFormCharpWebCam\obj\Debug\WinFormCharpWebCam.csproj.GenerateResource.Cache
+F:\Projects\Опытные\all\C#\Web-камера\WinFormCharpWebCam\obj\Debug\WinFormCharpWebCam.exe
+F:\Projects\Опытные\all\C#\Web-камера\WinFormCharpWebCam\obj\Debug\WinFormCharpWebCam.pdb

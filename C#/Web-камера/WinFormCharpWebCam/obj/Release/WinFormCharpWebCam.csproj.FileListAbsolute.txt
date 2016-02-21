@@ -1,0 +1,4 @@
+C:\Users\7\Desktop\Аппаратные средства и контроллеры\Резерв\primweb\WinFormCharpWebCam\obj\Release\WinFormCharpWebCam.mainWinForm.resources
+C:\Users\7\Desktop\Аппаратные средства и контроллеры\Резерв\primweb\WinFormCharpWebCam\obj\Release\WinFormCharpWebCam.Properties.Resources.resources
+C:\Users\7\Desktop\Аппаратные средства и контроллеры\Резерв\primweb\WinFormCharpWebCam\obj\Release\WinFormCharpWebCam.csproj.GenerateResource.Cache
+C:\Users\7\Desktop\Аппаратные средства и контроллеры\Резерв\primweb\WinFormCharpWebCam\obj\Release\WinFormCharpWebCam.CustomControl2.resources
