@@ -1,7 +1,7 @@
 
 // База для теста Миллера-Рабина
-int A[] = { 2};
-const int A_LENGTH = 1;
+int A[] = { 2, 3};
+const int A_LENGTH = 2;
 
 // Функция для умножения двух чисел x,y по модулю m
 uint64_t mulmod(uint64_t *x, uint64_t *y, uint64_t *m)
@@ -27,6 +27,8 @@ uint64_t powmod(uint64_t x, int a, uint64_t *m)
 
 // Функция теста Миллера-Рабина
 bool test_Miller_Rabin(uint64_t *m, int *a) {
+
+	if (*m % 2 == 0) return false;
 
 	uint64_t s = 0;
 	uint64_t t = *m - 1;

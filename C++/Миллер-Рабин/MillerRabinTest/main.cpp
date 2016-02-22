@@ -18,7 +18,7 @@
 using namespace std;
 
 
-// Используемое количество потоков. Равно числу ядер в компьютере
+// Используемое количество потоков. Будет равно числу ядер в компьютере
 int THREADS_COUNT = 0;
 
 // Максимальное количество допустимых активных потоков
@@ -32,9 +32,16 @@ void waitEnding(atomic<bool> *COMPLETED_THREADS) {
 
 	printf("\n\nОжидание завершения ещё работающих потоков");
 	for (int j = 0; j < THREADS_COUNT; j++) {
-				
-		THREADS[j].join();
-		printf("\nЗавершен поток %d", j);
+			
+		if (THREADS[j].joinable()) {
+
+			THREADS[j].join();
+			printf("\nЗавершен поток %d", j);
+		}
+		else {
+
+			printf("\nЗавершен поток %d", j);
+		}
 	}
 }
 
@@ -52,8 +59,7 @@ int main() {
 	FILE* FOUT_FILES[MAX_THREADS_COUNT];
 	// Инициализируем файлы
 	initFiles(FOUT_FILES, THREADS_COUNT);
-
-
+	
 	// Массив булевых значений - для контроля работы потоков(освобождения и заполнения)
 	atomic<bool> COMPLETED_THREADS[MAX_THREADS_COUNT];
 	// Говорим, что потоки ещё свободны
