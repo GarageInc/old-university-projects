@@ -4,33 +4,26 @@
 // Функция №2 - проверяем произведения всех простых чисел из поданного массива simples.
 // например, массив содержит все простые числа от 3 до 1млн - но функция обрабатывает определенные промежуток между leftBorder и rightBorder(т.к. в потоке) - 
 // и выводит прошедшие проверку тестом Миллера-Рабина числа в файл. Ведь они составные, а проходят проверку!
-void threadFunctionRun2(long long leftBorder, long long rightBorder, long long maxCount, long long * simples, FILE *fout)//atomic<bool>& ab)
+void threadFunctionRun2(uint64_t  leftBorder, uint64_t  rightBorder, uint64_t  maxCount, uint64_t  * simples, FILE *fout)
 {
-	long long multResult = 0;
-	long long j = 0;
-	long long p = 0;
-	long long q = 0;
+	uint64_t  multResult = 0;
+	uint64_t  j = 0;
+	uint64_t  p = 0;
+	uint64_t  q = 0;
 
-	for (long long i = leftBorder; i < rightBorder && i < maxCount; i++) {
+	for (uint64_t  i = leftBorder; i < rightBorder && i < maxCount; i++) {
 
 		p = simples[i];
 
-		if (p > 0) {
+		for (j = leftBorder; j < maxCount; j++) {
+			q = simples[j];
 
-			for (j = leftBorder; j < maxCount; j++) {
-				q = simples[j];
+			multResult = p*q;
 
-				if (q > 0) {
-					multResult = p*q;
-
-					if (ПровереноТестомМиллераРабина(&multResult)) {
-						printValue(&multResult, fout);
-						simples[j] = -1;
-					}
-				}
+			if (ПровереноТестомМиллераРабина(&multResult)) {
+				printValue(&multResult, fout);
 			}
 		}
-
 	}
 }
 
@@ -39,24 +32,22 @@ void threadFunctionRun2(long long leftBorder, long long rightBorder, long long m
 void run2(FILE **FOUT_FILES, atomic<bool> *COMPLETED_THREADS, thread * THREADS, int THREADS_COUNT) {
 
 	// Максимальное количество простых чисел. По умолчанию равно верхней границе рассматриваемого промежутка
-	long long max_count_simples = 100000; // 10000000 => 1400156 простых чисел
-	long long *simples = new long long[max_count_simples];
+	uint64_t  max_count_simples = 100; // 10000000 => 1400156 простых чисел
+	uint64_t  *simples = new uint64_t [max_count_simples];
 
-	// Получим количество простых чисел
-	long long count_simples = getCountSimples(3, max_count_simples, simples);
-	long long step = count_simples / 20;
-
-	for (int i = 0; i < count_simples; i++) {
-		long long a = simples[i];
-	}
-
+	// Получим количество простых чисел и все простые числа
+	uint64_t  count_simples = 0;// getCountSimples(3, max_count_simples, simples);
+	getPrimes(simples, &count_simples, 1, max_count_simples, THREADS_COUNT);
+	
+	uint64_t  step = count_simples / 20;
+	
 	double koef = 1 + 1 / (double)(THREADS_COUNT * 3);
 	int j = 0;
 
 	printf("Промежуток: до %lld, простых чисел всего: %lld, максимальное число = %lld\n\n", max_count_simples, count_simples, simples[count_simples - 2]);
 	fprintf(FOUT_FILES[THREADS_COUNT], "Промежуток: до %lld, простых чисел всего: %lld, максимальное число = %lld\n\n", max_count_simples, count_simples, simples[count_simples - 2]);
 
-	for (long long i = 0; i < count_simples; ) {
+	for (uint64_t  i = 0; i < count_simples; ) {
 
 		// Цикл просматривания потоков. Если поток освободился - то загружаем его работой по рассмотрению нового промежутка
 		for (j = 0; j < THREADS_COUNT && i < count_simples; j++) {

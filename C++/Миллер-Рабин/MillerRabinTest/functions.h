@@ -7,11 +7,11 @@ using namespace std;
 
 // Проверка на деление числа на все его составные части( от 2 до корня от этого числа).
 // Если делится - то точно простое число. НО! Не работает на четных числах, на вход подаются только нечетные числа с шагом 2: 1,3,5,7,9 и т.д.
-bool ПровереноМодифицированнымПростымДелением(long long *number) {
-	long long s = sqrt(*number) + 1;
+bool ПровереноМодифицированнымПростымДелением(uint64_t *number) {
+	uint64_t s = sqrt(*number) + 1;
 
 	// нет смысла рассматривать четные числа, т.к. они не делятся на два
-	for (long long i = 3; i <= s; i += 2) {
+	for (uint64_t i = 3; i <= s; i += 2) {
 		if ((*number) % i == 0) {
 			return false;
 		}
@@ -21,10 +21,10 @@ bool ПровереноМодифицированнымПростымДелением(long long *number) {
 }
 
 // Заполняет входной массив simples всеми простыми числами между start и finish - границами. Функция явно возвращает количество простых чисел и неявно - все найденные простые числа в массиве simples
-long long getCountSimples(long long start, long long finish, long long *simples) {
-	long long index = 0;
+uint64_t getCountSimples(uint64_t start, uint64_t finish, uint64_t *simples) {
+	uint64_t index = 0;
 
-	for (long long j = start; j < finish; j += 2) {
+	for (uint64_t j = start; j < finish; j += 2) {
 		if (j % 2 != 0) {
 
 			if (ПровереноМодифицированнымПростымДелением(&j)) {
@@ -39,7 +39,7 @@ long long getCountSimples(long long start, long long finish, long long *simples)
 
 
 // Вывод значения в файл
-void printValue(long long *i, FILE *fout) {
+void printValue(uint64_t *i, FILE *fout) {
 
 	fprintf(fout, "%lld \n", *i);
 }

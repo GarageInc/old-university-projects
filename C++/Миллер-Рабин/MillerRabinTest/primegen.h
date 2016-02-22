@@ -8,34 +8,6 @@
 
 #include "next_prime64.h" 
 
-// —охранение результата в файл
-bool prime_store(uint64_t x, FILE* f, int width)
-{
-	char buf[32];
-	int len = sprintf(buf, "%llu", x);
-	if (width > 0) {
-		static int line = 0;
-		buf[len++] = ',';
-		line += len;
-		if (line >= width) {
-			line = 0;
-			buf[len++] = 0xD;
-			buf[len++] = 0xA;
-		}
-	}
-	else {
-		buf[len++] = 0xD;
-		buf[len++] = 0xA;
-	}
-	if (fwrite(buf, 1, len, f) != len) {
-		printf("error write data\n");
-		return false;
-	}
-	else {
-		return true;
-	}
-}
-
 //***************************************************************************************
 // ћногопоточный расчет
 #include <thread>
@@ -54,29 +26,39 @@ typedef struct {
 	uint64_t to; // конец интервала
 	int cnt; // кол-во простых
 	int state; // состо€ние
+	uint64_t *block_simples;
 } interval_t;
 
-std::vector<interval_t> res; // интервалы дл€ обсчета и результаты
-std::mutex res_change; // синхронизаци€ доступа к res
+std::vector<interval_t> res; // интервалы для обсчета и результаты
+std::mutex res_change; // синхронизация доступа к res
 
-					   // ѕоток расчета
+// поток расчета
 void prime_thread(int block)
 {
 	prime_bitmap_t pb = { 0 }; // биткарта текущего потока
 	bool calc_up = true; // считаем последовательно вверх
+
 	while (block >= 0) {
 		// обсчет res[block]
 		interval_t* v = &res[block];
+
 		uint64_t x = next_prime(v->from, &pb);
+
 		while (x <= v->to) {
+			printf("%lld\n", x);
+			v->block_simples[v->cnt] = x;
 			v->cnt++;
+
 			x = next_prime(x, &pb);
 		}
+
 		// выбор очередного блока
 		res_change.lock();
 		v->state = (x == 0) ? ST_ERR : ST_END;
+
 		if (calc_up) {
 			block++; //следующий в своем интервале
+
 			if (block != res.size() && res[block].state == ST_INIT) {
 				res[block].state = ST_CALC;
 			}
@@ -84,6 +66,10 @@ void prime_thread(int block)
 				calc_up = false;
 			}
 		}
+		else {
+			// pass
+		}
+
 		if (!calc_up) { // поиск необсчитанных в чужих интервалах
 			for (block = (int)res.size() - 1; block >= 0; block--) {
 				if (res[block].state == ST_INIT) {
@@ -92,7 +78,12 @@ void prime_thread(int block)
 				}
 			}
 		}
+		else {
+			// pass
+		}
 		res_change.unlock();
+
+
 	}
 }
 
@@ -103,81 +94,98 @@ void prime_init(uint64_t max)
 }
 
 // запуск потоков расчета и сбор результатов
-int prime_calc_mt(uint64_t from, uint64_t to, int width, int thread_cnt)
+void prime_calc_mt(uint64_t * simples, uint64_t * count_simples, uint64_t from, uint64_t to, int width, int thread_cnt)
 {
-	if (from & 1) from--; // делаем четным чтобы не пропустить простое from
-	if (from <= 2) from = 1;
+	if (from & 1) 
+		from--; // делаем четным чтобы не пропустить простое from
+	if (from <= 2) 
+		from = 1;
+
 	std::thread th_init(prime_init, to);
+
 	// формирование заданий блоками кратными PRIME_BUF (окно решета)
 	for (uint64_t i = from; i < to; i += PRIME_BUF - (i & (PRIME_BUF - 1))) {
 		interval_t v = { 0 };
+
 		v.from = i;
 		v.to = i + PRIME_BUF - (i & (PRIME_BUF - 1)) - 1;
-		if (v.to > to) v.to = to;
+
+		if (v.to > to)
+			v.to = to;
+
+		v.block_simples = new uint64_t[v.to - v.from];
+
 		v.state = ST_INIT;
+
 		res.push_back(v);
 	}
+
 	// инициализаци€ кэша
 	th_init.join();
+
 	// запуск потоков расчета
 	std::vector<std::thread> th;
+
 	for (int i = 0; i < thread_cnt; i++) {
 		int first = (int)res.size() * i / thread_cnt; // номер первого блока дл€ потока
+		
 		res_change.lock();
-		res[first].state = ST_CALC;
+		res[ first ].state = ST_CALC;
 		res_change.unlock();
+		
 		th.push_back(std::thread(prime_thread, first));
 	}
-	// ќжидание завершени€ потоков
-	for (int i = 0; i < thread_cnt; i++) th[i].join();
-	// ¬ывод результатов
-	int cnt = 0;
+	
+	// oжидание завершени€ потоков
+	for (int i = 0; i < thread_cnt; i++)
+		th[i].join();
+	
+	// вывод результатов
+	(*count_simples) = 0;
+
 	for (int i = 0; i != res.size(); i++) {
+		
 		if (res[i].state != ST_END) {
-			cnt = -1;
+			(*count_simples) = -1;
 			break;
 		}
-		cnt += res[i].cnt;
+
+		(*count_simples) += res[i].cnt;
 	}
+
 	next_prime(0); // освобождение пам€ти
-	return cnt;
 }
 
 //***************************************************************************************
-// –асчет в одном потоке, возвращает количество найденых простых
-int prime_calc(uint64_t from, uint64_t to, int width)
+// расчет в одном потоке, возвращает количество найденых простых
+void prime_calc(uint64_t * simples, uint64_t * count_simples, uint64_t from, uint64_t to, int width)
 {
-	if (from & 1) from--; // делаем четным чтобы не пропустить простое from
-	if (from <= 2) from = 1;
-	int cnt = 0;
+	if (from & 1) 
+		from--; // делаем четным чтобы не пропустить простое from
+	if (from <= 2) 
+		from = 1;
 
-	uint64_t step = (to - from) / 100; // дл€ индикатора расчета
-	uint64_t show = from; // следующий вывод индикатора
-
+	*count_simples = 0;
+	
 	uint64_t x = next_prime(from);
 
 	while (x && x < to) {
-		cnt++;
-		/*if (f) {
-		if (!prime_store(x, f, width)) break;
-		if (show < x) { // вывод индикатора
-		printf("complite %d%%\r", (int)((show - from) / step));
-		show += step;
-		}
-		}*/
+
+		simples[*count_simples] = x;
+		(*count_simples)++;
+
 		x = next_prime(x);
 	}
 
 	next_prime(0); // освобождение пам€ти
 
-	if (x == 0) cnt = -1; // ошибка в next_prime()
-
-	return cnt;
+	if (x == 0) 
+		*count_simples = -1; // ошибка в next_prime()
 }
 
 
 //****************************************************************************************
-int getPrimes(uint64_t from = 0, uint64_t to = 0, int th_cnt = 0)
+int getPrimes(uint64_t * simples, uint64_t * count_simples, uint64_t from = 0, uint64_t to = 0, int th_cnt = 0)
 {
 	const char* file = NULL;
 	int width = 0;
@@ -189,14 +197,15 @@ int getPrimes(uint64_t from = 0, uint64_t to = 0, int th_cnt = 0)
 	}
 	else {
 
-		printf("Calc primes on interval %llu..%llu\n", from, to);
+		printf("Подсчет простых чисел на интервале: %llu..%llu\n", from, to);
 		int cnt = 0;
-		if (th_cnt > 1) {
-			cnt = prime_calc_mt(from, to, width, th_cnt);
-		}
-		else {
-			cnt = prime_calc(from, to, width);
-		}
+
+		//if (th_cnt > 1) {
+		//	prime_calc_mt(simples, count_simples, from, to, width, th_cnt);
+		//}
+		//else {
+			prime_calc(simples, count_simples, from, to, width);
+		//}
 	}
 
 	return 0;

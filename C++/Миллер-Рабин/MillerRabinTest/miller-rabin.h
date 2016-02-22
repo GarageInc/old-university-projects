@@ -1,17 +1,18 @@
 
 // База для теста Миллера-Рабина
-int A[] = { 2,3,5 };
+int A[] = { 2};
+const int A_LENGTH = 1;
 
 // Функция для умножения двух чисел x,y по модулю m
-long long mulmod(long long *x, long long *y, long long *m)
+uint64_t mulmod(uint64_t *x, uint64_t *y, uint64_t *m)
 {
 	return ((*x)*(*y)) % (*m);
 }
 
 // Функция возведения числа x в степен а по модулю n
-long long powmod(long long x, int a, long long *m)
+uint64_t powmod(uint64_t x, int a, uint64_t *m)
 {
-	long long r = 1;
+	uint64_t r = 1;
 
 	while (a > 0)
 	{
@@ -25,19 +26,12 @@ long long powmod(long long x, int a, long long *m)
 }
 
 // Функция теста Миллера-Рабина
-bool test_Miller_Rabin(long long *m, int *a) {
-	if (*m == 2 || *m == 3)
-		return true;
+bool test_Miller_Rabin(uint64_t *m, int *a) {
 
-	if (*m % 2 == 0 || *m == 1) {
-		return false;
-	}
-	// Сначала мы отсеяли самые простые случаи
-
-	long long s = 0;
-	long long t = *m - 1;
-	long long x = 0;
-	long long y = 0;
+	uint64_t s = 0;
+	uint64_t t = *m - 1;
+	uint64_t x = 0;
+	uint64_t y = 0;
 
 	// Считаем количество степени двойки
 	while (t != 0 && t % 2 == 0) {
@@ -65,11 +59,10 @@ bool test_Miller_Rabin(long long *m, int *a) {
 }
 
 
-
 // Функция проверки, использует тест Миллера-Рабина
-bool ПровереноТестомМиллераРабина(long long *number)
+bool ПровереноТестомМиллераРабина(uint64_t *number)
 {
-	for (int i = 0; i < 3; i++)
+	for (int i = 0; i < A_LENGTH; i++)
 	{
 		// Запускаем тест
 		if (!test_Miller_Rabin(number, &A[i]))

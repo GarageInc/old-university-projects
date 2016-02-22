@@ -27,8 +27,6 @@ const int MAX_THREADS_COUNT = 100;
 // Потоки
 thread THREADS[MAX_THREADS_COUNT];
 
-
-
 // Функция ожидания окончания работы потоков
 void waitEnding(atomic<bool> *COMPLETED_THREADS) {
 
@@ -49,30 +47,22 @@ int main() {
 	int NUM_CORES = thread::hardware_concurrency();
 	// Количество потоков
 	THREADS_COUNT =  NUM_CORES;
-
-	//
-	getPrimes(0, 1000, THREADS_COUNT);
-
-	getch();
-	return 0;
-
+	
 	// Выводные файлы(в которые выводится результат)
 	FILE* FOUT_FILES[MAX_THREADS_COUNT];
+	// Инициализируем файлы
+	initFiles(FOUT_FILES, THREADS_COUNT);
+
 
 	// Массив булевых значений - для контроля работы потоков(освобождения и заполнения)
 	atomic<bool> COMPLETED_THREADS[MAX_THREADS_COUNT];
-
 	// Говорим, что потоки ещё свободны
 	for (int j = 0; j < THREADS_COUNT; j++) {
 		COMPLETED_THREADS[j] = true;
 	}
 
-	// Инициализируем файлы
-	initFiles(FOUT_FILES, THREADS_COUNT);
-
 	fprintf(FOUT_FILES[THREADS_COUNT], "Количество ядер %d\nКоличество потоков: %d \n", NUM_CORES, THREADS_COUNT);
-
-
+	
 	// Начало работы
 	clock_t start_at = clock();
 
