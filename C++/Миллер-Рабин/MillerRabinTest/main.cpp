@@ -11,9 +11,13 @@
 #include <future>
 #include <mutex>
 
+
+#include "functions.h"
+#include "miller-rabin.h"
 #include"primegen.h"
 #include"example1.h"
 #include"example2.h"
+#include"BigInt.h"
 
 using namespace std;
 
@@ -36,12 +40,9 @@ void waitEnding(atomic<bool> *COMPLETED_THREADS) {
 		if (THREADS[j].joinable()) {
 
 			THREADS[j].join();
-			printf("\nЗавершен поток %d", j);
 		}
-		else {
 
-			printf("\nЗавершен поток %d", j);
-		}
+		printf("\nЗавершен поток %d", j);
 	}
 }
 
@@ -53,7 +54,7 @@ int main() {
 	// Количество ядер
 	int NUM_CORES = thread::hardware_concurrency();
 	// Количество потоков
-	THREADS_COUNT =  NUM_CORES;
+	THREADS_COUNT = NUM_CORES;
 	
 	// Выводные файлы(в которые выводится результат)
 	FILE* FOUT_FILES[MAX_THREADS_COUNT];
@@ -72,9 +73,9 @@ int main() {
 	// Начало работы
 	clock_t start_at = clock();
 
-	//run1(FOUT_FILES,COMPLETED_THREADS);
+	run1(FOUT_FILES,COMPLETED_THREADS, THREADS_COUNT, THREADS);
 	// Запускается функция, которая проверяет псевдопростые числа: числа, которые являются произведением двух простых чисел 'p' и 'q', но проходят тест Миллера-Рабина по 	базе 'A'
-	run2(FOUT_FILES, COMPLETED_THREADS, THREADS, THREADS_COUNT);
+	//run2(FOUT_FILES, COMPLETED_THREADS, THREADS, THREADS_COUNT);
 
 	// Ждем окончания работы всех потоков
 	waitEnding(COMPLETED_THREADS);

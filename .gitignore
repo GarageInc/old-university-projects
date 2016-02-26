@@ -3,3 +3,8 @@ C++/Миллер-Рабин/MillerRabinTest.sdf
 C++/Миллер-Рабин/MillerRabinTest.VC.opendb
 *.enc
 *.tlog
+*.txt
+*.txt
+C++/Миллер-Рабин/MillerRabinTest/stats.txt
+*.sdf
+C#/1. Криптография, сжатие, шифры/C++ RSA, Алсу/MillerRabinTest/MillerRabinTest.vcxproj

@@ -28,8 +28,8 @@ void threadFunctionRun2(uint64_t  leftBorder, uint64_t  rightBorder, uint64_t  m
 void run2(FILE **FOUT_FILES, atomic<bool> *COMPLETED_THREADS, thread * THREADS, int THREADS_COUNT) {
 
 	// Максимальное количество простых чисел. По умолчанию равно верхней границе рассматриваемого промежутка
-	uint64_t  max_count_simples = 10000000; // 10000000 => 1400156 простых чисел
-	uint64_t  *simples = new uint64_t [max_count_simples/10];
+	uint64_t  max_count_simples = 10000;
+	uint64_t  *simples = new uint64_t [max_count_simples];
 
 	// Получим количество простых чисел и все простые числа
 	uint64_t  count_simples = 0;// getCountSimples(3, max_count_simples, simples);
@@ -43,7 +43,7 @@ void run2(FILE **FOUT_FILES, atomic<bool> *COMPLETED_THREADS, thread * THREADS, 
 	printf("Промежуток: до %lld, простых чисел всего: %lld, максимальное число = %lld\n\n", max_count_simples, count_simples, simples[count_simples - 2]);
 	fprintf(FOUT_FILES[THREADS_COUNT], "Промежуток: до %lld, простых чисел всего: %lld, максимальное число = %lld\n\n", max_count_simples, count_simples, simples[count_simples - 2]);
 
-	for (uint64_t  i = 0; i < count_simples; ) {
+	for (uint64_t  i = 1; i < count_simples; ) {
 
 		// Цикл просматривания потоков. Если поток освободился - то загружаем его работой по рассмотрению нового промежутка
 		for (j = 0; j < THREADS_COUNT && i < count_simples; j++) {
@@ -73,9 +73,6 @@ void run2(FILE **FOUT_FILES, atomic<bool> *COMPLETED_THREADS, thread * THREADS, 
 				if (step > 3000) {
 					step = (step) / (koef);
 				}
-			}
-			else {
-
 			}
 		}
 	}
