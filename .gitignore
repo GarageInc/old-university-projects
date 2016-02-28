@@ -9,3 +9,5 @@ C++/Миллер-Рабин/MillerRabinTest/stats.txt
 *.sdf
 C#/1. Криптография, сжатие, шифры/C++ RSA, Алсу/MillerRabinTest/MillerRabinTest.vcxproj
 *.tlog
+*.tlog
+C#/1. Криптография, сжатие, шифры/C++ RSA, Алсу/MillerRabinTest.sdf
