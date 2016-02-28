@@ -26,9 +26,6 @@
     <ClInclude Include="primegen.h">
       <Filter>Файлы исходного кода</Filter>
     </ClInclude>
-    <ClInclude Include="example1.h">
-      <Filter>Файлы исходного кода</Filter>
-    </ClInclude>
     <ClInclude Include="example2.h">
       <Filter>Файлы исходного кода</Filter>
     </ClInclude>
@@ -36,6 +33,9 @@
       <Filter>Файлы исходного кода</Filter>
     </ClInclude>
     <ClInclude Include="functions.h">
+      <Filter>Файлы исходного кода</Filter>
+    </ClInclude>
+    <ClInclude Include="example1.h">
       <Filter>Файлы исходного кода</Filter>
     </ClInclude>
   </ItemGroup>
