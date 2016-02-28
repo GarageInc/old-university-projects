@@ -61,3 +61,4 @@ C:\Data\all\all\C#\1. Криптография, сжатие, шифры\Общ�
 C:\Data\all\all\C#\1. Криптография, сжатие, шифры\Общее решето числового поля\Application\obj\Debug\Application.csproj.GenerateResource.Cache
 C:\Data\all\all\C#\1. Криптография, сжатие, шифры\Общее решето числового поля\Application\obj\Debug\Application.exe
 C:\Data\all\all\C#\1. Криптография, сжатие, шифры\Общее решето числового поля\Application\obj\Debug\Application.pdb
+F:\Projects\Опытные\all\C#\1. Криптография, сжатие, шифры\RSA-эцп\RSA-эцп\RSA-эцп\Application\Application\bin\Debug\Application.exe.config
