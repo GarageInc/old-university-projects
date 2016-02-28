@@ -50,13 +50,13 @@
             this.button_Send = new System.Windows.Forms.Button();
             this.responsesBox = new System.Windows.Forms.TextBox();
             this.txtMessage = new System.Windows.Forms.TextBox();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.ineractivePanel = new System.Windows.Forms.Panel();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            this.panel1.SuspendLayout();
+            this.ineractivePanel.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -158,6 +158,7 @@
             this.txtIP.Name = "txtIP";
             this.txtIP.Size = new System.Drawing.Size(162, 21);
             this.txtIP.TabIndex = 1;
+            this.txtIP.Text = "192.168.1.36";
             // 
             // lblIP
             // 
@@ -276,23 +277,23 @@
             this.txtMessage.Size = new System.Drawing.Size(361, 21);
             this.txtMessage.TabIndex = 19;
             // 
-            // panel1
+            // ineractivePanel
             // 
-            this.panel1.Controls.Add(this.button_Send);
-            this.panel1.Controls.Add(this.label4);
-            this.panel1.Controls.Add(this.txtMessage);
-            this.panel1.Controls.Add(this.label3);
-            this.panel1.Controls.Add(this.responsesBox);
-            this.panel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            this.panel1.Location = new System.Drawing.Point(15, 12);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(481, 411);
-            this.panel1.TabIndex = 25;
+            this.ineractivePanel.Controls.Add(this.button_Send);
+            this.ineractivePanel.Controls.Add(this.label4);
+            this.ineractivePanel.Controls.Add(this.txtMessage);
+            this.ineractivePanel.Controls.Add(this.label3);
+            this.ineractivePanel.Controls.Add(this.responsesBox);
+            this.ineractivePanel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.ineractivePanel.Location = new System.Drawing.Point(15, 12);
+            this.ineractivePanel.Name = "ineractivePanel";
+            this.ineractivePanel.Size = new System.Drawing.Size(481, 411);
+            this.ineractivePanel.TabIndex = 25;
             // 
             // tabControl1
             // 
-            this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Location = new System.Drawing.Point(502, 66);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -330,7 +331,7 @@
             this.ClientSize = new System.Drawing.Size(1036, 435);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.btn_logout);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.ineractivePanel);
             this.Controls.Add(this.lblIP);
             this.Controls.Add(this.txtIP);
             this.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
@@ -341,8 +342,8 @@
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
+            this.ineractivePanel.ResumeLayout(false);
+            this.ineractivePanel.PerformLayout();
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
@@ -375,7 +376,7 @@
         private System.Windows.Forms.Button button_Send;
         private System.Windows.Forms.TextBox responsesBox;
         private System.Windows.Forms.TextBox txtMessage;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel ineractivePanel;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;

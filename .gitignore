@@ -11,3 +11,4 @@ C#/1. Криптография, сжатие, шифры/C++ RSA, Алсу/Mille
 *.tlog
 *.tlog
 C#/1. Криптография, сжатие, шифры/C++ RSA, Алсу/MillerRabinTest.sdf
+*.csproj

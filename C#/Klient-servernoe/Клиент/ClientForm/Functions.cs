@@ -8,34 +8,43 @@ using System.Security.Cryptography;
 
 namespace ClientForm
 {
-    class Function
+    class Functions
     {
         static public Random rand = new Random();
 
         // Получение MD5 хэша из входящей строки
         public static string calcHash(string input)
         {
-            MD5 md5Hash = MD5.Create();
+            MD5 md5Generator = MD5.Create();
+
             //посчитали мд5 хэш, получили массив байт
-            byte[] data = md5Hash.ComputeHash(getBytesFromStr(input));
+            byte[] hash = md5Generator.ComputeHash(getBytesFromStr(input));
+            
             //переводим массив в строку
-            return getStrFromBytes(data);
+            return getStrFromBytes(hash);
         }
 
-        // Возведение в степень
+        // Возведение в степень по модулю
         static public BigInteger PowMod(BigInteger a, BigInteger b, BigInteger n)
         {
             BigInteger temp;
-            if (b == 1) { return a % n; }
-            if (b == 0) { return 1; }
+
+            if (b == 1) {
+                return a % n;
+            }
+            if (b == 0) {
+                return 1;
+            }
 
             temp = PowMod(a, b / 2, n);
             temp *= temp;
             temp %= n;
+
             if (b % 2 == 1)
             {
                 temp *= a;
             }
+
             return temp % n;
         }
 

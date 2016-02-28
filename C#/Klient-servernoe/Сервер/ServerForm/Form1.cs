@@ -33,9 +33,8 @@ namespace ServerForm
         int port; //порт сервера
 
         Socket socket; // сокет для прослушивания
-        IPEndPoint point; //информация о точке (ип, порт)
+        IPEndPoint point; // информация о точке (ип, порт)
 
-        Socket client; // клиент
         private List<Thread> threads = new List<Thread>(); // лист для потоков
 
         BigInteger DHkey;// общий ключ по Диффи Хеллману
@@ -43,7 +42,9 @@ namespace ServerForm
 
         // Список пользователей
         List<User> users = new List<User>();
-                
+        List<Socket> clients = new List<Socket>(); // клиент
+
+
         public Form1()
         {
             InitializeComponent();
@@ -52,7 +53,9 @@ namespace ServerForm
 
         void Application_ApplicationExit(object sender, EventArgs e) //ивент закрытия программы
         {
-            if (running) { socket.Close(); } //если порт был привязан, то прекращаем слушание
+            if (running) {
+                socket.Close();
+            } //если порт был привязан, то прекращаем слушание
             running = false;
 
             for (int i = 0; i < threads.Count(); i++) //перебираем весь список потоков
@@ -66,11 +69,8 @@ namespace ServerForm
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            port = 10000; //назначаем порт
-                          //   address = IPAddress.Parse("192.168.2.1");
+            port = 10000; // назначаем порт
             host = IPAddress.Parse("127.0.0.1");
-            //   address = Dns.GetHostEntry(Dns.GetHostName()).AddressList[2]; //берем из хоста айпи
-            txtIPPORT.Text = host.ToString() + ":" + port.ToString();  //вписываем в поле ип:порт
         }
 
         // Хэндлер кнопки запуска сервера
@@ -78,9 +78,10 @@ namespace ServerForm
         {
             if ( !running )
             {
-                //создаем сокет для прослушки
+                // создаем сокет для прослушки
                 socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
                 point = new IPEndPoint(IPAddress.Any, port);
+
                 socket.Bind(point); // связываем сокет с точкой
                 socket.Listen(300); // начинаем прослушивать, макс. 300
 
@@ -89,7 +90,7 @@ namespace ServerForm
 
                 running = true; 
 
-                AcceptSocket(); //начинаем принимать сокеты
+                AcceptSocket(); // начинаем принимать сокеты
             }
             else
             {
@@ -99,7 +100,7 @@ namespace ServerForm
                 running = false;
                 socket.Close();
 
-                //закрываем и очищаем потоки
+                // закрываем и очищаем потоки
                 for (int i = 0; i < threads.Count(); i++)
                 {
                     if (threads[i].ThreadState == ThreadState.Running)
@@ -110,140 +111,171 @@ namespace ServerForm
                 }
             }
         }
-
+        
         // функция прослушки юзеров
         private void AcceptSocket()
         {
             Thread th = new Thread(delegate () //создаем новый поток для прослушки
             {
-                while (running) // делаем, пока сервер запущен
+                while ( running ) // делаем, пока сервер запущен
                 {
-                    try
+                    trace("ACCEPTING");
+                    Socket temp = socket.Accept();// Появилось новое соединение
+                    trace("ACCEPTED");
+
+                    Thread subth = new Thread(delegate () //создаем новый поток для прослушки
                     {
-                        client = socket.Accept(); //создаем сокет для клиента
-                    }
-                    catch {
-                        return;
-                    }
-
-                    string login, password, res; //временные переменные
-
-                    res = Encoding.Unicode.GetString(ReceiveBytes(client)); //конвертируем байты в "путь" (регистр или авторизац)
-
-                    if (res[0] == 'R') //если "путь" будет регистрация, то
-                    {
-                        generateKey();
-
-                        txtLog.Invoke(new Action(() => {
-                            trace("При регистрации был сгенерирован ключ: " + DHkey.ToString());
-                        }));
-
-                        login = RC4(Encoding.Unicode.GetString(ReceiveBytes(client)), DHkey.ToString()); //конвертируем байты в логин
-                        password = RC4(Encoding.Unicode.GetString(ReceiveBytes(client)), DHkey.ToString()); //конвертируем байты в пароль
-
-                        User user = this.users.Where(x => x.login == login).FirstOrDefault();
-
-                        if (user!=null) //если такой логин уже содержится
+                        bool isLoginned = false;
+                        while ( !isLoginned )
                         {
-                            SendBytes(client, "0");  //то отправляем клиенту сообщение о том, что такой логин уже есть
-                        }
-                        else
-                        {
-                            users.Add(new User(login, password));
-                            SendBytes(client, "1");//отправляем клиенту сообщение о том, что регистрация прошла успешно
-                            this.txtUsers.Invoke(new Action(() => { txtUsers.AppendText("Пользователь " + login + " зарегистрировался.\r\n"); }));
-                        }
-                    }
-                    else if (res[0] == 'I') //иначе, если вход, то
-                    {
-                        password = "pswd";
-                        bool exists = true;
-                        login = Encoding.Unicode.GetString(ReceiveBytes(client)); //конвертируем байты в логин
-                        
-                        User user = this.users.Where(x => x.login == login).FirstOrDefault();
+                            string login, password, res; // временные переменные
 
-                        if (user!=null)
-                        {
-                            password = user.password;
-                        }
-                        else
-                        {
-                            exists = false;
-                        }
-                        
-                        Random rnd = new Random();
-                        BigInteger n = Function.num_gen(10);
+                            res = ReceiveString(temp); //конвертируем байты в "путь" (регистр или авторизац)
 
-                        SendBytes(client, n.ToString());
-
-                        string hash1 = Encoding.Unicode.GetString(ReceiveBytes(client));
-                        string hash2 = Function.calcHash(password + n);
-
-                        generateKey();
-                        //Thread.Sleep(500);
-
-                        generateRSA();
-                        SendBytes(client, N.ToString());
-                        //Thread.Sleep(500);
-
-                        SendBytes(client, E.ToString());
-                        if (exists == false || hash1 != hash2) {
-                            SendBytes(client, "0");
-                        }
-                        else
-                        {
-                            txtLog.Invoke(new Action(() => {
-                                trace("При авторизации был сгенерирован ключ: " + DHkey.ToString());
-                            }));
-
-                            // Отправляем клиенту сообщение о том, что пользователь успешно вошел
-                            SendBytes(client, "1"); 
-
-                            this.txtUsers.Invoke(new Action(() => { txtUsers.AppendText("Пользователь " + login + " вошел в сеть\r\n"); }));
-                            
-                            // И создаем поток для принятия от юзера дальнейших сообщений
-                            Thread thh = new Thread(delegate () 
+                            if (res[0] == 'R') //если "путь" будет регистрация, то
                             {
-                                try
-                                {
-                                    string m = "";
-                                    while (m != "E")
-                                    {
-                                        m = RC4(Encoding.Unicode.GetString(ReceiveBytes(client)), DHkey.ToString());//получили от юзера сообщение m
-                                        string M;
-                                        if (!running)
-                                        {
-                                            M = "Сервер недоступен!\r\n";
-                                            SendBytes(client, RC4(M, DHkey.ToString()));
-                                        }
-                                        if ((running) && (m != "E"))
-                                        {
-                                            M = "Cервер получил сообщение: " + m;
-                                            SendBytes(client, RC4(M, DHkey.ToString()));
-                                            // Thread.Sleep(500);
-                                            BigInteger EDS = new BigInteger(Function.getBytesFromStr(M));//ЭЦП
-                                            SendBytes(client, RC4(BigInteger.ModPow(EDS, D, N).ToString(), DHkey.ToString()));//отправляем ЭЦП
-                                            this.txtUsers.Invoke(new Action(() => { txtUsers.AppendText("Пользователь " + login + " написал:\r\n" + m + "\r\n"); }));
-                                        }
-                                        else txtUsers.Invoke(
-                                            new Action(() => {
-                                                txtUsers.AppendText("Пользователь " + login + " вышел из сети\r\n");
-                                            }));
-                                    }
-                                }
-                                catch
-                                {
-                                    txtUsers.Invoke(new Action(() => { txtUsers.AppendText("Пользователь " + login + " вышел из сети\r\n"); }));
-                                }
-                            });
+                                generateKey(temp);
 
-                            thh.Start(); // запускаем этот поток
-                            threads.Add(thh);
-                        }
-                    } else
-                    {
-                        // pass, в ином случае не реагировать на входящие данные
-                    }
+                                txtLog.Invoke(new Action(() => {
+                                    trace("При регистрации был сгенерирован ключ: " + DHkey.ToString());
+                                }));
+
+                                login = RC4(ReceiveString(temp), DHkey.ToString()); //конвертируем байты в логин
+                                password = RC4(ReceiveString(temp), DHkey.ToString()); //конвертируем байты в пароль
+
+                                User user = this.users.Where(x => x.login == login).FirstOrDefault();
+
+                                if (user != null) // если такой логин уже содержится
+                                {
+                                    SendBytes(temp, "0");  //то отправляем клиенту сообщение о том, что такой логин уже есть
+                                }
+                                else
+                                {
+                                    users.Add(new User(login, password));
+                                    SendBytes(temp, "1");// отправляем клиенту сообщение о том, что регистрация прошла успешно
+                                    this.txtUsers.Invoke(new Action(() => { txtUsers.AppendText("Пользователь " + login + " зарегистрировался.\r\n"); }));
+                                }
+                            }
+                            else if (res[0] == 'I') // иначе, если вход, то
+                            {
+
+
+                                password = "pswd";
+                                bool exists = true;
+                                login = ReceiveString(temp); //конвертируем байты в логин
+
+                                User user = this.users.Where(x => x.login == login).FirstOrDefault();
+
+                                if (user != null)
+                                {
+                                    password = user.password;
+                                }
+                                else
+                                {
+                                    exists = false;
+                                }
+
+                                Random rnd = new Random();
+                                BigInteger n = Function.num_gen(10);
+
+                                SendBytes(temp, n.ToString());
+
+                                string hash1 = ReceiveString(temp);
+                                string hash2 = Function.calcHash(password + n);
+
+                                generateKey(temp);
+
+                                generateRSA();
+
+                                // Отправляем открытые ключи
+                                SendBytes(temp, N.ToString());
+                                SendBytes(temp, E.ToString());
+
+                                trace("EXISTS: " + exists);
+                                if (exists == false || hash1 != hash2)
+                                {
+
+                                    SendBytes(temp, "0");// Ошибка
+                                }
+                                else
+                                {
+                                    isLoginned = true;
+
+                                    clients.Add(temp);
+
+                                    txtLog.Invoke(new Action(() => {
+                                        trace("При авторизации был сгенерирован ключ: " + DHkey.ToString());
+                                    }));
+
+                                    // Отправляем клиенту сообщение о том, что пользователь успешно вошел
+                                    SendBytes(temp, "1");
+
+                                    this.txtUsers.Invoke(new Action(() => { txtUsers.AppendText("Пользователь " + login + " вошел в сеть\r\n"); }));
+
+                                    // И создаем поток для принятия от юзера дальнейших сообщений
+                                    Thread thh = new Thread(delegate ()
+                                    {
+                                        try
+                                        {
+                                            // ждем сообщение от пользователя
+                                            string m = RC4(ReceiveString(temp), DHkey.ToString()); ;
+
+                                            while (m != "E")
+                                            {
+                                                trace(">user----");
+                                                //получили от юзера сообщение m
+                                                string M;
+
+                                                if (!running)
+                                                {
+                                                    M = "Сервер недоступен!\r\n";
+                                                    trace(M);
+                                                    SendBytes(temp, RC4(M, DHkey.ToString()));
+                                                }
+
+                                                if ((running) && (m != "E"))
+                                                {
+                                                    M = "Cервер получил сообщение: " + m;
+                                                    trace(M);
+                                                    SendBytes(temp, RC4(M, DHkey.ToString()));
+
+                                                    BigInteger EDS = new BigInteger(Function.getBytesFromStr(M));// ЭЦП
+                                                    SendBytes(temp, RC4(BigInteger.ModPow(EDS, D, N).ToString(), DHkey.ToString()));//отправляем ЭЦП
+
+                                                    this.txtUsers.Invoke(new Action(() => {
+                                                        txtUsers.AppendText( login + ":\r\n" + m + "\r\n");
+                                                    }));
+                                                }
+                                                else
+                                                    txtUsers.Invoke(
+                                                   new Action(() => {
+                                                       txtUsers.AppendText("Пользователь " + login + " вышел из сети\r\n");
+                                                   }));
+
+                                                m = RC4(ReceiveString(temp), DHkey.ToString());
+                                            }
+                                        }
+                                        catch
+                                        {
+                                            txtUsers.Invoke(new Action(() => { txtUsers.AppendText("Пользователь " + login + " вышел из сети\r\n"); }));
+                                        }
+                                    });
+
+                                    thh.Start(); // запускаем этот поток
+                                    threads.Add(thh);
+                                }
+                            }
+                            else
+                            {
+                                trace("LISTENING: pass");
+                                // pass, в ином случае не реагировать на входящие данные
+                            }
+                        }                        
+                    });
+
+                    subth.Start(); // запускаем этот поток
+                    threads.Add(subth);
+
                 }
             });
 
@@ -258,67 +290,71 @@ namespace ServerForm
             }));
         }
 
-        byte[] ReceiveBytes(Socket client) //функция получения байтов
-        {
+        string ReceiveString(Socket client) //функция получения байтов
+        { 
+            try
+            {
                 trace("-> Begin reading bytes...");
-                byte[] bytes; //будет хранить в себе полученные данные в байтах 
-                byte[] bsize = new byte[8]; //будет хранить в себе размер полученных данных в байтах
+                byte[] bytes = new byte[1024];
 
-                int size; //размер полученных данных в инт формате
-
-                client.Receive(bsize); //получаем данных о размере строки 
-                size = BitConverter.ToInt32(bsize, 0); //конвертируем размер строки в int переменную
-
-                bytes = new byte[size * 2]; //выделяем память под байты в размере длины полученной троки
-                client.Receive(bytes); //принимаем байты
-
-                trace(" = Read bytes:" + Encoding.Unicode.GetString(bytes));
-                return bytes; //возвращаем байты из функции
+                int bytesRec = client.Receive(bytes);
+                string data = Encoding.Unicode.GetString(bytes, 0, bytesRec);
+                
+                trace(" = Read bytes:" + data);
+                return data; //возвращаем байты из функции
+            } catch(Exception e)
+            {
+                trace("ERROR: " + e.Message);
+                return "0";
+            }
+           
         }
 
         void SendBytes(Socket client, string message) //функция отправки байтов
         {
-            trace("-> Begin sending bytes...");
+            try
+            {
+                trace("-> Begin sending bytes...");
+                
+                byte[] bytes = Encoding.Unicode.GetBytes(message); //инкодим стринг в байты
+                
+                client.Send(bytes); //отправляем строку
 
-            byte[] bytes = new byte[message.Length * 2]; //переменная для отправки(получения) байтов
-            byte[] bsize; //будет хранить в себе размер полученных данных в байтах
+                trace(" = Bytes sended...");
 
-            bsize = BitConverter.GetBytes(message.Length); //конвертируем размер исходных данных в байты
-            bytes = Encoding.Unicode.GetBytes(message); //инкодим стринг в байты
-
-            client.Send(bsize); //отправляем размер строки
-            client.Send(bytes); //отправляем строку
-
-            trace(" = Bytes sended...");
+            } catch(Exception e)
+            {
+                trace("ERROR:" + e.Message);
+            }
         }
         
-        public void generateKey()
+        public void generateKey(Socket temp)
         {
+            trace("Generating key...");
             BigInteger n = Function.num_gen(8);
-
-            SendBytes( client, n.ToString());
-            // Thread.Sleep(500);
+            SendBytes(temp, n.ToString());
 
             BigInteger q = Function.num_gen(8);
-            SendBytes( client, q.ToString());
+            SendBytes(temp, q.ToString());
 
             BigInteger y = Function.num_gen(7);
             BigInteger K = Function.PowMod(q, y, n);
-            BigInteger M = BigInteger.Parse(Encoding.Unicode.GetString(ReceiveBytes(client)));
+            BigInteger M = BigInteger.Parse( ReceiveString(temp));
 
-            SendBytes( client, K.ToString());
+            SendBytes(temp, K.ToString());
 
             DHkey = Function.PowMod(M, y, n);
+            trace("Key generated!");
         }
 
         public void generateRSA()
         {
             P = Function.num_gen(100);
-            //Thread.Sleep(1);
-
             Q = Function.num_gen(100);
             N = P * Q;
+
             FI = (P - 1) * (Q - 1);
+
             E = Function.num_gen(P.ToString().Length / 2 + 1);
             D = get_inverse(FI, E);
         }
@@ -337,6 +373,7 @@ namespace ServerForm
             for (int i = 0; i < 256; i++) 
             {
                 j = (key[i % key.Length] + box[i] + j) % 256;
+
                 x = box[i]; //swap
                 box[i] = box[j];
                 box[j] = x;
