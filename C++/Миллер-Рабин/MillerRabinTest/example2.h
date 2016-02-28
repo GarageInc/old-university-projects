@@ -4,9 +4,9 @@
 // Функция №2 - проверяем произведения всех простых чисел из поданного массива simples.
 // например, массив содержит все простые числа от 3 до 1млн - но функция обрабатывает определенные промежуток между leftBorder и rightBorder(т.к. в потоке) - 
 // и выводит прошедшие проверку тестом Миллера-Рабина числа в файл. Ведь они составные, а проходят проверку!
-void threadFunctionRun2(uint64_t  leftBorder, uint64_t  rightBorder, uint64_t  maxCount, uint64_t  * simples, FILE *fout)
+void threadFunctionRun2(uint64_t  leftBorder, uint64_t  rightBorder, uint64_t  maxCount, uint64_t  * simples, FILE *fout, int index_j)
 {
-	uint64_t  multResult = 0;
+	uint128_t  multResult = 0;
 	uint64_t  j = 0;
 
 	for (uint64_t  i = leftBorder; i < rightBorder && i < maxCount; i++) {
@@ -14,7 +14,7 @@ void threadFunctionRun2(uint64_t  leftBorder, uint64_t  rightBorder, uint64_t  m
 		for (j = leftBorder; j < maxCount; j++) {
 			multResult = simples[i] * simples[j];// делаем составное число
 
-			if ( ПровереноТестомМиллераРабина( &multResult ) ) {
+			if ( ПровереноТестомМиллераРабина( &multResult, &index_j) ) {
 
 				// Если составное число прошло проверку - оно выводится в файл
 				printValue( &multResult, fout );
@@ -28,14 +28,14 @@ void threadFunctionRun2(uint64_t  leftBorder, uint64_t  rightBorder, uint64_t  m
 void run2(FILE **FOUT_FILES, atomic<bool> *COMPLETED_THREADS, thread * THREADS, int THREADS_COUNT) {
 
 	// Максимальное количество простых чисел. По умолчанию равно верхней границе рассматриваемого промежутка
-	uint64_t  max_count_simples = 10000;
-	uint64_t  *simples = new uint64_t [max_count_simples];
+	uint64_t  max_count_simples = 100000;
+	uint64_t  *simples = new uint64_t[max_count_simples];
 
 	// Получим количество простых чисел и все простые числа
 	uint64_t  count_simples = 0;// getCountSimples(3, max_count_simples, simples);
 	getPrimes(simples, &count_simples, 0, max_count_simples, THREADS_COUNT);
 	
-	uint64_t  step = count_simples / 20;
+	uint64_t  step = count_simples / 30;
 
 	double koef = 1 + 1 / (double)(THREADS_COUNT * 1);
 	int j = 0;
@@ -49,32 +49,47 @@ void run2(FILE **FOUT_FILES, atomic<bool> *COMPLETED_THREADS, thread * THREADS, 
 		for (j = 0; j < THREADS_COUNT && i < count_simples; j++) {
 
 			if (COMPLETED_THREADS[j] == true) {
+				COMPLETED_THREADS[j] = false;
 
 				if (i + step > count_simples) {
 					step = count_simples - i;
 				}
 
-				COMPLETED_THREADS[j] = false;
-				fflush(FOUT_FILES[j]);
-
 				if (THREADS[j].joinable()) {
 					THREADS[j].join();
 				}
 
-				THREADS[j] = thread([&COMPLETED_THREADS, &FOUT_FILES, count_simples, &simples, i, step, j] {
-					threadFunctionRun2( i, i + step, count_simples, simples, FOUT_FILES[j] );
-					COMPLETED_THREADS[j] = true;
+				uint64_t index_i = i;
+				int index_j = j;
+				THREADS[j] = thread([&COMPLETED_THREADS, &FOUT_FILES,  &simples, count_simples, index_i, step, index_j] {
+					printf("Запущен %d поток на промежутке [%lld - %lld)\n", index_j, index_i, index_i + step, index_j);
+
+					threadFunctionRun2(index_i, index_i + step, count_simples, simples, FOUT_FILES[index_j], index_j );
+					
+					printf(" => Завершил работу %d\n", index_j);
+					fflush(FOUT_FILES[index_j]);
+					COMPLETED_THREADS[index_j] = true;
 				});
 
-				printf("Запущен %d поток на промежутке [%lld - %lld)\n", j, i, i + step);
 				i += step;
 
 				// Т.к. подсчет занимает тем большее время, чем больше рассматриваемые числа - уменьшаем переменную step, чтобы и другие потоки смогли "прийти на помощь"
 				if (step > 3000) {
-					step = (step) / (koef);
+					step = (uint16_t)(step) / (koef);
 				}
 			}
 		}
+	}
+	
+	printf("\nОжидание завершения ещё работающих потоков\n");
+	for (int j = 0; j < THREADS_COUNT; j++) {
+
+		if (THREADS[j].joinable()) {
+
+			THREADS[j].join();
+		}
+
+		printf("Завершен поток %d\n", j);
 	}
 }
 

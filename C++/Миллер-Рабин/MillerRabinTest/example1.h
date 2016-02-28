@@ -2,16 +2,16 @@
 #include <thread>
 
 // Функция №1: если число проходит проверку на тест Миллера-Рабина, но не является простым(не ПровереноМодифицированнымПростымДелением) - то выводим его в файл
-void threadFunctionRun1(uint64_t  start, uint64_t  finish, FILE *fout)//atomic<bool>& ab)
+void threadFunctionRun1(uint128_t  start, uint128_t  finish, FILE *fout, int index_j)//atomic<bool>& ab)
 {
 	if (start % 2 == 0) 
-		start++;
+		start = start + 1;
 
-	for (uint64_t  i = start; i < finish; i+=2) {
+	for (uint128_t  i = start; i < finish; i+=2) {
 
-		if (ПровереноТестомМиллераРабина(&i) && !ПровереноМодифицированнымПростымДелением(&i)) {
-
-			printValue(&i, fout);
+		if (ПровереноТестомМиллераРабина( &i, &index_j) ) {
+			if(!ПровереноМодифицированнымПростымДелением(&i))
+				printValue(&i, fout);
 		}
 		else {
 
@@ -24,8 +24,8 @@ void threadFunctionRun1(uint64_t  start, uint64_t  finish, FILE *fout)//atomic<b
 void run1(FILE **FOUT_FILES, atomic<bool> *COMPLETED_THREADS, int THREADS_COUNT, thread * THREADS) {
 	// Переменные границ и шага, для работы потоков
 	uint64_t  start = 3;
-	uint64_t  finish = pow(10, 6) + 700000;//12 - рассматриваем верхнюю границу в  1трлн чисел
-	uint64_t  step = pow(10, 8)/4;//9
+	uint64_t  finish = pow(10, 9);//12 - рассматриваем верхнюю границу в  1трлн чисел
+	uint64_t step = pow(10, 7)*2;//9
 
 	fprintf(FOUT_FILES[THREADS_COUNT], "%lld to %lld by %lld\n", start, finish, step);
 
@@ -37,29 +37,46 @@ void run1(FILE **FOUT_FILES, atomic<bool> *COMPLETED_THREADS, int THREADS_COUNT,
 		for (j = 0; j < THREADS_COUNT && i < finish; j++) {
 
 			if (COMPLETED_THREADS[j] == true) {
-				if (i + step > finish) {
-					step = finish - i ;
-				}
-
 				COMPLETED_THREADS[j] = false;
-				fflush(FOUT_FILES[j]);
+
+				if (i + step > finish) {
+					step = finish - i;
+				}
 
 				if (THREADS[j].joinable()) {
 					THREADS[j].join();
 				}
 
-				THREADS[j] = thread([&COMPLETED_THREADS, &FOUT_FILES, finish, i, step, j] {
-					threadFunctionRun1(i, i + step, FOUT_FILES[j]);
-					COMPLETED_THREADS[j] = true;
+				uint64_t index_i = i;
+				int index_j = j;
+
+				THREADS[j] = thread([&COMPLETED_THREADS, &FOUT_FILES, index_i, step, index_j] {
+					printf("Запущен %d поток на промежутке [%lld - %lld)\n", index_j, index_i, index_i + step);
+
+					threadFunctionRun1(index_i, index_i + step, FOUT_FILES[index_j], index_j);
+
+					printf(" => Завершил работу %d\n", index_j);
+					fflush(FOUT_FILES[index_j]);
+					COMPLETED_THREADS[index_j] = true;
 				});
 
-				printf("Запущен %d поток на промежутке [%lld - %lld)\n", j, i, i + step);
 				i += step;
-
 				if (step > 1000000) {
 					step = (step) / (koef);
 				}
 			}
 		}
+	}
+
+
+	printf("\nОжидание завершения ещё работающих потоков\n");
+	for (int j = 0; j < THREADS_COUNT; j++) {
+
+		if (THREADS[j].joinable()) {
+
+			THREADS[j].join();
+		}
+
+		printf("Завершен поток %d\n", j);
 	}
 }
