@@ -80,8 +80,8 @@ int main() {
 	clock_t start_at = clock();
 
 	// Запускается функция, которая проверяет псевдопростые числа: числа, которые являются произведением двух простых чисел 'p' и 'q', но проходят тест Миллера-Рабина по 	базе 'A'
-	//run1(FOUT_FILES,COMPLETED_THREADS, THREADS_COUNT, THREADS);
-	run2(FOUT_FILES, COMPLETED_THREADS, THREADS, THREADS_COUNT);
+	run1(FOUT_FILES,COMPLETED_THREADS, THREADS_COUNT, THREADS);
+	//run2(FOUT_FILES, COMPLETED_THREADS, THREADS, THREADS_COUNT);
 	
 	// Конец работы
 	clock_t finish_at = clock();
