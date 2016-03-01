@@ -22,8 +22,8 @@ using namespace boost::multiprecision;
 #include "functions.h"
 #include "miller-rabin.h"
 #include"primegen.h"
-#include"example1.h"
-#include"example2.h"
+#include"exhaustive_search.h"
+#include"mult_simples_pq.h"
 
 // Максимальное uint1024_t: 2*179769313486231590772930519078902473361797697894230657273430081157732
 //675805500963132708477322407536021120113879871393357658789768814416622492
@@ -80,8 +80,8 @@ int main() {
 	clock_t start_at = clock();
 
 	// Запускается функция, которая проверяет псевдопростые числа: числа, которые являются произведением двух простых чисел 'p' и 'q', но проходят тест Миллера-Рабина по 	базе 'A'
-	run1(FOUT_FILES,COMPLETED_THREADS, THREADS_COUNT, THREADS);
-	//run2(FOUT_FILES, COMPLETED_THREADS, THREADS, THREADS_COUNT);
+	exhaustive_search_run(FOUT_FILES, COMPLETED_THREADS, THREADS_COUNT, THREADS);// полный перебор
+	mult_simples_pq_run(FOUT_FILES, COMPLETED_THREADS, THREADS, THREADS_COUNT); // Почти полный перебор, поиск по произведениям
 	
 	// Конец работы
 	clock_t finish_at = clock();

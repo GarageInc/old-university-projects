@@ -26,16 +26,16 @@
     <ClInclude Include="primegen.h">
       <Filter>Файлы исходного кода</Filter>
     </ClInclude>
-    <ClInclude Include="example2.h">
-      <Filter>Файлы исходного кода</Filter>
-    </ClInclude>
     <ClInclude Include="miller-rabin.h">
       <Filter>Файлы исходного кода</Filter>
     </ClInclude>
     <ClInclude Include="functions.h">
       <Filter>Файлы исходного кода</Filter>
     </ClInclude>
-    <ClInclude Include="example1.h">
+    <ClInclude Include="exhaustive_search.h">
+      <Filter>Файлы исходного кода</Filter>
+    </ClInclude>
+    <ClInclude Include="mult_simples_pq.h">
       <Filter>Файлы исходного кода</Filter>
     </ClInclude>
   </ItemGroup>
