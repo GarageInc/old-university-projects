@@ -15,3 +15,8 @@ C#/1. Криптография, сжатие, шифры/C++ RSA, Алсу/Mille
 *.tlog
 C++/Миллер-Рабин/MillerRabinTest.sdf
 *.opensdf
+*.tlog
+C++/Миллер-Рабин/MillerRabinTest/Debug/MillerRabinTest.tlog/link.read.1.tlog
+*.idb
+C++/Миллер-Рабин/MillerRabinTest/MillerRabinTest.vcxproj.filters
+*.txt

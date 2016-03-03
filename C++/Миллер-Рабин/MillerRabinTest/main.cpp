@@ -22,8 +22,10 @@ using namespace boost::multiprecision;
 #include "functions.h"
 #include "miller-rabin.h"
 #include"primegen.h"
+
 #include"exhaustive_search.h"
 #include"mult_simples_pq.h"
+#include"official_algorithm.h"
 
 // Максимальное uint1024_t: 2*179769313486231590772930519078902473361797697894230657273430081157732
 //675805500963132708477322407536021120113879871393357658789768814416622492

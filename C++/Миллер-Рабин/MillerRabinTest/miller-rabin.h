@@ -31,7 +31,7 @@ uint128_t powmod(uint128_t x, uint128_t a, uint128_t *m, int *index_j)
 	return r;
 }
 
-// Функция теста Миллера-Рабина
+// Функция теста Миллера-Рабина - по [2,3] или [2,3,5]
 bool LABS_TEST_MILLER_RABIN(uint128_t *m, int *index_j) {
 	
 	int s = 0;

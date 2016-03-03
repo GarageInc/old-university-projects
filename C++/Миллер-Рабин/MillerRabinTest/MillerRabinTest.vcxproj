@@ -86,6 +86,7 @@
     <ClInclude Include="functions.h" />
     <ClInclude Include="miller-rabin.h" />
     <ClInclude Include="next_prime64.h" />
+    <ClInclude Include="official_algorithm.h" />
     <ClInclude Include="primegen.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
