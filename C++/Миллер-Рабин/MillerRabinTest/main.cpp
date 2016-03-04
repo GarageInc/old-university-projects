@@ -14,9 +14,12 @@
 #include <mutex>
 
 
+#include <boost/math/special_functions/log1p.hpp>
 #include<boost\multiprecision\cpp_int.hpp>
 #include<boost\any.hpp>
+
 using namespace boost::multiprecision;
+using namespace std;
 
 //#include "mpreal.h"
 #include "functions.h"
@@ -82,8 +85,9 @@ int main() {
 	clock_t start_at = clock();
 
 	// Запускается функция, которая проверяет псевдопростые числа: числа, которые являются произведением двух простых чисел 'p' и 'q', но проходят тест Миллера-Рабина по 	базе 'A'
-	exhaustive_search_run(FOUT_FILES, COMPLETED_THREADS, THREADS_COUNT, THREADS);// полный перебор
-	mult_simples_pq_run(FOUT_FILES, COMPLETED_THREADS, THREADS, THREADS_COUNT); // Почти полный перебор, поиск по произведениям
+	// exhaustive_search_run(FOUT_FILES, COMPLETED_THREADS, THREADS_COUNT, THREADS);// полный перебор
+	// mult_simples_pq_run(FOUT_FILES, COMPLETED_THREADS, THREADS, THREADS_COUNT); // Почти полный перебор, поиск по произведениям простых чисел
+	official_algorithm_run(FOUT_FILES, COMPLETED_THREADS, THREADS_COUNT, THREADS);// Официальный алгоритм, по методичке
 	
 	// Конец работы
 	clock_t finish_at = clock();

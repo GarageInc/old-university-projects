@@ -9,7 +9,7 @@ void threadFunctionRun1(uint128_t  start, uint128_t  finish, FILE *fout, int ind
 
 	for (uint128_t  i = start; i < finish; i+=2) {
 
-		if (LABS_TEST_MILLER_RABIN( &i, &index_j) ) {
+		if (LABS_TEST_MILLER_RABIN_uint128_t( &i, &index_j) ) {
 			if( !ПровереноМодифицированнымПростымДелением(&i) )
 				printValue(&i, fout);
 		}

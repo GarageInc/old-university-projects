@@ -1,6 +1,7 @@
 
 // База для теста Миллера-Рабина
-uint128_t A[] = { 2, 3, 5, 7, 11, 13, 17, 19, 23 };
+uint128_t A_uint128_t[] = { 2, 3, 5, 7, 11, 13, 17, 19, 23 };
+int A_int[] = { 2, 3, 5, 7, 11, 13, 17, 19, 23 };
 const int A_LENGTH = 2;
 
 cpp_int FOR_THREADS[100];
@@ -32,7 +33,7 @@ uint128_t powmod(uint128_t x, uint128_t a, uint128_t *m, int *index_j)
 }
 
 // Функция теста Миллера-Рабина - по [2,3] или [2,3,5]
-bool LABS_TEST_MILLER_RABIN(uint128_t *m, int *index_j) {
+bool LABS_TEST_MILLER_RABIN_uint128_t(uint128_t *m, int *index_j) {
 	
 	int s = 0;
 	uint128_t t = *m - 1;
@@ -50,7 +51,7 @@ bool LABS_TEST_MILLER_RABIN(uint128_t *m, int *index_j) {
 	bool isBreaked = false;
 	for (int i = 0; i < 1; i++)
 	{
-		x = powm(A[i], t, *m);
+		x = powm(A_uint128_t[i], t, *m);
 		//x = powmod(A[i], t, m, index_j);
 
 		if ( x == 1 || x == *m - 1 ) {
@@ -82,7 +83,7 @@ bool LABS_TEST_MILLER_RABIN(uint128_t *m, int *index_j) {
 
 
 // Функция теста Миллера-Рабина
-bool TEST_MILLER_RABIN(uint128_t *m, int *index_j) {
+bool TEST_MILLER_RABIN_uint128_t(uint128_t *m, int *index_j) {
 
 	int s = 0;
 	uint128_t t = *m - 1;
@@ -100,7 +101,7 @@ bool TEST_MILLER_RABIN(uint128_t *m, int *index_j) {
 	bool isBreaked = false;
 	for (int i = 0; i < 9; i++)
 	{
-		x = powm(A[i], t, *m);
+		x = powm(A_uint128_t[i], t, *m);
 		//x = powmod(A[i], t, m, index_j);
 
 		if (x == 1 || x == *m - 1) {
