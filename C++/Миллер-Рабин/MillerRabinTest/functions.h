@@ -1,9 +1,4 @@
-﻿#include <iostream>
-#include <math.h>
-#include <stdio.h>
-#include <string>
-
-
+﻿
 // Проверка на деление числа на все его составные части( от 2 до корня от этого числа).
 // Если делится - то точно простое число. НО! Не работает на четных числах, на вход подаются только нечетные числа с шагом 2: 1,3,5,7,9 и т.д.
 bool ПровереноМодифицированнымПростымДелением(uint128_t *number) {
@@ -42,6 +37,21 @@ bool ПровереноМодифицированнымПростымДелен�
 void printValue(uint128_t *i, FILE *fout) {
 	
 	fprintf(fout, "%s\n", boost::lexical_cast<std::string>(*i).c_str());
+}
+
+// Вывод значений в файл
+void printValues(uint128_t *n, uint128_t *p, uint128_t *q, FILE *fout) {
+	uint128_t a = 132;
+	
+	auto str = boost::lexical_cast<std::string>(a);
+
+	return;
+
+	const char* n_str = (*n).convert_to<string>().c_str();
+	const char* p_str = (*p).convert_to<string>().c_str();
+	const char* q_str = (*q).convert_to<string>().c_str();
+	
+	fprintf(fout, "%s = %s * %s\n", n_str, p_str, q_str);
 }
 
 // Закрытие файлов, вызывает flush для выгрузки в них невыгруженного вывода. Если он есть, конечно.
@@ -88,11 +98,11 @@ uint128_t getNOK(uint128_t *array, int length, int index = 0) {
 }
 
 // Получение ord числа
-uint128_t ord(uint64_t *p, uint128_t a) {
+uint128_t ord(uint64_t p, uint128_t a) {
 	
 	int* H = new int[(int)boost::math::log1p(33)];// Массив для делителей p−1. Лаб.работа: числа 10в16ой, но т.к. рассматриваются только нечетные числа, то количество делителей будет не более чем log(3,10в16ой)
 													
-	uint128_t pp = *p - 1;
+	uint128_t pp = p - 1;
 	int k = 0, i = 2;
 	
 	for (; i <= pp && pp; i++) {
@@ -103,7 +113,7 @@ uint128_t ord(uint64_t *p, uint128_t a) {
 		}
 	}
 
-	uint128_t u = *p - 1;
+	uint128_t u = p - 1;
 	bool isChanged = false;
 
 	uint128_t b;
@@ -111,7 +121,7 @@ uint128_t ord(uint64_t *p, uint128_t a) {
 
 	for (i = 0; i < k; i++) {
 		c = u / H[i];
-		b = (powm(a, c, *p));// % (*p);
+		b = (powm(a, c, p));// % (*p);
 
 		if (b == 1) {
 			u = u / H[i];
@@ -127,6 +137,6 @@ uint128_t ord(uint64_t *p, uint128_t a) {
 	if (isChanged)
 		return u;
 	else
-		return ((*p) - 1);
+		return (p - 1);
 }
 

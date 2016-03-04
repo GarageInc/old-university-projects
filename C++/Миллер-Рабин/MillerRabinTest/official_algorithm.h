@@ -1,29 +1,14 @@
 
-#include <boost/math/special_functions/pow.hpp>
-#include <boost/multiprecision/cpp_dec_float.hpp>
-
-cpp_int customPow(int base, uint64_t stepen ) {
-	/*cpp_int saved = base;
-	cpp_int new_base = base;
-
-	while ( stepen != 0 ) {
-		new_base *= saved;
-		stepen--;
-	}
-	*/
-	return boost::multiprecision::pow((cpp_int)base, stepen);
-}
-
-
+// на вход  простые числа!
 // Функция №1: если число проходит проверку на тест Миллера-Рабина, но не является простым - то выводим его в файл
-void threadFunctionRun3(uint64_t  start, uint64_t  finish, int index_j)//atomic<bool>& ab) FILE *fout, 
+void threadFunctionRun3(uint64_t  leftBorder, uint64_t  rightBorder, uint64_t  maxCount, uint64_t  * simples, FILE *fout )//atomic<bool>& ab) 
 {
-	if ( start % 2 == 0 )
-		start = start + 1;
-
+	uint128_t p;
 	uint128_t q;
+	uint128_t n;
+
 	uint128_t u;
-	uint128_t* ords = new uint128_t[A_LENGTH];;
+	uint128_t ords[A_LENGTH];// = new uint128_t[];
 
 	int length = 0;
 	int j = 0;
@@ -34,35 +19,46 @@ void threadFunctionRun3(uint64_t  start, uint64_t  finish, int index_j)//atomic<
 
 	uint128_t k = 1;
 
-	for (uint64_t i = start; i < finish; i += 2) {
+	for (uint64_t i = leftBorder; i < rightBorder && i < maxCount; i++ ) {
 
 		// Получим ord по каждой базе
 		length = 0;
 
 		for (j = 0; j < A_LENGTH; j++) {
-			ords[j] = ord( &i, A_int[j] );
+
+			ords[j] = ord( simples[i], A_uint128_t[j] );
 			length++;
 		}
 
 		// получим НОК по всем ord
 		u = getNOK(ords, length);
 
-		koef = 1;
 		if (u % 2 != 0) {
+
 			koef = 2;
 		}
+		else {
+
+			koef = 1;
+		}
 		
-		cpp_int q = customPow(2, i - 1) - 1;
-		d = gcd(q, customPow(3, i - 1) - 1);
+		d = gcd( pow((cpp_int)2, simples[i] - 1) - 1, pow((cpp_int)3, simples[i] - 1) - 1 );
+
 		sqrt_d = sqrt(d) + 1;
 
+		q = 0;
 		for (k = 1; q < sqrt_d ; k++) {
-			q = koef*k*u + 1;
 
-			if (d % q == 0) {
-				if (LABS_TEST_MILLER_RABIN_uint64_t(&i, &index_j)) {
-					cout << i << endl;
-					//printValue(&i, fout);
+			q = koef * k * u + 1;
+
+			if ( d % q == 0 ) {
+
+				n = q * simples[i];
+
+				if ( LABS_TEST_MILLER_RABIN_uint128_t( &n, A_LENGTH ) ) {
+					p = simples[i];
+					//cout << n<<endl;
+					printValues(&n, &p, &q, fout);
 				}
 				else {
 					// pass
@@ -73,35 +69,40 @@ void threadFunctionRun3(uint64_t  start, uint64_t  finish, int index_j)//atomic<
 			}
 		}
 
-		
 	}
 }
 
 // Функция, которая проверяет все  числа в промежутке от start до finish с помощью функции threadFunctionRun3 
 void official_algorithm_run(FILE **FOUT_FILES, atomic<bool> *COMPLETED_THREADS, int THREADS_COUNT, thread * THREADS) {
 
-	threadFunctionRun3(1530780, 1530790, 0);
+	// Максимальное количество простых чисел. По умолчанию равно верхней границе рассматриваемого промежутка
+	uint64_t  max_count_simples = 1000000;
+	uint64_t  *simples = new uint64_t[max_count_simples];
 
-	return;
-	// Переменные границ и шага, для работы потоков
-	uint64_t  start = 3;
-	uint64_t  finish = pow(10, 4);//12 - рассматриваем верхнюю границу в  1трлн чисел
-	uint64_t step = pow(10, 3);//9
+	// Получим количество простых чисел и все простые числа
+	uint64_t  count_simples = 0;// getCountSimples(3, max_count_simples, simples);
+	getPrimes(simples, &count_simples, 0, max_count_simples, THREADS_COUNT);
 
-	fprintf(FOUT_FILES[THREADS_COUNT], "От %lld до %lld с шагом %lld\n", start, finish, step);
+	uint64_t  step = count_simples / 30;
 
-	double koef = 1 + 1 / ((double)THREADS_COUNT * 2);
+	double koef = 1 + 1 / (double)(THREADS_COUNT * 1);
 	int j = 0;
 
-	for (uint64_t i = start; i < finish; ) {
+	printf("Промежуток: до %lld, простых чисел всего: %lld, максимальное число = %lld\n\n", max_count_simples, count_simples, simples[count_simples - 2]);
+	
 
-		for (j = 0; j < THREADS_COUNT && i < finish; j++) {
+	fprintf(FOUT_FILES[THREADS_COUNT], "Промежуток: до %lld, простых чисел всего: %lld, максимальное число = %lld\n\n", max_count_simples, count_simples, simples[count_simples - 2]);
+	THREADS_COUNT = 1;
+	for (uint64_t i = 1; i < count_simples; ) {
+
+		// Цикл просматривания потоков. Если поток освободился - то загружаем его работой по рассмотрению нового промежутка
+		for (j = 0; j < THREADS_COUNT && i < count_simples; j++) {
 
 			if (COMPLETED_THREADS[j] == true) {
 				COMPLETED_THREADS[j] = false;
 
-				if (i + step > finish) {
-					step = finish - i;
+				if (i + step > count_simples) {
+					step = count_simples - i;
 				}
 
 				if (THREADS[j].joinable()) {
@@ -110,25 +111,26 @@ void official_algorithm_run(FILE **FOUT_FILES, atomic<bool> *COMPLETED_THREADS, 
 
 				uint64_t index_i = i;
 				int index_j = j;
+				THREADS[j] = thread([&COMPLETED_THREADS, &FOUT_FILES, &simples, count_simples, index_i, step, index_j] {
+					printf( "Запущен %d поток на промежутке [%lld - %lld)\n", index_j, index_i, index_i + step );
 
-				THREADS[j] = thread([&COMPLETED_THREADS, &FOUT_FILES, index_i, step, index_j] {
-					printf("Запущен %d поток на промежутке [%lld - %lld)\n", index_j, index_i, index_i + step);
-
-					//threadFunctionRun3(index_i, index_i + step, FOUT_FILES[index_j], index_j);
+					threadFunctionRun3(index_i, index_i + step, count_simples, simples, FOUT_FILES[index_j]);
 
 					printf(" => Завершил работу %d\n", index_j);
 					fflush(FOUT_FILES[index_j]);
+
 					COMPLETED_THREADS[index_j] = true;
 				});
 
 				i += step;
-				if (step > 1000000) {
-					step = (step) / (koef);
+
+				// Т.к. подсчет занимает тем большее время, чем больше рассматриваемые числа - уменьшаем переменную step, чтобы и другие потоки смогли "прийти на помощь"
+				if (step > 3000) {
+					step = (uint16_t)(step) / (koef);
 				}
 			}
 		}
 	}
-
 
 	printf("\nОжидание завершения ещё работающих потоков\n");
 	for (int j = 0; j < THREADS_COUNT; j++) {

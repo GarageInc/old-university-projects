@@ -2,19 +2,22 @@
 //#pragma comment (lib,"mpfr.lib")
 //#pragma comment (lib,"mpir.lib")
 
-#include <iostream>
 #include <stdio.h>
-#include <fstream>
 #include <conio.h>
 #include <string>
 #include <time.h>
+
 #include <thread>
 #include <chrono>
 #include <future>
 #include <mutex>
 
+#include <iostream>
+#include <fstream>
+#include <math.h>
 
 #include <boost/math/special_functions/log1p.hpp>
+#include <boost/math/special_functions/pow.hpp>
 #include<boost\multiprecision\cpp_int.hpp>
 #include<boost\any.hpp>
 
@@ -39,9 +42,6 @@ using namespace std;
 // Максимальное uint128_t: 2*340282366920938463463374607431768211456
 
 // Максимальное uint64_t: 2*18446744073709551616
-
-using namespace std;
-
 
 
 // Используемое количество потоков. Будет равно числу ядер в компьютере

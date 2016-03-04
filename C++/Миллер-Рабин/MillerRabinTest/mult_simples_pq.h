@@ -14,7 +14,7 @@ void threadFunctionRun2(uint64_t  leftBorder, uint64_t  rightBorder, uint64_t  m
 		for (j = leftBorder; j < maxCount; j++) {
 			multResult = simples[i] * simples[j];// делаем составное число
 
-			if (TEST_MILLER_RABIN_uint128_t( &multResult, &index_j) ) {
+			if (LABS_TEST_MILLER_RABIN_uint128_t( &multResult, A_LENGTH ) ) {
 
 				// ≈сли составное число прошло проверку - оно выводитс€ в файл
 				printValue( &multResult, fout );

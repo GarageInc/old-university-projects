@@ -9,8 +9,9 @@ void threadFunctionRun1(uint128_t  start, uint128_t  finish, FILE *fout, int ind
 
 	for (uint128_t  i = start; i < finish; i+=2) {
 
-		if (LABS_TEST_MILLER_RABIN_uint128_t( &i, &index_j) ) {
-			if( !ПровереноМодифицированнымПростымДелением(&i) )
+		if ( LABS_TEST_MILLER_RABIN_uint128_t( &i, A_LENGTH ) ) {
+
+			if( !LABS_TEST_MILLER_RABIN_uint128_t( &i, 9 ) )
 				printValue(&i, fout);
 		}
 		else {
@@ -24,8 +25,8 @@ void threadFunctionRun1(uint128_t  start, uint128_t  finish, FILE *fout, int ind
 void exhaustive_search_run(FILE **FOUT_FILES, atomic<bool> *COMPLETED_THREADS, int THREADS_COUNT, thread * THREADS) {
 	// Переменные границ и шага, для работы потоков
 	uint64_t  start = 3;
-	uint64_t  finish = pow(10, 4);//12 - рассматриваем верхнюю границу в  1трлн чисел
-	uint64_t step = pow(10, 3);//9
+	uint64_t  finish = pow(10, 6);//12 - рассматриваем верхнюю границу в  1трлн чисел
+	uint64_t step = pow(10, 5)/2;//9
 
 	fprintf(FOUT_FILES[THREADS_COUNT], "%lld to %lld by %lld\n", start, finish, step);
 
