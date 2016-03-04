@@ -88,9 +88,9 @@ uint128_t getNOK(uint128_t *array, int length, int index = 0) {
 }
 
 // Получение ord числа
-uint128_t ord(uint128_t *p, uint128_t a) {
+uint128_t ord(uint64_t *p, uint128_t a) {
 	
-	int* H = new int[(int)boost::math::log1p(132)];// Массив для делителей p−1.
+	int* H = new int[(int)boost::math::log1p(33)];// Массив для делителей p−1. Лаб.работа: числа 10в16ой, но т.к. рассматриваются только нечетные числа, то количество делителей будет не более чем log(3,10в16ой)
 													
 	uint128_t pp = *p - 1;
 	int k = 0, i = 2;
@@ -122,7 +122,7 @@ uint128_t ord(uint128_t *p, uint128_t a) {
 		}
 	}
 
-	delete H;
+	// delete[] H;
 
 	if (isChanged)
 		return u;

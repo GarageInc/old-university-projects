@@ -81,6 +81,54 @@ bool LABS_TEST_MILLER_RABIN_uint128_t(uint128_t *m, int *index_j) {
 	return flag;
 }
 
+// Функция теста Миллера-Рабина - по [2,3] или [2,3,5]
+bool LABS_TEST_MILLER_RABIN_uint64_t(uint64_t *m, int *index_j) {
+
+	int s = 0;
+	uint64_t t = *m - 1;
+	uint64_t two = 2;
+
+	// Считаем количество степени двойки
+	while (t != 0 && t % 2 == 0) {
+		s = s + 1;
+		t = t >> 1;
+	}
+
+	bool flag = false;
+	uint128_t x = 0;
+
+	bool isBreaked = false;
+	for (int i = 0; i < 1; i++)
+	{
+		x = powm(A_uint128_t[i], t, *m);
+		//x = powmod(A[i], t, m, index_j);
+
+		if (x == 1 || x == *m - 1) {
+			flag = true;
+			continue;
+		}
+
+		isBreaked = false;
+		// цикл B: s-1 раз
+		for (int j = 0; j < s - 1; j++) {
+			x = powm(x, two, *m);
+			//x = powmod(x, two, m, index_j);
+
+			if (x == 1)
+				return false;
+
+			if (x == *m - 1) {
+				flag = true;
+				isBreaked = true;
+				break;
+			}
+		}
+		if (!isBreaked)
+			flag = false;
+	}
+
+	return flag;
+}
 
 // Функция теста Миллера-Рабина
 bool TEST_MILLER_RABIN_uint128_t(uint128_t *m, int *index_j) {

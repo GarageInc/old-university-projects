@@ -2,21 +2,21 @@
 #include <boost/math/special_functions/pow.hpp>
 #include <boost/multiprecision/cpp_dec_float.hpp>
 
-cpp_int customPow(int base, uint128_t stepen ) {
-	cpp_int saved = base;
+cpp_int customPow(int base, uint64_t stepen ) {
+	/*cpp_int saved = base;
 	cpp_int new_base = base;
 
 	while ( stepen != 0 ) {
 		new_base *= saved;
 		stepen--;
 	}
-
-	return new_base;
+	*/
+	return boost::multiprecision::pow((cpp_int)base, stepen);
 }
 
 
-// Функция №1: если число проходит проверку на тест Миллера-Рабина, но не является простым(не ПровереноМодифицированнымПростымДелением) - то выводим его в файл
-void threadFunctionRun3(uint64_t  start, uint64_t  finish, FILE *fout, int index_j)//atomic<bool>& ab)
+// Функция №1: если число проходит проверку на тест Миллера-Рабина, но не является простым - то выводим его в файл
+void threadFunctionRun3(uint64_t  start, uint64_t  finish, int index_j)//atomic<bool>& ab) FILE *fout, 
 {
 	if ( start % 2 == 0 )
 		start = start + 1;
@@ -24,13 +24,17 @@ void threadFunctionRun3(uint64_t  start, uint64_t  finish, FILE *fout, int index
 	uint128_t q;
 	uint128_t u;
 	uint128_t* ords = new uint128_t[A_LENGTH];;
+
 	int length = 0;
 	int j = 0;
 	int koef = 1;
+
 	cpp_int d;
+	cpp_int sqrt_d;
+
 	uint128_t k = 1;
 
-	for (uint128_t i = start; i < finish; i += 2) {
+	for (uint64_t i = start; i < finish; i += 2) {
 
 		// Получим ord по каждой базе
 		length = 0;
@@ -47,15 +51,18 @@ void threadFunctionRun3(uint64_t  start, uint64_t  finish, FILE *fout, int index
 		if (u % 2 != 0) {
 			koef = 2;
 		}
+		
+		cpp_int q = customPow(2, i - 1) - 1;
+		d = gcd(q, customPow(3, i - 1) - 1);
+		sqrt_d = sqrt(d) + 1;
 
-		d = gcd(customPow(2, i - 1) - 1, customPow(3, i - 1) - 1);
-
-		for (k = 1; ; k++) {
+		for (k = 1; q < sqrt_d ; k++) {
 			q = koef*k*u + 1;
 
 			if (d % q == 0) {
-				if (TEST_MILLER_RABIN_uint128_t(&i, &index_j)) {
-					printValue(&i, fout);
+				if (LABS_TEST_MILLER_RABIN_uint64_t(&i, &index_j)) {
+					cout << i << endl;
+					//printValue(&i, fout);
 				}
 				else {
 					// pass
@@ -70,11 +77,10 @@ void threadFunctionRun3(uint64_t  start, uint64_t  finish, FILE *fout, int index
 	}
 }
 
-// Функция, которая проверяет ВСЕ числа в промежутке от start до finish с помощью функции threadFunctionRun1 
+// Функция, которая проверяет все  числа в промежутке от start до finish с помощью функции threadFunctionRun3 
 void official_algorithm_run(FILE **FOUT_FILES, atomic<bool> *COMPLETED_THREADS, int THREADS_COUNT, thread * THREADS) {
 
-	uint128_t p = 49;
-	IsSimple(&p);
+	threadFunctionRun3(1530780, 1530790, 0);
 
 	return;
 	// Переменные границ и шага, для работы потоков
@@ -108,7 +114,7 @@ void official_algorithm_run(FILE **FOUT_FILES, atomic<bool> *COMPLETED_THREADS, 
 				THREADS[j] = thread([&COMPLETED_THREADS, &FOUT_FILES, index_i, step, index_j] {
 					printf("Запущен %d поток на промежутке [%lld - %lld)\n", index_j, index_i, index_i + step);
 
-					threadFunctionRun3(index_i, index_i + step, FOUT_FILES[index_j], index_j);
+					//threadFunctionRun3(index_i, index_i + step, FOUT_FILES[index_j], index_j);
 
 					printf(" => Завершил работу %d\n", index_j);
 					fflush(FOUT_FILES[index_j]);
