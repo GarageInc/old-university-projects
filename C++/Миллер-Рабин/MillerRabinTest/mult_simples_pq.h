@@ -14,7 +14,7 @@ void threadFunctionRun2(uint64_t  leftBorder, uint64_t  rightBorder, uint64_t  m
 		for (j = leftBorder; j < maxCount; j++) {
 			multResult = simples[i] * simples[j];// делаем составное число
 
-			if (LABS_TEST_MILLER_RABIN( &multResult, &index_j) ) {
+			if (LABS_TEST_MILLER_RABIN_uint128_t( &multResult, A_LENGTH ) ) {
 
 				// Если составное число прошло проверку - оно выводится в файл
 				printValue( &multResult, fout );
@@ -25,7 +25,7 @@ void threadFunctionRun2(uint64_t  leftBorder, uint64_t  rightBorder, uint64_t  m
 
 
 // Функция, которая проверяет ВСЕ ПРОСТЫЕ числа в промежутке от start до finish с помощью функции threadFunctionRun1
-void run2(FILE **FOUT_FILES, atomic<bool> *COMPLETED_THREADS, thread * THREADS, int THREADS_COUNT) {
+void mult_simples_pq_run(FILE **FOUT_FILES, atomic<bool> *COMPLETED_THREADS, thread * THREADS, int THREADS_COUNT) {
 
 	// Максимальное количество простых чисел. По умолчанию равно верхней границе рассматриваемого промежутка
 	uint64_t  max_count_simples = 100000;

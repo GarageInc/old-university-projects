@@ -1,10 +1,13 @@
 
 // База для теста Миллера-Рабина
-int A[] = { 2, 3, 5, 7, 11, 13, 17, 19, 23 };
-const int A_LENGTH = 2;
+uint128_t A_uint128_t[] = { 2, 3, 5, 7, 11, 13, 17, 19, 23 };
+int A_int[] = { 2, 3, 5, 7, 11, 13, 17, 19, 23 };
+
+const int A_LENGTH = 2;// проверяемая длина базы
 
 cpp_int FOR_THREADS[100];
 
+/*
 // Функция для умножения двух чисел x,y по модулю m
 uint128_t mulmod(uint128_t *x, uint128_t *y, uint128_t *m, int *current_index)
 {
@@ -30,9 +33,11 @@ uint128_t powmod(uint128_t x, uint128_t a, uint128_t *m, int *index_j)
 
 	return r;
 }
+*/
 
-// Функция теста Миллера-Рабина
-bool LABS_TEST_MILLER_RABIN(uint128_t *m, int *index_j) {
+
+// Функция теста Миллера-Рабина - по [2,3] или [2,3,5]
+bool LABS_TEST_MILLER_RABIN_uint128_t( uint128_t *m, int a_length ) {
 	
 	int s = 0;
 	uint128_t t = *m - 1;
@@ -48,9 +53,10 @@ bool LABS_TEST_MILLER_RABIN(uint128_t *m, int *index_j) {
 	uint128_t x = 0;
 
 	bool isBreaked = false;
-	for (int i = 0; i < 1; i++)
+	for (int i = 0; i < a_length; i++)
 	{
-		x = powmod(A[i], t, m, index_j);
+		x = powm(A_uint128_t[i], t, *m);
+		//x = powmod(A[i], t, m, index_j);
 
 		if ( x == 1 || x == *m - 1 ) {
 			flag = true;
@@ -60,7 +66,8 @@ bool LABS_TEST_MILLER_RABIN(uint128_t *m, int *index_j) {
 		isBreaked = false;
 		// цикл B: s-1 раз
 		for (int j = 0; j < s - 1; j++) {
-			x = powmod(x, two, m, index_j);
+			x = powm(x, two, *m);
+			//x = powmod(x, two, m, index_j);
 
 			if (x == 1)
 				return false;
@@ -78,50 +85,3 @@ bool LABS_TEST_MILLER_RABIN(uint128_t *m, int *index_j) {
 	return flag;
 }
 
-
-// Функция теста Миллера-Рабина
-bool TEST_MILLER_RABIN(uint128_t *m, int *index_j) {
-
-	int s = 0;
-	uint128_t t = *m - 1;
-	uint128_t two = 2;
-
-	// Считаем количество степени двойки
-	while (t != 0 && t % 2 == 0) {
-		s = s + 1;
-		t = t >> 1;
-	}
-
-	bool flag = false;
-	uint128_t x = 0;
-
-	bool isBreaked = false;
-	for (int i = 0; i < 9; i++)
-	{
-		x = powmod(A[i], t, m, index_j);
-
-		if (x == 1 || x == *m - 1) {
-			flag = true;
-			continue;
-		}
-
-		isBreaked = false;
-		// цикл B: s-1 раз
-		for (int j = 0; j < s - 1; j++) {
-			x = powmod(x, two, m, index_j);
-
-			if (x == 1)
-				return false;
-
-			if (x == *m - 1) {
-				flag = true;
-				isBreaked = true;
-				break;
-			}
-		}
-		if (!isBreaked)
-			flag = false;
-	}
-
-	return flag;
-}
