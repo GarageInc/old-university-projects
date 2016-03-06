@@ -91,3 +91,12 @@ C:\Users\9-b-r_000\Desktop\Klient-servernoe\Клиент\ClientForm\obj\Debug\Cl
 C:\Users\9-b-r_000\Desktop\Klient-servernoe\Клиент\ClientForm\obj\Debug\ClientForm.pdb
 C:\Users\9-b-r_000\Desktop\Klient-servernoe\Клиент\ClientForm\bin\Debug\ClientForm.pdb
 C:\Users\9-b-r_000\Desktop\Klient-servernoe\Клиент\ClientForm\obj\Debug\ClientForm.csprojResolveAssemblyReference.cache
+F:\Projects\Опытные\all\C#\Klient-servernoe\Клиент\ClientForm\bin\Debug\ClientForm.exe.config
+F:\Projects\Опытные\all\C#\Klient-servernoe\Клиент\ClientForm\obj\Debug\ClientForm.exe
+F:\Projects\Опытные\all\C#\Klient-servernoe\Клиент\ClientForm\obj\Debug\ClientForm.pdb
+F:\Projects\Опытные\all\C#\Klient-servernoe\Клиент\ClientForm\bin\Debug\ClientForm.exe
+F:\Projects\Опытные\all\C#\Klient-servernoe\Клиент\ClientForm\bin\Debug\ClientForm.pdb
+F:\Projects\Опытные\all\C#\Klient-servernoe\Клиент\ClientForm\obj\Debug\ClientForm.csprojResolveAssemblyReference.cache
+F:\Projects\Опытные\all\C#\Klient-servernoe\Клиент\ClientForm\obj\Debug\ClientForm.Form1.resources
+F:\Projects\Опытные\all\C#\Klient-servernoe\Клиент\ClientForm\obj\Debug\ClientForm.Properties.Resources.resources
+F:\Projects\Опытные\all\C#\Klient-servernoe\Клиент\ClientForm\obj\Debug\ClientForm.csproj.GenerateResource.Cache
