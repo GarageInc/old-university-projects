@@ -40,18 +40,9 @@ void printValue(uint128_t *i, FILE *fout) {
 }
 
 // Вывод значений в файл
-void printValues(uint128_t *n, uint128_t *p, uint128_t *q, FILE *fout) {
-	uint128_t a = 132;
-	
-	auto str = boost::lexical_cast<std::string>(a);
-
-	return;
-
-	const char* n_str = (*n).convert_to<string>().c_str();
-	const char* p_str = (*p).convert_to<string>().c_str();
-	const char* q_str = (*q).convert_to<string>().c_str();
-	
-	fprintf(fout, "%s = %s * %s\n", n_str, p_str, q_str);
+void printValues(uint128_t *n, uint128_t p, uint128_t *q, FILE *fout) {
+			
+	fprintf(fout, "%s = %s * %s\n", boost::lexical_cast<std::string>( *n ).c_str(), boost::lexical_cast<std::string>( p ).c_str(), boost::lexical_cast<std::string>( *q ).c_str());
 }
 
 // Закрытие файлов, вызывает flush для выгрузки в них невыгруженного вывода. Если он есть, конечно.
@@ -82,14 +73,14 @@ void initFiles(FILE **FOUT_FILES, int THREADS_COUNT) {
 
 
 // Получение НОК массива чисел
-uint128_t getNOK(uint128_t *array, int length, int index = 0) {
+uint128_t getNOK(uint128_t *array, int index = 0) {
 
-	uint128_t lcm = (array[index] * array[index + 1]) / gcd(array[index], array[index + 1]);
+	uint128_t lcm = ( array[ index ] * array[ index + 1 ]) / gcd( array[ index ], array[ index + 1 ] );
 
-	if (index + 2  < length) {
+	if (array[ index + 1 ] && array[ index + 2 ]) {
 
-		array[index + 1] = lcm;
-		return getNOK(array, index + 1);
+		array[ index + 1 ] = lcm;
+		return getNOK( array, index + 1 );
 	}
 	else {
 		
@@ -98,9 +89,9 @@ uint128_t getNOK(uint128_t *array, int length, int index = 0) {
 }
 
 // Получение ord числа
-uint128_t ord(uint64_t p, uint128_t a) {
+uint128_t getOrd(uint128_t p, uint128_t a) {
 	
-	int* H = new int[(int)boost::math::log1p(33)];// Массив для делителей p−1. Лаб.работа: числа 10в16ой, но т.к. рассматриваются только нечетные числа, то количество делителей будет не более чем log(3,10в16ой)
+	int* H = new int[ 33 ];// Массив для делителей p−1. Лаб.работа: числа 10в16ой, но т.к. рассматриваются только нечетные числа, то количество делителей будет не более чем log(3,10в16ой)
 													
 	uint128_t pp = p - 1;
 	int k = 0, i = 2;

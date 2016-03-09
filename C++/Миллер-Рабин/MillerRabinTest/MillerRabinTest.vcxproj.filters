@@ -16,10 +16,16 @@
     <Filter Include="Файлы исходного кода\parts">
       <UniqueIdentifier>{59f0e85b-1f89-494a-bd86-89d64500f029}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Файлы исходного кода\threads">
+      <UniqueIdentifier>{c081be8f-39c0-4c63-bb85-0753bd55ca41}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Файлы исходного кода</Filter>
+    </ClCompile>
+    <ClCompile Include="ThreadsMikhail.cpp">
+      <Filter>Файлы исходного кода\threads</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -43,6 +49,9 @@
     </ClInclude>
     <ClInclude Include="official_algorithm.h">
       <Filter>Файлы исходного кода\parts</Filter>
+    </ClInclude>
+    <ClInclude Include="ThreadsMikhail.h">
+      <Filter>Файлы исходного кода\threads</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

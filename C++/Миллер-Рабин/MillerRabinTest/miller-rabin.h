@@ -41,7 +41,6 @@ bool LABS_TEST_MILLER_RABIN_uint128_t( uint128_t *m, int a_length ) {
 	
 	int s = 0;
 	uint128_t t = *m - 1;
-	uint128_t two = 2;
 
 	// Считаем количество степени двойки
 	while (t != 0 && t % 2 == 0) {
@@ -53,6 +52,7 @@ bool LABS_TEST_MILLER_RABIN_uint128_t( uint128_t *m, int a_length ) {
 	uint128_t x = 0;
 
 	bool isBreaked = false;
+
 	for (int i = 0; i < a_length; i++)
 	{
 		x = powm(A_uint128_t[i], t, *m);
@@ -64,9 +64,10 @@ bool LABS_TEST_MILLER_RABIN_uint128_t( uint128_t *m, int a_length ) {
 		}
 
 		isBreaked = false;
+
 		// цикл B: s-1 раз
 		for (int j = 0; j < s - 1; j++) {
-			x = powm(x, two, *m);
+			x = powm(x, 2, *m);
 			//x = powmod(x, two, m, index_j);
 
 			if (x == 1)

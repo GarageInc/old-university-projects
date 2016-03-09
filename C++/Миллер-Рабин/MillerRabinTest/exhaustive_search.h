@@ -58,6 +58,7 @@ void exhaustive_search_run(FILE **FOUT_FILES, atomic<bool> *COMPLETED_THREADS, i
 
 					printf(" => Завершил работу %d\n", index_j);
 					fflush(FOUT_FILES[index_j]);
+
 					COMPLETED_THREADS[index_j] = true;
 				});
 

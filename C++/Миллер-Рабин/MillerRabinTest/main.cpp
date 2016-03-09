@@ -29,9 +29,11 @@ using namespace std;
 #include "miller-rabin.h"
 #include"primegen.h"
 
+#include"official_algorithm.h"
 #include"exhaustive_search.h"
 #include"mult_simples_pq.h"
-#include"official_algorithm.h"
+
+#include"ThreadsMikhail.h"
 
 // Максимальное uint1024_t: 2*179769313486231590772930519078902473361797697894230657273430081157732
 //675805500963132708477322407536021120113879871393357658789768814416622492
@@ -53,6 +55,12 @@ const int MAX_THREADS_COUNT = 100;
 // Потоки
 thread THREADS[MAX_THREADS_COUNT];
 
+void some_function() {
+
+	srand(_Xtime_get_ticks());
+
+	std::this_thread::sleep_for(std::chrono::seconds(rand() % 10));
+}
 
 int main() {
 	
@@ -88,7 +96,14 @@ int main() {
 	// exhaustive_search_run(FOUT_FILES, COMPLETED_THREADS, THREADS_COUNT, THREADS);// полный перебор
 	// mult_simples_pq_run(FOUT_FILES, COMPLETED_THREADS, THREADS, THREADS_COUNT); // Почти полный перебор, поиск по произведениям простых чисел
 	official_algorithm_run(FOUT_FILES, COMPLETED_THREADS, THREADS_COUNT, THREADS);// Официальный алгоритм, по методичке
-	
+
+	//void(*alias_func);
+	//alias_func = some_function;
+
+	ThreadsMikhail 	example;
+	example.parallel_by_cores( [] { cout << 123 << endl; }, true);
+	example.wait_for_end();
+
 	// Конец работы
 	clock_t finish_at = clock();
 

@@ -64,7 +64,7 @@ void mult_simples_pq_run(FILE **FOUT_FILES, atomic<bool> *COMPLETED_THREADS, thr
 				THREADS[j] = thread([&COMPLETED_THREADS, &FOUT_FILES,  &simples, count_simples, index_i, step, index_j] {
 					printf("Запущен %d поток на промежутке [%lld - %lld)\n", index_j, index_i, index_i + step, index_j);
 
-					threadFunctionRun2(index_i, index_i + step, count_simples, simples, FOUT_FILES[index_j], index_j );
+					threadFunctionRun2(index_i, index_i + step, count_simples, simples, FOUT_FILES[index_j] , index_j);
 					
 					printf(" => Завершил работу %d\n", index_j);
 					fflush(FOUT_FILES[index_j]);
