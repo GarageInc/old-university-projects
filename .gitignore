@@ -23,3 +23,5 @@ C++/Миллер-Рабин/MillerRabinTest/MillerRabinTest.vcxproj.filters
 *.tlog
 *.idb
 C++/Миллер-Рабин/MillerRabinTest/stats.txt
+C++/Миллер-Рабин/MillerRabinTest.sdf
+*.txt
