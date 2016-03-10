@@ -1,5 +1,6 @@
 
 // на вход  простые числа!
+
 void thread_function_official(uint64_t  leftBorder, uint64_t  rightBorder, uint64_t  maxCount, uint64_t  * simples, mutex *locker, FILE*file )
 {
 	uint128_t q;

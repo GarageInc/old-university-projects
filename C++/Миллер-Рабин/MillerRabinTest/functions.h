@@ -32,6 +32,11 @@ bool ПровереноМодифицированнымПростымДелен�
 	return index;
 }
 */
+// Вывод значения в файл
+void printValue_uint64_t(uint64_t *i, FILE *fout) {
+
+	fprintf(fout, "%lld\n", (*i));
+}
 
 // Вывод значения в файл
 void printValue(uint128_t *i, FILE *fout) {

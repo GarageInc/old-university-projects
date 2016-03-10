@@ -1,6 +1,6 @@
 
 // Функция №1: если число проходит проверку на тест Миллера-Рабина, но не является простым(не ПровереноМодифицированнымПростымДелением) - то выводим его в файл
-void thread_function_exhaustive_search(uint64_t  start, uint64_t  finish, uint64_t*numbers, mutex*locker, FILE *fout)//atomic<bool>& ab)
+void thread_function_exhaustive_search(uint64_t  start, uint64_t  finish, uint64_t  maxCount, uint64_t*numbers, mutex*locker, FILE *fout)//atomic<bool>& ab)
 {
 	if (start % 2 == 0) 
 		start = start + 1;
@@ -9,9 +9,9 @@ void thread_function_exhaustive_search(uint64_t  start, uint64_t  finish, uint64
 
 		if ( LABS_TEST_MILLER_RABIN_uint64_t( &i, A_LENGTH ) ) {
 
-			if (!LABS_TEST_MILLER_RABIN_uint128_t(&i, 9)) {
+			if (!LABS_TEST_MILLER_RABIN_uint64_t(&i, 9)) {
 				locker->lock();
-				printValue(&i, fout);
+				printValue_uint64_t(&i, fout);
 				locker->unlock();
 			}
 		}
