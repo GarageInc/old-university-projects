@@ -1,0 +1,100 @@
+﻿
+#include "ThreadsManager.h"
+
+ThreadsManager::ThreadsManager(){
+	FOUT_FILE = fopen("results.txt", "w");
+}
+
+ThreadsManager::~ThreadsManager(){
+	//delete[] THREADS;
+	//delete[] COMPLETED_THREADS;
+	fclose( FOUT_FILE );
+}
+
+void ThreadsManager::wait_for_end() {
+
+	printf("\nОжидание последовательного завершения ещё работающих потоков\n");
+
+	for (int j = 0; j < THREADS_COUNT; j++) {
+
+		if ( THREADS[j].joinable() ) {
+
+			THREADS[j].join();
+		}
+
+		printf("Завершен поток %d\n", j);
+	}
+}
+
+void ThreadsManager::write_to_file( boost::multiprecision::uint128_t *i ) {
+
+	locker.lock();
+	fprintf(FOUT_FILE, "%s\n", boost::lexical_cast<std::string>(*i).c_str());
+	locker.unlock();
+}
+
+void ThreadsManager::parallel(std::atomic<bool> *temp_completed_threads, FILE*file_ptr, uint64_t max_count, uint64_t *numbers, int step, int step_low_border,  callback func) {
+
+	STEP = step;
+	STEP_LOW_BORDER = step_low_border;
+
+	THREADS_COUNT =  std::thread::hardware_concurrency();;
+	THREADS = new std::thread[THREADS_COUNT];
+
+	fprintf(FOUT_FILE, "Количество потоков: %d\n", THREADS_COUNT);
+
+	// Массив булевых значений - для контроля работы потоков(освобождения и заполнения)
+	COMPLETED_THREADS = new std::atomic<bool>[THREADS_COUNT];
+	temp_completed_threads = COMPLETED_THREADS;
+
+	for (int i = 0; i < THREADS_COUNT; i++) {
+		temp_completed_threads[i] = true;
+	}
+
+	// ссылки на объекты класса
+	mutex *locker_ptr = &locker;
+	file_ptr = FOUT_FILE;
+
+	double koef = 1 + 1 / (double)(THREADS_COUNT * 1);
+	uint64_t j = 0;
+	for (uint64_t i = 1; i < max_count; ) {
+
+		// Цикл просматривания потоков. Если поток освободился - то загружаем его работой по рассмотрению нового промежутка
+		for (j = 0; j < THREADS_COUNT && i < max_count; j++) {
+
+			if ( temp_completed_threads[j] == true ) {
+				temp_completed_threads[j] = false;
+
+				if (i + step > max_count) {
+					step = max_count - i;
+				}
+				
+				uint64_t index_i = i;
+				int clone_j = j;
+				
+				THREADS[j] = std::thread([&temp_completed_threads, &numbers, max_count, index_i, step, clone_j, locker_ptr, file_ptr, func] {
+					printf("Запущен %d поток на промежутке [%lld - %lld)\n", clone_j, index_i, index_i + step);
+
+					func(index_i, index_i + step, max_count, numbers, locker_ptr, file_ptr);
+					
+					printf(" => Завершил работу %d\n", clone_j);
+
+					locker_ptr->lock();
+					fflush( file_ptr );
+					locker_ptr->unlock();
+
+					temp_completed_threads[ clone_j ] = true;
+				});
+
+				i += STEP;
+
+				// Т.к. подсчет занимает тем большее время, чем больше рассматриваемые числа - уменьшаем переменную step, чтобы и другие потоки смогли "прийти на помощь"
+				if ( STEP > STEP_LOW_BORDER ) {
+					STEP = (int)(STEP) / (koef);
+				}
+			}
+		}
+	}
+
+	wait_for_end();
+}

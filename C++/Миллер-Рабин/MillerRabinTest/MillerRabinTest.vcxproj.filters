@@ -16,16 +16,22 @@
     <Filter Include="Файлы исходного кода\parts">
       <UniqueIdentifier>{59f0e85b-1f89-494a-bd86-89d64500f029}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Файлы исходного кода\threads">
+    <Filter Include="Файлы исходного кода\threads_manager">
       <UniqueIdentifier>{c081be8f-39c0-4c63-bb85-0753bd55ca41}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы исходного кода\time_manager">
+      <UniqueIdentifier>{f1593655-cad7-46fb-8d2b-05bc01cc9ca9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Файлы исходного кода</Filter>
     </ClCompile>
-    <ClCompile Include="ThreadsMikhail.cpp">
-      <Filter>Файлы исходного кода\threads</Filter>
+    <ClCompile Include="ThreadsManager.cpp">
+      <Filter>Файлы исходного кода\threads_manager</Filter>
+    </ClCompile>
+    <ClCompile Include="TimeManager.cpp">
+      <Filter>Файлы исходного кода</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -50,8 +56,11 @@
     <ClInclude Include="official_algorithm.h">
       <Filter>Файлы исходного кода\parts</Filter>
     </ClInclude>
-    <ClInclude Include="ThreadsMikhail.h">
-      <Filter>Файлы исходного кода\threads</Filter>
+    <ClInclude Include="ThreadsManager.h">
+      <Filter>Файлы исходного кода\threads_manager</Filter>
+    </ClInclude>
+    <ClInclude Include="TimeManager.h">
+      <Filter>Заголовочные файлы</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

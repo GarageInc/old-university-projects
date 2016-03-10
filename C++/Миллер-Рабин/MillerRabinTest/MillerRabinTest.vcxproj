@@ -79,7 +79,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="ThreadsMikhail.cpp" />
+    <ClCompile Include="ThreadsManager.cpp" />
+    <ClCompile Include="TimeManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="exhaustive_search.h" />
@@ -89,7 +90,8 @@
     <ClInclude Include="next_prime64.h" />
     <ClInclude Include="official_algorithm.h" />
     <ClInclude Include="primegen.h" />
-    <ClInclude Include="ThreadsMikhail.h" />
+    <ClInclude Include="ThreadsManager.h" />
+    <ClInclude Include="TimeManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
