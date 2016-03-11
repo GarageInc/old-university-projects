@@ -131,9 +131,9 @@ uint128_t getOrd(uint128_t p, uint128_t a) {
 		}
 	}
 
-	// delete[] H;
+	delete[] H;
 
-	if (isChanged)
+	if ( isChanged )
 		return u;
 	else
 		return (p - 1);

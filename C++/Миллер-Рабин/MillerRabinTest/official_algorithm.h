@@ -6,7 +6,7 @@ void thread_function_official(uint64_t  leftBorder, uint64_t  rightBorder, uint6
 	uint128_t n;
 
 	uint128_t u;
-	uint128_t ords[A_LENGTH];
+	uint128_t *ords = new uint128_t[ A_LENGTH  + 1 ];
 
 	int j;
 	int koef;
@@ -21,12 +21,12 @@ void thread_function_official(uint64_t  leftBorder, uint64_t  rightBorder, uint6
 
 		// Получим ord по каждой базе
 		for ( j = 0; j < A_LENGTH; j++ ) {
-			ords[j] = getOrd( simples[ i ], A_uint128_t[ j ] );
+			ords[ j ] = getOrd( simples[ i ], A_uint128_t[ j ] );
 		}
-		ords[j] = 0;
+		ords[ j ] = 0;
 
 		// получим НОК по всем ord
-		u = getNOK(ords);
+		u =  getNOK(ords);
 
 		if ( u % 2 != 0 ) {
 
@@ -63,10 +63,12 @@ void thread_function_official(uint64_t  leftBorder, uint64_t  rightBorder, uint6
 				if ( LABS_TEST_MILLER_RABIN_uint128_t( &n, 2 ) ) {
 
 					locker->lock();
+
 					if ( std::find(spps->begin(), spps->end(), n) == spps->end()) {
 						spps->push_back(n);
 						printValues(&n, simples[i], &q, file);
 					}
+
 					locker->unlock();
 				}
 				else {
@@ -77,10 +79,9 @@ void thread_function_official(uint64_t  leftBorder, uint64_t  rightBorder, uint6
 				// pass
 			}
 		}
-
 	}
 
-	// теперь проверяем все кортежи
+	delete[] ords;
 }
 
 // Функция, которая проверяет все  числа в промежутке от start до finish с помощью функции threadFunctionRun3 
@@ -94,7 +95,7 @@ void official_algorithm_run() {
 	uint64_t  count_simples = 0;// getCountSimples(3, max_count_simples, simples);
 	getPrimes( simples, &count_simples, 0, max_count_simples, 1 );
 
-	uint64_t  step = 200;// count_simples / 25;
+	uint64_t  step = 40;// count_simples / 25;
 
 	std::atomic<bool> * is_completed_threads = NULL;
 	FILE *f = NULL;
@@ -104,5 +105,5 @@ void official_algorithm_run() {
 	printf("Промежуток: до %lld, простых чисел всего : %lld, максимальное число = %lld\n\n", max_count_simples, count_simples, simples[count_simples - 2]);
 
 	// запускаем!
-	example.parallel_by_cores(is_completed_threads, f, count_simples, simples, step, 100, thread_function_official, 2);
+	example.parallel_by_cores(is_completed_threads, f, count_simples, simples, step, 40, thread_function_official, 2);
 }

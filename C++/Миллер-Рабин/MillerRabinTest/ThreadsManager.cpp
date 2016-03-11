@@ -26,13 +26,6 @@ void ThreadsManager::wait_for_end() {
 	}
 }
 
-void ThreadsManager::write_to_file( boost::multiprecision::uint128_t *i ) {
-
-	locker.lock();
-	fprintf(FOUT_FILE, "%s\n", boost::lexical_cast<std::string>(*i).c_str());
-	locker.unlock();
-}
-
 void ThreadsManager::parallel_by_cores(std::atomic<bool> *temp_completed_threads, FILE*file_ptr, uint64_t max_count, uint64_t *numbers, int step, int step_low_border,  callback func, int sub_threads_count) {
 
 	STEP = step;

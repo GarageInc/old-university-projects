@@ -53,6 +53,8 @@ int main() {
 	
 	setlocale(LC_ALL, "Russian");// Чтобы выводился текст на русском языке
 
+	// cout << getOrd(999997, 2)<<endl;
+	// cout << getOrd(999997, 3) << endl;
 	
 	TimeManager example;
 	example.run( official_algorithm_run );// Официальный алгоритм, по методичке
