@@ -22,7 +22,7 @@ public:
 
 	typedef void(*callback)(uint64_t, uint64_t, uint64_t, uint64_t*, std::mutex *locker, FILE *file);
 
-	void parallel(std::atomic<bool> *temp_completed_threads, FILE*file, uint64_t max_count, uint64_t *numbers, int step, int step_low_border, callback func);
+	void parallel_by_cores(std::atomic<bool> *temp_completed_threads, FILE*file, uint64_t max_count, uint64_t *numbers, int step, int step_low_border, callback func);
 	void wait_for_end();
 
 	void write_to_file( boost::multiprecision::uint128_t *i );

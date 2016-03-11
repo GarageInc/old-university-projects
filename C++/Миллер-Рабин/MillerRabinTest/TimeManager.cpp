@@ -7,7 +7,7 @@ TimeManager::TimeManager(){
 TimeManager::~TimeManager(){
 }
 
-void TimeManager::run_simples(callback func)
+void TimeManager::run(callback func)
 {
 	// Начало работы
 	clock_t start_at = clock();

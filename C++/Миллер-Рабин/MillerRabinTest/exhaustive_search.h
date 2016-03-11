@@ -35,5 +35,8 @@ void exhaustive_search_run() {
 
 	ThreadsManager 	example;
 	fprintf(example.FOUT_FILE, "Промежуток: все числа от 2 до %lld\n", max_count_numbers);
-	example.parallel(is_completed_threads, f, max_count_numbers, numbers, max_count_numbers/10, 3000, thread_function_exhaustive_search);
+	printf("Промежуток: все числа от 2 до %lld\n", max_count_numbers);
+
+
+	example.parallel_by_cores(is_completed_threads, f, max_count_numbers, numbers, 3000, 3000, thread_function_exhaustive_search);
 }

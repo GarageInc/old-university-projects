@@ -5,12 +5,7 @@
 #include <stdio.h>
 #include <conio.h>
 #include <string>
-#include <time.h>
 
-#include <thread>
-#include <chrono>
-#include <future>
-#include <mutex>
 
 #include <iostream>
 #include <fstream>
@@ -20,6 +15,7 @@
 #include <boost/math/special_functions/pow.hpp>
 #include<boost\multiprecision\cpp_int.hpp>
 #include<boost\any.hpp>
+#include"primegen.h"
 
 using namespace boost::multiprecision;
 using namespace std;
@@ -57,15 +53,12 @@ int main() {
 	
 	setlocale(LC_ALL, "Russian");// Чтобы выводился текст на русском языке
 
-	// Запускается функция, которая проверяет псевдопростые числа: числа, которые являются произведением двух простых чисел 'p' и 'q', но проходят тест Миллера-Рабина по 	базе 'A'
-	// exhaustive_search_run(FOUT_FILES, COMPLETED_THREADS, THREADS_COUNT, THREADS);// полный перебор
-	// mult_simples_pq_run(FOUT_FILES, COMPLETED_THREADS, THREADS, THREADS_COUNT); // Почти полный перебор, поиск по произведениям простых чисел
 	
-
 	TimeManager example;
-	example.run_simples( official_algorithm_run );// Официальный алгоритм, по методичке
+	//example.run( official_algorithm_run );// Официальный алгоритм, по методичке
+	example.run( exhaustive_search_run );// полный перебор
+	//example.run( mult_simples_pq_run ); // Почти полный перебор, поиск по произведениям простых чисел
 	
-
 	printf("\n\nКОНЕЦ");
 
 	getch();

@@ -1,7 +1,10 @@
 ﻿
 // Проверка на деление числа на все его составные части( от 2 до корня от этого числа).
-// Если делится - то точно простое число. НО! Не работает на четных числах, на вход подаются только нечетные числа с шагом 2: 1,3,5,7,9 и т.д.
-bool ПровереноМодифицированнымПростымДелением(uint128_t *number) {
+// Если делится - то точно простое число.
+bool SimpleDivisionTest(uint128_t *number) {
+	if (*number % 2 == 0) 
+		return false;
+
 	uint128_t s = sqrt(*number) + 1;// sqrt(*number) + 1;
 
 	// нет смысла рассматривать четные числа, т.к. они не делятся на два
@@ -39,7 +42,7 @@ void printValue_uint64_t(uint64_t *i, FILE *fout) {
 }
 
 // Вывод значения в файл
-void printValue(uint128_t *i, FILE *fout) {
+void printValue_uint128_t(uint128_t *i, FILE *fout) {
 	
 	fprintf(fout, "%s\n", boost::lexical_cast<std::string>(*i).c_str());
 }
@@ -49,7 +52,7 @@ void printValues(uint128_t *n, uint128_t p, uint128_t *q, FILE *fout) {
 			
 	fprintf(fout, "%s = %s * %s\n", boost::lexical_cast<std::string>( *n ).c_str(), boost::lexical_cast<std::string>( p ).c_str(), boost::lexical_cast<std::string>( *q ).c_str());
 }
-
+/*
 // Закрытие файлов, вызывает flush для выгрузки в них невыгруженного вывода. Если он есть, конечно.
 void closeFiles(FILE **FOUT_FILES, int THREADS_COUNT) {
 
@@ -75,7 +78,7 @@ void initFiles(FILE **FOUT_FILES, int THREADS_COUNT) {
 
 	FOUT_FILES[THREADS_COUNT] = fopen("stats.txt", "w");
 }
-
+*/
 
 // Получение НОК массива чисел
 uint128_t getNOK(uint128_t *array, int index = 0) {

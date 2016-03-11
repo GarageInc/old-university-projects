@@ -33,7 +33,7 @@ void ThreadsManager::write_to_file( boost::multiprecision::uint128_t *i ) {
 	locker.unlock();
 }
 
-void ThreadsManager::parallel(std::atomic<bool> *temp_completed_threads, FILE*file_ptr, uint64_t max_count, uint64_t *numbers, int step, int step_low_border,  callback func) {
+void ThreadsManager::parallel_by_cores(std::atomic<bool> *temp_completed_threads, FILE*file_ptr, uint64_t max_count, uint64_t *numbers, int step, int step_low_border,  callback func) {
 
 	STEP = step;
 	STEP_LOW_BORDER = step_low_border;
@@ -65,8 +65,12 @@ void ThreadsManager::parallel(std::atomic<bool> *temp_completed_threads, FILE*fi
 			if ( temp_completed_threads[j] == true ) {
 				temp_completed_threads[j] = false;
 
-				if (i + step > max_count) {
-					step = max_count - i;
+				if (i + STEP > max_count) {
+					STEP = max_count - i;
+				}
+
+				if (THREADS[j].joinable()) {
+					THREADS[j].join();
 				}
 				
 				uint64_t index_i = i;

@@ -1,6 +1,5 @@
 
 // на вход  простые числа!
-
 void thread_function_official(uint64_t  leftBorder, uint64_t  rightBorder, uint64_t  maxCount, uint64_t  * simples, mutex *locker, FILE*file )
 {
 	uint128_t q;
@@ -37,6 +36,7 @@ void thread_function_official(uint64_t  leftBorder, uint64_t  rightBorder, uint6
 			koef = 1;
 		}
 
+		//
 		d = gcd( pow((cpp_int)2, simples[i] - 1) - 1, pow((cpp_int)3, simples[i] - 1) - 1 );
 
 		sqrt_d = sqrt( d ) + 1;
@@ -65,6 +65,8 @@ void thread_function_official(uint64_t  leftBorder, uint64_t  rightBorder, uint6
 		}
 
 	}
+
+	// теперь провер€ем все кортежи
 }
 
 // ‘ункци€, котора€ провер€ет все  числа в промежутке от start до finish с помощью функции threadFunctionRun3 
@@ -72,19 +74,21 @@ void official_algorithm_run() {
 
 	// ћаксимальное количество простых чисел. ѕо умолчанию равно верхней границе рассматриваемого промежутка
 	uint64_t  max_count_simples = 1000000;
-	uint64_t  *simples = new uint64_t[max_count_simples];
+	uint64_t  *simples = new uint64_t[ max_count_simples ];
 
 	// ѕолучим количество простых чисел и все простые числа
 	uint64_t  count_simples = 0;// getCountSimples(3, max_count_simples, simples);
-	getPrimes(simples, &count_simples, 0, max_count_simples, 1);
+	getPrimes( simples, &count_simples, 0, max_count_simples, 1 );
 
-	uint64_t  step = count_simples / 30;
+	uint64_t  step = count_simples / 3000;
 
-	//fprintf(FOUT_FILES[THREADS_COUNT], "ѕромежуток: до %lld, простых чисел всего: %lld, максимальное число = %lld\n\n", max_count_simples, count_simples, simples[count_simples - 2]);
 	std::atomic<bool> * is_completed_threads = NULL;
 	FILE *f = NULL;
 
 	ThreadsManager 	example;
 	fprintf(example.FOUT_FILE, "ѕромежуток: до %lld, простых чисел всего : %lld, максимальное число = %lld\n\n", max_count_simples, count_simples, simples[count_simples - 2]);
-	example.parallel(is_completed_threads, f, count_simples, simples, step, 3000, thread_function_official);
+	printf("ѕромежуток: до %lld, простых чисел всего : %lld, максимальное число = %lld\n\n", max_count_simples, count_simples, simples[count_simples - 2]);
+
+	// запускаем!
+	example.parallel_by_cores(is_completed_threads, f, count_simples, simples, step, 3000, thread_function_official);
 }
