@@ -2,7 +2,7 @@
 // Функция №2 - проверяем произведения всех простых чисел из поданного массива simples.
 // например, массив содержит все простые числа от 3 до 1млн - но функция обрабатывает определенные промежуток между leftBorder и rightBorder(т.к. в потоке) - 
 // и выводит прошедшие проверку тестом Миллера-Рабина числа в файл. Ведь они составные, а проходят проверку!
-void thread_function_mult_simples(uint64_t  leftBorder, uint64_t  rightBorder, uint64_t  maxCount, uint64_t  * simples, mutex*locker, FILE *fout)
+void thread_function_mult_simples(uint64_t  leftBorder, uint64_t  rightBorder, uint64_t  maxCount, uint64_t  * simples, mutex*locker, FILE *fout, vector<uint128_t> *spps)
 {
 	uint128_t  multResult = 0;
 	uint64_t  j = 0;

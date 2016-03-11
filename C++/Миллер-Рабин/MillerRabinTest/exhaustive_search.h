@@ -1,6 +1,6 @@
 
 // Функция №1: если число проходит проверку на тест Миллера-Рабина, но не является простым(не ПровереноМодифицированнымПростымДелением) - то выводим его в файл
-void thread_function_exhaustive_search(uint64_t  start, uint64_t  finish, uint64_t  maxCount, uint64_t*numbers, mutex*locker, FILE *fout)//atomic<bool>& ab)
+void thread_function_exhaustive_search(uint64_t  start, uint64_t  finish, uint64_t  maxCount, uint64_t*numbers, mutex*locker, FILE *fout, vector<uint128_t> *spps)//atomic<bool>& ab)
 {
 	if (start % 2 == 0) 
 		start = start + 1;

@@ -6,8 +6,8 @@ ThreadsManager::ThreadsManager(){
 }
 
 ThreadsManager::~ThreadsManager(){
-	//delete[] THREADS;
-	//delete[] COMPLETED_THREADS;
+	delete[] THREADS;
+	delete[] COMPLETED_THREADS;
 	fclose( FOUT_FILE );
 }
 
@@ -33,12 +33,19 @@ void ThreadsManager::write_to_file( boost::multiprecision::uint128_t *i ) {
 	locker.unlock();
 }
 
-void ThreadsManager::parallel_by_cores(std::atomic<bool> *temp_completed_threads, FILE*file_ptr, uint64_t max_count, uint64_t *numbers, int step, int step_low_border,  callback func) {
+void ThreadsManager::parallel_by_cores(std::atomic<bool> *temp_completed_threads, FILE*file_ptr, uint64_t max_count, uint64_t *numbers, int step, int step_low_border,  callback func, int sub_threads_count) {
 
 	STEP = step;
 	STEP_LOW_BORDER = step_low_border;
 
-	THREADS_COUNT =  std::thread::hardware_concurrency();;
+	if (sub_threads_count != 0) {
+
+		THREADS_COUNT = std::thread::hardware_concurrency() / ( sub_threads_count + 1 ) + 1;
+	}
+	else {
+
+		THREADS_COUNT = std::thread::hardware_concurrency();;
+	}
 	THREADS = new std::thread[THREADS_COUNT];
 
 	fprintf(FOUT_FILE, "Количество потоков: %d\n", THREADS_COUNT);
@@ -57,6 +64,9 @@ void ThreadsManager::parallel_by_cores(std::atomic<bool> *temp_completed_threads
 
 	double koef = 1 + 1 / (double)(THREADS_COUNT * 1);
 	uint64_t j = 0;
+
+	vector<uint128_t> spps{};
+
 	for (uint64_t i = 1; i < max_count; ) {
 
 		// Цикл просматривания потоков. Если поток освободился - то загружаем его работой по рассмотрению нового промежутка
@@ -73,21 +83,18 @@ void ThreadsManager::parallel_by_cores(std::atomic<bool> *temp_completed_threads
 					THREADS[j].join();
 				}
 				
-				uint64_t index_i = i;
-				int clone_j = j;
-				
-				THREADS[j] = std::thread([&temp_completed_threads, &numbers, max_count, index_i, step, clone_j, locker_ptr, file_ptr, func] {
-					printf("Запущен %d поток на промежутке [%lld - %lld)\n", clone_j, index_i, index_i + step);
+				THREADS[j] = std::thread([&temp_completed_threads, &numbers, max_count, i, step, j, locker_ptr, file_ptr, func, &spps] {
+					printf("Запущен %lld поток на промежутке [%lld - %lld)\n", j, i, i + step);
 
-					func(index_i, index_i + step, max_count, numbers, locker_ptr, file_ptr);
+					func(i, i + step, max_count, numbers, locker_ptr, file_ptr, &spps);
 					
-					printf(" => Завершил работу %d\n", clone_j);
+					printf(" => Завершил работу %d\n", j);
 
 					locker_ptr->lock();
 					fflush( file_ptr );
 					locker_ptr->unlock();
 
-					temp_completed_threads[ clone_j ] = true;
+					temp_completed_threads[ j ] = true;
 				});
 
 				i += STEP;

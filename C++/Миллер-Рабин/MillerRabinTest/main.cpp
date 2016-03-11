@@ -55,8 +55,8 @@ int main() {
 
 	
 	TimeManager example;
-	//example.run( official_algorithm_run );// Официальный алгоритм, по методичке
-	example.run( exhaustive_search_run );// полный перебор
+	example.run( official_algorithm_run );// Официальный алгоритм, по методичке
+	//example.run( exhaustive_search_run );// полный перебор
 	//example.run( mult_simples_pq_run ); // Почти полный перебор, поиск по произведениям простых чисел
 	
 	printf("\n\nКОНЕЦ");
