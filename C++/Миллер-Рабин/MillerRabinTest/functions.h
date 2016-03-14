@@ -48,9 +48,17 @@ void printValue_uint128_t(uint128_t *i, FILE *fout) {
 }
 
 // Вывод значений в файл
-void printValues(uint128_t *n, uint128_t p, uint128_t *q, FILE *fout) {
-			
-	fprintf(fout, "%s = %s * %s\n", boost::lexical_cast<std::string>( *n ).c_str(), boost::lexical_cast<std::string>( p ).c_str(), boost::lexical_cast<std::string>( *q ).c_str());
+void printValues( uint128_t *values, int*count, FILE *fout ) {
+
+	std::stringstream ss;
+	ss << boost::lexical_cast<std::string>(values[ 0 ]).c_str() << " = " << boost::lexical_cast<std::string>(values[ 1 ]).c_str();
+	
+	for (int i = 2; i < *count; i++) {
+		//result = sprintf("%s",result.c_str())
+		ss << " * " << boost::lexical_cast<std::string>(values[i]).c_str();
+	}
+
+	fprintf(fout, "%s\n", ss.str().c_str());// boost::lexical_cast<std::string>(*n).c_str(), boost::lexical_cast<std::string>(p).c_str(), boost::lexical_cast<std::string>(*q).c_str());
 }
 /*
 // Закрытие файлов, вызывает flush для выгрузки в них невыгруженного вывода. Если он есть, конечно.

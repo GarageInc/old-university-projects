@@ -13,14 +13,14 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Файлы исходного кода\parts">
-      <UniqueIdentifier>{59f0e85b-1f89-494a-bd86-89d64500f029}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Файлы исходного кода\threads_manager">
       <UniqueIdentifier>{c081be8f-39c0-4c63-bb85-0753bd55ca41}</UniqueIdentifier>
     </Filter>
     <Filter Include="Файлы исходного кода\time_manager">
       <UniqueIdentifier>{f1593655-cad7-46fb-8d2b-05bc01cc9ca9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Заголовочные файлы\parts">
+      <UniqueIdentifier>{59f0e85b-1f89-494a-bd86-89d64500f029}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -31,35 +31,35 @@
       <Filter>Файлы исходного кода\threads_manager</Filter>
     </ClCompile>
     <ClCompile Include="TimeManager.cpp">
-      <Filter>Файлы исходного кода</Filter>
+      <Filter>Файлы исходного кода\time_manager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="next_prime64.h">
-      <Filter>Файлы исходного кода</Filter>
-    </ClInclude>
-    <ClInclude Include="primegen.h">
-      <Filter>Файлы исходного кода</Filter>
-    </ClInclude>
-    <ClInclude Include="miller-rabin.h">
-      <Filter>Файлы исходного кода</Filter>
-    </ClInclude>
-    <ClInclude Include="functions.h">
-      <Filter>Файлы исходного кода</Filter>
-    </ClInclude>
     <ClInclude Include="exhaustive_search.h">
-      <Filter>Файлы исходного кода\parts</Filter>
+      <Filter>Заголовочные файлы\parts</Filter>
     </ClInclude>
     <ClInclude Include="mult_simples_pq.h">
-      <Filter>Файлы исходного кода\parts</Filter>
+      <Filter>Заголовочные файлы\parts</Filter>
     </ClInclude>
     <ClInclude Include="official_algorithm.h">
-      <Filter>Файлы исходного кода\parts</Filter>
-    </ClInclude>
-    <ClInclude Include="ThreadsManager.h">
-      <Filter>Файлы исходного кода\threads_manager</Filter>
+      <Filter>Заголовочные файлы\parts</Filter>
     </ClInclude>
     <ClInclude Include="TimeManager.h">
+      <Filter>Заголовочные файлы</Filter>
+    </ClInclude>
+    <ClInclude Include="ThreadsManager.h">
+      <Filter>Заголовочные файлы</Filter>
+    </ClInclude>
+    <ClInclude Include="functions.h">
+      <Filter>Заголовочные файлы</Filter>
+    </ClInclude>
+    <ClInclude Include="miller-rabin.h">
+      <Filter>Заголовочные файлы</Filter>
+    </ClInclude>
+    <ClInclude Include="next_prime64.h">
+      <Filter>Заголовочные файлы</Filter>
+    </ClInclude>
+    <ClInclude Include="primegen.h">
       <Filter>Заголовочные файлы</Filter>
     </ClInclude>
   </ItemGroup>

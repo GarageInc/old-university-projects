@@ -55,11 +55,14 @@ int main() {
 
 	// cout << getOrd(999997, 2)<<endl;
 	// cout << getOrd(999997, 3) << endl;
+
 	
-	TimeManager example;
-	example.run( official_algorithm_run );// Официальный алгоритм, по методичке
-	//example.run( exhaustive_search_run );// полный перебор
-	//example.run( mult_simples_pq_run ); // Почти полный перебор, поиск по произведениям простых чисел
+	TimeManager example;// для запуска - передаём запускаемую функцию
+
+	example.run( official_algorithm_run_pq );// Официальный алгоритм, по методичке, проверяет pq - числа
+	// example.run( official_algorithm_run_pqr );// Официальный алгоритм, по методичке, проверяет pqr, r>q - числа
+	// example.run( exhaustive_search_run );// Полный перебор всех чисел до указанного предела
+	// example.run( mult_simples_pq_run ); // Почти полный перебор, поиск по произведениям простых чисел p и q
 	
 	printf("\n\nКОНЕЦ");
 

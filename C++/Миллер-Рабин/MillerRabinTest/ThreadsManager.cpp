@@ -2,7 +2,7 @@
 #include "ThreadsManager.h"
 
 ThreadsManager::ThreadsManager(){
-	FOUT_FILE = fopen("results.txt", "w");
+	FOUT_FILE = fopen("results.txt", "a");
 }
 
 ThreadsManager::~ThreadsManager(){
