@@ -81,8 +81,16 @@ void find_tuples(uint64_t index_simples, uint64_t *simples, uint64_t index_tmp, 
 	if (index_tmp > 0) {
 
 		if (!is_incr_tmp || last_mult * tmp[index_tmp - 1] >= MAX_BORDER_C) {
-
+			
 			// Дальше смысла перебирать нет в этой ветке
+			/*
+			stringstream ss;
+			for (int i = 0; i < index_tmp; i++) {
+			ss << tmp[i] << " ";
+			}
+
+			printf("\n\nЗА ПРЕДЕЛОМ: %s", ss.str().c_str());
+			*/
 			return;
 		}
 		else {
@@ -92,8 +100,8 @@ void find_tuples(uint64_t index_simples, uint64_t *simples, uint64_t index_tmp, 
 			// спим, пока какие-то кортежи обрабатываются, но
 			// ищем свободный поток
 			int completed_index = -1;
-
-			while ( completed_index==-1 ) {
+			
+			while ( completed_index == -1 ) {
 				
 				for (int i = 0; i < max_threads_count; i++) {
 				
@@ -109,7 +117,7 @@ void find_tuples(uint64_t index_simples, uint64_t *simples, uint64_t index_tmp, 
 			if ( THREADS[completed_index].joinable() ) {
 				THREADS[completed_index].join();
 			}
-
+			
 			// Как освободились - ищем результат на вывод
 			stringstream ss;
 			for (int i = 0; i < index_tmp; i++) {
@@ -117,7 +125,7 @@ void find_tuples(uint64_t index_simples, uint64_t *simples, uint64_t index_tmp, 
 			}
 			
 			printf("\n\nОБРАБОКТА КОРТЕЖА: %s", ss.str().c_str());
-
+			
 			// скопируем массив и скормим потоку( чтобы он внезапно не изменился внутри потока )
 			uint64_t *tmp_tmp = new uint64_t[index_tmp];
 			for (int i = 0; i < index_tmp; i++) {
@@ -133,7 +141,7 @@ void find_tuples(uint64_t index_simples, uint64_t *simples, uint64_t index_tmp, 
 				this_thread::sleep_for(1000ms);
 				check_tuple(last_mult, *maxCount, simples, index_simples, tmp_tmp, index_tmp);
 
-				printf("\n => Завершил работу %d", completed_index);
+				printf("\n\n => Завершил работу %d", completed_index);
 				
 				locker.lock();
 				fflush(file);
@@ -141,6 +149,7 @@ void find_tuples(uint64_t index_simples, uint64_t *simples, uint64_t index_tmp, 
 
 				completed[completed_index] = true;
 			});
+			
 		}
 	}
 	else {
