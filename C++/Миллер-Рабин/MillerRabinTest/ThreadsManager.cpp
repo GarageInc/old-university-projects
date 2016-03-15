@@ -39,6 +39,7 @@ void ThreadsManager::parallel_by_cores(std::atomic<bool> *temp_completed_threads
 
 		THREADS_COUNT = std::thread::hardware_concurrency();;
 	}
+
 	THREADS = new std::thread[THREADS_COUNT];
 
 	fprintf(FOUT_FILE, "Количество потоков: %d\n", THREADS_COUNT);

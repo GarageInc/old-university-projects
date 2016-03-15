@@ -41,9 +41,6 @@
     <ClInclude Include="mult_simples_pq.h">
       <Filter>Заголовочные файлы\parts</Filter>
     </ClInclude>
-    <ClInclude Include="official_algorithm.h">
-      <Filter>Заголовочные файлы\parts</Filter>
-    </ClInclude>
     <ClInclude Include="TimeManager.h">
       <Filter>Заголовочные файлы</Filter>
     </ClInclude>
@@ -61,6 +58,12 @@
     </ClInclude>
     <ClInclude Include="primegen.h">
       <Filter>Заголовочные файлы</Filter>
+    </ClInclude>
+    <ClInclude Include="official_algorithm_pq_pqr.h">
+      <Filter>Заголовочные файлы\parts</Filter>
+    </ClInclude>
+    <ClInclude Include="official_algorithm_tuples.h">
+      <Filter>Заголовочные файлы\parts</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

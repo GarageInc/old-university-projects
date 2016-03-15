@@ -88,7 +88,8 @@
     <ClInclude Include="functions.h" />
     <ClInclude Include="miller-rabin.h" />
     <ClInclude Include="next_prime64.h" />
-    <ClInclude Include="official_algorithm.h" />
+    <ClInclude Include="official_algorithm_pq_pqr.h" />
+    <ClInclude Include="official_algorithm_tuples.h" />
     <ClInclude Include="primegen.h" />
     <ClInclude Include="ThreadsManager.h" />
     <ClInclude Include="TimeManager.h" />

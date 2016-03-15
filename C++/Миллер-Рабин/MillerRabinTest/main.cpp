@@ -1,6 +1,7 @@
 
-//#pragma comment (lib,"mpfr.lib")
-//#pragma comment (lib,"mpir.lib")
+// Лаб.работа: числа 10в16ой, но т.к.рассматриваются только нечетные числа, то количество делителей будет не более чем log(3, 10в16ой)
+const int MAX_FACTORS_COUNT = 33;
+const int MAX_BORDER_C = 10000000000000000;
 
 #include <stdio.h>
 #include <conio.h>
@@ -26,7 +27,8 @@ using namespace std;
 #include "ThreadsManager.h"
 #include "TimeManager.h"
 
-#include "official_algorithm.h"
+#include "official_algorithm_tuples.h"
+#include "official_algorithm_pq_pqr.h"
 #include "exhaustive_search.h"
 #include "mult_simples_pq.h"
 
@@ -42,12 +44,6 @@ using namespace std;
 
 // Максимальное uint64_t: 2*18446744073709551616
 
-void some_function() {
-
-	srand(_Xtime_get_ticks());
-
-	std::this_thread::sleep_for(std::chrono::seconds(rand() % 10));
-}
 
 int main() {
 	
@@ -56,13 +52,22 @@ int main() {
 	// cout << getOrd(999997, 2)<<endl;
 	// cout << getOrd(999997, 3) << endl;
 
-	
-	TimeManager example;// для запуска - передаём запускаемую функцию
+	// uint64_t length = 7;
+	// uint64_t simples[ 7 ] = { 1,2,3,4,5,6 };
+	// uint64_t *tmp = new uint64_t[ length ];
 
-	example.run( official_algorithm_run_pq );// Официальный алгоритм, по методичке, проверяет pq - числа
+	// uint64_t predel = 200;
+
+	// find_tuples(0, simples, 0, tmp, &length, &predel);
+
+	official_algorithm_run_simpletuples();
+	// TimeManager example;// для запуска - передаём запускаемую функцию
+
+	// example.run(official_algorithm_run_pq);// Официальный алгоритм, по методичке, проверяет pq - числа
 	// example.run( official_algorithm_run_pqr );// Официальный алгоритм, по методичке, проверяет pqr, r>q - числа
 	// example.run( exhaustive_search_run );// Полный перебор всех чисел до указанного предела
 	// example.run( mult_simples_pq_run ); // Почти полный перебор, поиск по произведениям простых чисел p и q
+
 	
 	printf("\n\nКОНЕЦ");
 
