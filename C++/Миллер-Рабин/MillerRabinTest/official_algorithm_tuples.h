@@ -5,7 +5,7 @@
 mutex locker;
 FILE *file;
 std::vector<uint128_t> spps{};
-const int max_threads_count = 5;
+const int max_threads_count = 4;
 
 // на вход  простые числа!
 // проверка кортежа
