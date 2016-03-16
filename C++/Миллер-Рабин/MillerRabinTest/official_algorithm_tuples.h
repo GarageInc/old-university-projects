@@ -46,7 +46,7 @@ void check_tuple(uint64_t E, uint64_t  maxCount, uint64_t  * simples, uint64_t l
 
 		// 5. Проверяем, является ли произведение n СППС(A), проверяя каждое такое n по тесту МР с множеством баз A. 
 		// 6. В случае успеха добавляем n к базе данных СППС(A)-чисел. 
-		if (LABS_TEST_MILLER_RABIN_uint64_t(&n, 2)) {
+		if (LABS_TEST_MILLER_RABIN_uint64_t(&n, A_LENGTH)) {
 
 			locker.lock();
 			if (std::find(spps.begin(), spps.end(), n) == spps.end()) {

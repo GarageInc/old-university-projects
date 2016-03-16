@@ -1,22 +1,23 @@
 ﻿
+const int COUNT_FIRST_SIMPLES = 19;
+int FIRST_SIMPLES[COUNT_FIRST_SIMPLES] = { 3, 5,	7,	11,	13,	17,	19,	23,	29,	31,	37,	41,	43,	47,	53,	59,	61,	67,	71 };
+
 // Проверка на деление числа на все его составные части( от 2 до корня от этого числа).
 // Если делится - то точно простое число.
-bool SimpleDivisionTest(uint128_t *number) {
+bool SimpleDivisionTest(uint64_t *number) {
 	if (*number % 2 == 0) 
 		return false;
+	
+	for (int i = 0; i < COUNT_FIRST_SIMPLES; i++ ) {
 
-	uint128_t s = sqrt(*number) + 1;// sqrt(*number) + 1;
-
-	// нет смысла рассматривать четные числа, т.к. они не делятся на два
-	for (uint128_t i = 3; i <= s; i += 2) {
-		if (*number % i == 0 ) {
-			return false;
+		if ( (*number) % FIRST_SIMPLES[ i ] == 0  ) {
+			
+			return true;
 		}
 	}
 
 	return true;
 }
-
 
 // Заполняет входной массив simples всеми простыми числами между start и finish - границами. Функция явно возвращает количество простых чисел и неявно - все найденные простые числа в массиве simples
 /*int1024_t getCountSimples(int1024_t start, int1024_t finish, int1024_t *simples) {
@@ -47,10 +48,13 @@ void printValue_uint128_t(uint128_t *i, FILE *fout) {
 	fprintf(fout, "%s\n", boost::lexical_cast<std::string>(*i).c_str());
 }
 
+std::stringstream ss;
 // Вывод значений в файл
 void printValues( uint128_t *values, int*count, FILE *fout ) {
+	
+	ss.str(std::string());
+	ss.clear();
 
-	std::stringstream ss;
 	ss << boost::lexical_cast<std::string>(values[ 0 ]).c_str() << " = " << boost::lexical_cast<std::string>(values[ 1 ]).c_str();
 	
 	for (int i = 2; i < *count; i++) {

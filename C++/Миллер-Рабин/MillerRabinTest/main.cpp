@@ -2,6 +2,7 @@
 // Лаб.работа: числа 10в16ой, но т.к.рассматриваются только нечетные числа, то количество делителей будет не более чем log(3, 10в16ой)
 const int MAX_FACTORS_COUNT = 33;
 const int MAX_BORDER_C = 10000000000000000;
+const int MAX_BORDER_C_SQRT = 100000000;
 
 #include <stdio.h>
 #include <conio.h>
@@ -48,26 +49,15 @@ using namespace std;
 int main() {
 	
 	setlocale(LC_ALL, "Russian");// Чтобы выводился текст на русском языке
-
-	// cout << getOrd(999997, 2)<<endl;
-	// cout << getOrd(999997, 3) << endl;
-
-	// uint64_t length = 7;
-	// uint64_t simples[ 7 ] = { 1,2,3,4,5,6 };
-	// uint64_t *tmp = new uint64_t[ length ];
-
-	// uint64_t predel = 200;
-
-	// find_tuples(0, simples, 0, tmp, &length, &predel);
-
-	official_algorithm_run_simpletuples();
-	// TimeManager example;// для запуска - передаём запускаемую функцию
+		
+	TimeManager example;// для запуска - передаём запускаемую функцию
 
 	// example.run(official_algorithm_run_pq);// Официальный алгоритм, по методичке, проверяет pq - числа
 	// example.run( official_algorithm_run_pqr );// Официальный алгоритм, по методичке, проверяет pqr, r>q - числа
 	// example.run( exhaustive_search_run );// Полный перебор всех чисел до указанного предела
-	// example.run( mult_simples_pq_run ); // Почти полный перебор, поиск по произведениям простых чисел p и q
+	example.run( mult_simples_pq_run ); // Почти полный перебор, поиск по произведениям простых чисел p и q
 
+	// official_algorithm_run_simpletuples();// Перебор кортежей простых чисел, так же распараллелено
 	
 	printf("\n\nКОНЕЦ");
 

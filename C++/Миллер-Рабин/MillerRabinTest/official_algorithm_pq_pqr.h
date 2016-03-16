@@ -63,7 +63,7 @@ void thread_function_official_pq(uint64_t  leftBorder, uint64_t  rightBorder, ui
 
 				n = q * simples[ i ];
 
-				if ( LABS_TEST_MILLER_RABIN_uint128_t( &n, 2 ) ) {
+				if ( LABS_TEST_MILLER_RABIN_uint128_t( &n, A_LENGTH) ) {
 
 					locker->lock();
 
@@ -199,7 +199,7 @@ void thread_function_official_pqr(uint64_t  leftBorder, uint64_t  rightBorder, u
 
 					n = n_tmp * r;
 
-					if ( LABS_TEST_MILLER_RABIN_uint128_t( &n, 2 ) ) {
+					if ( LABS_TEST_MILLER_RABIN_uint128_t( &n, A_LENGTH) ) {
 
 						locker->lock();
 

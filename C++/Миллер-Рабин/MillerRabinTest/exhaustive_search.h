@@ -5,20 +5,23 @@ void thread_function_exhaustive_search(uint64_t  start, uint64_t  finish, uint64
 	if (start % 2 == 0) 
 		start = start + 1;
 
-	for (uint64_t  i = start; i < finish; i+=2) {
+	for (uint64_t  i = start; i < finish; i+=2 ) {
 
-		if ( LABS_TEST_MILLER_RABIN_uint64_t( &i, A_LENGTH ) ) {
+		if (LABS_TEST_MILLER_RABIN_uint64_t( &i, 1 ) ) {
 
-			if (!LABS_TEST_MILLER_RABIN_uint64_t(&i, 9)) {
-				locker->lock();
-				printValue_uint64_t(&i, fout);
-				locker->unlock();
-			}
-		}
-		else {
+			if ( !SimpleDivisionTest( &i ) || !LABS_TEST_MILLER_RABIN_uint64_t( &i, 9 ) ) {
 
-			//pass	
-		}
+				if (FIRST_SIMPLES[COUNT_FIRST_SIMPLES - 1] < i) {
+
+					locker->lock();
+
+					printValue_uint64_t(&i, fout);
+
+					locker->unlock();
+				}// pass
+			}// pass
+		}// pass	
+		
 	}
 }
 
@@ -26,7 +29,7 @@ void thread_function_exhaustive_search(uint64_t  start, uint64_t  finish, uint64
 void exhaustive_search_run() {
 
 	// ћаксимальное количество простых чисел. ѕо умолчанию равно верхней границе рассматриваемого промежутка
-	uint64_t  max_count_numbers = 1000000;
+	uint64_t  max_count_numbers = 10000;
 	uint64_t  *numbers = NULL;
 
 	//fprintf(FOUT_FILES[THREADS_COUNT], "ѕромежуток: до %lld, простых чисел всего: %lld, максимальное число = %lld\n\n", max_count_simples, count_simples, simples[count_simples - 2]);
@@ -37,6 +40,7 @@ void exhaustive_search_run() {
 	fprintf(example.FOUT_FILE, "ѕромежуток: все числа от 2 до %lld\n", max_count_numbers);
 	printf("ѕромежуток: все числа от 2 до %lld\n", max_count_numbers);
 
+	uint64_t  step = max_count_numbers / 30;
 
-	example.parallel_by_cores(is_completed_threads, f, max_count_numbers, numbers, 3000, 3000, thread_function_exhaustive_search);
+	example.parallel_by_cores(is_completed_threads, f, max_count_numbers, numbers, step, 3000, thread_function_exhaustive_search);
 }

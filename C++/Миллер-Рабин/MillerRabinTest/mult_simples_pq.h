@@ -4,23 +4,39 @@
 // и выводит прошедшие проверку тестом Миллера-Рабина числа в файл. Ведь они составные, а проходят проверку!
 void thread_function_mult_simples(uint64_t  leftBorder, uint64_t  rightBorder, uint64_t  maxCount, uint64_t  * simples, mutex*locker, FILE *fout, vector<uint128_t> *spps)
 {
-	uint128_t  multResult = 0;
+	uint64_t  multResult = 0;
 	uint64_t  j = 0;
+	int count = 3;
+
+	uint128_t * print_values = new uint128_t[ count ];
 
 	for (uint64_t  i = leftBorder; i < rightBorder && i < maxCount; i++) {
 		
 		for (j = leftBorder; j < maxCount; j++) {
 			multResult = simples[i] * simples[j];// делаем составное число
 
-			if (LABS_TEST_MILLER_RABIN_uint128_t( &multResult, A_LENGTH ) ) {
+			if (LABS_TEST_MILLER_RABIN_uint64_t( &multResult, A_LENGTH ) ) {
 
 				// Если составное число прошло проверку - оно выводится в файл
 				locker->lock();
-				printValue_uint128_t( &multResult, fout );
+
+				if (std::find(spps->begin(), spps->end(), multResult) == spps->end()) {
+
+					print_values[0] = multResult;
+					print_values[1] = simples[i];
+					print_values[2] = simples[j];
+
+					spps->push_back(multResult);
+
+					printValues(print_values, &count , fout);
+				}
+
 				locker->unlock();
 			}
 		}
 	}
+
+	delete[] print_values;
 }
 
 // Функция, которая проверяет ВСЕ ПРОСТЫЕ числа в промежутке от start до finish с помощью функции thread_function_mult_simples 
@@ -32,11 +48,10 @@ void mult_simples_pq_run() {
 
 	// Получим количество простых чисел и все простые числа
 	uint64_t  count_simples = 0;// getCountSimples(3, max_count_simples, simples);
-	// getPrimes(simples, &count_simples, 0, max_count_simples, 1);
+	getPrimes(simples, &count_simples, 0, max_count_simples, 1);
 
-	uint64_t  step = count_simples / 30;
+	uint64_t  step = count_simples / 2000;
 
-	//fprintf(FOUT_FILES[THREADS_COUNT], "Промежуток: до %lld, простых чисел всего: %lld, максимальное число = %lld\n\n", max_count_simples, count_simples, simples[count_simples - 2]);
 	std::atomic<bool> * is_completed_threads = NULL;
 	FILE *f = NULL;
 
