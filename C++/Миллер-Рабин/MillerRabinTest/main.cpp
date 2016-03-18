@@ -52,10 +52,10 @@ int main() {
 		
 	TimeManager example;// для запуска - передаём запускаемую функцию
 
-	// example.run(official_algorithm_run_pq);// Официальный алгоритм, по методичке, проверяет pq - числа
+	example.run(official_algorithm_run_pq);// Официальный алгоритм, по методичке, проверяет pq - числа
 	// example.run( official_algorithm_run_pqr );// Официальный алгоритм, по методичке, проверяет pqr, r>q - числа
 	// example.run( exhaustive_search_run );// Полный перебор всех чисел до указанного предела
-	example.run( mult_simples_pq_run ); // Почти полный перебор, поиск по произведениям простых чисел p и q
+	// example.run( mult_simples_pq_run ); // Почти полный перебор, поиск по произведениям простых чисел p и q
 
 	// official_algorithm_run_simpletuples();// Перебор кортежей простых чисел, так же распараллелено
 	
