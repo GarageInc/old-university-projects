@@ -121,8 +121,8 @@ int CLogReader::GetNextLine(char* szLine, int iLineSize)
 			}
 			switch(m_pBuffer[m_dwIndex])
 			{
-				case 0x0d://End of Line encountered
-				case 0x0a:
+				case 0x0d:// \r - возврат каретки End of Line encountered
+				case 0x0a:// \n
 					if((m_dwIndex+1) < m_dwRead) // Check we're not on end of m_pBuffer ???
 						if(m_pBuffer[m_dwIndex+1] == '\n' || m_pBuffer[m_dwIndex+1] == '\r')
 						{
