@@ -23,7 +23,9 @@ FileReader::FileReader( int nBufSize )
 
 	word = "";
 	word_j = 0;
+
 	key = "";
+	key_k = 0;
 }
 
 // Деструктор
@@ -142,30 +144,57 @@ int FileReader::GetNextLine( int lineSize )
 void FileReader::FilterWithXOR()
 {
 	int i = 0;
-	int k = 0;
-
+	char a;
 	while (szLine[i]) {
 
 		// если чтение слова не оборвалось по-середине. Но всякое бывает - чтение кусочка файла может завершиться на середине требуемого слова или слова, на него похожего
-
-		if (szLine[i] && szLine[i] ^ key[k] != word[word_j]) {
+		
+		if (szLine[i] && (szLine[i] ^ key[key_k]) != word[word_j]) {
 
 			word_j = 0;
 		}
 
 		if (word_j == 0) {
 
-			while (szLine[i] && szLine[i] ^ key[k] != word[word_j]) {
+			while (szLine[i] && (szLine[i] ^ key[key_k]) != word[word_j]) {
 				i++;
-				k++;
+
+				if (!key[key_k + 1]) {
+					key_k = 0;
+				}
+				else {
+					key_k++;
+				}
 			}
+
+			if ( !word[word_j] ) {
+				m_wordsCount++;
+
+				word_j = 0;
+
+				while (szLine[i] && (szLine[i] ^ key[key_k]) != word[word_j]) {
+					i++;
+
+					if (!key[key_k + 1]) {
+						key_k = 0;
+					}
+					else {
+						key_k++;
+					}
+				}
+			}// pass
 		}
 
-		while (szLine[i] && szLine[i] ^ key[k] == word[word_j] && word[word_j]) {
+		while (szLine[i] && (szLine[i] ^ key[key_k]) == word[word_j] && word[word_j]) {
 			i++;
-			k++;
-
 			word_j++;
+
+			if (!key[key_k+1]) {
+				key_k = 0;
+			}
+			else {
+				key_k++;
+			}
 		}
 
 		if ( !word[word_j] ) {
@@ -179,8 +208,7 @@ void FileReader::FilterWithXOR()
 void FileReader::FilterWithoutXOR()
 {
 	int i = 0;
-	int k = 0;
-	
+
 	while ( szLine[ i ] ) {
 		
 		// если чтение слова не оборвалось по-середине. Но всякое бывает - чтение кусочка файла может завершиться на середине требуемого слова или слова, на него похожего
@@ -194,14 +222,21 @@ void FileReader::FilterWithoutXOR()
 
 			while (szLine[i] && szLine[i] != word[word_j]) {
 				i++;
-				k++;
 			}
-		}
 
-		printf("%d\n", word_j);
+			if ( !word[word_j] ) {
+				m_wordsCount++;
+
+				word_j = 0;
+
+				while (szLine[i] && szLine[i] != word[word_j]) {
+					i++;
+				}
+			}// pass
+		}// pass
+		
 		while (szLine[i] && szLine[i] == word[word_j] && word[word_j]) {
 			i++;
-			k++;
 
 			word_j++;
 		}

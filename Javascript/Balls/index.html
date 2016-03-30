@@ -49,9 +49,22 @@
 			<option style="background-color:#ff0000" value="#ff0000">Красный</option>  
 			<option style="background-color:#8099E8" value="#8099E8">Голубой</option>  
 		</select>
+	</div>
+	<div>
+		<text>
+			Чтобы шарик первоначально двигался вертикально или горизонтально, задайте скорость типа [0,N] или [N,0]
+		</text>
+	</div>
+	<div>
+	
+		<label>Начальная скорость по оси Х</label>
+		<input id="bVX" placeholder="скорость по оси Х"/>
+		
+		<label>Начальная скорость по оси Y</label>
+		<input id="bVY" placeholder="скорость по оси Y"/>
+		
 		<button id="bAddNewBall" onclick="addNewBall()">Добавить новый шар</button>
 	</div>
-	
 	<div>	
 	   <canvas id="canvas" width = "600" height = "400">
 				Если Вы это увидели, это значит, что Ваш браузер не поддерживает canvas
@@ -77,6 +90,8 @@
 		// В эти переменные "положим" кнопки и текстовые поля
 		var bX = document.getElementById( 'bX' );
 		var bY = document.getElementById( 'bY' );
+		var bVX = document.getElementById( 'bVX' );
+		var bVY = document.getElementById( 'bVY' );
 		var bWeight = document.getElementById( 'bWeight' );
 		var bRadius = document.getElementById( 'bRadius' );
 		var bColor = document.getElementById( 'bColor' );
@@ -130,9 +145,8 @@
 			var radius = bRadius.value;
 			var color = bColor.value;
 			
-			// Сгенерируем случайное скорости/направления движения шарика:
-			var vX = (new Date()).getTime() % 10;
-			var vY = (new Date()).getTime() % 10;
+			var vx = bVX.value;
+			var vy = bVY.value;
 			
 			// Проверим на введенные значения
 			if( x == ""){
@@ -151,7 +165,15 @@
 			
 				alert("Не введена радиус шара!")
 				return ;
-			}
+			} else if( vx == ""){
+			
+				alert("Не введена  скорость по оси X(шара)!")
+				return ;
+			} else if( vy == ""){
+			
+				alert("Не введена скорость по оси У(шара)!")
+				return ;
+			} 
 			
 			if( radius * 2 > Math.min( canvas.width, canvas.height ) ){
 			
@@ -173,7 +195,7 @@
 			}
 			
 			trace(bColor)
-			var ball = new Ball( 1*x, 1*y, 1*radius, 1*weight, 1*vX, 1*vY, color );//new Ball( x, y, radius, weight, vX, vY, color );
+			var ball = new Ball( 1*x, 1*y, 1*radius, 1*weight, 1*vx, 1*vy, color );//new Ball( x, y, radius, weight, vX, vY, color );
 			
 			trace(ball)
 			// добавляем шарик на canvas

@@ -104,6 +104,7 @@ namespace TestWords {
 	private: System::Windows::Forms::TextBox^  textBoxXORKey;
 	private: System::Windows::Forms::Label^  label3;
 	private: System::Windows::Forms::Button^  buttonRepeatAnalize;
+	private: System::Windows::Forms::CheckBox^  checkBoxXORKey;
 
 
 
@@ -146,6 +147,7 @@ namespace TestWords {
 			this->textBoxXORKey = (gcnew System::Windows::Forms::TextBox());
 			this->label3 = (gcnew System::Windows::Forms::Label());
 			this->buttonRepeatAnalize = (gcnew System::Windows::Forms::Button());
+			this->checkBoxXORKey = (gcnew System::Windows::Forms::CheckBox());
 			this->SuspendLayout();
 			// 
 			// buttonOpenTxtFile
@@ -178,7 +180,7 @@ namespace TestWords {
 			// 
 			// textBoxReadingTime
 			// 
-			this->textBoxReadingTime->Location = System::Drawing::Point(550, 76);
+			this->textBoxReadingTime->Location = System::Drawing::Point(550, 108);
 			this->textBoxReadingTime->Name = L"textBoxReadingTime";
 			this->textBoxReadingTime->RightToLeft = System::Windows::Forms::RightToLeft::Yes;
 			this->textBoxReadingTime->Size = System::Drawing::Size(242, 20);
@@ -187,7 +189,7 @@ namespace TestWords {
 			// label9
 			// 
 			this->label9->AutoSize = true;
-			this->label9->Location = System::Drawing::Point(417, 79);
+			this->label9->Location = System::Drawing::Point(417, 111);
 			this->label9->Name = L"label9";
 			this->label9->Size = System::Drawing::Size(88, 13);
 			this->label9->TabIndex = 4;
@@ -195,7 +197,7 @@ namespace TestWords {
 			// 
 			// textBoxWordsCount
 			// 
-			this->textBoxWordsCount->Location = System::Drawing::Point(550, 102);
+			this->textBoxWordsCount->Location = System::Drawing::Point(550, 134);
 			this->textBoxWordsCount->Name = L"textBoxWordsCount";
 			this->textBoxWordsCount->RightToLeft = System::Windows::Forms::RightToLeft::Yes;
 			this->textBoxWordsCount->Size = System::Drawing::Size(242, 20);
@@ -204,7 +206,7 @@ namespace TestWords {
 			// label1
 			// 
 			this->label1->AutoSize = true;
-			this->label1->Location = System::Drawing::Point(417, 105);
+			this->label1->Location = System::Drawing::Point(417, 137);
 			this->label1->Name = L"label1";
 			this->label1->Size = System::Drawing::Size(127, 13);
 			this->label1->TabIndex = 13;
@@ -230,6 +232,7 @@ namespace TestWords {
 			// 
 			// buttonRepeatAnalize
 			// 
+			this->buttonRepeatAnalize->Enabled = false;
 			this->buttonRepeatAnalize->Location = System::Drawing::Point(12, 76);
 			this->buttonRepeatAnalize->Name = L"buttonRepeatAnalize";
 			this->buttonRepeatAnalize->Size = System::Drawing::Size(357, 42);
@@ -238,12 +241,23 @@ namespace TestWords {
 			this->buttonRepeatAnalize->UseVisualStyleBackColor = true;
 			this->buttonRepeatAnalize->Click += gcnew System::EventHandler(this, &Form1::buttonRepeatAnalize_Click);
 			// 
+			// checkBoxXORKey
+			// 
+			this->checkBoxXORKey->AutoSize = true;
+			this->checkBoxXORKey->Location = System::Drawing::Point(550, 76);
+			this->checkBoxXORKey->Name = L"checkBoxXORKey";
+			this->checkBoxXORKey->Size = System::Drawing::Size(83, 17);
+			this->checkBoxXORKey->TabIndex = 18;
+			this->checkBoxXORKey->Text = L"Применить";
+			this->checkBoxXORKey->UseVisualStyleBackColor = true;
+			// 
 			// Form1
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::SystemColors::Window;
-			this->ClientSize = System::Drawing::Size(864, 148);
+			this->ClientSize = System::Drawing::Size(864, 211);
+			this->Controls->Add(this->checkBoxXORKey);
 			this->Controls->Add(this->buttonRepeatAnalize);
 			this->Controls->Add(this->textBoxXORKey);
 			this->Controls->Add(this->label3);
@@ -282,9 +296,21 @@ namespace TestWords {
 
 			if ( sfText.Open( path ) )
 			{
+				typedef void (FileReader::*SomeClassMFP)();
+				SomeClassMFP my_memfunc_ptr;
+
+				if (checkBoxXORKey->Checked) {
+
+					my_memfunc_ptr = &FileReader::FilterWithXOR;
+				}
+				else {
+
+					my_memfunc_ptr = &FileReader::FilterWithoutXOR;
+				}
+
 				while ( sfText.GetNextLine() != 0 )
 				{
-					sfText.FilterWithoutXOR();
+					(sfText.*my_memfunc_ptr)();
 				}
 
 				sfText.Close();
@@ -312,11 +338,13 @@ namespace TestWords {
 					unsigned int start_time = clock(); // начальное время
 
 					ReadTextFile( currentFileName);
-
+					
 					unsigned int end_time = clock(); // конечное время
 					unsigned int search_time = end_time - start_time; // искомое время
 
 					textBoxReadingTime->Text = gcnew String(search_time.ToString());
+
+					buttonRepeatAnalize->Enabled = true;
 				}
 
 				myStream->Close();
@@ -328,8 +356,15 @@ namespace TestWords {
 			msclr::interop::marshal_context context;
 
 			string currentFileName = context.marshal_as<std::string>(openFileDialog->FileName);
-			
-			ReadTextFile( currentFileName );
+
+			unsigned int start_time = clock(); // начальное время
+
+			ReadTextFile(currentFileName);
+
+			unsigned int end_time = clock(); // конечное время
+			unsigned int search_time = end_time - start_time; // искомое время
+
+			textBoxReadingTime->Text = gcnew String(search_time.ToString());
 		}
 };
 }

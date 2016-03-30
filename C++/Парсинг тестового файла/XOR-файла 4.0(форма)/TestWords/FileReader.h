@@ -22,17 +22,17 @@ public:
 	void Close();
 
 	int GetNextLine( int lineSize = 0 );
-	void parseSymbol( char symbol );
 
 	void FilterWithXOR();
 	void FilterWithoutXOR();
 
 	int	m_wordsCount;
-	std::string word;
 
+	std::string word;
 	int word_j;
 
 	std::string key;
+	int key_k;
 
 	char* szLine;
 protected:

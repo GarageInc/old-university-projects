@@ -82,3 +82,4 @@ F:\Projects\Опытные\all\C#\Klient-servernoe\Сервер\ServerForm\obj\D
 F:\Projects\Опытные\all\C#\Klient-servernoe\Сервер\ServerForm\obj\Debug\ServerForm.Form1.resources
 F:\Projects\Опытные\all\C#\Klient-servernoe\Сервер\ServerForm\obj\Debug\ServerForm.Properties.Resources.resources
 F:\Projects\Опытные\all\C#\Klient-servernoe\Сервер\ServerForm\obj\Debug\ServerForm.csproj.GenerateResource.Cache
+C:\Data\all\C#\Klient-servernoe\Сервер\ServerForm\bin\Debug\ServerForm.exe.config
