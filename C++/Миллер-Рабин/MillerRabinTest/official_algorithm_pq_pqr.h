@@ -103,7 +103,7 @@ void official_algorithm_run_pq() {
 	uint64_t  count_simples = 0;// getCountSimples(3, max_count_simples, simples);
 	getPrimes( simples, &count_simples, 0, max_count_simples, 1 );
 
-	uint64_t  step = 40;// count_simples / 25;
+	uint64_t  step = count_simples / 25;
 
 	std::atomic<bool> * is_completed_threads = NULL;
 	FILE *f = NULL;

@@ -50,7 +50,7 @@ void mult_simples_pq_run() {
 	uint64_t  count_simples = 0;// getCountSimples(3, max_count_simples, simples);
 	getPrimes(simples, &count_simples, 0, max_count_simples, 1);
 
-	uint64_t  step = count_simples / 2000;
+	uint64_t  step = count_simples / 30;
 
 	std::atomic<bool> * is_completed_threads = NULL;
 	FILE *f = NULL;
@@ -60,6 +60,6 @@ void mult_simples_pq_run() {
 	printf("Промежуток: до %lld, простых чисел всего : %lld, максимальное число = %lld\n\n", max_count_simples, count_simples, simples[count_simples - 2]);
 
 
-	example.parallel_by_cores(is_completed_threads, f, count_simples, simples, step, 3000, thread_function_mult_simples);
+	example.parallel_by_cores(is_completed_threads, f, count_simples, simples, step, 2000, thread_function_mult_simples);
 }
 

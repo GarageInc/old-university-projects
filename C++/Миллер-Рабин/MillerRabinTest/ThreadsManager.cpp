@@ -33,7 +33,7 @@ void ThreadsManager::parallel_by_cores(std::atomic<bool> *temp_completed_threads
 
 	if (sub_threads_count != 0) {
 
-		THREADS_COUNT = std::thread::hardware_concurrency() / ( sub_threads_count + 1 ) + 1;
+		THREADS_COUNT = std::thread::hardware_concurrency() / ( sub_threads_count );
 	}
 	else {
 

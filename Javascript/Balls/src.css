@@ -1,0 +1,21 @@
+button {
+	color: navy;
+	font-size: 100%;
+	font-family: Arial, Verdana, sans-serif;
+	text-align: center;
+	padding: 10px;
+    margin: 10px;
+}
+
+canvas {
+	border: 1px solid;
+    padding-left: 0;
+    padding-right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+div {
+	    text-align: center;
+}

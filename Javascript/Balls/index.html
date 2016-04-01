@@ -1,0 +1,207 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <script type = "text/javascript" src = "javascript/ball.js"> </script>
+    <script type = "text/javascript" src = "javascript/Renderer.js"> </script>
+    <script type = "text/javascript" src = "javascript/Simulation.js"> </script>
+    <script type = "text/javascript" src = "javascript/vector.js"> </script>
+    <script type = "text/javascript" src = "javascript/canvas.js"> </script>
+    <meta charset="utf-8" />
+    <title>Рисование шариков</title>
+    <link rel="stylesheet" type="text/css" href="src.css">
+</head>
+<body>
+	<div>
+		<text>
+			Все шарики имеют свой вес! Поэтому - лучше добавлять шарики примерно одинакого веса, чтобы не сильно "тормозили" при столкновениях
+		</text>
+	</div>
+	<div>
+		<button id="bStart" onclick="bStart_click()" style="color: green;">Запуск!</button>
+		
+		<button id="bStop" onclick="bStop_click()" style="color: red;">Остановить</button>
+		
+		<button id="bClear" onclick="bClear_click()">Очистить всё</button>		
+	</div>
+	
+	<div>
+		<button id="bStartRandom" onclick="bStartRandow_click()">Сгенерировать и запустить рандомный массив шариков!</button>
+	</div>
+	
+	<div>
+		<label>X</label>
+		<input id="bX" type="text" placeholder="Координата 'x'"/>
+		
+		<label>Y</label>
+		<input id="bY" placeholder="Координата 'y'"/>
+		
+		<label>Вес</label>
+		<input id="bWeight" placeholder="Вес шара"/>
+		
+		<label>Радиус</label>
+		<input id="bRadius" placeholder="Радиус шара"/>
+		
+		<label>Цвет</label>
+		<select id="bColor">  
+			<option style="background-color:#CCCCCC" value="#CCCCCC">Серый</option>  
+			<option style="background-color:#ffff00" value="#ffff00">Желтый</option>  
+			<option style="background-color:#ff0000" value="#ff0000">Красный</option>  
+			<option style="background-color:#8099E8" value="#8099E8">Голубой</option>  
+		</select>
+	</div>
+	<div>
+		<text>
+			Чтобы шарик первоначально двигался вертикально или горизонтально, задайте скорость типа [0,N] или [N,0]
+		</text>
+	</div>
+	<div>
+	
+		<label>Начальная скорость по оси Х</label>
+		<input id="bVX" placeholder="скорость по оси Х"/>
+		
+		<label>Начальная скорость по оси Y</label>
+		<input id="bVY" placeholder="скорость по оси Y"/>
+		
+		<button id="bAddNewBall" onclick="addNewBall()">Добавить новый шар</button>
+	</div>
+	<div>	
+	   <canvas id="canvas" width = "600" height = "400">
+				Если Вы это увидели, это значит, что Ваш браузер не поддерживает canvas
+	   </canvas>
+	</div>
+	
+	<div>
+		<label>Частота кадров в период: </label> 
+		<label id="bFrameRateValue"></label> 
+		<input id="bFrameRate" type="range" min="10" max="100" step="1" value="25" style="background-repeat: repeat-x;" oninput="bSlider_click()"/> 
+	</div>
+	<div>
+		<label>Период в миллисекундах: </label> 
+		<label id="bDelayValue"></label> 
+		<input id="bDelay" type="range" min="1000" max="10000" step="10" value="1000" style="background-repeat: repeat-x;" oninput="bSlider_click()"/> 
+	</div>
+	<script>	
+		// Функция для вывода значений в консоль(при тестировании)
+		var trace = function( value ){
+			console.log( value );	
+		};
+		
+		// В эти переменные "положим" кнопки и текстовые поля
+		var bX = document.getElementById( 'bX' );
+		var bY = document.getElementById( 'bY' );
+		var bVX = document.getElementById( 'bVX' );
+		var bVY = document.getElementById( 'bVY' );
+		var bWeight = document.getElementById( 'bWeight' );
+		var bRadius = document.getElementById( 'bRadius' );
+		var bColor = document.getElementById( 'bColor' );
+		
+		var bFrameRateValue = document.getElementById( 'bFrameRateValue' );
+		var bFrameRate = document.getElementById( 'bFrameRate' );
+				
+		var bDelayValue = document.getElementById( 'bDelayValue' );
+		var bDelay = document.getElementById( 'bDelay' );
+		
+		bFrameRateValue.innerHTML  = bFrameRate.value;
+		bDelayValue.innerHTML  = bDelay.value;
+			
+		function bSlider_click() { 
+		
+			bFrameRateValue.innerHTML  = bFrameRate.value;
+			canvas.setFrameRate( bFrameRate.value )
+				
+			bDelayValue.innerHTML  = bDelay.value;
+			canvas.setDelay( bDelay.value )
+		}
+		
+		// Создадим-получим элемент canvas
+		var canvas = new Canvas();
+		canvas.setFrameRate( bFrameRate.value )
+		
+		function bStart_click() { 
+			canvas.start();
+		}
+		
+		function bStop_click() { 
+			canvas.stop();
+		}
+		
+		function bClear_click() { 
+			canvas.clear();
+		}
+		
+		function bStartRandow_click() { 
+			canvas.startRandomCanvas();
+		}
+		
+		// Функция добавления нового рисунка
+		function addNewBall(){
+			/* Ball takes X | Y | radius | Mass| vX | vY | colour */
+			
+			// Проверим  - а все ли данные введены?			
+			var x = bX.value;
+			var y = bY.value;
+			var weight = bWeight.value;
+			var radius = bRadius.value;
+			var color = bColor.value;
+			
+			var vx = bVX.value;
+			var vy = bVY.value;
+			
+			// Проверим на введенные значения
+			if( x == ""){
+			
+				alert("Не введена координата X(шара)!")
+				return ;
+			} else if( y == ""){
+			
+				alert("Не введена координата У(шара)!")
+				return ;
+			} else if( weight == ""){
+			
+				alert("Не введен вес(шара)!")
+				return ;
+			} else if( radius == ""){
+			
+				alert("Не введена радиус шара!")
+				return ;
+			} else if( vx == ""){
+			
+				alert("Не введена  скорость по оси X(шара)!")
+				return ;
+			} else if( vy == ""){
+			
+				alert("Не введена скорость по оси У(шара)!")
+				return ;
+			} 
+			
+			if( radius * 2 > Math.min( canvas.width, canvas.height ) ){
+			
+				alert("Введен неправильный радиус!");
+				return ;
+			}
+			
+			// Проверим на их размерность
+			if ( x > canvas.width - radius || x < radius || y < radius || y > canvas.height - radius ){
+			
+				alert("Границы координат X и Y должны быть в пределах ["+radius+"; "+canvas.width + "] и ["+radius+"; "+canvas.height + "]");
+				return ;
+			}
+			
+			if( weight > 100 ){
+			
+				alert("Вес шара должен быть меньше 100! Иначе будет дисбаланс системы")
+				return ;
+			}
+			
+			trace(bColor)
+			var ball = new Ball( 1*x, 1*y, 1*radius, 1*weight, 1*vx, 1*vy, color );//new Ball( x, y, radius, weight, vX, vY, color );
+			
+			trace(ball)
+			// добавляем шарик на canvas
+			canvas.addNewBall( ball );
+		}
+		
+	</script>
+</body>
+</html>
