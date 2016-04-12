@@ -8,7 +8,7 @@ namespace ConsoleApplication
 {
     class Path
     {
-        public List<Node> nodes { get; set; }
+        protected List<Node> nodes { get; set; }
 
         public Path()
         {
@@ -25,6 +25,11 @@ namespace ConsoleApplication
             }
 
             return result;
+        }
+
+        public void Add(Node node)
+        {
+            this.nodes.Add(node);
         }
     }
 }

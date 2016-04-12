@@ -23,42 +23,7 @@ namespace ConsoleApplication
         }
 
     }
-
-    class RelationsFabric
-    {
-        protected static RelationsFabric instance;
-
-        public Dictionary<int, Relation> relations { get; set; }
-
-        public RelationsFabric()
-        {
-            relations = new Dictionary<int, Relation>();
-        }
-
-        public static RelationsFabric getInstance()
-        {
-            if (instance == null)
-            {
-                instance = new RelationsFabric();
-            }
-
-            return instance;
-        }
-
-        public void createNewRelation(Node left, Node right)
-        {
-            var relation = new Relation(left, right);
-
-            int hash = (left.rootWord + right.rootWord).GetHashCode();
-            if (!relations.ContainsKey(hash))
-            {
-                relations.Add(hash, relation);
-
-                left.relations.Add(relation);
-                right.relations.Add(relation);
-            }
-        }
-    }
+    
 
     static class RelationsCombainer
     {
@@ -81,40 +46,96 @@ namespace ConsoleApplication
 
             var metric = new DamerauLevensteinMetric();
 
+
             for (int i = 0; i < nodes.Count; i++)
             {
                 for (int j = i + 1; j < nodes.Count; j++)
                 {
-                    if (metric.GetDistance(nodes[i].rootWord, nodes[i].rootWord, Math.Max(nodes[i].rootWord.Length, nodes[j].rootWord.Length)) == 1)
-                    {
-                        trace(nodes[i].rootWord, nodes[j].rootWord);
+                    var first = nodes.ElementAt(i).Value.rootWord;
+                    var second = nodes.ElementAt(j).Value.rootWord;
+                    var distance = metric.GetDistance(
+                        first,
+                        second,
+                        -1);
 
-                        RelationsFabric.getInstance().createNewRelation(nodes[i], nodes[j]);
+                    if (distance == 1)
+                    {
+                        Relation relation = new Relation(nodes.ElementAt(i).Value, nodes.ElementAt(j).Value);
+
+                        nodes.ElementAt(i).Value.relations.Add(relation);
+                        nodes.ElementAt(j).Value.relations.Add(relation);
 
                     }// pass
                 }
             }
 
+            var d = metric.GetDistance("тон", "слон", -1);
         }
 
         public static List<Path> findPaths(string wordFirth, string wordSecond)
         {
             var paths = new List<Path>();
 
-            var nodeFirst = NodesFabric.getInstance().nodes[wordFirth.GetHashCode()];
+            var nodeStart = NodesFabric.getInstance().nodes[wordFirth.GetHashCode()];
 
-            var nodeSecond = NodesFabric.getInstance().nodes[wordSecond.GetHashCode()];
+            var nodeEnd = NodesFabric.getInstance().nodes[wordSecond.GetHashCode()];
 
-            if (nodeFirst == null || nodeSecond == null)
+            if (nodeStart == null || nodeEnd == null)
                 throw new Exception("Ошибочка в поиске");
 
-            start(nodeFirst, nodeSecond);
-         
+            var tmpPath = new Path();
 
+            tmpPath.nodes.Add( nodeStart );
+            start(ref paths, ref tmpPath, nodeStart,  nodeEnd);
+         
             return paths;
         }
 
-        public static void 
+        // recursive path
+        public static void start(ref List<Path> paths, ref Path tmpPath, Node current,  Node end)
+        {
+            if ( current != end )
+            {
+                bool started = false;
+
+                foreach( Relation relation in current.relations )
+                {
+                    if ( !relation.isVisited )
+                    {
+                        started = true;
+
+                        relation.isVisited = true;
+                        
+                        if ( relation.leftNode != current )
+                        {
+                            tmpPath.nodes.Add(relation.leftNode);
+
+                            start( ref paths, ref tmpPath, relation.leftNode,  end );
+                        } else
+                        {
+                            tmpPath.nodes.Add(relation.rightNode);
+
+                            start( ref paths, ref tmpPath, relation.rightNode, end );
+                        }
+                    }
+                }
+
+                if ( !started )
+                {
+                    trace("Тупик: ", current.ToString());
+
+                    // делаем шаг назад, говорим - что сюда пройти уже нельзя и ищем новый путь
+                }
+            }
+            else
+            {                
+                trace("FIND PATH!");
+
+                trace( tmpPath );
+            }
+
+
+        }
     }
 
 

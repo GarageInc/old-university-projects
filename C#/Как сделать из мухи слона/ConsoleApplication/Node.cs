@@ -22,6 +22,18 @@ namespace ConsoleApplication
             return rootWord;
         }
 
+        public static bool operator !=(Node left, Node right)
+        {
+            return left.rootWord != right.rootWord;
+        }
+
+        public static bool operator ==(Node left, Node right)
+        {
+            if (ReferenceEquals(left, null) || ReferenceEquals(right, null))
+                return ReferenceEquals(left, right);
+
+            return left.rootWord != right.rootWord;
+        }
     }
 
     class NodesFabric

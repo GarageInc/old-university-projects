@@ -7,20 +7,28 @@ using System.IO;
 
 namespace ConsoleApplication
 {
+
+    
+
     class Program
     {
+        public static void change(Node node)
+        {
+            node.rootWord = "3";
+        }
+
         static void Main(string[] args)
         {
             string fileTwoWords = "input.txt";
             string fileDictionary = "dictionary.txt";
 
-            StreamReader sr = new StreamReader(fileTwoWords);
+            StreamReader sr = new StreamReader(fileTwoWords, Encoding.GetEncoding(1251));
             string[] readedResult = sr.ReadToEnd().Split('\n');
 
-            string wordFirst = readedResult[ 0 ];
-            string wordSecond = readedResult[ 1 ];
+            string wordFirst = readedResult[ 0 ].Trim();
+            string wordSecond = readedResult[ 1 ].Trim();
 
-            sr = new StreamReader(fileDictionary);
+            sr = new StreamReader(fileDictionary, Encoding.GetEncoding(1251));
 
             readedResult = sr.ReadToEnd().Split('\n');
             sr.Close();
@@ -28,7 +36,7 @@ namespace ConsoleApplication
             List<Node> nodes = new List<Node>();
             foreach(string word in readedResult)
             {
-                NodesFabric.getInstance().createNewNode(word);
+                NodesFabric.getInstance().createNewNode(word.Trim());
             }
 
             RelationsCombainer.transformNodesByRelations();
