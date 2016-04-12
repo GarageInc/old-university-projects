@@ -10,7 +10,7 @@ namespace ConsoleApplication
 
         public bool isVisited { get; set; }
 
-        public int lastVisitedIndex { get; set; }
+        public int visitedCounter { get; set; }
 
         public List<Relation> relations;
 

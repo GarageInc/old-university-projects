@@ -31,7 +31,7 @@ namespace ConsoleApplication
 
         public static void trace(params object[] list)
         {
-            return;
+            //return;
 
             foreach (var o in list)
             {
@@ -89,79 +89,78 @@ namespace ConsoleApplication
             tailRelation.nodes.Add(null);
             tailRelation.nodes.Add(null);
 
-            start( nodeStart,  nodeEnd,   tmpPath );
+            start(nodeStart, nodeStart,  nodeEnd,   tmpPath );
         }
 
         static int COUNTER = 0;
+
         // recursive path
-        public static void start(Node current, Node end,   Path tmpPath)
+        public static void start(Node startNode, Node current, Node end,   Path tmpPath)
         {
             tmpPath.Add(current);
 
             current.isVisited = true;
 
-            bool findAlso = false;
+            bool stepBack = false;
             bool started = false;
 
             if (current != end)
             {
-                for(int i=current.lastVisitedIndex; i < current.relations.Count; i++)
+                for(int i=current.visitedCounter; i < current.relations.Count; i++)
                 {
                     if (!current.relations[i].leftNode.isVisited )
                     {
                         started = true;
 
-                        current.lastVisitedIndex++;
+                        current.visitedCounter++;
 
-                        start(current.relations[i].leftNode, end,   tmpPath );
+                        start(startNode, current.relations[i].leftNode, end,   tmpPath );
                     }
                     else if (!current.relations[i].rightNode.isVisited)
                     {
                         started = true;
 
-                        current.lastVisitedIndex++;
+                        current.visitedCounter++;
 
-                        start(current.relations[i].rightNode, end,   tmpPath );
+                        start(startNode, current.relations[i].rightNode, end,   tmpPath );
                     }// pass
-                }
 
+                    stepBack = true;
+                }
 
                 if ( !started )
                 {
-                    findAlso = true;
-
-                    trace("Тупик: ", current.ToString());                    
+                    trace("Тупик: ", current.ToString());
                 }// pass
+
+                if ( current.visitedCounter == current.relations.Count && current == startNode)
+                {
+                    stepBack = false;
+                }// pass
+
             }
             else
             {
                 trace("");
                 trace(tmpPath);
 
-                findAlso = true;
+                stepBack = true;
 
                 COUNTER++;
             }
 
-            if ( findAlso )
+            if ( stepBack )
             {
                 Node newStartNode;
 
                 if ( tmpPath.nodes.Count >= 2 )
                 {
-                    //var newCannotVisit = tmpPath.nodes.Last();
-                    // newCannotVisit.isVisited = false;
-
-                    //tmpPath.nodes.Last().isVisited = false;
-
                     tmpPath.nodes.RemoveAt(tmpPath.nodes.Count - 1);
 
-                    current.lastVisitedIndex = 0;
+                    current.visitedCounter = 0;
                     current.isVisited = false;
 
                     newStartNode = tmpPath.nodes.Last();
-                    //newStartNode.isVisited = false;
-
                 } else
                 {
                     newStartNode = current;
@@ -169,8 +168,8 @@ namespace ConsoleApplication
                 
                 tmpPath.nodes.RemoveAt(tmpPath.nodes.Count - 1);// because than added in start
 
-                start(newStartNode, end, tmpPath);
-            }
+                start(startNode, newStartNode, end, tmpPath);
+            }// pass
         }
     }
 
