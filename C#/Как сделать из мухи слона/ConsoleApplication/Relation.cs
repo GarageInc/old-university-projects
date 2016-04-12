@@ -1,27 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace ConsoleApplication
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
 
     class Relation
     {
         public Node leftNode { get; set; }
 
         public Node rightNode { get; set; }
-
-        public bool isVisited { get; set; }
-
+        
         public Relation(Node l, Node r)
         {
             leftNode = l;
             rightNode = r;
-            isVisited = false;
         }
 
+        public override string ToString()
+        {
+            return leftNode.ToString() + " + " + rightNode.ToString();
+        }
     }
     
 
@@ -41,18 +42,16 @@ namespace ConsoleApplication
         public static void transformNodesByRelations()
         {
             var nodes = NodesFabric.getInstance().nodes;
-
-            // строим связи только те, в которых расстояние Дамерау-Левенштейна == 1
-
+            
             var metric = new DamerauLevensteinMetric();
-
-
+            
             for (int i = 0; i < nodes.Count; i++)
             {
                 for (int j = i + 1; j < nodes.Count; j++)
                 {
                     var first = nodes.ElementAt(i).Value.rootWord;
                     var second = nodes.ElementAt(j).Value.rootWord;
+
                     var distance = metric.GetDistance(
                         first,
                         second,
@@ -68,73 +67,111 @@ namespace ConsoleApplication
                     }// pass
                 }
             }
-
-            var d = metric.GetDistance("тон", "слон", -1);
+            
         }
 
-        public static List<Path> findPaths(string wordFirth, string wordSecond)
+        public static void findPaths(string wordFirth, string wordSecond)
         {
-            var paths = new List<Path>();
 
-            var nodeStart = NodesFabric.getInstance().nodes[wordFirth.GetHashCode()];
+            var nodeStart = NodesFabric.getInstance().find(wordFirth);//.GetHashCode()];
 
-            var nodeEnd = NodesFabric.getInstance().nodes[wordSecond.GetHashCode()];
+            var nodeEnd = NodesFabric.getInstance().find(wordSecond);//.GetHashCode()];
 
             if (nodeStart == null || nodeEnd == null)
                 throw new Exception("Ошибочка в поиске");
 
             var tmpPath = new Path();
+            var removePath = new Path();
+            var tailRelation = new Path();
 
-            tmpPath.nodes.Add( nodeStart );
-            start(ref paths, ref tmpPath, nodeStart,  nodeEnd);
-         
-            return paths;
+            tailRelation.nodes.Add(null);
+            tailRelation.nodes.Add(null);
+
+            start( nodeStart,  nodeEnd, ref tmpPath, ref tailRelation);
         }
 
+        static int COUNTER = 0;
         // recursive path
-        public static void start(ref List<Path> paths, ref Path tmpPath, Node current,  Node end)
+        public static void start(Node current, Node end, ref Path tmpPath, ref Path tail)
         {
-            if ( current != end )
-            {
-                bool started = false;
+            tmpPath.Add(current);
 
-                foreach( Relation relation in current.relations )
+            current.isVisited = true;
+
+            bool started = false;
+
+            // tailRelation.leftNode = tailRelation.rightNode;
+
+            if (current != end)
+            {
+                foreach (Relation relation in current.relations)
                 {
-                    if ( !relation.isVisited )
+                    if (!relation.leftNode.isVisited)
                     {
                         started = true;
-
-                        relation.isVisited = true;
                         
-                        if ( relation.leftNode != current )
-                        {
-                            tmpPath.nodes.Add(relation.leftNode);
-
-                            start( ref paths, ref tmpPath, relation.leftNode,  end );
-                        } else
-                        {
-                            tmpPath.nodes.Add(relation.rightNode);
-
-                            start( ref paths, ref tmpPath, relation.rightNode, end );
-                        }
+                        start( relation.leftNode, end, ref tmpPath, ref  tail);
                     }
+                    else if (!relation.rightNode.isVisited)
+                    {
+                        started = true;
+                        
+                        start( relation.rightNode, end, ref tmpPath, ref tail);
+                    }// pass
                 }
 
                 if ( !started )
                 {
                     trace("Тупик: ", current.ToString());
 
-                    // делаем шаг назад, говорим - что сюда пройти уже нельзя и ищем новый путь
-                }
+                    if (tmpPath.nodes.Count >= 2)
+                    {
+                        if (tail.nodes[0] != null)
+                        {
+                            tail.nodes[0].isVisited = false;
+                        }// pass
+
+                        tail.nodes.RemoveAt(0);
+
+                        tail.nodes.Add(tmpPath.nodes[tmpPath.nodes.Count - 1]);
+
+                        //
+                        tmpPath.nodes.RemoveAt(tmpPath.nodes.Count - 1);
+
+                        var newStartNode = tmpPath.nodes.Last();
+
+                        tmpPath.nodes.RemoveAt(tmpPath.nodes.Count - 1);
+
+                        start(newStartNode, end, ref tmpPath, ref tail);
+
+                        // current.isVisited = false;
+                    }// pass
+                }// pass
             }
             else
-            {                
-                trace("FIND PATH!");
+            {
+                COUNTER++;
+                trace("");
+                trace(tmpPath);
 
-                trace( tmpPath );
+                if (tmpPath.nodes.Count >= 2)
+                {
+                    tmpPath.nodes.Last().isVisited = false;// current
+
+                    tmpPath.nodes.RemoveAt(tmpPath.nodes.Count - 1);
+
+                    tmpPath.nodes.Last().isVisited = true;
+                    
+                    var newStartNode = tmpPath.nodes.Last();
+
+                    tmpPath.nodes.RemoveAt(tmpPath.nodes.Count - 1);
+
+                    start(newStartNode, end, ref tmpPath, ref tail);
+
+                    // current.isVisited = false;
+                }// pass
             }
-
-
+            
         }
     }
 

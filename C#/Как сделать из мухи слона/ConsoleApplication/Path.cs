@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace ConsoleApplication
 {
+    using System.Collections.Generic;
+
     class Path
     {
-        protected List<Node> nodes { get; set; }
+        public List<Node> nodes { get; set; }
 
         public Path()
         {

@@ -76,8 +76,7 @@ namespace ConsoleApplication
             {
                 char secondCh = second[i - 1];
                 _currentRow[0] = i;
-
-                // Compute only diagonal stripe of width 2 * (max + 1)
+                
                 int from = Math.Max(i - max - 1, 1);
                 int to = Math.Min(i + max + 1, firstLength);
 
@@ -85,12 +84,10 @@ namespace ConsoleApplication
                 for (int j = from; j <= to; j++)
                 {
                     char firstCh = first[j - 1];
-
-                    // Compute minimal cost of state change to current state from previous states of deletion, insertion and swapping 
+                    
                     int cost = firstCh == secondCh ? 0 : 1;
                     int value = Math.Min(Math.Min(_currentRow[j - 1] + 1, _previousRow[j] + 1), _previousRow[j - 1] + cost);
-
-                    // If there was transposition, take in account its cost 
+ 
                     if (firstCh == lastSecondCh && secondCh == lastFirstCh)
                         value = Math.Min(value, _transpositionRow[j - 2] + cost);
 

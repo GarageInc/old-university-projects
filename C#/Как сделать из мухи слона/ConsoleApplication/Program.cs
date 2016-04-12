@@ -1,14 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.IO;
-
+﻿
 namespace ConsoleApplication
 {
 
-    
+    using System;
+    using System.Linq;
+    using System.Collections.Generic;
+    using System.Text;
+    using System.Threading.Tasks;
+    using System.IO;
+
 
     class Program
     {
@@ -25,8 +25,8 @@ namespace ConsoleApplication
             StreamReader sr = new StreamReader(fileTwoWords, Encoding.GetEncoding(1251));
             string[] readedResult = sr.ReadToEnd().Split('\n');
 
-            string wordFirst = readedResult[ 0 ].Trim();
-            string wordSecond = readedResult[ 1 ].Trim();
+            string wordFirst = readedResult[0].Trim();
+            string wordSecond = readedResult[1].Trim();
 
             sr = new StreamReader(fileDictionary, Encoding.GetEncoding(1251));
 
@@ -34,13 +34,23 @@ namespace ConsoleApplication
             sr.Close();
 
             List<Node> nodes = new List<Node>();
-            foreach(string word in readedResult)
+            foreach (string word in readedResult)
             {
                 NodesFabric.getInstance().createNewNode(word.Trim());
             }
+            
 
             RelationsCombainer.transformNodesByRelations();
-            var paths = RelationsCombainer.findPaths(wordFirst, wordSecond);
+
+            foreach (var d in NodesFabric.getInstance().nodes)
+            {
+                foreach (var r in d.Value.relations)
+                {
+                    RelationsCombainer.trace(r);
+                }
+            }
+
+            RelationsCombainer.findPaths(wordFirst, wordSecond);
 
             Console.ReadKey();
         }

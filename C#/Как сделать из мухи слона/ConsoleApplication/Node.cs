@@ -1,13 +1,15 @@
-﻿using System.Collections.Generic;
-using System;
-
+﻿
 namespace ConsoleApplication
 {
+    using System.Collections.Generic;
+    using System;
 
     class Node
     {
         public string rootWord { get; set; }
-        
+
+        public bool isVisited { get; set; }
+
         public List<Relation> relations;
 
         public Node( string word )
@@ -15,6 +17,8 @@ namespace ConsoleApplication
             rootWord = word;
 
             relations = new List<Relation>();
+
+            isVisited = false;
         }
 
         public override string ToString()
@@ -24,6 +28,9 @@ namespace ConsoleApplication
 
         public static bool operator !=(Node left, Node right)
         {
+            if (ReferenceEquals(left, null) || ReferenceEquals(right, null))
+                return !ReferenceEquals(left, right);
+
             return left.rootWord != right.rootWord;
         }
 
@@ -65,6 +72,13 @@ namespace ConsoleApplication
             {
                 nodes.Add(hashCode, new Node(word));
             }
+        }
+
+        public Node find(string word)
+        {
+            var hash = word.GetHashCode();
+
+            return nodes[hash];
         }
     }
 
