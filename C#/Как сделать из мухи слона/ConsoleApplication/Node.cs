@@ -10,6 +10,8 @@ namespace ConsoleApplication
 
         public bool isVisited { get; set; }
 
+        public int lastVisitedIndex { get; set; }
+
         public List<Relation> relations;
 
         public Node( string word )

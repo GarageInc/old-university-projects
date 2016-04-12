@@ -31,6 +31,8 @@ namespace ConsoleApplication
 
         public static void trace(params object[] list)
         {
+            return;
+
             foreach (var o in list)
             {
                 Console.Write(o + " ");
@@ -87,91 +89,88 @@ namespace ConsoleApplication
             tailRelation.nodes.Add(null);
             tailRelation.nodes.Add(null);
 
-            start( nodeStart,  nodeEnd, ref tmpPath, ref tailRelation);
+            start( nodeStart,  nodeEnd,   tmpPath );
         }
 
         static int COUNTER = 0;
         // recursive path
-        public static void start(Node current, Node end, ref Path tmpPath, ref Path tail)
+        public static void start(Node current, Node end,   Path tmpPath)
         {
             tmpPath.Add(current);
 
             current.isVisited = true;
 
+            bool findAlso = false;
             bool started = false;
-
-            // tailRelation.leftNode = tailRelation.rightNode;
 
             if (current != end)
             {
-                foreach (Relation relation in current.relations)
+                for(int i=current.lastVisitedIndex; i < current.relations.Count; i++)
                 {
-                    if (!relation.leftNode.isVisited)
+                    if (!current.relations[i].leftNode.isVisited )
                     {
                         started = true;
-                        
-                        start( relation.leftNode, end, ref tmpPath, ref  tail);
+
+                        current.lastVisitedIndex++;
+
+                        start(current.relations[i].leftNode, end,   tmpPath );
                     }
-                    else if (!relation.rightNode.isVisited)
+                    else if (!current.relations[i].rightNode.isVisited)
                     {
                         started = true;
-                        
-                        start( relation.rightNode, end, ref tmpPath, ref tail);
+
+                        current.lastVisitedIndex++;
+
+                        start(current.relations[i].rightNode, end,   tmpPath );
                     }// pass
                 }
 
+
                 if ( !started )
                 {
-                    trace("Тупик: ", current.ToString());
+                    findAlso = true;
 
-                    if (tmpPath.nodes.Count >= 2)
-                    {
-                        if (tail.nodes[0] != null)
-                        {
-                            tail.nodes[0].isVisited = false;
-                        }// pass
-
-                        tail.nodes.RemoveAt(0);
-
-                        tail.nodes.Add(tmpPath.nodes[tmpPath.nodes.Count - 1]);
-
-                        //
-                        tmpPath.nodes.RemoveAt(tmpPath.nodes.Count - 1);
-
-                        var newStartNode = tmpPath.nodes.Last();
-
-                        tmpPath.nodes.RemoveAt(tmpPath.nodes.Count - 1);
-
-                        start(newStartNode, end, ref tmpPath, ref tail);
-
-                        // current.isVisited = false;
-                    }// pass
+                    trace("Тупик: ", current.ToString());                    
                 }// pass
             }
             else
             {
-                COUNTER++;
                 trace("");
                 trace(tmpPath);
 
-                if (tmpPath.nodes.Count >= 2)
-                {
-                    tmpPath.nodes.Last().isVisited = false;// current
+                findAlso = true;
 
-                    tmpPath.nodes.RemoveAt(tmpPath.nodes.Count - 1);
-
-                    tmpPath.nodes.Last().isVisited = true;
-                    
-                    var newStartNode = tmpPath.nodes.Last();
-
-                    tmpPath.nodes.RemoveAt(tmpPath.nodes.Count - 1);
-
-                    start(newStartNode, end, ref tmpPath, ref tail);
-
-                    // current.isVisited = false;
-                }// pass
+                COUNTER++;
             }
-            
+
+            if ( findAlso )
+            {
+                Node newStartNode;
+
+                if ( tmpPath.nodes.Count >= 2 )
+                {
+                    //var newCannotVisit = tmpPath.nodes.Last();
+                    // newCannotVisit.isVisited = false;
+
+                    //tmpPath.nodes.Last().isVisited = false;
+
+                    tmpPath.nodes.RemoveAt(tmpPath.nodes.Count - 1);
+
+                    current.lastVisitedIndex = 0;
+                    current.isVisited = false;
+
+                    newStartNode = tmpPath.nodes.Last();
+                    //newStartNode.isVisited = false;
+
+                } else
+                {
+                    newStartNode = current;
+                }
+                
+                tmpPath.nodes.RemoveAt(tmpPath.nodes.Count - 1);// because than added in start
+
+                start(newStartNode, end, tmpPath);
+            }
         }
     }
 
