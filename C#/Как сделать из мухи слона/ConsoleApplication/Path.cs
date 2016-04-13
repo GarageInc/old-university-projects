@@ -14,7 +14,7 @@ namespace ConsoleApplication
 
         override public string ToString()
         {
-            var result = "";
+            var result = "|";
 
             foreach (var node in nodes)
             {

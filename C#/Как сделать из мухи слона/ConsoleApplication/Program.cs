@@ -38,9 +38,8 @@ namespace ConsoleApplication
             {
                 NodesFabric.getInstance().createNewNode(word.Trim());
             }
-            
 
-            RelationsCombainer.transformNodesByRelations();
+            NodesFabric.getInstance().transformNodesByRelations();
             
             RelationsCombainer.findPaths(wordFirst, wordSecond);
 

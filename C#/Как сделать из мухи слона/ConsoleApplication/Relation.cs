@@ -40,41 +40,9 @@ namespace ConsoleApplication
 
             Console.WriteLine();
         }
-
-        public static void transformNodesByRelations()
-        {
-            var nodes = NodesFabric.getInstance().nodes;
-            
-            var metric = new DamerauLevensteinMetric();
-            
-            for (int i = 0; i < nodes.Count; i++)
-            {
-                for (int j = i + 1; j < nodes.Count; j++)
-                {
-                    var first = nodes.ElementAt(i).Value.rootWord;
-                    var second = nodes.ElementAt(j).Value.rootWord;
-
-                    var distance = metric.GetDistance(
-                        first,
-                        second,
-                        -1);
-
-                    if (distance == 1)
-                    {
-                        Relation relation = new Relation(nodes.ElementAt(i).Value, nodes.ElementAt(j).Value);
-
-                        nodes.ElementAt(i).Value.relations.Add(relation);
-                        nodes.ElementAt(j).Value.relations.Add(relation);
-
-                    }// pass
-                }
-            }
-            
-        }
-
+        
         public static void findPaths(string wordFirth, string wordSecond)
         {
-
             var nodeStart = NodesFabric.getInstance().find(wordFirth);//.GetHashCode()];
 
             var nodeEnd = NodesFabric.getInstance().find(wordSecond);//.GetHashCode()];
@@ -124,7 +92,7 @@ namespace ConsoleApplication
                 }
                 else
                 {
-                    trace("Тупик: ", current.ToString());
+                    trace("\nТупик: ", current.ToString());
                 }
 
                 if ( current.visitedCounter == current.relations.Count && current == startNode)

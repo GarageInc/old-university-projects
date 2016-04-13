@@ -3,6 +3,7 @@ namespace ConsoleApplication
 {
     using System.Collections.Generic;
     using System;
+    using System.Linq;
 
     class Node
     {
@@ -80,7 +81,47 @@ namespace ConsoleApplication
         {
             var hash = word.GetHashCode();
 
-            return nodes[hash];
+            if (nodes.ContainsKey(hash))
+            {
+
+                return nodes[hash];
+            }
+            else
+            {
+                return null;
+            }
+
+        }
+
+        public  void transformNodesByRelations()
+        {
+            var nodes = getInstance().nodes;
+
+            var metric = new DamerauLevensteinMetric();
+
+            for (int i = 0; i < nodes.Count; i++)
+            {
+                for (int j = i + 1; j < nodes.Count; j++)
+                {
+                    var first = nodes.ElementAt(i).Value.rootWord;
+                    var second = nodes.ElementAt(j).Value.rootWord;
+
+                    var distance = metric.GetDistance(
+                        first,
+                        second,
+                        -1);
+
+                    if (distance == 1)
+                    {
+                        Relation relation = new Relation(nodes.ElementAt(i).Value, nodes.ElementAt(j).Value);
+
+                        nodes.ElementAt(i).Value.relations.Add(relation);
+                        nodes.ElementAt(j).Value.relations.Add(relation);
+
+                    }// pass
+                }
+            }
+
         }
     }
 
