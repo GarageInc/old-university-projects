@@ -63,8 +63,7 @@ namespace ConsoleApplication
 
             current.isVisited = true;
 
-            bool stepBack = false;
-            Node newStartNode = null;
+            bool stepBack = false;           
 
             if (current != end)
             {
@@ -74,27 +73,18 @@ namespace ConsoleApplication
 
                     if ( !current.relations[i].leftNode.isVisited )
                     {
-                        newStartNode = current.relations[i].leftNode;
-                        break;
+                        start(ref startNode, current.relations[i].leftNode, ref end, tmpPath);
+                        return;
                     }
                     else if ( !current.relations[i].rightNode.isVisited)
                     {
-                        newStartNode = current.relations[i].rightNode;
-                        break;
+                        start(ref startNode, current.relations[i].rightNode, ref end, tmpPath);
+                        return;
                     }// pass
                 }
 
-                if ( newStartNode != null )
-                {
-                    start(ref startNode, newStartNode, ref end, tmpPath);
-
-                    return;
-                }
-                else
-                {
-                    trace("\nТупик: ", current.ToString());
-                }
-
+                // trace( "\nТупик: ", current.ToString() );
+                
                 if ( current.visitedCounter == current.relations.Count && current == startNode)
                 {
                     stepBack = false;
@@ -113,6 +103,8 @@ namespace ConsoleApplication
 
             if ( stepBack )
             {
+                Node newStartNode = null;
+
                 if ( tmpPath.nodes.Count >= 2 )
                 {
                     tmpPath.nodes.RemoveAt(tmpPath.nodes.Count - 1);
