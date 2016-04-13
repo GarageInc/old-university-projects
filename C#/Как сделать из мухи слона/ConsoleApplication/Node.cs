@@ -11,7 +11,7 @@ namespace ConsoleApplication
         public bool isVisited { get; set; }
 
         public int visitedCounter { get; set; }
-
+        
         public List<Relation> relations;
 
         public Node( string word )
@@ -41,7 +41,7 @@ namespace ConsoleApplication
             if (ReferenceEquals(left, null) || ReferenceEquals(right, null))
                 return ReferenceEquals(left, right);
 
-            return left.rootWord != right.rootWord;
+            return left.rootWord == right.rootWord;
         }
     }
 

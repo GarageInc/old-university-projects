@@ -41,15 +41,7 @@ namespace ConsoleApplication
             
 
             RelationsCombainer.transformNodesByRelations();
-
-            foreach (var d in NodesFabric.getInstance().nodes)
-            {
-                foreach (var r in d.Value.relations)
-                {
-                    RelationsCombainer.trace(r);
-                }
-            }
-
+            
             RelationsCombainer.findPaths(wordFirst, wordSecond);
 
             Console.ReadKey();

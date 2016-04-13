@@ -84,75 +84,67 @@ namespace ConsoleApplication
 
             var tmpPath = new Path();
             var removePath = new Path();
-            var tailRelation = new Path();
 
-            tailRelation.nodes.Add(null);
-            tailRelation.nodes.Add(null);
-
-            start(nodeStart, nodeStart,  nodeEnd,   tmpPath );
+            start(ref nodeStart, nodeStart, ref nodeEnd,   tmpPath );
         }
-
-        static int COUNTER = 0;
-
+        
         // recursive path
-        public static void start(Node startNode, Node current, Node end,   Path tmpPath)
+        public static void start(ref Node startNode, Node current, ref Node end,   Path tmpPath)
         {
             tmpPath.Add(current);
 
             current.isVisited = true;
 
             bool stepBack = false;
-            bool started = false;
+            Node newStartNode = null;
 
             if (current != end)
             {
-                for(int i=current.visitedCounter; i < current.relations.Count; i++)
+                for(int i = current.visitedCounter; i < current.relations.Count ; i++)
                 {
-                    if (!current.relations[i].leftNode.isVisited )
+                    current.visitedCounter++;
+
+                    if ( !current.relations[i].leftNode.isVisited )
                     {
-                        started = true;
-
-                        current.visitedCounter++;
-
-                        start(startNode, current.relations[i].leftNode, end,   tmpPath );
+                        newStartNode = current.relations[i].leftNode;
+                        break;
                     }
-                    else if (!current.relations[i].rightNode.isVisited)
+                    else if ( !current.relations[i].rightNode.isVisited)
                     {
-                        started = true;
-
-                        current.visitedCounter++;
-
-                        start(startNode, current.relations[i].rightNode, end,   tmpPath );
+                        newStartNode = current.relations[i].rightNode;
+                        break;
                     }// pass
-
-                    stepBack = true;
                 }
 
-                if ( !started )
+                if ( newStartNode != null )
+                {
+                    start(ref startNode, newStartNode, ref end, tmpPath);
+
+                    return;
+                }
+                else
                 {
                     trace("Тупик: ", current.ToString());
-                }// pass
+                }
 
                 if ( current.visitedCounter == current.relations.Count && current == startNode)
                 {
                     stepBack = false;
-                }// pass
+                } else
+                {
+                    stepBack = true;
+                }
 
             }
             else
             {
-                trace("");
-                trace(tmpPath);
+                trace("\n", tmpPath);
 
-                stepBack = true;
-
-                COUNTER++;
+                stepBack = true;                
             }
 
             if ( stepBack )
             {
-                Node newStartNode;
-
                 if ( tmpPath.nodes.Count >= 2 )
                 {
                     tmpPath.nodes.RemoveAt(tmpPath.nodes.Count - 1);
@@ -168,8 +160,11 @@ namespace ConsoleApplication
                 
                 tmpPath.nodes.RemoveAt(tmpPath.nodes.Count - 1);// because than added in start
 
-                start(startNode, newStartNode, end, tmpPath);
+                start(ref startNode, newStartNode, ref end, tmpPath);
+                return;
+
             }// pass
+
         }
     }
 
