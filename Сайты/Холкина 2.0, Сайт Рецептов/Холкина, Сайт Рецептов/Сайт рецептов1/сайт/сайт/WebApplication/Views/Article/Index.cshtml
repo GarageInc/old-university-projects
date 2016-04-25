@@ -1,0 +1,196 @@
+﻿@using WebApplication.Models
+@model IEnumerable<ArticleDTO>
+@using Microsoft.AspNet.Identity
+
+@{
+    ViewBag.Title = "Список всех рецептов";
+    var userId = User.Identity.GetUserId();
+}
+
+<div class="modal fade" id="modDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div id="dialogContent" class="modal-dialog"></div>
+</div>
+
+<h3>Список всех рецептов</h3>
+<div>
+    <form method="post" action="/Article/Index">
+        <div class="form-group">
+            @Html.Label("Тип", new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.DropDownList("type", ViewBag.Types as SelectList, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Выберите ингридиенты?", new { @class = "col-md-2 control-label" })
+            <div class="col-md-4">
+                @foreach (Category cat in ViewBag.Categories)
+                {
+                    <button type="button" class="btn btn-default form-control" data-toggle="collapse" data-target="#@cat.Id">
+                        @cat.Name
+                        <b class="caret"></b>
+                    </button>
+
+                    <div id="@cat.Id" align="justify" class="collapse">
+                        @foreach (Ingridient ingr in cat.Ingridients)
+                        {
+                            <input type="checkbox"
+                                   name="ingridient"
+                                   value="@ingr.Id" />
+                                    @ingr.Name
+                                    <br />
+                        }
+                    </div>
+                        <br />
+                }
+            </div>
+        </div>
+        
+        <input type="submit" value="Применить фильтр" align="right" class="col-md-2 buttonb" />
+    </form>
+</div>
+
+<br />
+
+<div id="toolbar">
+
+    <button id="remove" class="btn btn-warning" disabled></button>
+</div>
+
+<div class="table-responsive col-md-12">
+    <table class="table table-bordered table-hover table-condensed"
+           id="table" data-show-toggle="true"
+           data-click-to-select="true"
+           data-show-columns="true"
+           data-search="true"
+           data-show-refresh="true"
+           data-show-export="true"
+           data-pagination="true"
+           data-toolbar="#toolbar"
+           data-minimum-count-columns="2"
+           data-show-pagination-switch="true"
+           data-id-field="id"
+           data-page-size="6"
+           data-page-list="[6,10, 25, 50, 100, ALL]"
+           data-response-handler="responseHandler"
+           data-flat="true"
+           data-sort-order="desk"
+           data-page-number="1"
+           data-show-multi-sort="true">
+        <thead>
+            <tr>
+                <th></th>
+                <th data-field="id">
+                    @Html.DisplayNameFor(model => model.Id)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+
+                <th>
+                    Детали
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Author)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td></td>
+                    <td><b>@item.Id</b></td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        <div>
+                            <a class="compItem" href='@Url.Action("Details", "Article", new {id = item.Id}, null)'>
+                                <img src="../../Content/pictures/info.png" class="tdImage" title="Детали рецепты" />
+                            </a>
+                        </div>
+                    </td>
+                    <td>
+                        <a class="compItem" href='@Url.Action("Author", "Article", new {id = item.AuthorId}, null)'>
+                            @item.Author.Name
+                            <img src="../../Content/pictures/author.png" class="tdImage" title="Автор рецепты" />
+                        </a>
+                    </td>
+                    <td>
+                        @if (User.Identity.IsAuthenticated && item.Author.Id == userId)
+                        {
+                            @Html.ActionLink("Удалить", "Delete", new { id = item.Id }, new { @class = "buttonb" })
+                        }
+
+                        @Html.ActionLink("Комментарии/Обсуждение", "Index", "Comment", new { ArticleId = item.Id }, new { @class = "buttons" })
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+</div>
+
+@Styles.Render("~/Scripts/bootstrap-table-master/css")
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("~/bundles/bootstrap-table-master/1")
+    @Scripts.Render("~/bundles/bootstrap-table-master/2")
+    @Scripts.Render("~/bundles/bootstrap-table-master/3")
+    @Scripts.Render("~/bundles/bootstrap-table-master/4")
+    @Scripts.Render("~/bundles/bootstrap-table-master/5")
+    @Scripts.Render("~/bundles/bootstrap-table-master/6")
+    @Scripts.Render("~/bundles/bootstrap-table-master/7")
+    @Scripts.Render("~/bundles/bootstrap-table-master/8")
+    @Scripts.Render("~/bundles/bootstrap-table-master/9")
+    @Scripts.Render("~/bundles/bootstrap-table-master/10")
+    @Scripts.Render("~/bundles/bootstrap-table-master/11")
+    @Scripts.Render("~/bundles/bootstrap-table-master/12")
+    @Scripts.Render("~/bundles/bootstrap-table-master/13")
+    @Scripts.Render("~/bundles/bootstrap-table-master/14")
+    @Scripts.Render("~/bundles/bootstrap-table-master/15")
+    @Scripts.Render("~/bundles/bootstrap-table-master/16")
+    @Scripts.Render("~/bundles/bootstrap-table-master/17")
+    @Scripts.Render("~/bundles/bootstrap-table-master/18")
+    @Scripts.Render("~/bundles/bootstrap-table-master/19")
+
+    <script type="text/javascript">
+        @*$('#state').change(function (e) {
+            // получаем выбранный id
+            var id = $(this).val();
+            $.ajax({
+                type: 'GET',
+                url: '@Url.Action("NewIngridients")/',
+                data: {
+                    id: id
+                },
+                success: function (result) {
+                    //alert(result);
+                    // заменяем содержимое присланным частичным представлением
+                    $('#newingridients').replaceWith(result);
+                },
+
+                error: function (xhr, status, p3) {
+                    alert(status);
+                }
+            });
+        });*@
+
+        // Модальное окно
+        $(function () {
+            $.ajaxSetup({ cache: false });
+            $(".compItem").click(function (e) {
+
+                e.preventDefault();
+                $.get(this.href, function (data) {
+                    $('#dialogContent').html(data);
+                    $('#modDialog').modal('show');
+                });
+            });
+        });
+    </script>
+}

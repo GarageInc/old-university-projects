@@ -1,0 +1,56 @@
+﻿@model WebApplication.Models.ErrorMessage
+
+@{
+    ViewBag.Title = "Детали сообщения об ошибке";
+}
+
+
+<div>
+    <h4>Детали сообщения об ошибке</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Author.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Author.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Text)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Text)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ErrorStatus)
+        </dt>
+
+        <dd>
+            @if (Model.ErrorStatus == 0)
+            {
+                <span class="label label-success">Открыто</span>
+            }
+            else
+            {
+                <span class="label label-default">Закрыто</span>
+                }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreateDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreateDate)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

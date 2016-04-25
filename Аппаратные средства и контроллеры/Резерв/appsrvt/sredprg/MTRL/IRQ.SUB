@@ -1,0 +1,67 @@
+***********************************************x
+* IRQ.SUB - Sample code to read the push buttons
+* Copyright 1995 by Brad Stewart
+* NOTE:  IRQ are edge sentitive ONLY--see MOR byte
+***********************************************
+
+irq_int:
+        ;first check if irq caused by speech signal
+;        brclr speech,porta,irq70
+
+        ;arrive here if irq due to speech signal
+;        ldx #4
+;        stx irq_type
+;        bclr sample_led,portb   ;turn on sample_led
+
+        ;check if switches caused irq since they have
+        ;highest priority
+
+$IFNOT debug
+        ;debounce switches
+        lda #9
+        jsr delayms
+$ENDIF
+
+irq70:
+;        ldx #0
+;        stx irq_type
+        brclr select,porta,irq90 ;exit if select not pressed
+
+        bclr on_led,portb
+        ;bset sample_led,portb
+        inc led_count
+        lda led_count
+        coma            ;compliment since use neg logic
+        lsla            ;put into upper four bits
+        lsla
+        lsla
+        lsla
+        sta porta       ;display count
+
+        ldx #1
+        stx irq_type            ;if x=1, irq was due to select
+        bra irqdone
+
+irq90:
+        brclr recog,porta,irq80 ;recog buttun pressed?
+        ldx #2
+        stx irq_type
+        bra irqdone
+
+irq80:
+        brclr train,porta,irqdone  ;check if train button pressed
+        ldx #3
+        stx irq_type
+
+irqdone:
+
+;$IFNOT debug
+        ;debounce switches
+;        lda #9
+;        jsr delayms
+;$ENDIF
+
+        bset irqr,iscr  ;clear irq requests
+        rti
+
+

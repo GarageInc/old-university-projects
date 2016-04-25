@@ -1,0 +1,201 @@
+﻿@model IEnumerable<WebApplication.Models.RequestSolution>
+@using Microsoft.AspNet.Identity
+@using WebApplication.Models
+
+@{
+    ViewBag.Title = "Все решения";
+}
+
+<div class="modal fade" id="modDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div id="dialogContent" class="modal-dialog"></div>
+</div>
+
+<h2>Все решения</h2>
+
+<p>
+    @Html.ActionLink("Новое решение", "Create", "RequestSolution", new { @class = "buttonS" })
+</p>
+
+<h2>Список задач</h2>
+<p>Всего задач: @(Model.Count<RequestSolution>())</p>
+
+<div id="toolbar">
+    <button id="remove" class="btn btn-warning" disabled>
+        <i class="glyphicon glyphicon-remove"></i> Скрыть выбранное
+    </button>
+</div>
+
+<div class="table-responsive">
+    <table class="table table-bordered table-hover table-condensed"
+           id="table"
+           data-click-to-select="true"
+           data-show-columns="true"
+           data-search="true"
+           data-show-refresh="true"
+           data-show-export="true"
+           data-pagination="true"
+           data-toolbar="#toolbar"
+           data-minimum-count-columns="2"
+           data-show-pagination-switch="true"
+           data-id-field="id"
+           data-page-size="6"
+           data-page-list="[6,10, 25, 50, 100, ALL]"
+           data-response-handler="responseHandler"
+           data-flat="true"
+           data-sort-order="desk"
+           data-page-number="1"
+           data-show-multi-sort="true">
+
+        <thead>
+        <tr>
+            <th></th>
+            <th>
+                @Html.DisplayNameFor(model => model.Author)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Document)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Comment)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsChecked)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Right)
+            </th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td></td>
+                    <td>
+                        <a class="compItem" href='@Url.Action("Author", "Request", new {id = item.AuthorId}, null)'>
+                            @item.Author.Name
+                            <img src="../../Content/pictures/author.png" class="tdImage" title="Автор задачи"/>
+                        </a>
+                    </td>
+                    <td>
+                        @if (item.Document != null)
+                        {
+                            <a href="/Document/DownloadRequestSolutionFiles/@item.Document.Id"><img src="../../Content/pictures/filey.png" alt='@item.Document.Url' class="tdImage" title="Скачать файл"/></a>
+                        }
+                        else
+                        {
+                            <img src="../../Content/pictures/filen.png" alt="без файла изображения" class="tdImage" title="Файл не приложен"/>
+                        }
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Date)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Comment)
+                    </td>
+                    <td>
+                        @if (item.IsChecked)
+                        {
+                            if (item.Right)
+                            {
+                                <h5>Решение верное!</h5>
+                            }
+                            else
+                            {
+                                if (item.Request.RightRequestSolution != null)
+                                {
+                                    <h5>Решение не верное!</h5>
+                                    <a class="compItem" href="/RequestSolution/ShowRightSolution/@item.Id">
+                                        <img src="../../Content/pictures/filey.png" alt='@item.Id' class="tdImage" title="Скачать файл"/>
+                                        Посмотреть правильное решение
+                                    </a>
+                                }
+                                else
+                                {
+                                    <h5>Решение не верное!</h5>
+                                    <h5>Правильное решение ещё не загружено</h5>
+                                }
+                            }
+                        }
+                        else
+                        {
+                            <h5>Не проверено</h5>
+                        }
+                    </td>
+                    <td>
+                        @using (Html.BeginForm("DistributeChangeStatus", "RequestSolution"))
+                        {
+                            @Html.Hidden("requestSolutionId", item.Id)
+                            @Html.DropDownList("status",
+                                new[]
+                                {
+                                    new SelectListItem() {Text = "Не проверено", Value = "0"},
+                                    new SelectListItem() {Text = "Проверено, верно", Value = "1"},
+                                    new SelectListItem() {Text = "Проверено, не верно", Value = "2"}
+                                })
+
+                            <input type="submit" value="Изменить" class="buttons"/>
+                        }
+                    </td>
+                    <td>
+                        @if (item.Author.Id == User.Identity.GetUserId() && !item.IsChecked)
+                        {
+                            @Html.ActionLink("Удалить", "Delete", new {id = item.Id}, new {@class = "buttonb"})
+                        }
+
+                        @Html.ActionLink("Обсуждение", "Index", "Comment", new {requestSolutionId = item.Id}, new {@class = "buttons"})
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@Styles.Render("~/Scripts/bootstrap-table-master/css")
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("~/bundles/bootstrap-table-master/1")
+    @Scripts.Render("~/bundles/bootstrap-table-master/2")
+    @Scripts.Render("~/bundles/bootstrap-table-master/3")
+    @Scripts.Render("~/bundles/bootstrap-table-master/4")
+    @Scripts.Render("~/bundles/bootstrap-table-master/5")
+    @Scripts.Render("~/bundles/bootstrap-table-master/6")
+    @Scripts.Render("~/bundles/bootstrap-table-master/7")
+    @Scripts.Render("~/bundles/bootstrap-table-master/8")
+    @Scripts.Render("~/bundles/bootstrap-table-master/9")
+    @Scripts.Render("~/bundles/bootstrap-table-master/10")
+    @Scripts.Render("~/bundles/bootstrap-table-master/11")
+    @Scripts.Render("~/bundles/bootstrap-table-master/12")
+    @Scripts.Render("~/bundles/bootstrap-table-master/13")
+    @Scripts.Render("~/bundles/bootstrap-table-master/14")
+    @Scripts.Render("~/bundles/bootstrap-table-master/15")
+    @Scripts.Render("~/bundles/bootstrap-table-master/16")
+    @Scripts.Render("~/bundles/bootstrap-table-master/17")
+    @Scripts.Render("~/bundles/bootstrap-table-master/18")
+    @Scripts.Render("~/bundles/bootstrap-table-master/19")
+
+<script type="text/javascript">
+        // Модальное окно снизу справа
+        $(function () {
+            $.ajaxSetup({ cache: false });
+            $(".compItem").click(function (e) {
+
+                e.preventDefault();
+                $.get(this.href, function (data) {
+                    $('#dialogContent').html(data);
+                    $('#modDialog').modal('show');
+                });
+            });
+        });
+</script>
+}

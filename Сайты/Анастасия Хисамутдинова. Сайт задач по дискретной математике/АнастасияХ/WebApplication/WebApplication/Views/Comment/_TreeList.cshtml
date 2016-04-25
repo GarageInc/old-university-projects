@@ -1,0 +1,87 @@
+﻿@using Microsoft.AspNet.Identity
+@using WebApplication.Service
+@model WebApplication.Models.CommentList
+
+@if (Model.Comments.Any(x => x.ParentId == Model.Seed))
+{
+    <ul>
+        @foreach (var node in Model.Comments)
+        {
+            if (node.ParentId == Model.Seed)
+            {
+                WebApplication.Models.CommentList inner = new WebApplication.Models.CommentList { Seed = node.Id, Comments = Model.Comments };
+                <li>
+                    <div class="tree">
+                        <ul class="hor">
+                            <li>
+                                <a href="/Comment/UpComment/@node.Id"><img style='width: 10px; height: 10px' src="../../Content/pictures/up.png" alt='@node.Id' class="tdImage" title="Согласен" /></a>
+                            </li>
+                            <li>
+                                @if (node.Karma > 0)
+                                {
+                                    <h4> @node.Karma </h4>
+                                }
+                                else
+                                {
+                                    <h4> @node.Karma </h4>
+                                }
+                            </li>
+                            <li>
+                                <a href="/Comment/DownComment/@node.Id"><img style='width: 10px; height: 10px' src="../../Content/pictures/down.png" alt='@node.Id' class="tdImage" title="Несогласен"/></a>
+                            </li>
+                            <li>
+                                <a class="compItem" href='@Url.Action("Author", "Request", new { id = node.AuthorId }, null)'>
+                                    <b>@node.Author.Name</b>
+                                </a>
+                            </li>
+                            <li>
+                                @{
+                                    var yes = ApplicationUserDTO.GetUserAvatar(node.AuthorId).IsEmpty();
+                                    if (!yes)
+                                    {
+                                        @Html.Raw("<img style='width:30px; height:30px;' src=\"../../Files/UserAvatarFiles/"
+                                                  + ApplicationUserDTO.GetUserAvatar(node.AuthorId) + "\" />")
+                                    }
+                                }
+                            </li>
+                            <li>
+                                <h6>@node.AddDateTime.ToShortDateString()</h6>
+                            </li>
+                            <li>
+
+                            </li>
+                        </ul>
+
+                        <div class="drop" parent-id="@node.Id">
+                            <a href="#" node-id="@node.Id" class="drag" onclick="expand(this)">@node.Text</a>
+                            @*"*@
+                        </div>
+                        <br/>
+                        <div class="add" title="Ответить" onclick="openAdd(@node.Id)">
+                        </div>
+                        @if (node.Author.Id == this.User.Identity.GetUserId())
+                        {
+                            <div class="remove">
+                                @Ajax.ActionLink(
+                                "Удалить",
+                                "Delete",
+                                new
+                                {
+                                    id = node.Id
+                                },
+                                new AjaxOptions
+                                {
+                                    HttpMethod = "POST",
+                                    OnSuccess = "document.location.reload(true);",
+                                    OnFailure = "alert('Some errors may occurs. Item not delete.');"
+                                },
+                                new { title = "Удалить" })
+                            </div>
+                        }
+                    </div>
+                    @Html.Partial("_TreeList", inner)
+            </li>
+            }
+        }
+    </ul>
+}

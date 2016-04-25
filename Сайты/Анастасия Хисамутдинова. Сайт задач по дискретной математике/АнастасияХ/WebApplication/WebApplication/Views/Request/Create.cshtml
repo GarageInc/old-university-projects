@@ -1,0 +1,82 @@
+﻿@model WebApplication.Models.Request
+
+@{
+    ViewBag.Title = "Создать задачу";
+}
+
+
+@using (Html.BeginForm("Create", "Request", FormMethod.Post, new { role = "form", @class = "form-horizontal", enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true)
+        <fieldset>
+            <legend>Новая задача</legend>
+            
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Name, new {@class = "col-md-2 control-label"})
+
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Name, new {@class = "form-control"})
+                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Deadline, new {@class = "col-md-2 control-label"})
+
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Deadline, new {@class = "form-control"})
+                    @Html.ValidationMessageFor(model => model.Deadline, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Description, new {@class = "col-md-2 control-label"})
+
+                <div class="col-md-10">
+                    @Html.TextAreaFor(model => model.Description, 3, 100, new {htmlAttributes = new {@class = "form-control"}})
+                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Priority, new {@class = "col-md-2 control-label"})
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.Priority, new[]
+                    {
+                        new SelectListItem() {Text = "Низкий", Value = "1"},
+                        new SelectListItem() {Text = "Средний", Value = "2"},
+                        new SelectListItem() {Text = "Высокий", Value = "3"},
+                        new SelectListItem() {Text = "Критичный", Value = "4"}
+                    }, new {@class = "form-control"})
+                </div>
+            </div>
+            
+            <div class="form-group">
+                @Html.Label("Приложенный файл?", new {@class = "col-md-2 control-label"})
+                <div class="col-md-10">
+                    <input type="file" class="form-control" id="error" name="error" value="Сохранить файл"/>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.Label("Подтвердить отправку?", new {@class = "col-md-2 control-label"})
+
+                <div class="col-md-10">
+                    <input class="buttonS" type="submit" value="Сохранить" width="100"/>
+                </div>
+            </div>
+        </fieldset>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jqueryui");
+    <script>
+    </script>
+}
+        

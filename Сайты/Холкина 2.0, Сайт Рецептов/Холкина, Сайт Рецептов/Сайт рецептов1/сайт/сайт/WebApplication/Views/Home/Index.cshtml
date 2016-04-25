@@ -1,0 +1,30 @@
+﻿@{
+    ViewBag.Title = "Вкусные рецепты";
+}
+
+<div id="myCarousel" class="carousel slide" align="center">
+    <div class="carousel-inner">
+        <div class="item active">
+            <img width="800" height="400" src="../../Content/pictures/1.jpg" />
+        </div>
+        <div class="item">
+            <img width="800" height="400" src="../../Content/pictures/2.jpg" />
+        </div>
+        <div class="item">
+            <img width="800"  height="400" src="../../Content/pictures/3.jpg" />
+        </div>
+    </div>
+    <a class="left carousel-control" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+    <a class="right carousel-control" href="#myCarousel" data-slide="next">&rsaquo;</a>
+</div>
+
+<div class="jumbotron">
+    <h3>Сайт рецептов самого разного характера</h3>
+    <p class="lead">
+        Поварам и начинающим!
+    </p>
+    @if (User.Identity.IsAuthenticated)
+    {
+    <p>@Html.ActionLink("Оставить свой рецепт", "Create", "Article", new { area = "" }, new { @class = "buttonS" })</p>
+    }
+</div>

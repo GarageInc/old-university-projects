@@ -1,0 +1,117 @@
+﻿@{
+    ViewBag.Title = "Тренажер";
+}
+
+<div class="center">
+    <label>Выберите тип задания:</label>
+    <br />
+    <label>Задания генерируются автоматически!</label>
+    <br/>
+
+    @Html.DropDownList("type",
+                                new[]
+                                {
+                                    new SelectListItem() {Text = "Однозначность кодирования", Value = "0"},
+                                    new SelectListItem() {Text = "На построение префиксного кода(легкий уровень)", Value = "1"},
+                                    new SelectListItem() {Text = "На построение префиксного кода(сложный уровень)", Value = "2"},
+                                    new SelectListItem() {Text = "Однозначность декодирования", Value = "3"},
+                                    new SelectListItem() {Text = "Оптимальный код Хаффмана для заданной последовательности", Value = "4"},
+                               }, new { id = "type" })
+
+    <hr />
+    <button class="buttons" id="generate">Сгенерировать задание</button>
+
+    <hr />
+    <textarea id="result" disabled cols="50" rows="4"></textarea>
+    <textarea id="uslovie" disabled cols="50" rows="4"></textarea>
+    <br/>
+    <button class="btn btn-default" id="clear">Очистить</button>
+
+    <hr/>
+    <label>Ответ:</label>
+    <br/>
+    <textarea id="reply" cols="50" rows="2"></textarea>
+    <br />
+    <button class="buttonb" id="sendToCheck">Отправить на проверку</button>
+
+</div>
+
+@section scripts{
+    <script type="text/javascript">
+        // Генерируем задание
+        $('#generate').click(function (e)
+        {
+            var id = document.getElementById('type').value;
+            var generated = document.getElementById('result');
+            var uslovie = document.getElementById('uslovie');
+
+            var reply = document.getElementById('reply');
+            reply.value = "";
+
+            // получаем выбранный id
+            $.ajax({
+                type: 'GET',
+                url: '@Url.Action("GetRequest")/' + id,
+                success: function (result) {
+                    //alert(result);
+                    // Вставляем в текстовое окно результат запроса
+                    generated.value = result;
+                },
+                error: function (xhr, status, p3) {
+                    alert(status);
+                }
+            });
+            if (id == 0) {
+                uslovie.value = "Проверьте на однозначность кодирования. Ответ: либо 'ДА', либо 'НЕТ'(однозначно-не однозначно дешифруется заданная последовательность)";
+            }
+            else if (id == 1 || id == 2)
+            {
+                uslovie.value = "Построить двоичный префиксный код с заданной последовательностью длин кодовых слов. Ответ: последовательность, разделенная пробелами как: \"111 011 001 000\"";
+            }
+            else if(id==3)
+            {
+                uslovie.value = "Проверьте на однозначность декодирования заданной последовательности данным кодом.  Ответ: либо 'ДА', либо 'НЕТ'(однозначно-не однозначно дешифруется заданная последовательность)";
+            }
+            else if (id == 4) {
+                uslovie.value = "Построить оптимальный код Хаффмана для заданной последовательности. Например, для кода \"12322\" Вы должны ввести в поле ответа: \"00 1 01 1 1\"";
+            }
+        });
+
+        // Отправляем на проверку
+        $('#sendToCheck').click(function (e) {
+            var id = document.getElementById('type').value;
+            var reply = document.getElementById('reply').value;
+            var generated = document.getElementById('result').value;
+            //var data = { id: 'id', 'reply': reply };
+            // получаем выбранный id
+            $.ajax({
+                type: 'GET',
+                url: '@Url.Action("CheckRequest")/',
+                data: {
+                    id: id,
+                    reply: reply,
+                    generated: generated
+                },
+
+                success: function (result) {
+                    alert(result);
+                },
+                error: function (xhr, status, p3) {
+                    alert(status);
+                }
+            });
+        });
+
+        // Кнопка очистки
+        $('#clear').click(function (e) {
+            var reply = document.getElementById('reply');
+            var generated = document.getElementById('result');
+            var uslovie = document.getElementById('uslovie');
+
+            reply.value = "";
+            generated.value = "";
+            uslovie.value = "";
+        });
+
+    </script>
+}

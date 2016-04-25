@@ -1,0 +1,142 @@
+************************************************************
+* NORMALZ.ASM - Perform time normalization
+* Copyright (c) 1995 by Brad Stewart
+* Raw data is stored in EEPROM loc 0 to 128, bank 0
+* where [0..127] is high frequency and
+*  [128..255] is low frequency data
+*
+* this routine calls divide subroutine
+* and eeprom read/write subroutine
+***********************************************************
+
+time_norm:
+        lda frames
+        sta unor
+        lda #0
+        sta n
+        sta m
+        ;set ram array to zero
+        ldx #nor
+zero:
+        sta normal,x
+        sta normal1,x
+        decx
+        bpl zero
+        ldx #0
+        sta j
+        sta working
+        sta working+1
+        sta working1
+        sta working1+1
+
+;       initialize eerom to address 0 to read the
+;       bytes sequentially
+
+        sta addr
+        jsr a2404_start
+        lda #W_B0
+        jsr a2404_write         ;send control byte
+        lda addr
+        jsr a2404_write         ; send address
+        jsr a2404_start         ;send another start
+        lda #R_B0               ;write read control byte
+        jsr a2404_write
+;now the eerom is set up for sequential reading starting at loc 0
+
+        ; get first data bytes
+        jsr a2404_read  ;result is returned in x register
+        txa
+        sta ee_data1
+        jsr a2404_ack
+        jsr a2404_read
+        txa
+        sta ee_data2
+        jsr a2404_ack
+
+normal05:
+
+        ; put results in working register
+        lda working
+        add ee_data1        ;add lsb
+        sta working
+        lda #0
+        adc working+1     ;add 0 to msb
+        sta working+1
+
+        ;do second value
+        lda working1
+        add ee_data2
+        sta working1
+        lda #0
+        adc working1+1
+        sta working1+1
+
+normal20:
+        inc n
+        inc m
+        lda m
+        cmp #nor
+        bne normal10
+
+;get data from eerom
+        jsr a2404_read
+        txa
+        sta ee_data1
+        jsr a2404_ack
+        jsr a2404_read
+        txa
+        sta ee_data2
+        inc addr
+       ; check if last byte read
+        lda addr
+        cmp unor
+        beq normal25   ;if so, do not send ack signal
+        jsr a2404_ack
+normal25:
+        lda #0
+        sta m
+normal10:
+        lda n
+        cmp unor
+        bne normal05
+        lda #0
+        sta n
+
+;this is where we do the division
+;need to convert to 16 bit
+; divide 2 byte in working (lsb), working+1 (msb) by unor
+
+        lda unor
+        sta dvsor0
+        jsr div16
+        lda working     ;result
+        ldx j
+        sta normal,x
+
+        ;do second value
+
+        lda working1
+        sta dvdnd0
+        lda working1+1
+        sta dvdnd1
+        lda unor
+        sta dvsor0
+        jsr div16
+        lda working
+        sta normal1,x
+;end of division
+
+        lda #0
+        sta working
+        sta working+1
+        sta working1
+        sta working1+1
+        inc j
+        lda j
+        cmp #nor
+        beq done
+        bra normal05
+done:
+        jsr a2404_stop
+        rts
+

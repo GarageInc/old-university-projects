@@ -1,0 +1,20 @@
+﻿@model WebApplication.Models.Request
+
+
+<div class="modal-content">
+    <div class="modal-header">
+        <button class="close" data-dismiss="modal" area-hidden="true">X</button>
+        <h4>Детали</h4>
+    </div>
+    <div class="modal-body">
+        <dl class="dl-horizontal">
+            <p><b>Задача №  @Html.DisplayFor(m => m.Id)</b></p>
+            <p>Название: @Html.DisplayFor(m => m.Name)</p>
+            <p>Описание: @Html.DisplayFor(m => m.Description)</p>
+        </dl>
+    </div>
+    
+    <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Закрыть</button>
+    </div>
+</div>

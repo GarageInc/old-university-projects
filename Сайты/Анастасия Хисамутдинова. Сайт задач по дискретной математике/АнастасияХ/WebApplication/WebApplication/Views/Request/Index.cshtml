@@ -1,0 +1,186 @@
+﻿@model IEnumerable<Request>
+@using Microsoft.AspNet.Identity
+@using WebApplication.Models
+
+@{
+    ViewBag.Title = "Список всех задач";
+}
+<div class="modal fade" id="modDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div id="dialogContent" class="modal-dialog"></div>
+</div>
+
+<h2>Список всех задач</h2>
+<p>Всего задач: @(Model.Count<Request>())</p>
+
+<br />
+<div id="toolbar">
+
+    <button id="remove" class="btn btn-warning" disabled>
+        <i class="glyphicon glyphicon-remove"></i> Скрыть выбранное
+    </button>
+</div>
+
+<div class="table-responsive">
+    <table class="table table-bordered table-hover table-condensed"
+           id="table"
+           data-click-to-select="true"
+           data-show-columns="true"
+           data-search="true"
+           data-show-refresh="true"
+           data-show-export="true"
+           data-pagination="true"
+           data-toolbar="#toolbar"
+           data-minimum-count-columns="2"
+           data-show-pagination-switch="true"
+           data-id-field="id"
+           data-page-size="6"
+           data-page-list="[6,10, 25, 50, 100, ALL]"
+           data-response-handler="responseHandler"
+           data-flat="true"
+           data-sort-order="desk"
+           data-page-number="1"
+           data-show-multi-sort="true">
+        <thead>
+            <tr>
+                <th></th>
+                <th data-field="id">
+                    @Html.DisplayNameFor(model => model.Id)
+                </th>
+                <th data-sortable="true">
+                    @Html.DisplayNameFor(model => model.Status)
+                </th>
+                <th data-sortable="true">
+                    @Html.DisplayNameFor(model => model.Priority)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Document)
+                </th>
+                <th data-field="deadline" data-sortable="true">
+                    @Html.DisplayNameFor(model => model.Deadline)
+                </th>
+                <th>
+                    Детали
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Author)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td></td>
+                    <td><b>@item.Id</b></td>
+                    <td>
+                        @if (item.Status == (int)RequestStatus.Open)
+                        {
+                            <span class="label label-success">Открыта</span>
+                        }
+                        else if (item.Status == (int)RequestStatus.Distributed)
+                        {
+                            <span class="label label-warning">Распределена</span>
+                        }
+                        else if (item.Status == (int)RequestStatus.Proccesing)
+                        {
+                            <span class="label label-important">На решении</span>
+                        }
+                        else if (item.Status == (int)RequestStatus.Closed)
+                        {
+                            <span class="label label-inverse">Закрыта</span>
+                        }
+                    </td>
+                    <td>
+                        @if (item.Priority == (int)RequestPriority.Low)
+                        {
+                            <span class="badge badge-low">Низкий</span>
+                        }
+                        else if (item.Priority == (int)RequestPriority.Medium)
+                        {
+                            <span class="badge badge-medium">Средний</span>
+                        }
+                        else if (item.Priority == (int)RequestPriority.High)
+                        {
+                            <span class="badge badge-high">Высокий</span>
+                        }
+                        else if (item.Priority == (int)RequestPriority.Critical)
+                        {
+                            <span class="badge badge-critical">Критичный</span>
+                        }
+                    </td>
+                    <td>
+                        @if (item.Document != null)
+                        {
+                            <a href="/Document/DownloadRequestFile/@item.Document.Id"><img src="../../Content/pictures/filey.png" alt='@item.Document.Url' class="tdImage" title="Скачать файл" /></a>
+                        }
+                        else
+                        {
+                            <img src="../../Content/pictures/filen.png" alt="без файла изображения" class="tdImage" title="Файл не приложен" />
+                        }
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Deadline)
+                    </td>
+                    <td>
+                            <a class="compItem" href='@Url.Action("Details", "Request", new {id = item.Id}, null)'>
+                                <img src="../../Content/pictures/info.png" class="tdImage" title="Детали задачи"/>
+                            </a>
+                    </td>
+
+                    <td>
+                        <a class="compItem" href='@Url.Action("Author", "Request", new {id = item.AuthorId}, null)'>
+                            @item.Author.Name
+                            <img src="../../Content/pictures/author.png" class="tdImage" title="Автор задачи" />
+                        </a>
+                    </td>
+
+                    <td>
+                        @if (item.Author.Id == this.User.Identity.GetUserId())
+                        {
+                            @Html.ActionLink("Удалить", "Delete", new { id = item.Id }, new { @class = "buttonb" })
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@Styles.Render("~/Scripts/bootstrap-table-master/css")
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("~/bundles/bootstrap-table-master/1")
+    @Scripts.Render("~/bundles/bootstrap-table-master/2")
+    @Scripts.Render("~/bundles/bootstrap-table-master/3")
+    @Scripts.Render("~/bundles/bootstrap-table-master/4")
+    @Scripts.Render("~/bundles/bootstrap-table-master/5")
+    @Scripts.Render("~/bundles/bootstrap-table-master/6")
+    @Scripts.Render("~/bundles/bootstrap-table-master/7")
+    @Scripts.Render("~/bundles/bootstrap-table-master/8")
+    @Scripts.Render("~/bundles/bootstrap-table-master/9")
+    @Scripts.Render("~/bundles/bootstrap-table-master/10")
+    @Scripts.Render("~/bundles/bootstrap-table-master/11")
+    @Scripts.Render("~/bundles/bootstrap-table-master/12")
+    @Scripts.Render("~/bundles/bootstrap-table-master/13")
+    @Scripts.Render("~/bundles/bootstrap-table-master/14")
+    @Scripts.Render("~/bundles/bootstrap-table-master/15")
+    @Scripts.Render("~/bundles/bootstrap-table-master/16")
+    @Scripts.Render("~/bundles/bootstrap-table-master/17")
+    @Scripts.Render("~/bundles/bootstrap-table-master/18")
+    @Scripts.Render("~/bundles/bootstrap-table-master/19")
+    <script type="text/javascript">
+                $(function () {
+                    $.ajaxSetup({ cache: false });
+                    $(".compItem").click(function (e) {
+
+                        e.preventDefault();
+                        $.get(this.href, function (data) {
+                            $('#dialogContent').html(data);
+                            $('#modDialog').modal('show');
+                        });
+                    });
+                });
+    </script>
+}

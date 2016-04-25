@@ -1,0 +1,187 @@
+
+Final.asm              Assembled with CASM08Z  10.05.04  5:47:43  PAGE 1
+
+
+
+                        1  ***********************************************
+                        2  * TEST3.ASM- Perform input and time normalization
+                        3  * Added interrupt processing, error and on leds
+                        4  * Added compare routine
+                        5  * Copyright (c) 1995 by Brad Stewart
+                        6  * Raw data is stored in EEPROM loc 0 to 128, bank 0
+                        7  * where [0..127] is high frequency and
+                        8  * [128..255] is low frequency data
+                        9  *
+                       10  ***************************************************
+ 0000                  11  $SET debug1     ;toggles sampling led
+ 0000                  12  $SET debug
+ 0000                  13  $SETNOT debug
+ 0000                  14  $SET timer
+                       15  ;$SETNOT timer
+ 0000                  16  RAMStart EQU $0040
+ 0000                  17  ROMStart EQU $E000
+                       18  
+ 0040                  19          org  RAMStart
+                       20  
+ 0040                  21  #include        'brad.h'
+                       22  ************************************************
+                       23  * BRAD.H header file for equates
+                       24  * and RAM definitions
+                       25  ************************************************
+                       26  
+                       27  ;misc. 68hc05 equates
+ 0040                  28  toie    equ     5
+ 0040                  29  rtie    equ     4
+ 0040                  30  irqr    equ     1
+ 0040                  31  iscr    equ     $0a
+ 0040                  32  tcntr   equ     9
+ 0040                  33  copr    equ     $07f0
+                       34  
+                       35  * 39 bytes of ram used
+                       36  *****************************************
+                       37  * ram and equates for time normalization
+                       38  *****************************************
+ 0040                  39  normal    ds      12t       ;normalized high 
+                                                               frequency vector
+ 004C                  40  normal1   ds      12t       ;normalized low freq. 
+                                                                         vector
+ 0058                  41  working   ds      2         ;16 bit working 
+                                                                      registers
+ 005A                  42  working1  ds      2
+ 005C                  43  unor      ds      1         ;length of the raw data 
+                                                                         buffer
+                       44                              ;Variables used by the
+ 005D                  45  j       ds      1           ;normalization and must 
+                                                                    not be used
+ 005E                  46  m       ds      1           ;while in the routine, 
+                                                                  but available
+ 005F                  47  n       ds      1           ;otherwise.
+                       48  
+ 0060                  49  nor     equ     12t       ;length of normalized 
+                                                             vector--a constant
+                       50  
+                       51  ****************************************************
+
+
+Final.asm              Assembled with CASM08Z  10.05.04  5:47:43  PAGE 2
+
+
+
+                                                                            ***
+                       52  * ram and equates for the eerom read/write subroutin
+                                                                            e *
+                       53  ****************************************************
+                                                                            ***
+                       54  
+ 0060                  55  addr            ds      1           ;eeprom address
+ 0061      00          56  ee_data1        db      0
+ 0062      00          57  ee_data2        db      0
+                       58  
+                       59  ****************************************
+                       60  ;equates and ram for the input subroutine
+                       61  *****************************************
+                       62  ; these ram locations can share with the ones
+                       63  ; used by the time normalization
+                       64  
+ 0063                  65  timeout     equ   normal
+ 0063                  66  zcross      equ   normal+1
+                       67  ;bit_count   equ   normal+2
+ 0063                  68  frames      equ   normal+3
+ 0063                  69  silence     equ   normal+4
+ 0063                  70  sound       equ   normal+5
+ 0063                  71  z1          equ   normal+6
+ 0063                  72  freq1       equ   normal+7
+ 0063                  73  freq2       equ   normal+8
+ 0063                  74  sign        equ   normal+9
+ 0063                  75  temp        equ   normal+0a
+ 0063                  76  ticks       equ   normal+0b
+                       77  
+ 0063                  78  z_thresh        equ 5
+                       79  
+ 0063                  80  $IF debug
+ 0063                  81  sound_thresh    equ 2
+ 0063                  82  sil_thresh      equ 2
+ 0063                  83  $ELSEIF
+                       84  sil_thresh      equ 6
+                       85  sound_thresh    equ 8 ;was 6
+ 0063                  86  $ENDIF
+                       87  
+ 0063                  88  freq_limit      equ 6
+                       89  
+                       90  ;portb LEDs
+ 0063                  91  sample_led      equ 2
+ 0063                  92  on_led          equ 3
+ 0063                  93  speech          equ 4
+ 0063                  94  error_led       equ 5
+                       95  
+                       96  ;push buttons porta
+ 0063                  97  select          equ 3
+ 0063                  98  recog           equ 2
+ 0063                  99  train           equ 1
+ 0063                 100  untrainb        equ 0
+                      101  
+ 0063                 102  $IF debug
+ 0063                 103  time_out        equ 04 ;time out value
+ 0063                 104  $ELSEIF
+                      105  time_out        equ 0ff
+ 0063                 106  $ENDIF
+
+
+Final.asm              Assembled with CASM08Z  10.05.04  5:47:43  PAGE 3
+
+
+
+                      107  
+ 0063                 108  to_error       equ $EF
+ 0063                 109  bufull_error   equ $DF
+ 0063                 110  no_recog       equ $CF
+ 0063                 111  to_high        equ $BF
+                      112  
+                      113  ***********************************************
+                      114  * ram locations used by division routine
+                      115  ***********************************************
+ 0063                 116  dvsor0    ds      1         ;used by div16_8.sub
+ 0064                 117  ctr       ds      1         ; "   "      "
+                      118  
+                      119  **********************************
+                      120  * ram for command/template number
+                      121  **********************************
+                      122  
+ 0065      00         123  led_count db 0
+                      124  
+                      125  ***************************
+                      126  * ram for type of interrupt
+                      127  ***************************
+                      128  
+ 0066      00         129  irq_type db 0
+                      130  
+                      131  ****************************
+                      132  * ram used by main routine
+                      133  ****************************
+                      134  
+                      135  ******************************
+                      136  * used by compare.sub        *
+                      137  ******************************
+ 0067                 138  nindex          equ      j
+ 0067                 139  tnum            equ      m
+                      140  
+ 0067                 141  error0          ds      2           ;working error 
+                                                                          value
+ 0069                 142  min0            equ     working     ;lowest error
+ 0069                 143  min1            equ     working1    ;second lowest 
+                                                                          error
+ 0069                 144  imin0           equ     ee_data1    ;lowest index 
+                                                                         number
+ 0069                 145  imin1           equ     ee_data2    ;second lowest 
+                                                                   index number
+ 0069                 146  running         ds      1
+                      147  
+                      148  
+ E000                 149          org  ROMStart
+                      150  
+                      151  start:
+                      152          ;setup data direction registers
+                      153  
+ E000 [02] A6F0       154          lda #$f0
+ ***** FATAL ERROR ***** ASSEMBLY ABORTED *****
+error  first parameter unknown.

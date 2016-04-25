@@ -1,0 +1,56 @@
+﻿@using WebApplication.Models
+@using WebApplication.Service
+
+@{
+    ApplicationUser item = ViewData["User"] as ApplicationUser;
+}
+
+<div>
+    <hr/>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(modelItem => item.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(modelItem => item.Name)
+        </dd>
+        <br/>
+
+        <dt>Аватар:</dt>
+        <dd>
+            <p>
+                @{
+                    var yes = ApplicationUserService.GetUserAvatar(item.Id).IsEmpty();
+                    if (!yes)
+                    {
+                        @Html.Raw("<img style='width:100px;' src=\"../../Files/UserAvatarFiles/"
+                                  + ApplicationUserService.GetUserAvatar(item.Id) + "\" />")
+                    }
+                    else
+                    {
+                        <h5>Аватар не выбран</h5>
+                    }
+                }
+            </p>
+        </dd>
+        <br />
+
+
+        <dt>О себе:</dt>
+        <dd>
+            <p>
+                @ApplicationUserService.GetUserInfo(item.Id)
+            </p>
+        </dd>
+        <br />
+        
+        <dt>
+            @Html.DisplayNameFor(modelItem => item.RegistrationDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(modelItem => item.RegistrationDate)
+        </dd>
+        <br />
+    </dl>
+</div>
+

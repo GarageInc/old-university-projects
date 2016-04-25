@@ -1,0 +1,216 @@
+<?xml version="1.0"?>
+<BZ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="Квалитет" Version="1.14" Author="Рахимулин Ринат" IsRelease="false" CreateDate="12.03.2016 12:00:09" UpdateDate="12.03.2016 13:39:13">
+  <Comment />
+  <Rule Name="Загрузка таблиц">
+    <Act>F=ЧТЕНИЕ("Table.csv")</Act>
+    <Act>T1=ЗАГРТАБ(F)</Act>
+    <Act>ВЫВОД("Таблица1")</Act>
+    <Act>ВыводТаблицы(T1)</Act>
+    <Act>T2=СОЗДТАБЛ(2,14)</Act>
+    <Act>ВЫВОД("Таблица2")</Act>
+    <Act>ИЗМТАБ(T2,1,1,7)</Act>
+    <Act>ИЗМТАБ(T2,2,1,10)</Act>
+    <Act>ИЗМТАБ(T2,3,1,16)</Act>
+    <Act>ИЗМТАБ(T2,4,1,25)</Act>
+    <Act>ИЗМТАБ(T2,5,1,40)</Act>
+    <Act>ИЗМТАБ(T2,6,1,64)</Act>
+    <Act>ИЗМТАБ(T2,7,1,100)</Act>
+    <Act>ИЗМТАБ(T2,8,1,160)</Act>
+    <Act>ИЗМТАБ(T2,9,1,250)</Act>
+    <Act>ИЗМТАБ(T2,10,1,400)</Act>
+    <Act>ИЗМТАБ(T2,11,1,640)</Act>
+    <Act>ИЗМТАБ(T2,12,1,1000)</Act>
+    <Act>ИЗМТАБ(T2,13,1,1600)</Act>
+    <Act>ИЗМТАБ(T2,14,1,2500)</Act>
+    <Act>ИЗМТАБ(T2,1,2,5)</Act>
+    <Act>ИЗМТАБ(T2,2,2,6)</Act>
+    <Act>ИЗМТАБ(T2,3,2,7)</Act>
+    <Act>ИЗМТАБ(T2,4,2,8)</Act>
+    <Act>ИЗМТАБ(T2,5,2,9)</Act>
+    <Act>ИЗМТАБ(T2,6,2,10)</Act>
+    <Act>ИЗМТАБ(T2,7,2,11)</Act>
+    <Act>ИЗМТАБ(T2,8,2,12)</Act>
+    <Act>ИЗМТАБ(T2,9,2,13)</Act>
+    <Act>ИЗМТАБ(T2,10,2,14)</Act>
+    <Act>ИЗМТАБ(T2,11,2,15)</Act>
+    <Act>ИЗМТАБ(T2,12,2,16)</Act>
+    <Act>ИЗМТАБ(T2,13,2,17)</Act>
+    <Act>ИЗМТАБ(T2,14,2,18)</Act>
+    <Act>ВыводТаблицы(T2)</Act>
+    <Act>загрузка_успешная=1</Act>
+    <Enable>true</Enable>
+    <Priority>50</Priority>
+  </Rule>
+  <Rule Name="Ввод d,Td">
+    <Condition>загрузка_успешная=1</Condition>
+    <Act>d=1</Act>
+    <Act>Td=1</Act>
+    <Act>ВВОДБЛ("Введите данные",d,Td)</Act>
+    <Act>данные_введены=1</Act>
+    <Enable>true</Enable>
+    <Priority>50</Priority>
+  </Rule>
+  <Rule Name="Расчет i по таблице">
+    <Condition>данные_введены=1</Condition>
+    <Act>счетчик=2</Act>
+    <Act>i=0</Act>
+    <Act>ВЫВОД("d: ",d)</Act>
+    <Act>d_tmp=СТР_ЧИСЛО(d)</Act>
+    <Act>элемент_таблицы=СТР_ЧИСЛО(ЭЛЕМТАБ(T1,счетчик,2))</Act>
+    <Act>ПОКА(d_tmp&gt;=элемент_таблицы)</Act>
+    <Act>счетчик=счетчик+1</Act>
+    <Act>i=ЭЛЕМТАБ(T1,счетчик,3)</Act>
+    <Act>ПРЕРВАТЬ(счетчик&gt;=КОЛСТР(T1))</Act>
+    <Act>элемент_таблицы=СТР_ЧИСЛО(ЭЛЕМТАБ(T1,счетчик,2))</Act>
+    <Act>ВЫХОД</Act>
+    <Act>ВЫВОД("Значение i: ",i)</Act>
+    <Act>расчет_i_пройден=1</Act>
+    <Enable>true</Enable>
+    <Priority>50</Priority>
+  </Rule>
+  <Rule Name="Определение количества единиц допуска K">
+    <Condition>расчет_i_пройден=1</Condition>
+    <Act>k=1000*Td/i</Act>
+    <Act>ВЫВОД("Значение k: ",k)</Act>
+    <Act>определение_к=1</Act>
+    <Comment>Определение количества единиц допуска K</Comment>
+    <Enable>true</Enable>
+    <Priority>50</Priority>
+  </Rule>
+  <Rule Name="Определение квалитета по таблице 2">
+    <Condition>определение_к=1</Condition>
+    <Act>счетчик=1</Act>
+    <Act>IT=0</Act>
+    <Act>элемент_таблицы=СТР_ЧИСЛО(ЭЛЕМТАБ(T2,счетчик,1))</Act>
+    <Act>ПОКА(k&gt;=элемент_таблицы)</Act>
+    <Act>счетчик=счетчик+1</Act>
+    <Act>IT=СТР_ЧИСЛО(ЭЛЕМТАБ(T2,счетчик,2))</Act>
+    <Act>ПРЕРВАТЬ(счетчик&gt;=КОЛСТР(T2))</Act>
+    <Act>элемент_таблицы=СТР_ЧИСЛО(ЭЛЕМТАБ(T2,счетчик,1))</Act>
+    <Act>ВЫХОД</Act>
+    <Act>ВЫВОД("Значение квалитета IT: ",IT)</Act>
+    <Act>квалитет_определен=1</Act>
+    <Enable>true</Enable>
+    <Priority>50</Priority>
+  </Rule>
+  <Variable xsi:type="NoType" Name="F" Goal="false">
+    <IsBackward>false</IsBackward>
+    <Goal>False</Goal>
+    <Comment />
+    <StartValue />
+    <Opredelena>false</Opredelena>
+  </Variable>
+  <Variable xsi:type="NoType" Name="T1" Goal="false">
+    <IsBackward>false</IsBackward>
+    <Goal>False</Goal>
+    <Comment />
+    <StartValue />
+    <Opredelena>false</Opredelena>
+  </Variable>
+  <Variable xsi:type="NoType" Name="загрузка_успешная" Goal="false">
+    <IsBackward>false</IsBackward>
+    <Goal>False</Goal>
+    <Comment />
+    <StartValue />
+    <Opredelena>false</Opredelena>
+  </Variable>
+  <Variable xsi:type="NoType" Name="Td" Goal="false">
+    <IsBackward>false</IsBackward>
+    <Goal>False</Goal>
+    <Comment />
+    <StartValue />
+    <Opredelena>false</Opredelena>
+  </Variable>
+  <Variable xsi:type="NoType" Name="данные_введены" Goal="false">
+    <IsBackward>false</IsBackward>
+    <Goal>False</Goal>
+    <Comment />
+    <StartValue />
+    <Opredelena>false</Opredelena>
+  </Variable>
+  <Variable xsi:type="NoType" Name="T2" Goal="false">
+    <IsBackward>false</IsBackward>
+    <Goal>False</Goal>
+    <Comment />
+    <StartValue />
+    <Opredelena>false</Opredelena>
+  </Variable>
+  <Variable xsi:type="NoType" Name="расчет_i_пройден" Goal="false">
+    <IsBackward>false</IsBackward>
+    <Goal>False</Goal>
+    <Comment />
+    <StartValue />
+    <Opredelena>false</Opredelena>
+  </Variable>
+  <Variable xsi:type="NoType" Name="счетчик" Goal="false">
+    <IsBackward>false</IsBackward>
+    <Goal>False</Goal>
+    <Comment />
+    <StartValue />
+    <Opredelena>false</Opredelena>
+  </Variable>
+  <Variable xsi:type="NoType" Name="i" Goal="false">
+    <IsBackward>false</IsBackward>
+    <Goal>False</Goal>
+    <Comment />
+    <StartValue />
+    <Opredelena>false</Opredelena>
+  </Variable>
+  <Variable xsi:type="Number" Name="d" Goal="false">
+    <IsBackward>false</IsBackward>
+    <Goal>False</Goal>
+    <Comment />
+    <StartValue />
+    <Opredelena>false</Opredelena>
+  </Variable>
+  <Variable xsi:type="NoType" Name="определение_к" Goal="false">
+    <IsBackward>false</IsBackward>
+    <Goal>False</Goal>
+    <Comment />
+    <StartValue />
+    <Opredelena>false</Opredelena>
+  </Variable>
+  <Variable xsi:type="NoType" Name="квалитет_определен" Goal="true">
+    <IsBackward>false</IsBackward>
+    <Goal>True</Goal>
+    <Comment />
+    <StartValue />
+    <Opredelena>false</Opredelena>
+  </Variable>
+  <Variable xsi:type="Number" Name="k" Goal="false">
+    <IsBackward>false</IsBackward>
+    <Goal>False</Goal>
+    <Comment />
+    <StartValue />
+    <Opredelena>false</Opredelena>
+  </Variable>
+  <Variable xsi:type="Number" Name="элемент_таблицы" Goal="false">
+    <IsBackward>false</IsBackward>
+    <Goal>False</Goal>
+    <Comment />
+    <StartValue />
+    <Opredelena>false</Opredelena>
+  </Variable>
+  <Variable xsi:type="NoType" Name="d_tmp" Goal="false">
+    <IsBackward>false</IsBackward>
+    <Goal>False</Goal>
+    <Comment />
+    <StartValue />
+    <Opredelena>false</Opredelena>
+  </Variable>
+  <Variable xsi:type="Number" Name="IT" Goal="false">
+    <IsBackward>false</IsBackward>
+    <Goal>False</Goal>
+    <Comment />
+    <StartValue />
+    <Opredelena>false</Opredelena>
+  </Variable>
+  <CommentHtml />
+  <SearchStrategy>Прямой вывод</SearchStrategy>
+  <Group>
+    <Name>Новые БЗ</Name>
+    <Reference>gl:Новые БЗ</Reference>
+    <UserElement>true</UserElement>
+    <Elements />
+  </Group>
+</BZ>

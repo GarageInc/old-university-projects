@@ -1,0 +1,470 @@
+<?xml version="1.0"?>
+<BZ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="Выбор типа автомобиля из базы данных &quot;Автомобили.mdb&quot;" Version="1.14" Author="Рахимулин Ринат" IsRelease="false" CreateDate="15.02.2016 12:27:51" UpdateDate="12.03.2016 10:46:14">
+  <Comment />
+  <Rule Name="Вопрос о правах">
+    <Act>Ответ1=ВЫБОР("Ваши права позволяют управлять автомобилем только с автоматической коробкой передач или любой?",["Автомат","Любая"])</Act>
+    <Enable>true</Enable>
+    <Priority>50</Priority>
+  </Rule>
+  <Rule Name="Автомат">
+    <Condition>Ответ1="Автомат"</Condition>
+    <Act>Коробка="Автоматическая"</Act>
+    <Enable>true</Enable>
+    <Priority>50</Priority>
+  </Rule>
+  <Rule Name="Вопрос о пробках">
+    <Condition>Ответ1="Любая"</Condition>
+    <Act>Ответ2=ВЫБОР("Вам часто приходится ездить в пробках, особенно на наклонных дорогах?",["Часто","Редко"])</Act>
+    <Enable>true</Enable>
+    <Priority>50</Priority>
+  </Rule>
+  <Rule Name="Частые пробки, коробка автомат">
+    <Condition>Ответ2="Часто"</Condition>
+    <Act>Коробка="Автоматическая"</Act>
+    <Enable>true</Enable>
+    <Priority>50</Priority>
+  </Rule>
+  <Rule Name="Вопрос о стаже вождения">
+    <Condition>Ответ2="Редко"</Condition>
+    <Act>Ответ3=ВЫБОР("Каков Ваш стаж вождения?",["Более 2 лет","Менее 2 лет"])</Act>
+    <Enable>true</Enable>
+    <Priority>50</Priority>
+  </Rule>
+  <Rule Name="Большой стаж, механика">
+    <Condition>Ответ3="Более 2 лет"</Condition>
+    <Act>Коробка="Механическая"</Act>
+    <Enable>true</Enable>
+    <Priority>50</Priority>
+  </Rule>
+  <Rule Name="Маленький стаж, автомат">
+    <Condition>Ответ3="Менее 2 лет"</Condition>
+    <Act>Коробка="Автоматическая"</Act>
+    <Enable>true</Enable>
+    <Priority>50</Priority>
+  </Rule>
+  <Rule Name="Вопрос о плохих дорогах">
+    <Act>Ответ4=ВЫБОР("Как часто Вам приходится ездить по плохим дорогам (ямы, дороги без покрытия?",["Часто","Редко"])</Act>
+    <Enable>true</Enable>
+    <Priority>50</Priority>
+  </Rule>
+  <Rule Name="Частые плохие дороги">
+    <Condition>Ответ4="Часто"</Condition>
+    <Act>Подвеска=170</Act>
+    <Enable>true</Enable>
+    <Priority>50</Priority>
+  </Rule>
+  <Rule Name="Редкие плохие дороги">
+    <Condition>Ответ4="Редко"</Condition>
+    <Act>Подвеска=130</Act>
+    <Enable>true</Enable>
+    <Priority>50</Priority>
+  </Rule>
+  <Rule Name="Вопрос о размытии дорог">
+    <Act>Ответ5=ВЫБОР("Часто ли дороги, по которым Вы ездите, размывает?",["Часто","Редко"])</Act>
+    <Enable>true</Enable>
+    <Priority>50</Priority>
+  </Rule>
+  <Rule Name="Частое размытие дороги">
+    <Condition>Ответ5="Часто"</Condition>
+    <Act>Привод="\"Полный\""</Act>
+    <Enable>true</Enable>
+    <Priority>50</Priority>
+  </Rule>
+  <Rule Name="Редкое размытие дороги">
+    <Condition>Ответ5="Редко"</Condition>
+    <Act>Привод="\"Полный\",\"Задний\",\"Передний\""</Act>
+    <Enable>true</Enable>
+    <Priority>50</Priority>
+  </Rule>
+  <Rule Name="Вопрос о количестве мест">
+    <Act>Ответ6=ВЫБОР("Кто будет ездить в машине?",["Большая семья","Водитель и иногда друзья","Водитель и изредка 1 пассажир"])</Act>
+    <Enable>true</Enable>
+    <Priority>50</Priority>
+  </Rule>
+  <Rule Name="Требуется многоместный автомобиль">
+    <Condition>Ответ6="Большая семья"</Condition>
+    <Act>Места=[6,8]</Act>
+    <Enable>true</Enable>
+    <Priority>50</Priority>
+  </Rule>
+  <Rule Name="Требуется средняя вместимость">
+    <Condition>Ответ6="Водитель и иногда друзья"</Condition>
+    <Act>Места=[4,5]</Act>
+    <Enable>true</Enable>
+    <Priority>50</Priority>
+  </Rule>
+  <Rule Name="Требуется маленькая вместимость">
+    <Condition>Ответ6="Водитель и изредка 1 пассажир"</Condition>
+    <Act>Места=[2,5]</Act>
+    <Enable>true</Enable>
+    <Priority>50</Priority>
+  </Rule>
+  <Rule Name="Запрос на предварительный выбор">
+    <Act>SQL="SELECT Модель.Имя, Двигатели.Мощность, Двигатели.Объем, Двигатели.Привод, Двигатели.Коробка,Кузов.Тип,Кузов.Подвеска,Кузов.КолМест,Автомобили.Цена"</Act>
+    <Act>SQL=SQL+" FROM ((Автомобили"</Act>
+    <Act>SQL=SQL+" LEFT JOIN Модель ON Модель.id=Автомобили.Модель)"</Act>
+    <Act>SQL=SQL+" LEFT JOIN Двигатели ON Двигатели.id=Автомобили.Двигатель)"</Act>
+    <Act>SQL=SQL+" LEFT JOIN Кузов ON Кузов.id=Автомобили.Кузов"</Act>
+    <Act>SQL=SQL+" WHERE Двигатели.Коробка=\""+Коробка+"\""</Act>
+    <Act>SQL=SQL+" AND Кузов.Подвеска&gt;="+Подвеска</Act>
+    <Act>SQL=SQL+" AND Двигатели.Привод IN ("+Привод+")"</Act>
+    <Act>SQL=SQL+" AND Кузов.КолМест&gt;="+ЭЛЕМСП(1,Места)+" AND Кузов.КолМест&lt;="+ЭЛЕМСП(2,Места)</Act>
+    <Act>Предварительные_авто=ЗАПРОС("Автомобили.mdb",SQL)</Act>
+    <Act>Title=["Модель","Мощность двигателя","Объем двигателя","Привод","Коробка","Тип кузова","Клиренс","Количество мест","Цена"]</Act>
+    <Act>Предварительные_авто=ДобавитьЗаголовок(Предварительные_авто,Title)</Act>
+    <Enable>true</Enable>
+    <Priority>50</Priority>
+  </Rule>
+  <Rule Name="Автомобилей нет">
+    <Condition>КОЛСТР(Предварительные_авто)=1</Condition>
+    <Act>ВЫВОД("К сожалению автомобиля, удовлетворяющего данным критериям, нет в наличии")</Act>
+    <Act>Выбор=0</Act>
+    <Enable>true</Enable>
+    <Priority>50</Priority>
+  </Rule>
+  <Rule Name="Только 1 модель">
+    <Condition>КОЛСТР(Предварительные_авто)=2</Condition>
+    <Act>ВЫВОД("Вам подходит лишь один автомобиль")</Act>
+    <Act>ВыводТаблицы(Предварительные_авто)</Act>
+    <Act>Выбор=1</Act>
+    <Enable>true</Enable>
+    <Priority>50</Priority>
+  </Rule>
+  <Rule Name="Вывод всех подходящих моделей и составление списка кузовов">
+    <Act>ВЫВОД("Вам подходят несколько автомобилей. Позвольте задать несколько уточнющих вопросов.")</Act>
+    <Act>ВыводТаблицы(Предварительные_авто)</Act>
+    <Act>Кузова=[]</Act>
+    <Act>i=2</Act>
+    <Act>ПОКА(i&lt;=КОЛСТР(Предварительные_авто))</Act>
+    <Act>Кузова=ДОПСП(Кузова,ЭЛЕМТАБ(Предварительные_авто,i,6))</Act>
+    <Act>i=i+1</Act>
+    <Act>ВЫХОД</Act>
+    <Enable>true</Enable>
+    <Priority>50</Priority>
+  </Rule>
+  <Rule Name="Один кузов">
+    <Condition>КОЛЭЛЕМ(Кузова)=1</Condition>
+    <Act>Кузов="Любой"</Act>
+    <Enable>true</Enable>
+    <Priority>50</Priority>
+  </Rule>
+  <Rule Name="Вопрос о предпочитаемом кузове">
+    <Condition>КОЛЭЛЕМ(Кузова)&gt;1</Condition>
+    <Act>Кузов=ВЫБОР("Какой тип кузова вы предпочитаете",ДОПСП(Кузова,"Любой"))</Act>
+    <Enable>true</Enable>
+    <Priority>50</Priority>
+  </Rule>
+  <Rule Name="Вопрос о цене">
+    <Act>Цена=ВЫБОР("Вы бы хотели приобрести статусный или экономный автомобиль?",["Экономный","Статусный"])</Act>
+    <Enable>true</Enable>
+    <Priority>50</Priority>
+  </Rule>
+  <Rule Name="Поиск произвольного автомобиля с нужным кузовом">
+    <Act>Best=2</Act>
+    <Act>ПОКА((Кузов!="Любой")&amp;(ЭЛЕМТАБ(Предварительные_авто,Best,6)!=Кузов))</Act>
+    <Act>Best=Best+1</Act>
+    <Act>ВЫХОД</Act>
+    <Enable>true</Enable>
+    <Priority>50</Priority>
+  </Rule>
+  <Rule Name="Выбор статусного автомобиля">
+    <Condition>Цена="Статусный"</Condition>
+    <Act>i=Best</Act>
+    <Act>ПОКА(i&lt;КОЛСТР(Предварительные_авто))</Act>
+    <Act>iprev=ЕСЛИ(ЭЛЕМТАБ(Предварительные_авто,Best,9)&lt;ЭЛЕМТАБ(Предварительные_авто,i,9),i,Best)</Act>
+    <Act>Best=ЕСЛИ((Кузов="Любой")|(ЭЛЕМТАБ(Предварительные_авто,i,6)=Кузов),iprev,Best)</Act>
+    <Act>i=i+1</Act>
+    <Act>ВЫХОД</Act>
+    <Enable>true</Enable>
+    <Priority>50</Priority>
+  </Rule>
+  <Rule Name="Выбор экономного автомобиля">
+    <Condition>Цена="Экономный"</Condition>
+    <Act>i=Best</Act>
+    <Act>ПОКА(i&lt;КОЛСТР(Предварительные_авто))</Act>
+    <Act>iprev=ЕСЛИ(ЭЛЕМТАБ(Предварительные_авто,Best,9)&gt;ЭЛЕМТАБ(Предварительные_авто,i,9),i,Best)</Act>
+    <Act>Best=ЕСЛИ((Кузов="Любой")|(ЭЛЕМТАБ(Предварительные_авто,i,6)=Кузов),iprev,Best)</Act>
+    <Act>i=i+1</Act>
+    <Act>ВЫХОД</Act>
+    <Enable>true</Enable>
+    <Priority>50</Priority>
+  </Rule>
+  <Rule Name="ВЫВОД">
+    <Act>Выбор=Best-1</Act>
+    <Act>ВЫВОД("Лучше всего вам подойдет автомобиль, находящийся на "+Выбор+" строке.")</Act>
+    <Act>ВЫВОД("Это: "+ЭЛЕМТАБ(Предварительные_авто,Best,1))</Act>
+    <Enable>true</Enable>
+    <Priority>50</Priority>
+  </Rule>
+  <Variable xsi:type="NoType" Name="Ответ1" Goal="false">
+    <IsBackward>false</IsBackward>
+    <Goal>False</Goal>
+    <Comment />
+    <StartValue />
+    <Opredelena>false</Opredelena>
+  </Variable>
+  <Variable xsi:type="NoType" Name="Ответ2" Goal="false">
+    <IsBackward>false</IsBackward>
+    <Goal>False</Goal>
+    <Comment />
+    <StartValue />
+    <Opredelena>false</Opredelena>
+  </Variable>
+  <Variable xsi:type="NoType" Name="Ответ3" Goal="false">
+    <IsBackward>false</IsBackward>
+    <Goal>False</Goal>
+    <Comment />
+    <StartValue />
+    <Opredelena>false</Opredelena>
+  </Variable>
+  <Variable xsi:type="NoType" Name="Коробка" Goal="false">
+    <IsBackward>false</IsBackward>
+    <Goal>False</Goal>
+    <Comment />
+    <StartValue />
+    <Opredelena>false</Opredelena>
+  </Variable>
+  <Variable xsi:type="NoType" Name="Ответ4" Goal="false">
+    <IsBackward>false</IsBackward>
+    <Goal>False</Goal>
+    <Comment />
+    <StartValue />
+    <Opredelena>false</Opredelena>
+  </Variable>
+  <Variable xsi:type="NoType" Name="Подвеска" Goal="false">
+    <IsBackward>false</IsBackward>
+    <Goal>False</Goal>
+    <Comment />
+    <StartValue />
+    <Opredelena>false</Opredelena>
+  </Variable>
+  <Variable xsi:type="NoType" Name="Ответ5" Goal="false">
+    <IsBackward>false</IsBackward>
+    <Goal>False</Goal>
+    <Comment />
+    <StartValue />
+    <Opredelena>false</Opredelena>
+  </Variable>
+  <Variable xsi:type="NoType" Name="Привод" Goal="false">
+    <IsBackward>false</IsBackward>
+    <Goal>False</Goal>
+    <Comment />
+    <StartValue />
+    <Opredelena>false</Opredelena>
+  </Variable>
+  <Variable xsi:type="NoType" Name="Ответ6" Goal="false">
+    <IsBackward>false</IsBackward>
+    <Goal>False</Goal>
+    <Comment />
+    <StartValue />
+    <Opredelena>false</Opredelena>
+  </Variable>
+  <Variable xsi:type="NoType" Name="Места" Goal="false">
+    <IsBackward>false</IsBackward>
+    <Goal>False</Goal>
+    <Comment />
+    <StartValue />
+    <Opredelena>false</Opredelena>
+  </Variable>
+  <Variable xsi:type="NoType" Name="Предварительные_авто" Goal="false">
+    <IsBackward>false</IsBackward>
+    <Goal>False</Goal>
+    <Comment />
+    <StartValue />
+    <Opredelena>false</Opredelena>
+  </Variable>
+  <Variable xsi:type="NoType" Name="SQL" Goal="false">
+    <IsBackward>false</IsBackward>
+    <Goal>False</Goal>
+    <Comment />
+    <StartValue />
+    <Opredelena>false</Opredelena>
+  </Variable>
+  <Variable xsi:type="NoType" Name="Title" Goal="false">
+    <IsBackward>false</IsBackward>
+    <Goal>False</Goal>
+    <Comment />
+    <StartValue />
+    <Opredelena>false</Opredelena>
+  </Variable>
+  <Variable xsi:type="NoType" Name="Выбор" Goal="true">
+    <IsBackward>false</IsBackward>
+    <Goal>True</Goal>
+    <Comment />
+    <StartValue />
+    <Opredelena>false</Opredelena>
+  </Variable>
+  <Variable xsi:type="NoType" Name="Кузова" Goal="false">
+    <IsBackward>false</IsBackward>
+    <Goal>False</Goal>
+    <Comment />
+    <StartValue />
+    <Opredelena>false</Opredelena>
+  </Variable>
+  <Variable xsi:type="NoType" Name="i" Goal="false">
+    <IsBackward>false</IsBackward>
+    <Goal>False</Goal>
+    <Comment />
+    <StartValue />
+    <Opredelena>false</Opredelena>
+  </Variable>
+  <Variable xsi:type="NoType" Name="Кузов" Goal="false">
+    <IsBackward>false</IsBackward>
+    <Goal>False</Goal>
+    <Comment />
+    <StartValue />
+    <Opredelena>false</Opredelena>
+  </Variable>
+  <Variable xsi:type="NoType" Name="Цена" Goal="false">
+    <IsBackward>false</IsBackward>
+    <Goal>False</Goal>
+    <Comment />
+    <StartValue />
+    <Opredelena>false</Opredelena>
+  </Variable>
+  <Variable xsi:type="NoType" Name="iprev" Goal="false">
+    <IsBackward>false</IsBackward>
+    <Goal>False</Goal>
+    <Comment />
+    <StartValue />
+    <Opredelena>false</Opredelena>
+  </Variable>
+  <Variable xsi:type="NoType" Name="Best" Goal="false">
+    <IsBackward>false</IsBackward>
+    <Goal>False</Goal>
+    <Comment />
+    <StartValue />
+    <Opredelena>false</Opredelena>
+  </Variable>
+  <Functions>
+    <Name>Соединить</Name>
+    <LocalVariables xsi:type="NoType" Name="i" Goal="false">
+      <IsBackward>false</IsBackward>
+      <Goal>False</Goal>
+      <Comment />
+      <StartValue />
+      <Opredelena>false</Opredelena>
+    </LocalVariables>
+    <LocalVariables xsi:type="NoType" Name="результат" Goal="false">
+      <IsBackward>false</IsBackward>
+      <Goal>False</Goal>
+      <Comment />
+      <StartValue />
+      <Opredelena>false</Opredelena>
+    </LocalVariables>
+    <LocalVariables xsi:type="NoType" Name="элемент" Goal="false">
+      <IsBackward>false</IsBackward>
+      <Goal>False</Goal>
+      <Comment />
+      <StartValue />
+      <Opredelena>false</Opredelena>
+    </LocalVariables>
+    <LocalVariables xsi:type="NoType" Name="список" Goal="false">
+      <IsBackward>false</IsBackward>
+      <Goal>False</Goal>
+      <Comment />
+      <StartValue />
+      <Opredelena>false</Opredelena>
+    </LocalVariables>
+    <LocalVariables xsi:type="NoType" Name="разделитель" Goal="false">
+      <IsBackward>false</IsBackward>
+      <Goal>False</Goal>
+      <Comment />
+      <StartValue />
+      <Opredelena>false</Opredelena>
+    </LocalVariables>
+    <LocalVariables xsi:type="NoType" Name="кавычки" Goal="false">
+      <IsBackward>false</IsBackward>
+      <Goal>False</Goal>
+      <Comment />
+      <StartValue />
+      <Opredelena>false</Opredelena>
+    </LocalVariables>
+    <Args>3</Args>
+    <Args>4</Args>
+    <Args>5</Args>
+    <Act>i=1</Act>
+    <Act>результат=""</Act>
+    <Act>ПОКА(i&lt;=КОЛЭЛЕМ(список))</Act>
+    <Act>элемент=ЭЛЕМСП(i,список)</Act>
+    <Act>if(кавычки=1)</Act>
+    <Act>элемент="\""+элемент+"\""</Act>
+    <Act>endif</Act>
+    <Act>if(ДЛИНАСТР(результат)&gt;0)</Act>
+    <Act>результат=результат+разделитель</Act>
+    <Act>endif</Act>
+    <Act>результат=результат+элемент</Act>
+    <Act>i=i+1</Act>
+    <Act>ВЫХОД</Act>
+    <Act>Возврат(результат)</Act>
+  </Functions>
+  <Functions>
+    <Name>ДобавитьЗаголовок</Name>
+    <LocalVariables xsi:type="NoType" Name="T" Goal="false">
+      <IsBackward>false</IsBackward>
+      <Goal>False</Goal>
+      <Comment />
+      <StartValue />
+      <Opredelena>false</Opredelena>
+    </LocalVariables>
+    <LocalVariables xsi:type="NoType" Name="i" Goal="false">
+      <IsBackward>false</IsBackward>
+      <Goal>False</Goal>
+      <Comment />
+      <StartValue />
+      <Opredelena>false</Opredelena>
+    </LocalVariables>
+    <LocalVariables xsi:type="NoType" Name="j" Goal="false">
+      <IsBackward>false</IsBackward>
+      <Goal>False</Goal>
+      <Comment />
+      <StartValue />
+      <Opredelena>false</Opredelena>
+    </LocalVariables>
+    <LocalVariables xsi:type="NoType" Name="T1" Goal="false">
+      <IsBackward>false</IsBackward>
+      <Goal>False</Goal>
+      <Comment />
+      <StartValue />
+      <Opredelena>false</Opredelena>
+    </LocalVariables>
+    <LocalVariables xsi:type="NoType" Name="заголовок" Goal="false">
+      <IsBackward>false</IsBackward>
+      <Goal>False</Goal>
+      <Comment />
+      <StartValue />
+      <Opredelena>false</Opredelena>
+    </LocalVariables>
+    <Args>0</Args>
+    <Args>4</Args>
+    <Act>//Создаем таблицу</Act>
+    <Act>T1=СОЗДТАБЛ(КОЛСТОЛБ(T)+0)</Act>
+    <Act>//Добавляем заголовок</Act>
+    <Act>ДОБСТР(T1)</Act>
+    <Act>i=1</Act>
+    <Act>ПОКА(i&lt;=КОЛЭЛЕМ(заголовок))</Act>
+    <Act>ИЗМТАБ(T1,1,i,ЭЛЕМСП(i,заголовок))</Act>
+    <Act>i=i+1</Act>
+    <Act>ВЫХОД</Act>
+    <Act>//добавляем все остальное из таблицы</Act>
+    <Act>i=1</Act>
+    <Act>ПОКА(i&lt;=КОЛСТР(T))</Act>
+    <Act>ДОБСТР(T1)</Act>
+    <Act>j=1</Act>
+    <Act>ПОКА(j&lt;=КОЛСТОЛБ(T1))</Act>
+    <Act>ИЗМТАБ(T1,i+1,j,ЭЛЕМТАБ(T,i,j))</Act>
+    <Act>j=j+1</Act>
+    <Act>ВЫХОД</Act>
+    <Act>i=i+1</Act>
+    <Act>ВЫХОД</Act>
+    <Act>//</Act>
+    <Act>Возврат(T1)</Act>
+  </Functions>
+  <CommentHtml>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"&gt;
+&lt;HTML&gt;&lt;HEAD&gt;
+&lt;META content="text/html; charset=unicode" http-equiv=Content-Type&gt;
+&lt;META name=GENERATOR content="MSHTML 11.00.9600.18212"&gt;&lt;/HEAD&gt;
+&lt;BODY&gt;&lt;/BODY&gt;&lt;/HTML&gt;
+</CommentHtml>
+  <SearchStrategy>Прямой вывод</SearchStrategy>
+</BZ>

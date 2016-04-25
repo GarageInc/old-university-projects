@@ -1,0 +1,67 @@
+MPASM  5.33                          PROG.ASM   4-10-2014  13:52:06         PAGE  1
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00001  
+Warning[207]: Found label after column 1. (TRISB)
+  00000006            00002          TRISB   equ  06h ;(1-й банк)
+Warning[207]: Found label after column 1. (PORTB)
+  00000006            00003      PORTB   equ  06h ; (0-й банк)
+Warning[207]: Found label after column 1. (Status)
+  00000003            00004      Status  equ  03h
+                      00005 
+0000   0A04           00006     goto  start
+0004                  00007          org 4h
+                      00008 
+0004                  00009 start ; продолж. основной программы
+                      00010       ; инициализация
+Warning[207]: Found label after column 1. (nachalo)
+0004                  00011         nachalo      ; решение задачи
+0004   0406           00012                  bcf PORTB, 0    ; устанавливаем начальное состояние
+                      00013                                  ; (уровень, который установится на RB0
+                      00014                                  ; после переключения направления работы
+                      00015                                  ; на выход, 0 - низкий уровень, 1 - высокий
+Error[113]  : Symbol not previously defined (RP0)
+0005   0503           00016                  bsf Status, RP0 ; переходим в первый банк (нужный
+                      00017                                  ; нам регистр TRISB находится там), для чего
+                      00018                                  ; устанавливаем в 1 бит RP0 регистра Status
+0006   0406           00019                  bcf TRISB, 0    ; устанавливаем в 0 нулевой бит регистра TRISB
+                      00020                                  ; (устанавливаем направление работы RB0 - на выход)
+Error[113]  : Symbol not previously defined (RP0)
+0007   0403           00021                  bcf Status, RP0 ; возвращаемся в нулевой банк
+                      00022         
+0008   0A04           00023         goto nachalo
+Warning[205]: Found directive in column 1. (end)
+                      00024 end
+MPASM  5.33                          PROG.ASM   4-10-2014  13:52:06         PAGE  2
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+PORTB                             00000006
+Status                            00000003
+TRISB                             00000006
+__16C54                           00000001
+__DEBUG                           1
+nachalo                           00000004
+start                             00000004
+
+
+MEMORY USAGE MAP ('X' = Used,  '-' = Unused)
+
+0000 : X---XXXXX------- ---------------- ---------------- ----------------
+
+All other memory blocks unused.
+
+Program Memory Words Used:     6
+Program Memory Words Free:   506
+
+
+Errors   :     2
+Warnings :     5 reported,     0 suppressed
+Messages :     0 reported,     0 suppressed
+
+

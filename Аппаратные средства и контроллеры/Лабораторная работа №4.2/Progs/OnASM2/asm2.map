@@ -1,0 +1,40 @@
+MPLINK 4.33, Linker
+Linker Map File - Created Mon Apr 14 09:03:32 2014
+
+                                 Section Info
+                  Section       Type    Address   Location Size(Bytes)
+                ---------  ---------  ---------  ---------  ---------
+                   .org_0       code   0x000000    program   0x000000
+                   .org_1       code   0x000000    program   0x000002
+                   .org_2       code   0x000004    program   0x00001a
+      .config_2007_ASM2.O       code   0x002007    program   0x000002
+
+
+
+                              Program Memory Usage 
+                               Start         End      
+                           ---------   ---------      
+                            0x000000    0x000000      
+                            0x000004    0x000010      
+                            0x002007    0x002007      
+            15 out of 2183 program addresses used, program memory utilization is 0%
+
+
+
+                              Symbols - Sorted by Name
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                  nachalo   0x000004    program     static C:\Video\Progs\OnASM2\asm2.asm
+                    pause   0x00000f    program     static C:\Video\Progs\OnASM2\asm2.asm
+                    start   0x000004    program     static C:\Video\Progs\OnASM2\asm2.asm
+
+
+
+                              Symbols - Sorted by Address
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                  nachalo   0x000004    program     static C:\Video\Progs\OnASM2\asm2.asm
+                    start   0x000004    program     static C:\Video\Progs\OnASM2\asm2.asm
+                    pause   0x00000f    program     static C:\Video\Progs\OnASM2\asm2.asm
+
+

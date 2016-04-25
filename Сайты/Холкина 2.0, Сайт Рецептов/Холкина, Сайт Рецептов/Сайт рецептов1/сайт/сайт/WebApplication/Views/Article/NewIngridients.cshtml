@@ -1,0 +1,12 @@
+﻿
+<div class="col-md-10" id="newingridients">
+    @foreach (var item in ViewBag.Ingridients)
+    {
+        <input type="checkbox"
+               name="ingridient"
+               value="@item.Id" />
+                            @item.Name
+                            <br />
+    }
+</div>
+

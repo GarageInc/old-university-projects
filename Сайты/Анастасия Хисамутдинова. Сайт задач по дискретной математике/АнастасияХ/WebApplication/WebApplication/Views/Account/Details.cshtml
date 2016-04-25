@@ -1,0 +1,110 @@
+﻿@model WebApplication.Models.ApplicationUser
+@{
+    ViewBag.Title = "О пользователе";
+    var userId = Model.Id;
+}
+@using WebApplication.Service
+
+<div>
+
+    <p><b>Сведения о пользователе</b></p>
+    <hr/>
+    <dl class="dl-horizontal">
+
+        <dt>Аватар:</dt>
+        <dd>
+            <p>
+                @{
+                    var yes = ApplicationUserDTO.GetUserAvatar(userId).IsEmpty();
+                    if (!yes)
+                    {
+                        @Html.Raw("<img style='width:100px;' src=\"../../Files/UserAvatarFiles/"
+                                  + ApplicationUserDTO.GetUserAvatar(userId) + "\" />")
+                    }
+                    else
+                    {
+                        <h5>Аватар не выбран</h5>
+                    }
+                }
+            </p>
+        </dd>
+        <hr/>
+        <dt>Карма(статус):</dt>
+        <dd>
+            <p>
+                @ApplicationUserDTO.GetUserKarma(userId)
+            </p>
+        </dd>
+        <hr/>
+        <dt>О себе:</dt>
+        <dd>
+            <p>
+                @ApplicationUserDTO.GetUserInfo(userId)
+            </p>
+        </dd>
+        <hr/>
+
+        @if (User.IsInRole("Administrator"))
+        {
+            <dt>Реквизиты(добавить)</dt>
+            <dd>
+                <table class="table">
+                    <tr>
+                        <th>
+                            Категория
+                        </th>
+                        <th>Доп.сведения</th>
+                        <th>
+                            Номер/адрес
+                        </th>
+                        <th></th>
+                    </tr>
+
+                    @foreach (var item in Model.Props)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.PropsCategory.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.PropsCategory.Info)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Number)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Удалить", "Delete", "Props", new {id = item.Id}, null)
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </dd>
+            <hr/>
+
+            <dt>Контакты</dt>
+            <dd>
+                <table class="table">
+                    <tr>
+                        <th>
+                            Ссылка/номер/адрес
+                        </th>
+                        <th></th>
+                    </tr>
+
+                    @foreach (var item in Model.Contacts)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ContactAdress)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Удалить", "Delete", "Contact", new {id = item.Id}, null)
+                            </td>
+                        </tr>
+                    }
+                </table>
+
+            </dd>
+        }
+    </dl>
+</div>

@@ -1,0 +1,78 @@
+﻿@using Microsoft.AspNet.Identity
+@using WebApplication.Service
+@model WebApplication.Models.ApplicationUser
+
+<div class="modal-content">
+    <div class="modal-header">
+        <button class="close" data-dismiss="modal" area-hidden="true">X</button>
+        <h4>Пользователь</h4>
+    </div>
+    <div class="modal-body">
+        <dl class="dl-horizontal">
+            <dt> @Html.DisplayNameFor(m => m.Name) </dt>
+            <dd>
+                @Html.DisplayFor(m => m.Name)
+            </dd>
+            <br/>
+
+            <dt>
+                @Html.DisplayNameFor(m => m.Avatar)
+            </dt>
+            <dd>
+                @{
+                    var yes = ApplicationUserDTO.GetUserAvatar(this.User.Identity.GetUserId()).IsEmpty();
+                    if (!yes)
+                    {
+                        @Html.Raw("<img style='width:50px; height:50px;' src=\"../../Files/UserAvatarFiles/"
+                                  + ApplicationUserDTO.GetUserAvatar(this.User.Identity.GetUserId()) + "\" />")
+                    }
+                    else
+                    {
+                        <b>Аватар не выбран</b>
+                    }
+                }
+            </dd>
+            <br />
+
+            <dt>
+                 @Html.DisplayNameFor(m => m.Karma)
+            </dt>
+            <dd>
+                 @Html.DisplayFor(m => m.Karma)
+            </dd>
+            <br/>
+
+            @if (User.IsInRole("Administrator"))
+            {
+                
+                <hr />
+                <dt>
+                    @Html.DisplayNameFor(m => m.Contacts)
+                </dt>
+                <dd>
+                    <table class="table">
+                        <tr>
+                            <th>
+                                Ссылка/номер/адрес
+                            </th>
+                            <th></th>
+                        </tr>
+
+                        @foreach (var item in Model.Contacts)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ContactAdress)
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Удалить", "Delete", "Contact", new { id = item.Id }, null)
+                                </td>
+                            </tr>
+                        }
+                    </table>
+                </dd>
+            }
+
+        </dl>
+    </div>
+</div>

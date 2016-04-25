@@ -1,0 +1,574 @@
+
+knopka04.asm           Assembled with CASM08Z  13.02.05  0:17:29  PAGE 1
+
+
+
+ 0000                   1  RAMStart      EQU  $0040
+ 0000                   2  ROMStart      EQU  $8000
+ 0000                   3  VectorStart   EQU  $FFDC
+                        4  
+ 0000                   5  $Include 'gpgtregs.inc'
+                        6   ; 68HC908GT16/GP32 Equates
+                        7  
+ 0000                   8  PTA    EQU $0000     ; Ports and data direction
+ 0000                   9  PORTA  EQU $0000
+ 0000                  10  PTB    EQU $0001
+ 0000                  11  PORTB  EQU $0001
+ 0000                  12  PTC    EQU $0002
+ 0000                  13  PORTC  EQU $0002
+ 0000                  14  PTD    EQU $0003
+ 0000                  15  PORTD  EQU $0003
+ 0000                  16  DDRA   EQU $0004
+ 0000                  17  DDRB   EQU $0005
+ 0000                  18  DDRC   EQU $0006
+ 0000                  19  DDRD   EQU $0007
+ 0000                  20  PTE    EQU $0008
+ 0000                  21  PORTE  EQU $0008
+                       22  
+ 0000                  23  SCPSC   EQU $0009    ;GT16 Only - Enhanced SCI
+ 0000                  24  SCIACTL EQU $000A    ;GT16 Only
+ 0000                  25  SCIADAT EQU $000B    ;GT16 Only
+                       26  
+ 0000                  27  DDRE    EQU $000C    ; Ports and data direction
+                       28  
+ 0000                  29  PTAPUE  EQU $000D    ; Port pull-up enables
+ 0000                  30  PTCPUE  EQU $000E
+ 0000                  31  PTDPUE  EQU $000F
+                       32  
+ 0000                  33  SPCR    EQU $0010    ; SPI (Syncronous communication
+                                                                             s)
+ 0000                  34  SPSCR   EQU $0011
+ 0000                  35  SPDR    EQU $0012
+                       36  
+ 0000                  37  SCC1    EQU $0013    ; SCI (Asyncronous communicatio
+                                                                            ns)
+ 0000                  38  SCC2    EQU $0014
+ 0000                  39  SCC3    EQU $0015
+ 0000                  40  SCS1    EQU $0016
+ 0000                  41  SCS2    EQU $0017
+ 0000                  42  SCDR    EQU $0018
+ 0000                  43  SCBR    EQU $0019
+                       44  
+ 0000                  45  INTKBSCR EQU $001a   ; Keyboard interrupt control/st
+                                                                           atus
+ 0000                  46  INTKBIER EQU $001b
+                       47  
+ 0000                  48  TBCR    EQU $001c    ; Time base module
+                       49  
+ 0000                  50  INTSCR  EQU $001d    ; IRQ status/control
+                       51  
+ 0000                  52  CONFIG2 EQU $001e    ; System configuration
+ 0000                  53  CONFIG1 EQU $001f
+                       54  
+ 0000                  55  T1SC    EQU $0020    ; Timer 1
+
+
+knopka04.asm           Assembled with CASM08Z  13.02.05  0:17:29  PAGE 2
+
+
+
+ 0000                  56  T1CNTH  EQU $0021
+ 0000                  57  T1CNTL  EQU $0022
+ 0000                  58  T1MODH  EQU $0023
+ 0000                  59  T1MODL  EQU $0024
+ 0000                  60  T1SC0   EQU $0025
+ 0000                  61  T1CH0H  EQU $0026
+ 0000                  62  T1CH0L  EQU $0027
+ 0000                  63  T1SC1   EQU $0028
+ 0000                  64  T1CH1H  EQU $0029
+ 0000                  65  T1CH1L  EQU $002a
+                       66  
+ 0000                  67  T2SC    EQU $002b    ; Timer 2
+ 0000                  68  T2CNTH  EQU $002c
+ 0000                  69  T2CNTL  EQU $002d
+ 0000                  70  T2MODH  EQU $002e
+ 0000                  71  T2MODL  EQU $002f
+ 0000                  72  T2SC0   EQU $0030
+ 0000                  73  T2CH0H  EQU $0031
+ 0000                  74  T2CH0L  EQU $0032
+ 0000                  75  T2SC1   EQU $0033
+ 0000                  76  T2CH1H  EQU $0034
+ 0000                  77  T2CH1L  EQU $0035
+                       78  
+ 0000                  79  PCTL    EQU $0036    ; GP32 Only - Phase lock loop 
+                                                                 (for crystals)
+ 0000                  80  PBWC    EQU $0037    ; GP32 Only
+ 0000                  81  PMSH    EQU $0038    ; GP32 Only
+ 0000                  82  PMSL    EQU $0039    ; GP32 Only
+ 0000                  83  PMRS    EQU $003A    ; GP32 Only
+ 0000                  84  PMDS    EQU $003B    ; GP32 Only
+                       85  
+ 0000                  86  ICGCR   EQU $0036    ; GT16 Only - Internal Clock 
+                                                                      Generator
+ 0000                  87  ICGMR   EQU $0037    ; GT16 Only
+ 0000                  88  ICGTR   EQU $0038    ; GT16 Only
+ 0000                  89  ICGDVR  EQU $0039    ; GT16 Only
+ 0000                  90  ICGDSR  EQU $003A    ; GT16 Only
+ 0000                  91  ICGTR5  EQU $FF80    ; GT16 Only
+ 0000                  92  ICGTR3  EQU $FF81    ; GT16 Only
+                       93  
+ 0000                  94  ADSCR   EQU $003C    ; A to D converter
+ 0000                  95  ADR     EQU $003D
+ 0000                  96  ADCLK   EQU $003E
+                       97  
+ 0000                  98  SBSR    EQU $fe00    ; System integration
+ 0000                  99  SRSR    EQU $fe01
+ 0000                 100  SUBAR   EQU $fe02
+ 0000                 101  SBFCR   EQU $fe03
+                      102  
+ 0000                 103  INT1    EQU $fe04    ; Interrupt status
+ 0000                 104  INT2    EQU $fe05
+ 0000                 105  INT3    EQU $fe06
+                      106  
+ 0000                 107  FLTCR   EQU $fe07    ; Flash test/programming
+ 0000                 108  FLCR    EQU $fe08
+                      109  
+ 0000                 110  BRKH    EQU $fe09    ; Hardware breakpoint
+ 0000                 111  BRKL    EQU $fe0a
+
+
+knopka04.asm           Assembled with CASM08Z  13.02.05  0:17:29  PAGE 3
+
+
+
+ 0000                 112  BRKSCR  EQU $fe0b
+                      113  
+ 0000                 114  LVISR   EQU $fe0c    ; Low voltage detect
+                      115  
+ 0000                 116  FLBPR   EQU $ff80    ; Flash boot protect
+                      117  
+ 0000                 118  COPCTL  EQU $ffff    ; COP (Computer operating 
+                                                              properly) control
+                      119  
+                      120  
+                      121  
+                      122  ; (C)opywrite P&E Microcomputer Systems, 1998, 2002
+                      123  ; http://www.pemicro.com
+                      124  
+                      125  
+ 0000                 126  LCD_CTRL      EQU  PORTC
+ 0000                 127  LCD_DATA      EQU  PORTC
+ 0000                 128  LCD_DATA_MASK EQU  $0F
+ 0000                 129  LCD_RS        EQU  1
+ 0000                 130  LCD_RW        EQU  0
+ 0000                 131  LCD_E         EQU  4
+ 0000                 132  LCD_CTRU      EQU  PORTD
+                      133  
+                      134  
+ 0040                 135          org   RAMStart
+                      136  
+ 0040                 137  delayReg1 ds 1
+ 0041                 138  delayReg2 ds 1
+ 0042                 139  delayReg3 ds 1
+ 0043                 140  lcddata   ds 1
+ 0044                 141  time      ds 1
+                      142  
+ 8000                 143        org   ROMStart
+                      144  
+                      145  Var_Delay:
+ 8000 [02] A621       146         lda   #33T
+ 8002 [01] 4A         147  L6:    deca
+ 8003 [03] 26FD       148         bne   L6
+ 8005 [04] 3A44       149         dec   time
+ 8007 [03] 26F7       150         bne   Var_Delay
+ 8009 [04] 81         151         rts
+                      152  
+                      153  
+                      154  LCD_Delay_40us:
+ 800A [02] 87         155         psha        ;2 cycles
+ 800B [02] A60E       156         lda   #14T  ;2 cycles
+ 800D [01] 4A         157  L5:    deca        ;1 cycle
+ 800E [03] 26FD       158         bne   L5    ;3 cycles
+ 8010 [02] 86         159         pula        ;2 cycles
+ 8011 [04] 81         160         rts         ;4 cycles
+                      161  
+                      162  LCD_Write_Nibble:
+ 8012 [02] 87         163         psha
+ 8013 [02] A40F       164         and   #$0F
+ 8015 [02] 87         165         psha
+ 8016 [02] 9B         166         sei
+ 8017 [03] B602       167         lda   LCD_DATA
+ 8019 [02] A4F0       168         and   #$F0
+
+
+knopka04.asm           Assembled with CASM08Z  13.02.05  0:17:29  PAGE 4
+
+
+
+ 801B [04] 9EEA01     169         ora   1,SP
+ 801E [03] B702       170         sta   LCD_DATA
+ 8020 [02] 9A         171         cli
+ 8021 [04] 1802       172         bset  LCD_E,LCD_CTRL
+ 8023 [04] 1902       173         bclr  LCD_E,LCD_CTRL
+ 8025 [04] ADE3       174         bsr   LCD_Delay_40us
+ 8027 [02] 86         175         pula
+ 8028 [02] 86         176         pula
+ 8029 [04] 81         177         rts
+                      178  
+                      179  
+                      180  LCD_Write:
+ 802A [03] 62         181         nsa
+ 802B [04] ADE5       182         bsr   LCD_Write_Nibble
+ 802D [03] 62         183         nsa
+ 802E [04] ADE2       184         bsr   LCD_Write_Nibble
+ 8030 [04] 81         185         rts
+                      186  
+                      187  LCD_Init:
+                      188  *** Wait for 15ms
+ 8031 [02] A696       189         lda   #150T
+ 8033 [03] B744       190         sta   time
+ 8035 [05] CD8000     191         jsr   Var_Delay
+                      192  *** Send Init Command
+ 8038 [02] A602       193         lda   #$02
+ 803A [05] CD8012     194         jsr   LCD_Write_Nibble
+                      195  *** Wait for 4.1ms
+ 803D [02] A629       196         lda   #41T
+ 803F [03] B744       197         sta   time
+ 8041 [05] CD8000     198         jsr   Var_Delay
+                      199  *** Send Init Command
+ 8044 [02] A608       200         lda   #$08
+ 8046 [05] CD8012     201         jsr   LCD_Write_Nibble
+                      202  *** Wait for 100 us
+ 8049 [02] A601       203         lda   #1
+ 804B [03] B744       204         sta   time
+ 804D [05] CD8000     205         jsr   Var_Delay
+                      206  *** Send Init Command
+                      207      ;   lda   #$00
+                      208      ;   jsr   LCD_Write_Nibble
+                      209  *** Send Function Set Command (4 bit bus, 2 rows, 
+                                                                      5x7 dots)
+                      210     ;    lda   #$0F
+                      211     ;    jsr   LCD_Write_Nibble
+ 8050 [02] A60F       212         lda   #$0F
+ 8052 [05] CD802A     213         jsr   LCD_Write
+                      214  *** Send Display Ctrl Command (display on, cursor 
+                                                              off, no blinking)
+ 8055 [02] A628       215         lda   #$28
+ 8057 [05] CD802A     216         jsr   LCD_Write
+                      217  *** Send Clear Display Command (clear display, 
+                                                               cursor addr = 0)
+ 805A [02] A601       218         lda   #$01
+ 805C [05] CD802A     219         jsr   LCD_Write
+ 805F [02] A6C8       220         lda   #200T
+ 8061 [03] B744       221         sta   time
+ 8063 [05] CD8000     222         jsr   Var_Delay
+                      223  *** Send Entry Mode Command (increment, no display 
+
+
+knopka04.asm           Assembled with CASM08Z  13.02.05  0:17:29  PAGE 5
+
+
+
+                                                                         shift)
+                      224  ;       lda   #$04
+                      225  ;       jsr   LCD_Write
+ 8066 [04] 1203       226         bset  LCD_RS,LCD_CTRU
+ 8068 [04] 81         227         rts
+                      228  
+                      229  
+                      230  Main_Init:
+ 8069 [01] 9C         231         rsp
+ 806A [03] B61F       232         lda   CONFIG1
+ 806C [02] AA01       233         ora   #1
+ 806E [03] B71F       234         sta   CONFIG1
+ 8070 [04] 6E0E04     235         mov   #$0E,DDRA
+ 8073 [04] 6EF00D     236         mov   #$F0,PTAPUE
+ 8076 [04] 6E1F06     237         mov   #$1F,DDRC
+ 8079 [04] 6E0002     238         mov   #$00,PORTC
+ 807C [04] 6E0B07     239         mov   #$0B,DDRD
+ 807F [04] 6E0003     240         mov   #$00,PORTD
+ 8082 [05] CD8031     241         jsr   LCD_Init
+ 8085 [01] 5F         242         clrx
+ 8086 [01] 8C         243         clrh
+                      244  OPROS:
+ 8087 [02] A641       245       lda #$41
+ 8089 [05] CD802A     246       jsr LCD_Write
+                      247  ;     bclr 1,PTA
+                      248  ;     jsr PROVERKA
+                      249  ;     clra
+                      250  ;     bset 1,PTA
+ 808C [02] A642       251       lda #$42
+ 808E [05] CD802A     252       jsr LCD_Write
+                      253  ;     bclr 2,PTA
+                      254  ;     jsr PROVERKA
+                      255  ;     clra
+                      256  ;     bset 2,PTA
+ 8091 [02] A643       257       lda #$43
+ 8093 [05] CD802A     258       jsr LCD_Write
+                      259  ;     bclr 3,PTA
+                      260  ;     jsr PROVERKA
+                      261  ;     clra
+                      262  ;     bset 3,PTA
+                      263  ;     bra OPROS
+ 8096 [02] A644       264       lda #$44
+ 8098 [05] CD802A     265       jsr LCD_Write
+ 809B [02] A620       266       lda #$20
+ 809D [05] CD802A     267       jsr LCD_Write
+ 80A0 [02] A646       268       lda #$46
+ 80A2 [05] CD802A     269       jsr LCD_Write
+ 80A5 [02] A633       270       lda #$33
+ 80A7 [05] CD802A     271       jsr LCD_Write
+ 80AA [02] A634       272       lda #$34
+ 80AC [05] CD802A     273       jsr LCD_Write
+ 80AF [02] A635       274       lda #$35
+ 80B1 [05] CD802A     275       jsr LCD_Write  
+ 80B4 [03] 20FE       276  loop: bra loop
+                      277  PROVERKA:
+ 80B6 [05] CD80C9     278       jsr PRB4
+ 80B9 [02] AB03       279       add #3T
+ 80BB [05] CD80D6     280       jsr PRB5
+
+
+knopka04.asm           Assembled with CASM08Z  13.02.05  0:17:29  PAGE 6
+
+
+
+ 80BE [02] AB03       281       add #3T
+ 80C0 [05] CD80E3     282       jsr PRB6
+ 80C3 [02] AB03       283       add #3T
+ 80C5 [05] CD80F0     284       jsr PRB7
+ 80C8 [04] 81         285       rts
+                      286  
+                      287  
+                      288  PRB4:
+ 80C9 [05] 090003     289       brclr 4,PTA,L1
+ 80CC [03] CC80D5     290       jmp K1
+ 80CF [05] CD802A     291  L1:  jsr LCD_Write
+ 80D2 [05] 0900FD     292  B1:  brclr 4,PTA,B1
+ 80D5 [04] 81         293  K1:  rts
+                      294  
+                      295  PRB5:
+ 80D6 [05] 0B0003     296       brclr 5,PTA,L2
+ 80D9 [03] CC80E2     297       jmp K2
+ 80DC [05] CD802A     298  L2:  jsr LCD_Write
+ 80DF [05] 0B00FD     299  B2:  brclr 5,PTA,B2
+ 80E2 [04] 81         300  K2:  rts
+                      301  
+                      302  PRB6:
+ 80E3 [05] 0D0003     303       brclr 6,PTA,L3
+ 80E6 [03] CC80EF     304       jmp K3
+ 80E9 [05] CD802A     305  L3:  jsr LCD_Write
+ 80EC [05] 0D00FD     306  B3:  brclr 6,PTA,B3
+ 80EF [04] 81         307  K3:  rts
+                      308  
+                      309  PRB7:
+ 80F0 [05] 0F0003     310       brclr 7,PTA,L4
+ 80F3 [03] CC811D     311       jmp K5
+ 80F6 [02] A13A       312  L4:  cmp #$3A
+ 80F8 [03] 270B       313       beq E1
+ 80FA [02] A13B       314       cmp #$3B
+ 80FC [03] 270F       315       beq E2
+ 80FE [02] A13C       316       cmp #$3C
+ 8100 [03] 2713       317       beq E3
+ 8102 [03] CC811A     318       jmp K4
+ 8105 [02] A601       319  E1:  lda #1T
+ 8107 [05] CD811E     320       jsr comand
+ 810A [03] CC811A     321       jmp K4
+ 810D [02] A630       322  E2:  lda #$30
+ 810F [05] CD802A     323       jsr LCD_Write
+ 8112 [03] CC811A     324       jmp K4
+ 8115 [02] A602       325  E3:  lda #2T
+ 8117 [05] CD811E     326       jsr comand
+ 811A [05] 0F00FD     327  K4:  brclr 7,PTA,K4
+ 811D [04] 81         328  K5:  rts
+                      329  
+                      330  
+                      331  comand:
+ 811E [04] 1303       332       bclr LCD_RS,LCD_CTRU
+ 8120 [05] CD802A     333       jsr  LCD_Write
+ 8123 [04] 1203       334       bset LCD_RS,LCD_CTRU
+ 8125 [04] 81         335       rts
+                      336  
+                      337  
+                      338  
+
+
+knopka04.asm           Assembled with CASM08Z  13.02.05  0:17:29  PAGE 7
+
+
+
+                      339  Dummy_Isr:
+ 8126 [07] 80         340         rti              ; Return
+                      341  
+                      342  
+                      343  ****************************************************
+                                                    ***************************
+                      344  * Vectors section                                   
+                                                                              *
+                      345  ****************************************************
+                                                    ***************************
+ FFDC                 346         org  VectorStart
+                      347  
+ FFDC      8126       348         dw  Dummy_Isr    ; Time Base Vector
+ FFDE      8126       349         dw  Dummy_Isr    ; ADC Conversion Complete
+ FFE0      8126       350         dw  Dummy_Isr    ; Keyboard Vector
+ FFE2      8126       351         dw  Dummy_Isr    ; SCI Transmit Vector
+ FFE4      8126       352         dw  Dummy_Isr    ; SCI Receive Vector
+ FFE6      8126       353         dw  Dummy_Isr    ; SCI Error Vector
+ FFE8      8126       354         dw  Dummy_Isr    ; SPI Transmit Vector
+ FFEA      8126       355         dw  Dummy_Isr    ; SPI Receive Vector
+ FFEC      8126       356         dw  Dummy_Isr    ; TIM2 Overflow Vector
+ FFEE      8126       357         dw  Dummy_Isr    ; TIM2 Channel 1 Vector
+ FFF0      8126       358         dw  Dummy_Isr    ; TIM2 Channel 0 Vector
+ FFF2      8126       359         dw  Dummy_Isr    ; TIM1 Overflow Vector
+ FFF4      8126       360         dw  Dummy_Isr    ; TIM1 Channel 1 Vector
+ FFF6      8126       361         dw  Dummy_Isr    ; TIM1 Channel 0 Vector
+ FFF8      8126       362         dw  Dummy_Isr    ; PLL Vector
+ FFFA      8126       363         dw  Dummy_Isr    ; ~IRQ1 Vector
+ FFFC      8126       364         dw  Dummy_Isr    ; SWI Vector
+ FFFE      8069       365         dw  Main_Init    ; Reset Vector
+                      366  
+                      367  
+                      368   
+
+ Symbol Table 
+
+ADCLK            003E
+ADR              003D
+ADSCR            003C
+B1               80D2
+B2               80DF
+B3               80EC
+BRKH             FE09
+BRKL             FE0A
+BRKSCR           FE0B
+COMAND           811E
+CONFIG1          001F
+CONFIG2          001E
+COPCTL           FFFF
+DDRA             0004
+DDRB             0005
+DDRC             0006
+DDRD             0007
+DDRE             000C
+DELAYREG1        0040
+DELAYREG2        0041
+DELAYREG3        0042
+DUMMY_ISR        8126
+
+
+knopka04.asm           Assembled with CASM08Z  13.02.05  0:17:29  PAGE 8
+
+
+
+E1               8105
+E2               810D
+E3               8115
+FLBPR            FF80
+FLCR             FE08
+FLTCR            FE07
+ICGCR            0036
+ICGDSR           003A
+ICGDVR           0039
+ICGMR            0037
+ICGTR            0038
+ICGTR3           FF81
+ICGTR5           FF80
+INT1             FE04
+INT2             FE05
+INT3             FE06
+INTKBIER         001B
+INTKBSCR         001A
+INTSCR           001D
+K1               80D5
+K2               80E2
+K3               80EF
+K4               811A
+K5               811D
+L1               80CF
+L2               80DC
+L3               80E9
+L4               80F6
+L5               800D
+L6               8002
+LCDDATA          0043
+LCD_CTRL         0002
+LCD_CTRU         0003
+LCD_DATA         0002
+LCD_DATA_MASK    000F
+LCD_DELAY_40US   800A
+LCD_E            0004
+LCD_INIT         8031
+LCD_RS           0001
+LCD_RW           0000
+LCD_WRITE        802A
+LCD_WRITE_NIBBLE 8012
+LOOP             80B4
+LVISR            FE0C
+MAIN_INIT        8069
+OPROS            8087
+PBWC             0037
+PCTL             0036
+PMDS             003B
+PMRS             003A
+PMSH             0038
+PMSL             0039
+PORTA            0000
+PORTB            0001
+PORTC            0002
+PORTD            0003
+PORTE            0008
+PRB4             80C9
+
+
+knopka04.asm           Assembled with CASM08Z  13.02.05  0:17:29  PAGE 9
+
+
+
+PRB5             80D6
+PRB6             80E3
+PRB7             80F0
+PROVERKA         80B6
+PTA              0000
+PTAPUE           000D
+PTB              0001
+PTC              0002
+PTCPUE           000E
+PTD              0003
+PTDPUE           000F
+PTE              0008
+RAMSTART         0040
+ROMSTART         8000
+SBFCR            FE03
+SBSR             FE00
+SCBR             0019
+SCC1             0013
+SCC2             0014
+SCC3             0015
+SCDR             0018
+SCIACTL          000A
+SCIADAT          000B
+SCPSC            0009
+SCS1             0016
+SCS2             0017
+SPCR             0010
+SPDR             0012
+SPSCR            0011
+SRSR             FE01
+SUBAR            FE02
+T1CH0H           0026
+T1CH0L           0027
+T1CH1H           0029
+T1CH1L           002A
+T1CNTH           0021
+T1CNTL           0022
+T1MODH           0023
+T1MODL           0024
+T1SC             0020
+T1SC0            0025
+T1SC1            0028
+T2CH0H           0031
+T2CH0L           0032
+T2CH1H           0034
+T2CH1L           0035
+T2CNTH           002C
+T2CNTL           002D
+T2MODH           002E
+T2MODL           002F
+T2SC             002B
+T2SC0            0030
+T2SC1            0033
+TBCR             001C
+TIME             0044
+VAR_DELAY        8000
+VECTORSTART      FFDC

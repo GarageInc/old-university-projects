@@ -1,0 +1,115 @@
+﻿@model WebApplication.Models.CommentList
+
+@{
+    ViewBag.Title = "Комментарии";
+}
+
+<div class="modal fade" id="modDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div id="dialogContent" class="modal-dialog">
+        
+    </div>
+</div>
+
+<div class="modal fade" id="addDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h5 id="myModalLabel">Комментарий</h5>
+    </div>
+    <div class="modal-body">
+        <p>
+            @using (Html.BeginForm("Add", "Comment", FormMethod.Post, new { id = "AddForm" }))
+            {
+                @Html.AntiForgeryToken()
+
+                <input type="hidden" id="articleId" name="ArticleId" value="@ViewBag.ArticleId" />
+
+                <input type="hidden" id="parentId" name="parentId"/>
+
+                <textarea id="Text" name="Text" value="Уважаемый, " type="text" cols="100" rows="5" autocomplete="off"></textarea>
+                <br />
+                <button type="submit" class="buttonb" onclick="checkAndAdd()">Добавить</button>
+            }
+        </p>
+    </div>
+</div>
+
+@Html.Partial("_ArticleDetails")
+
+<hr/>
+
+@if (!Model.Comments.Any())
+{
+    <div class="text_center">
+        Нет комментариев.
+        <a href="#" onclick="openAdd()">Добавить</a> первый комментарий
+    </div>
+}
+else
+{
+    <div class="margin_center">
+        <div class="add_root inline" title="Add" onclick="openAdd()">
+        </div>
+        <div class="drop inline root">
+            Добавить комментарий
+            <hr />
+        </div>
+        @Html.Partial("_TreeList", Model)
+    </div>
+}
+
+
+@using (Html.BeginForm("Move", "Comment", FormMethod.Post, new { id = "MoveForm", @class = "no_display" }))
+{
+    @Html.AntiForgeryToken()
+    
+    <input type="hidden" id="newParentId" name="newParentId" />
+    <input type="hidden" id="nodeId" name="nodeId" />
+}
+
+
+@section Scripts
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('a.drag').draggable({ helper: 'clone' });
+            $('div.drop').droppable({
+                hoverClass: 'droppable-hover',
+                drop: function (event, ui) {
+                    $('#newParentId').val($(this).attr('parent-id'));
+                    $('#nodeId').val($(ui.draggable).attr('node-id'));
+                    $('#ArticleId').val($(ui.draggable).attr('Article-id'));
+                    $('#MoveForm').submit();
+                }
+            });
+        });
+
+        function openAdd(parentId) {
+            $('#parentId').val(parentId);
+            $('#addDialog').modal('show');
+            $('#title').focus();
+        }
+
+        function checkAndAdd() {
+            $('#title').val() ? $('#AddForm').submit() : $('#title').focus();
+        }
+
+        function expand(elem) {
+            var li = $(elem).parents('li')[0];
+            var ul = $(li).children('ul')[0];
+            $(ul).css('display') == 'none' ? $(ul).show() : $(ul).hide();
+        }
+
+        // Модальное окно
+        $(function () {
+            $.ajaxSetup({ cache: false });
+            $(".compItem").click(function (e) {
+
+                e.preventDefault();
+                $.get(this.href, function (data) {
+                    $('#dialogContent').html(data);
+                    $('#modDialog').modal('show');
+                });
+            });
+        });
+    </script>
+}

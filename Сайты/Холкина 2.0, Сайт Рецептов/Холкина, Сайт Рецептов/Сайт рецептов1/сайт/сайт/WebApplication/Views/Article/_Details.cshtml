@@ -1,0 +1,62 @@
+﻿@using WebApplication.Models
+@using WebApplication.Service
+@model WebApplication.Models.Article
+
+
+<div class="modal-content">
+    <div class="modal-header">
+        <button class="close" data-dismiss="modal" area-hidden="true">X</button>
+        <h4><b>Рецепт №  @Html.DisplayFor(m => m.Id)</b></h4>
+    </div>
+    <div class="modal-body">
+        <dl class="dl-horizontal">
+            
+            <dt>Название: </dt>
+            <dd>
+                @Html.DisplayFor(m => m.Name)
+            </dd>
+            <dt> Ингридиенты:</dt>
+                <dd>
+                    <ul>
+                        @foreach (Ingridient item in Model.Ingridients)
+                        {
+                            <li>
+                                @item.Name
+                            </li>
+                        }
+                    </ul>
+                </dd>
+          
+            <dt>Категория:</dt>
+            <dd>
+                @Html.DisplayFor(m => m.Type.Name)
+            </dd>
+            <dt>Описание:</dt>
+            <dd>
+                @Html.DisplayFor(m => m.Description)
+            </dd>
+
+            <dt>Фото:
+            </dt>
+            <dd>
+                @{
+                    var yes = ArticleService.GetArticleAvatar(Model.Id.ToString()).IsEmpty();
+                    if (!yes)
+                    {
+                        @Html.Raw("<img style='width:200px;' src=\"../../Files/ArticleFiles/"
+                                  + ArticleService.GetArticleAvatar(Model.Id.ToString()) + "\" />")
+                    }
+                    else
+                    {
+                        <h5>Фото не приложено</h5>
+                    }
+                }
+
+            </dd>
+        </dl>
+    </div>
+    
+    <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Закрыть</button>
+    </div>
+</div>

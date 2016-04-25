@@ -1,0 +1,71 @@
+﻿@using WebApplication.Models
+@using WebApplication.Service
+@model WebApplication.Models.RequestSolution
+
+
+<div class="modal-content">
+    <div class="modal-header">
+        <button class="close" data-dismiss="modal" area-hidden="true">X</button>
+        <h4>Детали</h4>
+    </div>
+    <div class="modal-body">
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(modelItem => Model.Id)
+            </dt>
+            <dd>
+                @Html.DisplayFor(modelItem => Model.Id)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(modelItem => Model.Comment)
+            </dt>
+            <dd>
+                @Html.DisplayFor(modelItem => Model.Comment)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(modelItem => Model.Document)
+            </dt>
+            <dd>
+                @if (Model.Document != null)
+            {
+                    <a href="/Document/DownloadRequestSolutionFile/@Model.Document.Id"><img src="../../Content/pictures/filey.png" alt='@Model.Document.Url' class="tdImage" title="Скачать файл" /></a>
+                }
+                else
+                {
+                    <img src="../../Content/pictures/filen.png" alt="без файла изображения" class="tdImage" title="Файл не приложен" />
+                }
+            </dd>
+
+
+            <dt>
+                @Html.DisplayNameFor(modelItem => Model.Author)
+            </dt>
+            <dd>
+                @Model.Author.Name
+            </dd>
+
+            <dd>
+                @{
+                    var yes = ApplicationUserDTO.GetUserAvatar(Model.Author.Id).IsEmpty();
+                    if (!yes)
+                    {
+                        @Html.Raw("<img style='width:100px;' src=\"../../Files/UserAvatarFiles/"
+                              + ApplicationUserDTO.GetUserAvatar(Model.Author.Id) + "\" />")
+                    }
+                    else
+                    {
+                        <h5>Аватар не выбран</h5>
+                    }
+                }
+            </dd>
+
+        </dl>
+    </div>
+
+    <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Закрыть</button>
+    </div>
+</div>
+

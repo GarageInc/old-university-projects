@@ -1,0 +1,49 @@
+<?xml version="1.0" standalone="yes"?>
+<NewDataSet>
+  <xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
+      <xs:complexType>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:element name="Заказчики">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="IDЗаказчика" type="xs:int" />
+                <xs:element name="ФИОЗаказчика" type="xs:string" minOccurs="0" />
+                <xs:element name="УчебноеЗаведение" type="xs:string" minOccurs="0" />
+                <xs:element name="Связь" type="xs:string" minOccurs="0" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:choice>
+      </xs:complexType>
+      <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+        <xs:selector xpath=".//Заказчики" />
+        <xs:field xpath="IDЗаказчика" />
+      </xs:unique>
+    </xs:element>
+  </xs:schema>
+  <Заказчики>
+    <IDЗаказчика>1</IDЗаказчика>
+    <ФИОЗаказчика />
+    <УчебноеЗаведение />
+    <Связь />
+  </Заказчики>
+  <Заказчики>
+    <IDЗаказчика>2</IDЗаказчика>
+    <ФИОЗаказчика />
+    <УчебноеЗаведение />
+    <Связь />
+  </Заказчики>
+  <Заказчики>
+    <IDЗаказчика>3</IDЗаказчика>
+    <ФИОЗаказчика />
+    <УчебноеЗаведение />
+    <Связь />
+  </Заказчики>
+  <Заказчики>
+    <IDЗаказчика>4</IDЗаказчика>
+    <ФИОЗаказчика />
+    <УчебноеЗаведение />
+    <Связь />
+  </Заказчики>
+</NewDataSet>

@@ -1,0 +1,167 @@
+﻿@model IEnumerable<WebApplication.Models.ApplicationUser>
+@using WebApplication.Service
+
+@{
+    ViewBag.Title = "Список пользователей";
+}
+
+<h2>Список пользователей</h2>
+<br/>
+
+<div id="toolbar">
+
+    <button id="remove" class="btn btn-warning" disabled>
+        <i class="glyphicon glyphicon-remove"></i> Скрыть выбранное
+    </button>
+</div>
+<br />
+
+<div class="table-responsive">
+    <table class="table table-bordered table-hover table-condensed"
+           id="table"
+           data-click-to-select="true"
+           data-show-columns="true"
+           data-search="true"
+           data-show-refresh="true"
+           data-show-export="true"
+           data-pagination="true"
+           data-toolbar="#toolbar"
+           data-minimum-count-columns="2"
+           data-show-pagination-switch="true"
+           data-id-field="id"
+           data-page-size="6"
+           data-page-list="[6,10, 25, 50, 100, ALL]"
+           data-response-handler="responseHandler"
+           data-flat="true"
+           data-sort-order="desk"
+           data-page-number="1"
+           data-show-multi-sort="true">
+
+        <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.UserName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @if (HttpContext.Current.User.IsInRole("Administrator"))
+                {
+                    @Html.DisplayNameFor(model => model.Email)
+                }
+                else
+                {
+                    <h6>-</h6>
+                }
+            </th>
+            <th>
+                @if (HttpContext.Current.User.IsInRole("Administrator"))
+                {
+                    @Html.DisplayNameFor(model => model.Password)
+                }
+                else
+                {
+                    <h6>-</h6>
+                }
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Karma)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RegistrationDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastVisition)
+            </th>
+            <th>
+                Роль пользователя
+            </th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+
+                <td>
+                    @if (HttpContext.Current.User.IsInRole("Administrator"))
+                    {
+                        @Html.DisplayFor(modelItem => item.Email)
+                    }
+                    else
+                    {
+                        <h6>-</h6>
+                    }
+                </td>
+                <td>
+                    @if (HttpContext.Current.User.IsInRole("Administrator"))
+                    {
+                        @Html.DisplayFor(modelItem => item.Password)
+                    }
+                    else
+                    {
+                        <h6>-</h6>
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Karma)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RegistrationDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastVisition)
+                </td>
+
+                <td>
+                    @ApplicationUserDTO.GetUserRole(item.Id)
+                </td>
+                <td>
+                    @if (HttpContext.Current.User.IsInRole("Administrator"))
+                    {
+                        if (User.IsInRole("Administrator") || User.IsInRole("Moderator"))
+                        {
+                            @Html.ActionLink("Редактировать", "Edit", new {id = item.Id})<b>|</b>
+                            @Html.ActionLink("Удалить", "Delete", new { id = item.Id })<b>|</b>
+                        }
+                        @Html.ActionLink("Подробнее", "UserDetails", new {userId = item.Id}, new {@class="buttonb"})
+                    }
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>
+
+@Styles.Render("~/Scripts/bootstrap-table-master/css")
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("~/bundles/bootstrap-table-master/1")
+    @Scripts.Render("~/bundles/bootstrap-table-master/2")
+    @Scripts.Render("~/bundles/bootstrap-table-master/3")
+    @Scripts.Render("~/bundles/bootstrap-table-master/4")
+    @Scripts.Render("~/bundles/bootstrap-table-master/5")
+    @Scripts.Render("~/bundles/bootstrap-table-master/6")
+    @Scripts.Render("~/bundles/bootstrap-table-master/7")
+    @Scripts.Render("~/bundles/bootstrap-table-master/8")
+    @Scripts.Render("~/bundles/bootstrap-table-master/9")
+    @Scripts.Render("~/bundles/bootstrap-table-master/10")
+    @Scripts.Render("~/bundles/bootstrap-table-master/11")
+    @Scripts.Render("~/bundles/bootstrap-table-master/12")
+    @Scripts.Render("~/bundles/bootstrap-table-master/13")
+    @Scripts.Render("~/bundles/bootstrap-table-master/14")
+    @Scripts.Render("~/bundles/bootstrap-table-master/15")
+    @Scripts.Render("~/bundles/bootstrap-table-master/16")
+    @Scripts.Render("~/bundles/bootstrap-table-master/17")
+    @Scripts.Render("~/bundles/bootstrap-table-master/18")
+    @Scripts.Render("~/bundles/bootstrap-table-master/19")
+}

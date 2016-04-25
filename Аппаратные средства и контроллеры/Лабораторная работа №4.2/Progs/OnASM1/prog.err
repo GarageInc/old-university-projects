@@ -1,0 +1,7 @@
+Warning[207] C:\VIDEO\PROGS\ONASM1\PROG.ASM 2 : Found label after column 1. (TRISB)
+Warning[207] C:\VIDEO\PROGS\ONASM1\PROG.ASM 3 : Found label after column 1. (PORTB)
+Warning[207] C:\VIDEO\PROGS\ONASM1\PROG.ASM 4 : Found label after column 1. (Status)
+Warning[207] C:\VIDEO\PROGS\ONASM1\PROG.ASM 11 : Found label after column 1. (nachalo)
+Error[113]   C:\VIDEO\PROGS\ONASM1\PROG.ASM 16 : Symbol not previously defined (RP0)
+Error[113]   C:\VIDEO\PROGS\ONASM1\PROG.ASM 21 : Symbol not previously defined (RP0)
+Warning[205] C:\VIDEO\PROGS\ONASM1\PROG.ASM 24 : Found directive in column 1. (end)

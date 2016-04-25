@@ -1,0 +1,731 @@
+
+Demogpgt.asm           Assembled with CASM08Z  12.05.04  19:31:19  PAGE 1
+
+
+
+                        1  ; This application is meant to demonstrate a 
+                                                               framework for an
+                        2  ; application running on the 68HC908GT8, 68HC908GT16
+                                                         or 68HC908GP32 MCU. It
+                        3  ; demonstrates interrupts from the timer and the 
+                                                              ADC, uses general
+                        4  ; purpose timeouts, and transmits information out 
+                                                               the serial port.
+                        5  
+                        6  ; Application Information:
+                        7  
+                        8  ; (1) An output compare channel of the timer is 
+                                                          used to create a time
+                        9  ;     base for the application. Output compare 
+                                                         intervals happen every
+                       10  ;     2ms, and is continually set up in the timer 
+                                                              interrupt service
+                       11  ;     routine. The internal Bus clock is 2.4576 MHZ.
+                       12  ; (2) Provides three general purpose timeouts, each 
+                                                           with a resolution of
+                       13  ;     2ms and a maximum timeout of 510 ms (1-255). 
+                                                           When a timeout value
+                       14  ;     is zero, it is ignored. When a timeout value 
+                                                             is non-zero, it is
+                       15  ;     decremented by the timer interrupt approximate
+                                                            ly every two milli-
+                       16  ;     seconds. When a timeout value goes to zero, 
+                                                              the timeout event
+                       17  ;     handler is called. The "timeout 1" value is 
+                                                            initially set to 3,
+                       18  ;     so the "timeout 1" event handler will be run 
+                                                           after 6ms. The event
+                       19  ;     handler sets up the ADC converter to do a 
+                                                          single conversion and
+                       20  ;     cause an interrupt. After starting the 
+                                                    conversion, the "timeout 1"
+                       21  ;     event schedules another "timeout 1" event in 
+                                                               6ms (timeout=3).
+                       22  ; (3) When the ADC conversion is complete, an 
+                                                        interrupt is generated.
+                       23  ;     In the interrupt routine, the ADC input value 
+                                                        is read and transmitted
+                       24  ;     out the TXD line of the serial port (PRTE bit 
+                                                               0) at 9600 baud.
+                       25  ;     Note that if you are running this ICS in 
+                                                        "Simulation Only" mode,
+                       26  ;     you have to use the ADDI command prior to the 
+                                                            conversion becoming
+                       27  ;     complete. Otherwise the ADR value will not be 
+                                                          set and the simulator
+                       28  ;     will give an error when the simulator tries 
+                                                      to load the uninitialized
+                       29  ;     value in ADR.
+                       30  ; (4) Since the GT16/GT8 parts included with the 
+                                                  ICS kits runs in monitor mode
+                       31  ;     at at bus clock of 2.4576, this program 
+                                               simulates the GT16/GT8 switching
+                       32  ;     to external clock mode so it matches the ICS 
+
+
+Demogpgt.asm           Assembled with CASM08Z  12.05.04  19:31:19  PAGE 2
+
+
+
+                                                       kit. This can be changed
+                       33  ;     so the GT16/GT8 runs off of the internal 
+                                           clock. The simulator fully simulates
+                       34  ;     the ICG module including the trim functionalit
+                                                                             y.
+                       35  
+                       36  ; To run this application, you first need to 
+                                                      compile it pushing the F4
+                       37  ; key on your keyboard. Note that once you do this, 
+                                                        it will say "Successful
+                       38  ; Assembly" on the status bar at the bottom of this 
+                                                                   application.
+                       39  
+                       40  ; To simulate this application in the ICS08GPGTZ 
+                                                          in-circuit simulator,
+                       41  ; simply run the ICS08GPGTZ and type "LOAD DEMOGPGT"
+                                                          in the status window.
+                       42  ; The PC will automatically be loaded with the 
+                                                          reset vector. Use the
+                       43  ; BR command to set breakpoints in the ADC interrupt
+                                                                routine and the
+                       44  ; timer routine (or in the debugger double click 
+                                                        the red dot next to any
+                       45  ; valid source line). Use the cycles counter to 
+                                                        verify the time between
+                       46  ; timer interrupts when you run code using the GO 
+                                                           command. The CAPTURE
+                       47  ; command is very useful for tracking when and if a 
+                                                              memory location's
+                       48  ; value changes. If you capture the ADR (ADC Data 
+                                                                 Register), the
+                       49  ; capturefile will contain the cycle count of each 
+                                                           time a conversion is
+                       50  ; complete.
+                       51  
+                       52  ; To run this application realtime, you will have 
+                                                            to use the PROG08SZ
+                       53  ; application to program the S19 into the GT16/GT8/G
+                                                     P32's on-chip flash block.
+                       54  ; Once you have done this, run the ICD08SZ in-circui
+                                                                t debugger. The
+                       55  ; PC does not get set to the reset vector automatica
+                                                                 lly (this is a
+                       56  ; monitor mode limitation). First, you should load 
+                                                          the debug information
+                       57  ; for the application now programmed into the 
+                                                                    flash. Type
+                       58  ; "LOADMAP DEMOGPGT.MAP" in the status window. Use 
+                                                             the "PC MAIN_INIT"
+                       59  ; to set the PC to the start of the application. 
+                                                      Only the first breakpoint
+                       60  ; set is valid in flash. To reset the first 
+                                               breakpoint, use the NOBR command
+                       61  ; before you set the breakpoint. If you do a GO, 
+                                                       the part will be running
+                       62  ; in realtime. You can see characters coming out 
+                                                       the porte pin every 6ms.
+                       63  
+
+
+Demogpgt.asm           Assembled with CASM08Z  12.05.04  19:31:19  PAGE 3
+
+
+
+                       64  ; Here is the sample application...
+                       65  
+ 0000                  66  $Include 'gpgtregs.inc'
+                       67   ; 68HC908GT16/GP32 Equates
+                       68  
+ 0000                  69  PTA    EQU $0000     ; Ports and data direction
+ 0000                  70  PORTA  EQU $0000
+ 0000                  71  PTB    EQU $0001
+ 0000                  72  PORTB  EQU $0001
+ 0000                  73  PTC    EQU $0002
+ 0000                  74  PORTC  EQU $0002
+ 0000                  75  PTD    EQU $0003
+ 0000                  76  PORTD  EQU $0003
+ 0000                  77  DDRA   EQU $0004
+ 0000                  78  DDRB   EQU $0005
+ 0000                  79  DDRC   EQU $0006
+ 0000                  80  DDRD   EQU $0007
+ 0000                  81  PTE    EQU $0008
+ 0000                  82  PORTE  EQU $0008
+                       83  
+ 0000                  84  SCPSC   EQU $0009    ;GT16 Only - Enhanced SCI
+ 0000                  85  SCIACTL EQU $000A    ;GT16 Only
+ 0000                  86  SCIADAT EQU $000B    ;GT16 Only
+                       87  
+ 0000                  88  DDRE    EQU $000C    ; Ports and data direction
+                       89  
+ 0000                  90  PTAPUE  EQU $000D    ; Port pull-up enables
+ 0000                  91  PTCPUE  EQU $000E
+ 0000                  92  PTDPUE  EQU $000F
+                       93  
+ 0000                  94  SPCR    EQU $0010    ; SPI (Syncronous communication
+                                                                             s)
+ 0000                  95  SPSCR   EQU $0011
+ 0000                  96  SPDR    EQU $0012
+                       97  
+ 0000                  98  SCC1    EQU $0013    ; SCI (Asyncronous communicatio
+                                                                            ns)
+ 0000                  99  SCC2    EQU $0014
+ 0000                 100  SCC3    EQU $0015
+ 0000                 101  SCS1    EQU $0016
+ 0000                 102  SCS2    EQU $0017
+ 0000                 103  SCDR    EQU $0018
+ 0000                 104  SCBR    EQU $0019
+                      105  
+ 0000                 106  INTKBSCR EQU $001a   ; Keyboard interrupt control/st
+                                                                           atus
+ 0000                 107  INTKBIER EQU $001b
+                      108  
+ 0000                 109  TBCR    EQU $001c    ; Time base module
+                      110  
+ 0000                 111  INTSCR  EQU $001d    ; IRQ status/control
+                      112  
+ 0000                 113  CONFIG2 EQU $001e    ; System configuration
+ 0000                 114  CONFIG1 EQU $001f
+                      115  
+ 0000                 116  T1SC    EQU $0020    ; Timer 1
+ 0000                 117  T1CNTH  EQU $0021
+ 0000                 118  T1CNTL  EQU $0022
+
+
+Demogpgt.asm           Assembled with CASM08Z  12.05.04  19:31:19  PAGE 4
+
+
+
+ 0000                 119  T1MODH  EQU $0023
+ 0000                 120  T1MODL  EQU $0024
+ 0000                 121  T1SC0   EQU $0025
+ 0000                 122  T1CH0H  EQU $0026
+ 0000                 123  T1CH0L  EQU $0027
+ 0000                 124  T1SC1   EQU $0028
+ 0000                 125  T1CH1H  EQU $0029
+ 0000                 126  T1CH1L  EQU $002a
+                      127  
+ 0000                 128  T2SC    EQU $002b    ; Timer 2
+ 0000                 129  T2CNTH  EQU $002c
+ 0000                 130  T2CNTL  EQU $002d
+ 0000                 131  T2MODH  EQU $002e
+ 0000                 132  T2MODL  EQU $002f
+ 0000                 133  T2SC0   EQU $0030
+ 0000                 134  T2CH0H  EQU $0031
+ 0000                 135  T2CH0L  EQU $0032
+ 0000                 136  T2SC1   EQU $0033
+ 0000                 137  T2CH1H  EQU $0034
+ 0000                 138  T2CH1L  EQU $0035
+                      139  
+ 0000                 140  PCTL    EQU $0036    ; GP32 Only - Phase lock loop 
+                                                                 (for crystals)
+ 0000                 141  PBWC    EQU $0037    ; GP32 Only
+ 0000                 142  PMSH    EQU $0038    ; GP32 Only
+ 0000                 143  PMSL    EQU $0039    ; GP32 Only
+ 0000                 144  PMRS    EQU $003A    ; GP32 Only
+ 0000                 145  PMDS    EQU $003B    ; GP32 Only
+                      146  
+ 0000                 147  ICGCR   EQU $0036    ; GT16 Only - Internal Clock 
+                                                                      Generator
+ 0000                 148  ICGMR   EQU $0037    ; GT16 Only
+ 0000                 149  ICGTR   EQU $0038    ; GT16 Only
+ 0000                 150  ICGDVR  EQU $0039    ; GT16 Only
+ 0000                 151  ICGDSR  EQU $003A    ; GT16 Only
+ 0000                 152  ICGTR5  EQU $FF80    ; GT16 Only
+ 0000                 153  ICGTR3  EQU $FF81    ; GT16 Only
+                      154  
+ 0000                 155  ADSCR   EQU $003C    ; A to D converter
+ 0000                 156  ADR     EQU $003D
+ 0000                 157  ADCLK   EQU $003E
+                      158  
+ 0000                 159  SBSR    EQU $fe00    ; System integration
+ 0000                 160  SRSR    EQU $fe01
+ 0000                 161  SUBAR   EQU $fe02
+ 0000                 162  SBFCR   EQU $fe03
+                      163  
+ 0000                 164  INT1    EQU $fe04    ; Interrupt status
+ 0000                 165  INT2    EQU $fe05
+ 0000                 166  INT3    EQU $fe06
+                      167  
+ 0000                 168  FLTCR   EQU $fe07    ; Flash test/programming
+ 0000                 169  FLCR    EQU $fe08
+                      170  
+ 0000                 171  BRKH    EQU $fe09    ; Hardware breakpoint
+ 0000                 172  BRKL    EQU $fe0a
+ 0000                 173  BRKSCR  EQU $fe0b
+                      174  
+
+
+Demogpgt.asm           Assembled with CASM08Z  12.05.04  19:31:19  PAGE 5
+
+
+
+ 0000                 175  LVISR   EQU $fe0c    ; Low voltage detect
+                      176  
+ 0000                 177  FLBPR   EQU $ff80    ; Flash boot protect
+                      178  
+ 0000                 179  COPCTL  EQU $ffff    ; COP (Computer operating 
+                                                              properly) control
+                      180  
+                      181  
+                      182  
+                      183  ; (C)opywrite P&E Microcomputer Systems, 1998, 2002
+                      184  ; http://www.pemicro.com
+                      185  
+                      186  
+ 0000                 187  RAMStart     EQU  $0040
+                      188  
+ 0000                 189  RomStart     EQU  $E000         ; This is valid ROM 
+                                                     on the GP32, GT16, and GT8
+                      190  
+ 0000                 191  VectorStart  EQU  $FFDC
+ 0000                 192  ADC_Channel  EQU  5t
+ 0000                 193  ADC_ENABLE_INT EQU 01000000q    ; Bit mask for 
+                                                           interrupt enable bit
+                      194                                  ; in the ADC 
+                                                        status/control register
+                      195  
+                      196  
+ 0040                 197      org RamStart
+                      198  
+ 0040                 199  temp_long ds 4
+ 0044                 200  temp_word ds 2
+ 0046                 201  temp_byte ds 1
+ 0047                 202  Timeout1 ds 1   ; Allows three timeout routines to 
+                                                        be called each of which
+ 0048                 203  Timeout2 ds 1   ; can run for up to ~ 1/2 second.
+ 0049                 204  Timeout3 ds 1
+                      205  
+                      206  
+ E000                 207      org RomStart
+                      208  
+                      209  
+                      210  ****************************************************
+                                                                     **********
+                      211  * Init_SCI - Turns on the asyncronous communications
+                                                                      port    *
+                      212  *            for "transmitting only" at 9600 baud 
+                                                                   N81.       *
+                      213  ****************************************************
+                                                                     **********
+                      214  Init_SCI:
+ E000 [04] 6E0419     215         mov   #$04,SCBR       ; Baud Rate = 9600
+ E003 [04] 6E4013     216         mov   #$40,SCC1       ; Enable the SCI 
+                                                                     peripheral
+ E006 [04] 6E0814     217         mov   #$08,SCC2       ; Enable the SCI 
+                                                                    transmitter
+ E009 [04] 81         218         rts
+                      219  
+                      220  
+                      221  ****************************************************
+
+
+Demogpgt.asm           Assembled with CASM08Z  12.05.04  19:31:19  PAGE 6
+
+
+
+                                                                     **********
+                      222  * Init_AtoD - Sets up the AtoD clock + turns it on  
+                                                                              *
+                      223  ****************************************************
+                                                                     **********
+                      224  Init_AtoD:
+ E00A [04] 6E303E     225         mov   #$30,ADCLK          ; Bus Clock / 2
+ E00D [04] 6E053C     226         mov   #ADC_CHANNEL,ADSCR  ; Enable the ADC 
+                                                                     peripheral
+ E010 [04] 81         227         rts
+                      228  
+                      229  
+                      230  ****************************************************
+                                                                     **********
+                      231  * Init_Timer - Turns on timer 1 channel 0 for an 
+                                                                  Output      *
+                      232  *              Compare in approximately 2ms. The 
+                                                                  timer       *
+                      233  *              interrupt service routine continually
+                                                                      sets    *
+                      234  *              the next interrupt to occur 2ms 
+                                                                later.        *
+                      235  ****************************************************
+                                                                     **********
+                      236  Init_Timer:
+ E011 [04] 6E3620     237         mov   #$36,T1SC     ; Timer 1 - Cleared + 
+                                                                       Stopped.
+                      238                             ;    Clicks once every 
+                                                                  64 BUS Cycles
+                      239                             ;    77t Clicks ~ 2ms
+                      240  
+ E014 [04] 6E0026     241         mov   #$0,T1CH0H    ; Set Output Compare to 
+                                                              happen 77T clicks
+ E017 [04] 6E4D27     242         mov   #77T,T1CH0L   ; after we start the 
+                                                             timer. (~2ms). The
+                      243                             ; timer interrupt will 
+                                                       set OC for another ~2ms.
+                      244  
+ E01A [04] 6E5425     245         mov   #$54,T1SC0    ; Timer 1 Channel 0
+                      246                             ; Set for Output Compare 
+                                                                     operation.
+                      247  
+ E01D [04] 6E0620     248         mov   #$06,T1SC     ; Start the timer
+ E020 [04] 81         249         rts
+                      250  
+                      251  
+                      252  ****************************************************
+                                                                     **********
+                      253  * Main_Init - This is the point where code starts 
+                                                                   executing  *
+                      254  *             after a RESET.                        
+                                                                              *
+                      255  ****************************************************
+                                                                     **********
+                      256  Main_Init:
+ E021 [01] 9C         257         rsp
+ E022 [01] 4F         258         clra                ; Initialize A,X so that 
+                                                                      interrupt
+
+
+Demogpgt.asm           Assembled with CASM08Z  12.05.04  19:31:19  PAGE 7
+
+
+
+ E023 [01] 5F         259         clrx                ; processing doesn't 
+                                                                      stop with
+                      260                             ; uninitialized register 
+                                                                        warning
+                      261                             ; when push A,X on the 
+                                                                          stack
+ E024 [04] ADDA       262         bsr Init_SCI        ; Initialize peripherals
+ E026 [04] ADE2       263         bsr Init_AtoD
+ E028 [04] ADE7       264         bsr Init_Timer
+ E02A [03] 3F47       265         clr timeout1        ; Initialize timeouts 
+                                                                        (0=off)
+ E02C [03] 3F48       266         clr timeout2
+ E02E [03] 3F49       267         clr timeout3
+ E030 [02] 9A         268         cli                 ; Allow interrupts to 
+                                                                         happen
+                      269  
+ E031 [04] 6E291E     270         mov #$29,config2    ; For GT16 - turn on 
+                                                                 external clock
+                      271                             ; For GP32 - SCI clock 
+                                                                  source is Bus
+                      272                             ;            (Automatic 
+                                                                      for GT16)
+ E034 [04] 6E0A36     273         mov #$0A,icgcr      ; For GT16 - enable 
+                                                                 external clock
+                      274  
+ E037 [04] 6E0347     275         mov #3,timeout1     ; Start an AtoD conversio
+                                                                 n in 3*2ms=6ms
+                      276  
+                      277  main_loop:
+ E03A [05] 013602     278         brclr 0,icgcr,fixcop
+ E03D [04] 1836       279         bset  4,icgcr       ; For GT16 - switch to 
+                                                                 external clock
+                      280                             ;            when valid
+                      281  fixcop:
+ E03F [04] C7FFFF     282         sta copctl          ; Clear COP to prevent 
+                                                                 watchdog reset
+ E042 [03] 20F6       283         bra main_loop
+                      284  
+                      285  ****************************************************
+                                                                     **********
+                      286  * AtoD_ISR - ADC Conversion Complete Interrupt      
+                                                                              *
+                      287  *            Transmit ADC value out serial port 
+                                                                 (PTE0)       *
+                      288  ****************************************************
+                                                                     **********
+                      289  AtoD_ISR:
+                      290  !
+ E044 [03] B63D       291         lda  adr            ; Get the converted value
+ E046 [05] 0F16FD     292         brclr 7,scs1,$       ; wait until xmitter is 
+                                                                         ready.
+ E049 [03] B718       293         sta  scdr           ; Xmit it our serial port
+ E04B [03] B746       294         sta  temp_byte      ; save it in temp_byte
+ E04D [07] 80         295         rti
+                      296  
+                      297  
+                      298  ****************************************************
+                                                                     **********
+
+
+Demogpgt.asm           Assembled with CASM08Z  12.05.04  19:31:19  PAGE 8
+
+
+
+                      299  * T_ISR - Timer Interrupt Service Routine.          
+                                                                              *
+                      300  *             after a RESET.                        
+                                                                              *
+                      301  ****************************************************
+                                                                     **********
+                      302  T_ISR:
+ E04E [02] 8B         303         pshh
+ E04F [03] B625       304         lda   t1sc0
+ E051 [02] A47F       305         and   #$7f
+ E053 [03] B725       306         sta   t1sc0              ; Clear O.C. Flag
+ E055 [04] 5526       307         ldhx  t1ch0h
+ E057 [02] AF4D       308         aix   #77T               ; Setup another 
+                                                              interrupt in ~2ms
+ E059 [04] 3526       309         sthx  t1ch0h
+ E05B [02] 8A         310         pulh
+                      311  
+                      312  Check_t1:
+ E05C [03] 3D47       313         tst timeout1
+ E05E [03] 2707       314         beq check_t2             ; Is Timeout 1 
+                                                              currently active?
+ E060 [04] 3A47       315         dec timeout1             ;   yes
+ E062 [03] 2603       316         bne check_t2             ; Did it just 
+                                                          finish counting down?
+ E064 [05] CDE07E     317         jsr t1_handler           ;   Yes - Execute 
+                                                              Timeout 1 handler
+                      318  
+                      319  Check_t2:
+ E067 [03] 3D48       320         tst timeout2
+ E069 [03] 2707       321         beq check_t3             ; Is Timeout 2 
+                                                              currently active?
+ E06B [04] 3A48       322         dec timeout2             ;   yes
+ E06D [03] 2603       323         bne check_t3             ; Did it just 
+                                                          finish counting down?
+ E06F [05] CDE085     324         jsr t2_handler           ;   Yes - Execute 
+                                                              Timeout 2 handler
+                      325  
+                      326  Check_t3:
+ E072 [03] 3D49       327         tst timeout3
+ E074 [03] 2707       328         beq done_tisr             ; Is Timeout 3 
+                                                              currently active?
+ E076 [04] 3A49       329         dec timeout3             ;   yes
+ E078 [03] 2603       330         bne done_tisr             ; Did it just 
+                                                          finish counting down?
+ E07A [05] CDE086     331         jsr t3_handler           ;   Yes - Execute 
+                                                              Timeout 3 handler
+                      332  
+                      333  done_tisr:
+ E07D [07] 80         334         rti
+                      335  
+                      336  
+                      337  ****************************************************
+                                                                   ************
+                      338  * Timeout Handlers - All the user has to do is set 
+                                                                  one of the  *
+                      339  *                    timeout variables to any 
+                                                             number n (1-255) *
+                      340  *                    and the timeout handler will 
+
+
+Demogpgt.asm           Assembled with CASM08Z  12.05.04  19:31:19  PAGE 9
+
+
+
+                                                                 be executed  *
+                      341  *                    in 2*n milliseconds. Setting 
+                                                                 the timeout  *
+                      342  *                    variable from within the 
+                                                             handler will     *
+                      343  *                    cause a periodic timeout as 
+                                                                shown in      *
+                      344  *                    timeout 1.                     
+                                                                              *
+                      345  ****************************************************
+                                                                   ************
+                      346  t1_handler:
+ E07E [04] 6E453C     347         mov   #{ADC_ENABLE_INT | ADC_CHANNEL},ADSCR
+                      348                                   ; Start a single 
+                                                                 ADC conversion
+                      349                                   ; which will 
+                                                         generate an interrupt.
+                      350  
+ E081 [04] 6E0347     351         mov #3,timeout1     ; Setup next t1_handler 
+                                                             event in 3*2ms=6ms
+ E084 [04] 81         352         rts
+                      353  
+                      354  t2_handler:
+ E085 [04] 81         355         rts
+                      356  
+                      357  t3_handler:
+ E086 [04] 81         358         rts
+                      359  
+                      360  
+                      361  ****************************************************
+                                                                     **********
+                      362  * DUMMY_ISR - Dummy Interrupt Service Routine.      
+                                                                              *
+                      363  *             Just does a return from interrupt.    
+                                                                              *
+                      364  ****************************************************
+                                                                     **********
+                      365  dummy_isr:
+                      366  
+ E087 [07] 80         367         rti           ; return
+                      368  
+                      369  
+                      370  ****************************************************
+                                                                     **********
+                      371  * Vectors - Timer Interrupt Service Routine.        
+                                                                              *
+                      372  *             after a RESET.                        
+                                                                              *
+                      373  ****************************************************
+                                                                     **********
+ FFDC                 374     org  VectorStart
+                      375  
+ FFDC      E087       376          dw  dummy_isr    ; Time Base Vector
+ FFDE      E044       377          dw  atod_isr     ; ADC Conversion Complete
+ FFE0      E087       378          dw  dummy_isr    ; Keyboard Vector
+ FFE2      E087       379          dw  dummy_isr    ; SCI Transmit Vector
+ FFE4      E087       380          dw  dummy_isr    ; SCI Receive Vector
+ FFE6      E087       381          dw  dummy_isr    ; SCI Error Vector
+
+
+Demogpgt.asm           Assembled with CASM08Z  12.05.04  19:31:19  PAGE 10
+
+
+
+ FFE8      E087       382          dw  dummy_isr    ; SPI Transmit Vector
+ FFEA      E087       383          dw  dummy_isr    ; SPI Receive Vector
+ FFEC      E087       384          dw  dummy_isr    ; TIM2 Overflow Vector
+ FFEE      E087       385          dw  dummy_isr    ; TIM2 Channel 1 Vector
+ FFF0      E087       386          dw  dummy_isr    ; TIM2 Channel 0 Vector
+ FFF2      E087       387          dw  dummy_isr    ; TIM1 Overflow Vector
+ FFF4      E087       388          dw  dummy_isr    ; TIM1 Channel 1 Vector
+ FFF6      E04E       389          dw  t_isr        ; TIM1 Channel 0 Vector
+ FFF8      E087       390          dw  dummy_isr    ; ICG/CGM Vector
+ FFFA      E087       391          dw  dummy_isr    ; ~IRQ1 Vector
+ FFFC      E087       392          dw  dummy_isr    ; SWI Vector
+ FFFE      E021       393          dw  main_init    ; Reset Vector
+                      394  
+                      395  
+                      396  ; (C)opywrite P&E Microcomputer Systems, 1998, 2002
+                      397  ; Visit us at http://www.pemicro.com
+                      398  
+                      399   
+
+ Symbol Table 
+
+ADCLK            003E
+ADC_CHANNEL      0005
+ADC_ENABLE_INT   0040
+ADR              003D
+ADSCR            003C
+ATOD_ISR         E044
+BRKH             FE09
+BRKL             FE0A
+BRKSCR           FE0B
+CHECK_T1         E05C
+CHECK_T2         E067
+CHECK_T3         E072
+CONFIG1          001F
+CONFIG2          001E
+COPCTL           FFFF
+DDRA             0004
+DDRB             0005
+DDRC             0006
+DDRD             0007
+DDRE             000C
+DONE_TISR        E07D
+DUMMY_ISR        E087
+FIXCOP           E03F
+FLBPR            FF80
+FLCR             FE08
+FLTCR            FE07
+ICGCR            0036
+ICGDSR           003A
+ICGDVR           0039
+ICGMR            0037
+ICGTR            0038
+ICGTR3           FF81
+ICGTR5           FF80
+INIT_ATOD        E00A
+INIT_SCI         E000
+INIT_TIMER       E011
+INT1             FE04
+
+
+Demogpgt.asm           Assembled with CASM08Z  12.05.04  19:31:19  PAGE 11
+
+
+
+INT2             FE05
+INT3             FE06
+INTKBIER         001B
+INTKBSCR         001A
+INTSCR           001D
+LVISR            FE0C
+MAIN_INIT        E021
+MAIN_LOOP        E03A
+PBWC             0037
+PCTL             0036
+PMDS             003B
+PMRS             003A
+PMSH             0038
+PMSL             0039
+PORTA            0000
+PORTB            0001
+PORTC            0002
+PORTD            0003
+PORTE            0008
+PTA              0000
+PTAPUE           000D
+PTB              0001
+PTC              0002
+PTCPUE           000E
+PTD              0003
+PTDPUE           000F
+PTE              0008
+RAMSTART         0040
+ROMSTART         E000
+SBFCR            FE03
+SBSR             FE00
+SCBR             0019
+SCC1             0013
+SCC2             0014
+SCC3             0015
+SCDR             0018
+SCIACTL          000A
+SCIADAT          000B
+SCPSC            0009
+SCS1             0016
+SCS2             0017
+SPCR             0010
+SPDR             0012
+SPSCR            0011
+SRSR             FE01
+SUBAR            FE02
+T1CH0H           0026
+T1CH0L           0027
+T1CH1H           0029
+T1CH1L           002A
+T1CNTH           0021
+T1CNTL           0022
+T1MODH           0023
+T1MODL           0024
+T1SC             0020
+T1SC0            0025
+T1SC1            0028
+T1_HANDLER       E07E
+
+
+Demogpgt.asm           Assembled with CASM08Z  12.05.04  19:31:19  PAGE 12
+
+
+
+T2CH0H           0031
+T2CH0L           0032
+T2CH1H           0034
+T2CH1L           0035
+T2CNTH           002C
+T2CNTL           002D
+T2MODH           002E
+T2MODL           002F
+T2SC             002B
+T2SC0            0030
+T2SC1            0033
+T2_HANDLER       E085
+T3_HANDLER       E086
+TBCR             001C
+TEMP_BYTE        0046
+TEMP_LONG        0040
+TEMP_WORD        0044
+TIMEOUT1         0047
+TIMEOUT2         0048
+TIMEOUT3         0049
+T_ISR            E04E
+VECTORSTART      FFDC

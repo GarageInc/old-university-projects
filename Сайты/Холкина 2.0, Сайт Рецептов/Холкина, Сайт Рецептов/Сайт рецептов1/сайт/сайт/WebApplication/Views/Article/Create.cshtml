@@ -1,0 +1,149 @@
+﻿@using System.Web.UI.WebControls
+@using WebApplication.Models
+@model WebApplication.Models.Article
+
+@{
+    ViewBag.Title = "Создать рецепт";
+}
+
+@using (Html.BeginForm("Create", "Article", FormMethod.Post, new { role = "form", @class = "form-horizontal", enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary("", new { @class = "text-danger" })
+        <fieldset>
+            <legend>Новый рецепт</legend>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Name, new { @class = "col-md-2 control-label" })
+
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Name, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Description, new { @class = "col-md-2 control-label" })
+
+                <div class="col-md-10">
+                    @Html.TextAreaFor(model => model.Description, 3, 100, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.Label("Тип", new { @class = "col-md-2 control-label" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.TypeId, ViewBag.Types as SelectList, new { @class = "form-control" })
+                </div>
+            </div>
+
+            @*<div class="form-group">
+                @Html.Label("Категория", new { @class = "col-md-2 control-label" })
+                <div class="col-md-10">
+                    @Html.DropDownList("CategoryId", ViewBag.CategoriesForView as SelectList, new { @class = "form-control", id = "state" })
+                </div>
+            </div>*@
+
+            <div class="form-group">
+                @Html.Label("Выберите ингридиенты?", new { @class = "col-md-2 control-label" })
+                <div class="col-md-10">
+                    @foreach (Category cat in ViewBag.Categories)
+                    {
+                        <button type="button" class="btn btn-default form-control" data-toggle="collapse" data-target="#@cat.Id">
+                            @cat.Name
+                            <b class="caret"></b>
+                        </button>
+
+                        <div id="@cat.Id" align="justify" class="collapse">
+                            @foreach (Ingridient ingr in cat.Ingridients)
+                            {
+                                <input
+                                       type="checkbox"
+                                       name="ingridient"
+                                       value="@ingr.Id" />
+                                @ingr.Name
+                                <br />
+                            }
+                        </div>
+                        <br />
+                    }
+                </div>
+            </div>
+            
+            <div class="form-group">
+                @Html.LabelFor(model => model.Difficulty, new { @class = "col-md-2 control-label" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Difficulty, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Difficulty, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.Label("Фото блюда?", new { @class = "col-md-2 control-label" })
+                <div class="col-md-10">
+                    <input type="file" multiple accept="image/*,image/jpeg,image/png" class="form-control" id="error" name="error" value="Сохранить файл" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.Label("Подтвердить отправку?", new { @class = "col-md-2 control-label" })
+
+                <div class="col-md-10">
+                    <input class="buttonS" type="submit" value="Сохранить" width="100" />
+                </div>
+            </div>
+        </fieldset>
+    </div>
+
+}
+
+@section Scripts {
+    <script type="text/javascript">
+                //var arr = Array();
+
+                //var doc = document.getElementsByName("ingridient");
+                //for (var i = 0; i < doc.length; i++)
+                //{
+                //    doc[i].addEventListener("click", function (e) {
+                //        alert(e.type);
+                //    });
+                //};
+
+                // Обрабатываем клик по добавлению/удалению ингридиента
+                //$('#ingridient').click(function (e) {
+                //    var val = this.value;
+
+                //    alert(val);
+
+                //    if (arr.indexOf(val) < 0) {
+                //        arr.add(val);
+                //    } else {
+                //        arr.remove(val);
+                //    }
+                //});
+
+                @*$('#state').change(function(e) {
+                // получаем выбранный id
+                var id = $(this).val();
+                $.ajax({
+                    type: 'GET',
+                    url: '@Url.Action("NewIngridients")/',
+                    data: {
+                        id: id
+                    },
+                    success: function(result) {
+                        //alert(result);
+                        // заменяем содержимое присланным частичным представлением
+                        $('#newingridients').replaceWith(result);
+                    },
+
+                    error: function(xhr, status, p3) {
+                        alert(status);
+                    }
+                });
+            });*@
+    </script>
+}

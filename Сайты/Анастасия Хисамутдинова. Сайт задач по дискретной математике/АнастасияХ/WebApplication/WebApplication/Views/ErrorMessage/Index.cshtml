@@ -1,0 +1,157 @@
+﻿@model IEnumerable<WebApplication.Models.ErrorMessage>
+
+@{
+    ViewBag.Title = "задачи об ошибках";
+}
+
+<br />
+<div id="toolbar">
+    <button id="remove" class="btn btn-warning" disabled>
+        <i class="glyphicon glyphicon-remove"></i> Скрыть выбранное
+    </button>
+</div>
+
+<div class="table-responsive" align="center">
+    <table class="table table-bordered table-hover table-condensed"
+           id="table"
+           data-click-to-select="true"
+           data-show-columns="true"
+           data-search="true"
+           data-show-refresh="true"
+           data-show-export="true"
+           data-pagination="true"
+           data-toolbar="#toolbar"
+           data-minimum-count-columns="2"
+           data-show-pagination-switch="true"
+           data-id-field="id"
+           data-page-size="6"
+           data-page-list="[6,10, 25, 50, 100, ALL]"
+           data-response-handler="responseHandler"
+           data-flat="true"
+           data-sort-order="desk"
+           data-page-number="1"
+           data-show-multi-sort="true">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Author.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Text)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Document)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ErrorStatus)
+                </th>
+                <th>
+                    Изменить статус
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CreateDate)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @if (item.Author != null)
+                        {
+                            @Html.DisplayFor(modelItem => item.Author.Name)
+                        }
+                        else
+                        {
+                            <h4>Не установлен</h4>
+                        }
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Text)
+                    </td>
+                    <td>
+                        @if (item.Document != null)
+                        {
+                            <a href="/Document/DownloadErrorMessageFile/@item.Document.Id"><img src="../../Content/pictures/filey.png" alt='@item.Document.Url' class="tdImage" title="Скачать файл" /></a>
+                        }
+                        else
+                        {
+                            <img src="../../Content/pictures/filen.png" alt="без файла изображения" class="tdImage" title="Файл не приложен" />
+                        }
+                    </td>
+
+                    <td>
+                        @if (item.ErrorStatus == 0)
+                        {
+                            <span class="label label-success">Открыто</span>
+                        }
+                        else
+                        {
+                            <span class="label label-default">Закрыто</span>
+                        }
+                    </td>
+                    @if ((ViewBag.ErrorStatus as SelectList).Count() > 0)
+                    {
+                        <td>
+                            @using (Html.BeginForm("ChangeErrorMessageStatus", "ErrorMessage", FormMethod.Post, new { @class = "form-horizontal", id = "myForm", role = "form", enctype = "multipart/form-data" }))
+                            {
+                                @Html.Hidden("errorMessageId", item.Id)
+                                @Html.DropDownList("errorStatusId", ViewBag.ErrorStatus as SelectList)
+                                <br>
+                                <input type="submit" value="Изменить" class="buttonb" />
+                            }
+                        </td>
+                    }
+                    else
+                    {
+                        <td>
+                            В БД отсутствуют исполнители
+                        </td>
+                    }
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CreateDate)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Детали", "Details", new { id = item.Id }) |
+                        @Html.ActionLink("Удалить", "Delete", new { id = item.Id })
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+</div>
+
+@Styles.Render("~/Content/css/css")
+@Styles.Render("~/Scripts/bootstrap-table-master/css")
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("~/bundles/bootstrap-table-master/1")
+    @Scripts.Render("~/bundles/bootstrap-table-master/2")
+    @Scripts.Render("~/bundles/bootstrap-table-master/3")
+    @Scripts.Render("~/bundles/bootstrap-table-master/4")
+    @Scripts.Render("~/bundles/bootstrap-table-master/5")
+    @Scripts.Render("~/bundles/bootstrap-table-master/6")
+    @Scripts.Render("~/bundles/bootstrap-table-master/7")
+    @Scripts.Render("~/bundles/bootstrap-table-master/8")
+    @Scripts.Render("~/bundles/bootstrap-table-master/9")
+    @Scripts.Render("~/bundles/bootstrap-table-master/10")
+    @Scripts.Render("~/bundles/bootstrap-table-master/11")
+    @Scripts.Render("~/bundles/bootstrap-table-master/12")
+    @Scripts.Render("~/bundles/bootstrap-table-master/13")
+    @Scripts.Render("~/bundles/bootstrap-table-master/14")
+    @Scripts.Render("~/bundles/bootstrap-table-master/15")
+    @Scripts.Render("~/bundles/bootstrap-table-master/16")
+    @Scripts.Render("~/bundles/bootstrap-table-master/17")
+    @Scripts.Render("~/bundles/bootstrap-table-master/18")
+    @Scripts.Render("~/bundles/bootstrap-table-master/19")
+
+    <script type="text/javascript">
+        
+    </script>
+}
+
+

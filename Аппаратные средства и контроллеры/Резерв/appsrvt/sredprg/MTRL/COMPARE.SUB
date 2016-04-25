@@ -1,0 +1,152 @@
+*********************************************
+* COMPARE.SUB  routine to compare template  *
+* Copyright 1995 by Brad Stewart            *
+*********************************************
+
+compare:
+
+        ldx #0
+        stx nindex
+        stx addr
+        stx tnum
+
+        lda #$7f
+        sta min0
+        sta min0+1
+        sta min1
+        sta min1+1
+
+        ;setup eerom device
+        jsr a2404_ack
+        jsr a2404_stop
+        jsr a2404_start
+        lda #W_B0
+        jsr a2404_write
+        lda #$80
+        sta addr
+        jsr a2404_write
+        jsr a2404_start
+        lda #R_B0
+        jsr a2404_write
+        ;eerom is now ready to read sequentially
+
+cmpr20:
+        lda #0
+        sta error0
+        sta error0+1
+cmpr10:
+        ;find absolute value
+        jsr a2404_read
+        txa
+        jsr a2404_ack
+        ldx nindex
+        sub normal,x
+        bpl posit
+        nega
+posit:
+        add error0    ;low order
+        sta error0
+        lda #0
+        adc error0+1
+        sta error0+1
+        inc addr
+        lda addr
+        cmp #0          ;time to switch eerom banks
+        bne cmpr40      ;no
+        jsr a2404_read  ;do a dummy read
+        jsr a2404_stop
+        ;setup eerom device
+        jsr a2404_start
+        lda #W_B1
+        jsr a2404_write
+        lda #$00
+        sta addr
+        jsr a2404_write
+        jsr a2404_start
+        lda #R_B1
+        jsr a2404_write
+        ;eerom is now ready to read sequentially
+cmpr40:
+
+        inc nindex
+        lda nindex
+        cmp #12t         ;done with high frequencies?
+        bne cmpr10      ;no
+                        ;yes, divide result by 2
+        lsr error0+1
+        ror error0
+
+cmpr15:
+        ;find absolute value
+        jsr a2404_read
+        tax
+        jsr a2404_ack
+        ldx nindex
+        sub normal,x
+        bpl posit1
+        nega
+posit1:
+        add error0
+        sta error0
+        lda #0
+        adc error0+1
+        sta error0+1
+        inc addr
+        lda addr
+        cmp #0
+        beq cmpr30      ;finished?
+        inc nindex
+        lda nindex
+        cmp #24t        ;done with vector
+        bne cmpr15      ;no
+        lda #0
+        sta nindex      ;reset pointer to prototype vector
+
+;now I have the error value for template 'cntr'
+;next is to compare to min0 and min1
+
+        lda min0           ;perform subtraction and test
+        sub error0          ;first, sub no carry on low order
+        lda min0+1
+        sbc error0+1
+
+        bmi cmpr25      ;branch negative
+                        ;if not lower, then value becomes min
+
+        lda min0
+        sta min1
+        lda min0+1
+        sta min1+1
+        lda imin0
+        sta imin1
+
+        lda error0
+        sta min0
+        lda error0+1
+        sta min0+1
+        lda tnum
+        sta imin0
+        bra cmpr35
+
+cmpr25:
+        lda min1
+        sub error0
+        lda min1+1
+        sbc error0+1
+        bmi cmpr35
+        lda error0
+        sta min1
+        lda error0+1
+        sta min1+1
+        lda tnum
+        sta imin1
+
+cmpr35:
+        inc tnum
+        jmp cmpr20
+cmpr30:
+        jsr a2404_read  ;do a dummy read
+        jsr a2404_stop
+        rts
+
+

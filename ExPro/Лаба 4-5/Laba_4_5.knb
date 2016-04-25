@@ -1,0 +1,1000 @@
+<?xml version="1.0"?>
+<BZ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="Лаб.работа №4" Version="1.14" Author="Рахимулин Ринат, гр.09-208" IsRelease="false" CreateDate="19.03.2016 12:42:11" UpdateDate="21.03.2016 20:58:33">
+  <Comment />
+  <Rule Name="Создание цепи">
+    <Act>цепь=Цепь</Act>
+    <Act>блок_цепи=Блок</Act>
+    <Act>блок1=Блок</Act>
+    <Act>блок1_1=Блок</Act>
+    <Act>резистор_1=Резистор</Act>
+    <Act>резистор_2=Резистор</Act>
+    <Act>блок1_1.Тип="последовательный"</Act>
+    <Act>блок1_1.Блоки=[резистор_1,резистор_2]</Act>
+    <Act>блок1_2=Блок</Act>
+    <Act>резистор_3=Резистор</Act>
+    <Act>блок1_2.Тип="последовательный"</Act>
+    <Act>блок1_2.Блоки=[резистор_3]</Act>
+    <Act>блок1.Блоки=[блок1_1,блок1_2]</Act>
+    <Act>блок1.Тип="параллельный"</Act>
+    <Act>блок2=Блок</Act>
+    <Act>резистор_4=Резистор</Act>
+    <Act>блок2.Тип="последовательный"</Act>
+    <Act>блок2.Блоки=[резистор_4]</Act>
+    <Act>блок3=Блок</Act>
+    <Act>резистор_5=Резистор</Act>
+    <Act>блок3.Тип="последовательный"</Act>
+    <Act>блок3.Блоки=[резистор_5]</Act>
+    <Act>блок_цепи.Блоки=[блок1,блок2,блок3]</Act>
+    <Act>блок_цепи.Тип="параллельный"</Act>
+    <Act>цепь.Блок=блок_цепи</Act>
+    <Enable>true</Enable>
+    <Priority>50</Priority>
+  </Rule>
+  <Rule Name="Рисование цепи">
+    <Act>НарисоватьЭлектрическуюЦепь(цепь)</Act>
+    <Enable>true</Enable>
+    <Priority>50</Priority>
+  </Rule>
+  <Rule Name="Ввод значений цепи">
+    <Act>R1=0</Act>
+    <Act>R2=0</Act>
+    <Act>R3=0</Act>
+    <Act>R4=0</Act>
+    <Act>R5=0</Act>
+    <Act>U=0</Act>
+    <Act>ВВОДБЛ("Введите указанные сопротивления и напряжение в цепи:",R1,R2,R3,R4,R5,U)</Act>
+    <Act>резистор_1.R=R1</Act>
+    <Act>резистор_2.R=R2</Act>
+    <Act>резистор_3.R=R3</Act>
+    <Act>резистор_4.R=R4</Act>
+    <Act>резистор_5.R=R5</Act>
+    <Enable>true</Enable>
+    <Priority>50</Priority>
+  </Rule>
+  <Rule Name="Расчет общего сопротивления цепи">
+    <Act>R=РассчитатьСопротивлениеЦепи(цепь)</Act>
+    <Act>ВЫВОД("Общее сопротивление цепи R = ",R," Ом")</Act>
+    <Enable>true</Enable>
+    <Priority>50</Priority>
+  </Rule>
+  <Rule Name="Расчет силы тока цепи">
+    <Act>I=U/R</Act>
+    <Act>ВЫВОД("Сила тока в цепи 'I' = ",I," Ампер")</Act>
+    <Enable>true</Enable>
+    <Priority>50</Priority>
+  </Rule>
+  <Rule Name="Вывод данных">
+    <Act>док=ДОКУМЕНТ(ШаблонДокумента)</Act>
+    <Act>ЗАПИСЬ(док,"Results.htm")</Act>
+    <Enable>true</Enable>
+    <Priority>50</Priority>
+  </Rule>
+  <Variable xsi:type="NoType" Name="R1" Goal="false">
+    <IsBackward>false</IsBackward>
+    <Goal>False</Goal>
+    <Comment />
+    <StartValue />
+    <Opredelena>false</Opredelena>
+  </Variable>
+  <Variable xsi:type="NoType" Name="R2" Goal="false">
+    <IsBackward>false</IsBackward>
+    <Goal>False</Goal>
+    <Comment />
+    <StartValue />
+    <Opredelena>false</Opredelena>
+  </Variable>
+  <Variable xsi:type="NoType" Name="R3" Goal="false">
+    <IsBackward>false</IsBackward>
+    <Goal>False</Goal>
+    <Comment />
+    <StartValue />
+    <Opredelena>false</Opredelena>
+  </Variable>
+  <Variable xsi:type="NoType" Name="R4" Goal="false">
+    <IsBackward>false</IsBackward>
+    <Goal>False</Goal>
+    <Comment />
+    <StartValue />
+    <Opredelena>false</Opredelena>
+  </Variable>
+  <Variable xsi:type="NoType" Name="R5" Goal="false">
+    <IsBackward>false</IsBackward>
+    <Goal>False</Goal>
+    <Comment />
+    <StartValue />
+    <Opredelena>false</Opredelena>
+  </Variable>
+  <Variable xsi:type="NoType" Name="цепь" Goal="false">
+    <IsBackward>false</IsBackward>
+    <Goal>False</Goal>
+    <Comment />
+    <StartValue />
+    <Opredelena>false</Opredelena>
+  </Variable>
+  <Variable xsi:type="NoType" Name="блок_цепи" Goal="false">
+    <IsBackward>false</IsBackward>
+    <Goal>False</Goal>
+    <Comment />
+    <StartValue />
+    <Opredelena>false</Opredelena>
+  </Variable>
+  <Variable xsi:type="NoType" Name="блок1" Goal="false">
+    <IsBackward>false</IsBackward>
+    <Goal>False</Goal>
+    <Comment />
+    <StartValue />
+    <Opredelena>false</Opredelena>
+  </Variable>
+  <Variable xsi:type="NoType" Name="блок2" Goal="false">
+    <IsBackward>false</IsBackward>
+    <Goal>False</Goal>
+    <Comment />
+    <StartValue />
+    <Opredelena>false</Opredelena>
+  </Variable>
+  <Variable xsi:type="NoType" Name="блок3" Goal="false">
+    <IsBackward>false</IsBackward>
+    <Goal>False</Goal>
+    <Comment />
+    <StartValue />
+    <Opredelena>false</Opredelena>
+  </Variable>
+  <Variable xsi:type="NoType" Name="блок1_1" Goal="false">
+    <IsBackward>false</IsBackward>
+    <Goal>False</Goal>
+    <Comment />
+    <StartValue />
+    <Opredelena>false</Opredelena>
+  </Variable>
+  <Variable xsi:type="NoType" Name="блок1_2" Goal="false">
+    <IsBackward>false</IsBackward>
+    <Goal>False</Goal>
+    <Comment />
+    <StartValue />
+    <Opredelena>false</Opredelena>
+  </Variable>
+  <Variable xsi:type="NoType" Name="резистор_1" Goal="false">
+    <IsBackward>false</IsBackward>
+    <Goal>False</Goal>
+    <Comment />
+    <StartValue />
+    <Opredelena>false</Opredelena>
+  </Variable>
+  <Variable xsi:type="NoType" Name="резистор_2" Goal="false">
+    <IsBackward>false</IsBackward>
+    <Goal>False</Goal>
+    <Comment />
+    <StartValue />
+    <Opredelena>false</Opredelena>
+  </Variable>
+  <Variable xsi:type="NoType" Name="резистор_3" Goal="false">
+    <IsBackward>false</IsBackward>
+    <Goal>False</Goal>
+    <Comment />
+    <StartValue />
+    <Opredelena>false</Opredelena>
+  </Variable>
+  <Variable xsi:type="NoType" Name="пример" Goal="false">
+    <IsBackward>false</IsBackward>
+    <Goal>False</Goal>
+    <Comment />
+    <StartValue />
+    <Opredelena>false</Opredelena>
+  </Variable>
+  <Variable xsi:type="Number" Name="R" Goal="false">
+    <IsBackward>false</IsBackward>
+    <Goal>False</Goal>
+    <Comment />
+    <StartValue />
+    <Opredelena>false</Opredelena>
+  </Variable>
+  <Variable xsi:type="NoType" Name="резистор_4" Goal="false">
+    <IsBackward>false</IsBackward>
+    <Goal>False</Goal>
+    <Comment />
+    <StartValue />
+    <Opredelena>false</Opredelena>
+  </Variable>
+  <Variable xsi:type="NoType" Name="резистор_5" Goal="false">
+    <IsBackward>false</IsBackward>
+    <Goal>False</Goal>
+    <Comment />
+    <StartValue />
+    <Opredelena>false</Opredelena>
+  </Variable>
+  <Variable xsi:type="NoType" Name="док" Goal="true">
+    <IsBackward>false</IsBackward>
+    <Goal>True</Goal>
+    <Comment />
+    <StartValue />
+    <Opredelena>false</Opredelena>
+  </Variable>
+  <Variable xsi:type="Number" Name="I" Goal="false">
+    <IsBackward>false</IsBackward>
+    <Goal>False</Goal>
+    <Comment />
+    <StartValue />
+    <Opredelena>false</Opredelena>
+  </Variable>
+  <Variable xsi:type="Number" Name="U" Goal="false">
+    <IsBackward>false</IsBackward>
+    <Goal>False</Goal>
+    <Comment />
+    <StartValue />
+    <Opredelena>false</Opredelena>
+  </Variable>
+  <Functions>
+    <Name>НарисоватьЭлектрическуюЦепь</Name>
+    <LocalVariables xsi:type="NoType" Name="цепь" Goal="false">
+      <IsBackward>false</IsBackward>
+      <Goal>False</Goal>
+      <Comment />
+      <StartValue />
+      <Opredelena>false</Opredelena>
+    </LocalVariables>
+    <LocalVariables xsi:type="Number" Name="количество_ветвей" Goal="false">
+      <IsBackward>false</IsBackward>
+      <Goal>False</Goal>
+      <Comment />
+      <StartValue />
+      <Opredelena>false</Opredelena>
+    </LocalVariables>
+    <LocalVariables xsi:type="Number" Name="счетчик" Goal="false">
+      <IsBackward>false</IsBackward>
+      <Goal>False</Goal>
+      <Comment />
+      <StartValue />
+      <Opredelena>false</Opredelena>
+    </LocalVariables>
+    <LocalVariables xsi:type="NoType" Name="текущий_блок" Goal="false">
+      <IsBackward>false</IsBackward>
+      <Goal>False</Goal>
+      <Comment />
+      <StartValue />
+      <Opredelena>false</Opredelena>
+    </LocalVariables>
+    <LocalVariables xsi:type="Number" Name="сдвиг_по_х" Goal="false">
+      <IsBackward>false</IsBackward>
+      <Goal>False</Goal>
+      <Comment />
+      <StartValue />
+      <Opredelena>false</Opredelena>
+    </LocalVariables>
+    <LocalVariables xsi:type="Number" Name="высота" Goal="false">
+      <IsBackward>false</IsBackward>
+      <Goal>False</Goal>
+      <Comment />
+      <StartValue />
+      <Opredelena>false</Opredelena>
+    </LocalVariables>
+    <LocalVariables xsi:type="Number" Name="текущее_значение_высоты" Goal="false">
+      <IsBackward>false</IsBackward>
+      <Goal>False</Goal>
+      <Comment />
+      <StartValue />
+      <Opredelena>false</Opredelena>
+    </LocalVariables>
+    <LocalVariables xsi:type="Number" Name="длина_ветки" Goal="false">
+      <IsBackward>false</IsBackward>
+      <Goal>False</Goal>
+      <Comment />
+      <StartValue />
+      <Opredelena>false</Opredelena>
+    </LocalVariables>
+    <LocalVariables xsi:type="Number" Name="начало_х1" Goal="false">
+      <IsBackward>false</IsBackward>
+      <Goal>False</Goal>
+      <Comment />
+      <StartValue />
+      <Opredelena>false</Opredelena>
+    </LocalVariables>
+    <LocalVariables xsi:type="Number" Name="конец_х2" Goal="false">
+      <IsBackward>false</IsBackward>
+      <Goal>False</Goal>
+      <Comment />
+      <StartValue />
+      <Opredelena>false</Opredelena>
+    </LocalVariables>
+    <LocalVariables xsi:type="Number" Name="общая_высота_у" Goal="false">
+      <IsBackward>false</IsBackward>
+      <Goal>False</Goal>
+      <Comment />
+      <StartValue />
+      <Opredelena>false</Opredelena>
+    </LocalVariables>
+    <Args>0</Args>
+    <Act>количество_ветвей=КОЛЭЛЕМ(цепь.Блок.Блоки)</Act>
+    <Act>ВЫВОД("Количество блоков в начале цепи: ",количество_ветвей)</Act>
+    <Act>начало_х1=50</Act>
+    <Act>конец_х2=100</Act>
+    <Act>общая_высота_у=300</Act>
+    <Act>длина_ветки=340</Act>
+    <Act>АнализироватьСоединение(цепь.Блок,конец_х2,общая_высота_у,длина_ветки)</Act>
+    <Act>ВЫВОД("Конец рисования!")</Act>
+  </Functions>
+  <Functions>
+    <Name>АнализироватьСоединение</Name>
+    <LocalVariables xsi:type="NoType" Name="блок" Goal="false">
+      <IsBackward>false</IsBackward>
+      <Goal>False</Goal>
+      <Comment />
+      <StartValue />
+      <Opredelena>false</Opredelena>
+    </LocalVariables>
+    <LocalVariables xsi:type="Number" Name="х" Goal="false">
+      <IsBackward>false</IsBackward>
+      <Goal>False</Goal>
+      <Comment />
+      <StartValue />
+      <Opredelena>false</Opredelena>
+    </LocalVariables>
+    <LocalVariables xsi:type="Number" Name="у" Goal="false">
+      <IsBackward>false</IsBackward>
+      <Goal>False</Goal>
+      <Comment />
+      <StartValue />
+      <Opredelena>false</Opredelena>
+    </LocalVariables>
+    <LocalVariables xsi:type="Number" Name="длина_ветки" Goal="false">
+      <IsBackward>false</IsBackward>
+      <Goal>False</Goal>
+      <Comment />
+      <StartValue />
+      <Opredelena>false</Opredelena>
+    </LocalVariables>
+    <LocalVariables xsi:type="NoType" Name="тип" Goal="false">
+      <IsBackward>false</IsBackward>
+      <Goal>False</Goal>
+      <Comment />
+      <StartValue />
+      <Opredelena>false</Opredelena>
+    </LocalVariables>
+    <LocalVariables xsi:type="NoType" Name="текущий_блок" Goal="false">
+      <IsBackward>false</IsBackward>
+      <Goal>False</Goal>
+      <Comment />
+      <StartValue />
+      <Opredelena>false</Opredelena>
+    </LocalVariables>
+    <LocalVariables xsi:type="Number" Name="берем_х" Goal="false">
+      <IsBackward>false</IsBackward>
+      <Goal>False</Goal>
+      <Comment />
+      <StartValue />
+      <Opredelena>false</Opredelena>
+    </LocalVariables>
+    <LocalVariables xsi:type="Number" Name="берем_у" Goal="false">
+      <IsBackward>false</IsBackward>
+      <Goal>False</Goal>
+      <Comment />
+      <StartValue />
+      <Opredelena>false</Opredelena>
+    </LocalVariables>
+    <LocalVariables xsi:type="Number" Name="ждать_посл" Goal="false">
+      <IsBackward>false</IsBackward>
+      <Goal>False</Goal>
+      <Comment />
+      <StartValue />
+      <Opredelena>false</Opredelena>
+    </LocalVariables>
+    <LocalVariables xsi:type="Number" Name="ждать_парал" Goal="false">
+      <IsBackward>false</IsBackward>
+      <Goal>False</Goal>
+      <Comment />
+      <StartValue />
+      <Opredelena>false</Opredelena>
+    </LocalVariables>
+    <LocalVariables xsi:type="Number" Name="количество_блоков" Goal="false">
+      <IsBackward>false</IsBackward>
+      <Goal>False</Goal>
+      <Comment />
+      <StartValue />
+      <Opredelena>false</Opredelena>
+    </LocalVariables>
+    <Args>0</Args>
+    <Args>1</Args>
+    <Args>2</Args>
+    <Args>3</Args>
+    <Act>ВЫВОД("Анализируем блок с координатами: ",х," ",у)</Act>
+    <Act>тип=блок.Тип</Act>
+    <Act>ВЫВОД("Тип: ",тип)</Act>
+    <Act>текущий_блок=блок</Act>
+    <Act>берем_х=х</Act>
+    <Act>берем_у=у</Act>
+    <Act>количество_блоков=КОЛЭЛЕМ(блок.Блоки)</Act>
+    <Act>ВЫВОД("Количество подблоков: ",количество_блоков)</Act>
+    <Act>ждать_посл=1</Act>
+    <Act>ПОКА(И(тип=="последовательный",ждать_посл==1))</Act>
+    <Act>длина_ветки=длина_ветки</Act>
+    <Act>РисоватьПоследовательныйБлок(текущий_блок,берем_х,берем_у,длина_ветки)</Act>
+    <Act>ждать_посл=0</Act>
+    <Act>ВЫВОД("---2---")</Act>
+    <Act>ВЫХОД</Act>
+    <Act>ждать_парал=1</Act>
+    <Act>ПОКА(И(тип=="параллельный",ждать_парал==1))</Act>
+    <Act>берем_у=у/2</Act>
+    <Act>длина_ветки=длина_ветки-100</Act>
+    <Act>РисоватьПараллельныйБлок(текущий_блок,берем_х,берем_у,длина_ветки)</Act>
+    <Act>ждать_парал=0</Act>
+    <Act>ВЫВОД("---1---")</Act>
+    <Act>ВЫХОД</Act>
+    <Comment>Рисует переданный блок</Comment>
+  </Functions>
+  <Functions>
+    <Name>НарисоватьРезистор</Name>
+    <LocalVariables xsi:type="NoType" Name="резистор" Goal="false">
+      <IsBackward>false</IsBackward>
+      <Goal>False</Goal>
+      <Comment />
+      <StartValue />
+      <Opredelena>false</Opredelena>
+    </LocalVariables>
+    <LocalVariables xsi:type="Number" Name="х" Goal="false">
+      <IsBackward>false</IsBackward>
+      <Goal>False</Goal>
+      <Comment />
+      <StartValue />
+      <Opredelena>false</Opredelena>
+    </LocalVariables>
+    <LocalVariables xsi:type="Number" Name="у" Goal="false">
+      <IsBackward>false</IsBackward>
+      <Goal>False</Goal>
+      <Comment />
+      <StartValue />
+      <Opredelena>false</Opredelena>
+    </LocalVariables>
+    <LocalVariables xsi:type="Number" Name="высота" Goal="false">
+      <IsBackward>false</IsBackward>
+      <Goal>False</Goal>
+      <Comment />
+      <StartValue />
+      <Opredelena>false</Opredelena>
+    </LocalVariables>
+    <LocalVariables xsi:type="Number" Name="длина" Goal="false">
+      <IsBackward>false</IsBackward>
+      <Goal>False</Goal>
+      <Comment />
+      <StartValue />
+      <Opredelena>false</Opredelena>
+    </LocalVariables>
+    <LocalVariables xsi:type="NoType" Name="позиция_линии_х1" Goal="false">
+      <IsBackward>false</IsBackward>
+      <Goal>False</Goal>
+      <Comment />
+      <StartValue />
+      <Opredelena>false</Opredelena>
+    </LocalVariables>
+    <LocalVariables xsi:type="NoType" Name="позиция_линии_х2" Goal="false">
+      <IsBackward>false</IsBackward>
+      <Goal>False</Goal>
+      <Comment />
+      <StartValue />
+      <Opredelena>false</Opredelena>
+    </LocalVariables>
+    <LocalVariables xsi:type="NoType" Name="позиция_линии_у" Goal="false">
+      <IsBackward>false</IsBackward>
+      <Goal>False</Goal>
+      <Comment />
+      <StartValue />
+      <Opredelena>false</Opredelena>
+    </LocalVariables>
+    <LocalVariables xsi:type="Number" Name="длина_ветки" Goal="false">
+      <IsBackward>false</IsBackward>
+      <Goal>False</Goal>
+      <Comment />
+      <StartValue />
+      <Opredelena>false</Opredelena>
+    </LocalVariables>
+    <Args>0</Args>
+    <Args>1</Args>
+    <Args>2</Args>
+    <Args>8</Args>
+    <Act>высота=20</Act>
+    <Act>длина=40</Act>
+    <Act>позиция_линии_х1=х</Act>
+    <Act>позиция_линии_х2=позиция_линии_х1+длина_ветки</Act>
+    <Act>позиция_линии_у=у+(высота/2)</Act>
+    <Act>ВЫВОД("Зашли в резистор: ",х," ",у)</Act>
+    <Act>ВЫВОД("Длина ветви: ",длина_ветки)</Act>
+    <Act>РИСПРЯМОУГ(х+15,у-10,длина,высота,"Red")</Act>
+    <Comment>Рисует резистор, на вход принимает координаты левого нижнего угла</Comment>
+  </Functions>
+  <Functions>
+    <Name>РисоватьПараллельныйБлок</Name>
+    <LocalVariables xsi:type="NoType" Name="блок" Goal="false">
+      <IsBackward>false</IsBackward>
+      <Goal>False</Goal>
+      <Comment />
+      <StartValue />
+      <Opredelena>false</Opredelena>
+    </LocalVariables>
+    <LocalVariables xsi:type="Number" Name="х" Goal="false">
+      <IsBackward>false</IsBackward>
+      <Goal>False</Goal>
+      <Comment />
+      <StartValue />
+      <Opredelena>false</Opredelena>
+    </LocalVariables>
+    <LocalVariables xsi:type="Number" Name="у" Goal="false">
+      <IsBackward>false</IsBackward>
+      <Goal>False</Goal>
+      <Comment />
+      <StartValue />
+      <Opredelena>false</Opredelena>
+    </LocalVariables>
+    <LocalVariables xsi:type="Number" Name="длина_ветки" Goal="false">
+      <IsBackward>false</IsBackward>
+      <Goal>False</Goal>
+      <Comment />
+      <StartValue />
+      <Opredelena>false</Opredelena>
+    </LocalVariables>
+    <LocalVariables xsi:type="Number" Name="счетчик" Goal="false">
+      <IsBackward>false</IsBackward>
+      <Goal>False</Goal>
+      <Comment />
+      <StartValue />
+      <Opredelena>false</Opredelena>
+    </LocalVariables>
+    <LocalVariables xsi:type="NoType" Name="текущий_блок" Goal="false">
+      <IsBackward>false</IsBackward>
+      <Goal>False</Goal>
+      <Comment />
+      <StartValue />
+      <Opredelena>false</Opredelena>
+    </LocalVariables>
+    <LocalVariables xsi:type="Number" Name="сдвиг_по_х" Goal="false">
+      <IsBackward>false</IsBackward>
+      <Goal>False</Goal>
+      <Comment />
+      <StartValue />
+      <Opredelena>false</Opredelena>
+    </LocalVariables>
+    <LocalVariables xsi:type="Number" Name="высота" Goal="false">
+      <IsBackward>false</IsBackward>
+      <Goal>False</Goal>
+      <Comment />
+      <StartValue />
+      <Opredelena>false</Opredelena>
+    </LocalVariables>
+    <LocalVariables xsi:type="Number" Name="количество_блоков" Goal="false">
+      <IsBackward>false</IsBackward>
+      <Goal>False</Goal>
+      <Comment />
+      <StartValue />
+      <Opredelena>false</Opredelena>
+    </LocalVariables>
+    <LocalVariables xsi:type="Number" Name="отсчет_высоты" Goal="false">
+      <IsBackward>false</IsBackward>
+      <Goal>False</Goal>
+      <Comment />
+      <StartValue />
+      <Opredelena>false</Opredelena>
+    </LocalVariables>
+    <Args>0</Args>
+    <Args>1</Args>
+    <Args>2</Args>
+    <Args>3</Args>
+    <Act>ВЫВОД("=&gt;Рисуем параллельный блок: ",х,", ",у)</Act>
+    <Act>количество_блоков=КОЛЭЛЕМ(блок.Блоки)</Act>
+    <Act>ВЫВОД("-&gt;Количество блоков в параллельном блоке: ",количество_блоков)</Act>
+    <Act>счетчик=0</Act>
+    <Act>высота=у-50*(количество_блоков-1)/2</Act>
+    <Act>отсчет_высоты=50*количество_блоков-50</Act>
+    <Act>сдвиг_по_х=х+50</Act>
+    <Act>ПОКА(И(количество_блоков==3,счетчик==0))</Act>
+    <Act>счетчик=1</Act>
+    <Act>РИСЛИНИЯ(х,высота+50,сдвиг_по_х,высота+50,"Red")</Act>
+    <Act>РИСЛИНИЯ(х+длина_ветки+50,высота+50,сдвиг_по_х+длина_ветки+50,высота+50,"Red")</Act>
+    <Act>отсчет_высоты=отсчет_высоты+50</Act>
+    <Act>ВЫХОД</Act>
+    <Act>счетчик=0</Act>
+    <Act>ПОКА(И(количество_блоков==2,счетчик==0))</Act>
+    <Act>счетчик=1</Act>
+    <Act>РИСЛИНИЯ(х,высота+25,сдвиг_по_х,высота+25,"Red")</Act>
+    <Act>РИСЛИНИЯ(х+длина_ветки+50,высота+25,сдвиг_по_х+длина_ветки+50,высота+25,"Red")</Act>
+    <Act>ВЫХОД</Act>
+    <Act>счетчик=1</Act>
+    <Act>ВЫВОД("-&gt; Сдвиг по Х: ",сдвиг_по_х)</Act>
+    <Act>длина_ветки=длина_ветки</Act>
+    <Act>ПОКА(счетчик&lt;=количество_блоков)</Act>
+    <Act>текущий_блок=ЭЛЕМСП(счетчик,блок.Блоки)</Act>
+    <Act>АнализироватьСоединение(текущий_блок,сдвиг_по_х,высота,длина_ветки)</Act>
+    <Act>высота=высота+50</Act>
+    <Act>счетчик=счетчик+1</Act>
+    <Act>ВЫХОД</Act>
+    <Act>РИСЛИНИЯ(сдвиг_по_х,высота-50,сдвиг_по_х,высота-50-отсчет_высоты,"Red")</Act>
+    <Act>РИСЛИНИЯ(сдвиг_по_х+длина_ветки,высота-50,сдвиг_по_х+длина_ветки,высота-50-отсчет_высоты,"Red")</Act>
+    <Act>ВЫВОД("&lt;=Вышли из рисования параллельного блока")</Act>
+    <Act>ВЫВОД(" ")</Act>
+  </Functions>
+  <Functions>
+    <Name>РисоватьПоследовательныйБлок</Name>
+    <LocalVariables xsi:type="NoType" Name="блок" Goal="false">
+      <IsBackward>false</IsBackward>
+      <Goal>False</Goal>
+      <Comment />
+      <StartValue />
+      <Opredelena>false</Opredelena>
+    </LocalVariables>
+    <LocalVariables xsi:type="Number" Name="х" Goal="false">
+      <IsBackward>false</IsBackward>
+      <Goal>False</Goal>
+      <Comment />
+      <StartValue />
+      <Opredelena>false</Opredelena>
+    </LocalVariables>
+    <LocalVariables xsi:type="Number" Name="у" Goal="false">
+      <IsBackward>false</IsBackward>
+      <Goal>False</Goal>
+      <Comment />
+      <StartValue />
+      <Opredelena>false</Opredelena>
+    </LocalVariables>
+    <LocalVariables xsi:type="Number" Name="счетчик" Goal="false">
+      <IsBackward>false</IsBackward>
+      <Goal>False</Goal>
+      <Comment />
+      <StartValue />
+      <Opredelena>false</Opredelena>
+    </LocalVariables>
+    <LocalVariables xsi:type="NoType" Name="количество_резисторов" Goal="false">
+      <IsBackward>false</IsBackward>
+      <Goal>False</Goal>
+      <Comment />
+      <StartValue />
+      <Opredelena>false</Opredelena>
+    </LocalVariables>
+    <LocalVariables xsi:type="NoType" Name="резистор" Goal="false">
+      <IsBackward>false</IsBackward>
+      <Goal>False</Goal>
+      <Comment />
+      <StartValue />
+      <Opredelena>false</Opredelena>
+    </LocalVariables>
+    <LocalVariables xsi:type="Number" Name="сдвиг_по_х" Goal="false">
+      <IsBackward>false</IsBackward>
+      <Goal>False</Goal>
+      <Comment />
+      <StartValue />
+      <Opredelena>false</Opredelena>
+    </LocalVariables>
+    <LocalVariables xsi:type="Number" Name="берем_у" Goal="false">
+      <IsBackward>false</IsBackward>
+      <Goal>False</Goal>
+      <Comment />
+      <StartValue />
+      <Opredelena>false</Opredelena>
+    </LocalVariables>
+    <LocalVariables xsi:type="Number" Name="длина_ветки" Goal="false">
+      <IsBackward>false</IsBackward>
+      <Goal>False</Goal>
+      <Comment />
+      <StartValue />
+      <Opredelena>false</Opredelena>
+    </LocalVariables>
+    <Args>0</Args>
+    <Args>1</Args>
+    <Args>2</Args>
+    <Args>8</Args>
+    <Act>ВЫВОД("=&gt;Рисуем последовательный блок с резисторами: ",х," ",у)</Act>
+    <Act>количество_резисторов=КОЛЭЛЕМ(блок.Блоки)</Act>
+    <Act>счетчик=1</Act>
+    <Act>сдвиг_по_х=х</Act>
+    <Act>берем_у=у</Act>
+    <Act>длина_ветки=длина_ветки</Act>
+    <Act>РИСЛИНИЯ(сдвиг_по_х,берем_у,сдвиг_по_х+длина_ветки,берем_у,"Red")</Act>
+    <Act>ПОКА(счетчик&lt;=количество_резисторов)</Act>
+    <Act>резистор=ЭЛЕМСП(счетчик,блок.Блоки)</Act>
+    <Act>НарисоватьРезистор(резистор,сдвиг_по_х,берем_у,длина_ветки)</Act>
+    <Act>счетчик=счетчик+1</Act>
+    <Act>сдвиг_по_х=сдвиг_по_х+65</Act>
+    <Act>ВЫХОД</Act>
+    <Act>ВЫВОД("&lt;=Закончили рисование последовательного блока")</Act>
+  </Functions>
+  <Functions>
+    <Name>РассчитатьСопротивлениеЦепи</Name>
+    <LocalVariables xsi:type="NoType" Name="цепь" Goal="false">
+      <IsBackward>false</IsBackward>
+      <Goal>False</Goal>
+      <Comment />
+      <StartValue />
+      <Opredelena>false</Opredelena>
+    </LocalVariables>
+    <LocalVariables xsi:type="Number" Name="R" Goal="false">
+      <IsBackward>false</IsBackward>
+      <Goal>False</Goal>
+      <Comment />
+      <StartValue />
+      <Opredelena>false</Opredelena>
+    </LocalVariables>
+    <Args>0</Args>
+    <Act>R=АнализироватьСопротивлениеСоединения(цепь.Блок)</Act>
+    <Act>Возврат(R)</Act>
+  </Functions>
+  <Functions>
+    <Name>АнализироватьСопротивлениеСоединения</Name>
+    <LocalVariables xsi:type="NoType" Name="блок" Goal="false">
+      <IsBackward>false</IsBackward>
+      <Goal>False</Goal>
+      <Comment />
+      <StartValue />
+      <Opredelena>false</Opredelena>
+    </LocalVariables>
+    <LocalVariables xsi:type="Number" Name="R" Goal="false">
+      <IsBackward>false</IsBackward>
+      <Goal>False</Goal>
+      <Comment />
+      <StartValue />
+      <Opredelena>false</Opredelena>
+    </LocalVariables>
+    <LocalVariables xsi:type="StringVariable" Name="тип" Goal="false">
+      <IsBackward>false</IsBackward>
+      <Goal>False</Goal>
+      <Comment />
+      <StartValue />
+      <Value xsi:type="xsd:string" />
+      <Opredelena>false</Opredelena>
+    </LocalVariables>
+    <LocalVariables xsi:type="NoType" Name="текущий_блок" Goal="false">
+      <IsBackward>false</IsBackward>
+      <Goal>False</Goal>
+      <Comment />
+      <StartValue />
+      <Opredelena>false</Opredelena>
+    </LocalVariables>
+    <LocalVariables xsi:type="Number" Name="количество_блоков" Goal="false">
+      <IsBackward>false</IsBackward>
+      <Goal>False</Goal>
+      <Comment />
+      <StartValue />
+      <Opredelena>false</Opredelena>
+    </LocalVariables>
+    <LocalVariables xsi:type="Number" Name="ждать_посл" Goal="false">
+      <IsBackward>false</IsBackward>
+      <Goal>False</Goal>
+      <Comment />
+      <StartValue />
+      <Opredelena>false</Opredelena>
+    </LocalVariables>
+    <LocalVariables xsi:type="Number" Name="ждать_парал" Goal="false">
+      <IsBackward>false</IsBackward>
+      <Goal>False</Goal>
+      <Comment />
+      <StartValue />
+      <Opredelena>false</Opredelena>
+    </LocalVariables>
+    <Args>0</Args>
+    <Act>R=0</Act>
+    <Act>тип=блок.Тип</Act>
+    <Act>ВЫВОД("Тип: ",тип)</Act>
+    <Act>текущий_блок=блок</Act>
+    <Act>количество_блоков=КОЛЭЛЕМ(блок.Блоки)</Act>
+    <Act>ВЫВОД("Количество подблоков: ",количество_блоков)</Act>
+    <Act>ждать_посл=1</Act>
+    <Act>ПОКА(И(тип=="последовательный",ждать_посл==1))</Act>
+    <Act>R=РассчитатьПоследовательныйБлок(текущий_блок)</Act>
+    <Act>ждать_посл=0</Act>
+    <Act>ВЫВОД("---2---")</Act>
+    <Act>ВЫХОД</Act>
+    <Act>ждать_парал=1</Act>
+    <Act>ПОКА(И(тип=="параллельный",ждать_парал==1))</Act>
+    <Act>R=РассчитатьПараллельныйБлок(текущий_блок)</Act>
+    <Act>ждать_парал=0</Act>
+    <Act>ВЫВОД("---1---")</Act>
+    <Act>ВЫХОД</Act>
+    <Act>Возврат(R)</Act>
+  </Functions>
+  <Functions>
+    <Name>РассчитатьПоследовательныйБлок</Name>
+    <LocalVariables xsi:type="NoType" Name="блок" Goal="false">
+      <IsBackward>false</IsBackward>
+      <Goal>False</Goal>
+      <Comment />
+      <StartValue />
+      <Opredelena>false</Opredelena>
+    </LocalVariables>
+    <LocalVariables xsi:type="Number" Name="R" Goal="false">
+      <IsBackward>false</IsBackward>
+      <Goal>False</Goal>
+      <Comment />
+      <StartValue />
+      <Opredelena>false</Opredelena>
+    </LocalVariables>
+    <LocalVariables xsi:type="Number" Name="количество_блоков" Goal="false">
+      <IsBackward>false</IsBackward>
+      <Goal>False</Goal>
+      <Comment />
+      <StartValue />
+      <Opredelena>false</Opredelena>
+    </LocalVariables>
+    <LocalVariables xsi:type="Number" Name="счетчик" Goal="false">
+      <IsBackward>false</IsBackward>
+      <Goal>False</Goal>
+      <Comment />
+      <StartValue />
+      <Opredelena>false</Opredelena>
+    </LocalVariables>
+    <LocalVariables xsi:type="NoType" Name="текущий_блок" Goal="false">
+      <IsBackward>false</IsBackward>
+      <Goal>False</Goal>
+      <Comment />
+      <StartValue />
+      <Opredelena>false</Opredelena>
+    </LocalVariables>
+    <Args>0</Args>
+    <Act>R=0</Act>
+    <Act>количество_блоков=КОЛЭЛЕМ(блок.Блоки)</Act>
+    <Act>счетчик=1</Act>
+    <Act>ПОКА(счетчик&lt;=количество_блоков)</Act>
+    <Act>текущий_блок=ЭЛЕМСП(счетчик,блок.Блоки)</Act>
+    <Act>ВЫВОД(текущий_блок)</Act>
+    <Act>ВЫВОД(текущий_блок.R)</Act>
+    <Act>R=R+текущий_блок.R</Act>
+    <Act>счетчик=счетчик+1</Act>
+    <Act>ВЫХОД</Act>
+    <Act>Возврат(R)</Act>
+  </Functions>
+  <Functions>
+    <Name>РассчитатьПараллельныйБлок</Name>
+    <LocalVariables xsi:type="NoType" Name="блок" Goal="false">
+      <IsBackward>false</IsBackward>
+      <Goal>False</Goal>
+      <Comment />
+      <StartValue />
+      <Opredelena>false</Opredelena>
+    </LocalVariables>
+    <LocalVariables xsi:type="Number" Name="R" Goal="false">
+      <IsBackward>false</IsBackward>
+      <Goal>False</Goal>
+      <Comment />
+      <StartValue />
+      <Opredelena>false</Opredelena>
+    </LocalVariables>
+    <LocalVariables xsi:type="Number" Name="количество_блоков" Goal="false">
+      <IsBackward>false</IsBackward>
+      <Goal>False</Goal>
+      <Comment />
+      <StartValue />
+      <Opredelena>false</Opredelena>
+    </LocalVariables>
+    <LocalVariables xsi:type="Number" Name="счетчик" Goal="false">
+      <IsBackward>false</IsBackward>
+      <Goal>False</Goal>
+      <Comment />
+      <StartValue />
+      <Opredelena>false</Opredelena>
+    </LocalVariables>
+    <LocalVariables xsi:type="NoType" Name="текущий_блок" Goal="false">
+      <IsBackward>false</IsBackward>
+      <Goal>False</Goal>
+      <Comment />
+      <StartValue />
+      <Opredelena>false</Opredelena>
+    </LocalVariables>
+    <Args>0</Args>
+    <Act>R=0</Act>
+    <Act>ВЫВОД("=&gt;Вошли в расчет параллельного блока")</Act>
+    <Act>количество_блоков=КОЛЭЛЕМ(блок.Блоки)</Act>
+    <Act>ВЫВОД("-&gt;Количество блоков в параллельном блоке: ",количество_блоков)</Act>
+    <Act>счетчик=1</Act>
+    <Act>ПОКА(счетчик&lt;=количество_блоков)</Act>
+    <Act>текущий_блок=ЭЛЕМСП(счетчик,блок.Блоки)</Act>
+    <Act>R=R+1/(АнализироватьСопротивлениеСоединения(текущий_блок))</Act>
+    <Act>счетчик=счетчик+1</Act>
+    <Act>ВЫХОД</Act>
+    <Act>ВЫВОД("&lt;=Вышли из расчета параллельного блока")</Act>
+    <Act>R=1/R</Act>
+    <Act>Возврат(R)</Act>
+  </Functions>
+  <CommentHtml>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"&gt;
+&lt;HTML&gt;&lt;HEAD&gt;
+&lt;META content="text/html; charset=unicode" http-equiv=Content-Type&gt;
+&lt;META name=GENERATOR content="MSHTML 11.00.9600.17842"&gt;&lt;/HEAD&gt;
+&lt;BODY&gt;&lt;/BODY&gt;&lt;/HTML&gt;
+</CommentHtml>
+  <SearchStrategy>Прямой вывод</SearchStrategy>
+  <BZ Name="Модуль1" Version="1.14" Author="Рахимулин Ринат, гр.09-208" IsRelease="false" CreateDate="19.03.2016 15:22:05" UpdateDate="19.03.2016 15:22:05">
+    <Comment />
+    <CommentHtml>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"&gt;
+&lt;HTML&gt;&lt;HEAD&gt;
+&lt;META content="text/html; charset=unicode" http-equiv=Content-Type&gt;
+&lt;META name=GENERATOR content="MSHTML 11.00.9600.18231"&gt;&lt;/HEAD&gt;
+&lt;BODY&gt;&lt;/BODY&gt;&lt;/HTML&gt;
+</CommentHtml>
+    <SearchStrategy>Прямой вывод</SearchStrategy>
+  </BZ>
+  <Obj Name="Резистор">
+    <Comment>Класс Резистор</Comment>
+    <BaseClass />
+    <Property>
+      <Variable xsi:type="Number" Name="R" Goal="false">
+        <IsBackward>false</IsBackward>
+        <Goal>False</Goal>
+        <Comment>Сопротивление</Comment>
+        <StartValue>0</StartValue>
+        <Opredelena>false</Opredelena>
+      </Variable>
+      <Modifiers>Public</Modifiers>
+    </Property>
+  </Obj>
+  <Obj Name="Блок">
+    <Comment>Класс блока электрической цепи</Comment>
+    <BaseClass />
+    <Property>
+      <Variable xsi:type="Number" Name="U" Goal="false">
+        <IsBackward>false</IsBackward>
+        <Goal>False</Goal>
+        <Comment>Напряжение</Comment>
+        <StartValue>0</StartValue>
+        <Opredelena>false</Opredelena>
+      </Variable>
+      <Modifiers>Public</Modifiers>
+    </Property>
+    <Property>
+      <Variable xsi:type="Number" Name="I" Goal="false">
+        <IsBackward>false</IsBackward>
+        <Goal>False</Goal>
+        <Comment>Сила тока</Comment>
+        <StartValue>0</StartValue>
+        <Opredelena>false</Opredelena>
+      </Variable>
+      <Modifiers>Public</Modifiers>
+    </Property>
+    <Property>
+      <Variable xsi:type="NoType" Name="R" Goal="false">
+        <IsBackward>false</IsBackward>
+        <Goal>False</Goal>
+        <Comment>Сопротивление</Comment>
+        <StartValue>0</StartValue>
+        <Opredelena>false</Opredelena>
+      </Variable>
+      <Modifiers>Public</Modifiers>
+    </Property>
+    <Property>
+      <Variable xsi:type="List" Name="Блоки" Goal="false">
+        <IsBackward>false</IsBackward>
+        <Goal>False</Goal>
+        <Comment>Список блоков</Comment>
+        <StartValue />
+        <Opredelena>false</Opredelena>
+      </Variable>
+      <Modifiers>Public</Modifiers>
+    </Property>
+    <Property>
+      <Variable xsi:type="StringVariable" Name="Тип" Goal="false">
+        <IsBackward>false</IsBackward>
+        <Goal>False</Goal>
+        <Comment>Тип соединения: параллельный или последовательный</Comment>
+        <StartValue>неопределено</StartValue>
+        <Value xsi:type="xsd:string" />
+        <Opredelena>true</Opredelena>
+      </Variable>
+      <Modifiers>Public</Modifiers>
+    </Property>
+  </Obj>
+  <Obj Name="Цепь">
+    <Comment>Класс электрической цепи</Comment>
+    <BaseClass>Блок</BaseClass>
+    <Property>
+      <Variable xsi:type="NoType" Name="Блок" Goal="false">
+        <IsBackward>false</IsBackward>
+        <Goal>False</Goal>
+        <Comment>Всегда в себя включает</Comment>
+        <StartValue />
+        <Opredelena>false</Opredelena>
+      </Variable>
+      <Modifiers>Public</Modifiers>
+    </Property>
+  </Obj>
+  <Templates Name="ШаблонДокумента">
+    <Comment />
+    <Value>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"&gt;
+&lt;HTML&gt;&lt;HEAD&gt;
+&lt;META content="text/html; charset=unicode" http-equiv=Content-Type&gt;
+&lt;META name=GENERATOR content="MSHTML 11.00.9600.17842"&gt;&lt;/HEAD&gt;
+&lt;BODY&gt;Полное электрическое сопротивление цепи R = #R Ом&lt;BR&gt;Сила тока&amp;nbsp;при 
+напряжении U(#U В) в цепи равна I = #I&amp;nbsp;А &lt;/BODY&gt;&lt;/HTML&gt;
+</Value>
+  </Templates>
+</BZ>

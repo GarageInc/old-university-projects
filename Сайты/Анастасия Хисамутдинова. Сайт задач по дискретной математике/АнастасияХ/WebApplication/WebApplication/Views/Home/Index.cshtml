@@ -1,0 +1,56 @@
+﻿@{
+    ViewBag.Title = "Дискретная математика";
+}
+
+@*<ul class="nav nav-list">
+    <li class="active"><a href="#"><i class="icon-home"></i> На главную</a></li>
+    <li><a href="#"><i class="icon-book"></i> Библиотека</a></li>
+    <li><a href="#"><i class="icon-pencil"></i> Приложения</a></li>
+    <li><a href="#"><i class="icon-cogs"></i> Настройки</a></li>
+</ul>*@
+
+<div id="myCarousel" class="carousel slide" align="center">
+    <div class="carousel-inner">
+        <div class="item active">
+            <img src="../../Content/pictures/Carousel/bootstrap-mdo-sfmoma-01.jpg" />
+            <div class="carousel-caption">
+                <h4>Учебный тренажер</h4>
+                <p>Принимаясь за дело, соберись с духом!</p>
+            </div>
+        </div>
+        <div class="item">
+            <img src="../../Content/pictures/Carousel/bootstrap-mdo-sfmoma-01.jpg" />
+            <div class="carousel-caption">
+                <h4>Учебный тренажер</h4>
+                @*<p>Часами измеряется время, а временем жизнь человеческая; но чем, скажи, измеришь ты глубину Восточного океана?</p>*@
+            </div>
+        </div>
+        <div class="item">
+            <img src="../../Content/pictures/Carousel/bootstrap-mdo-sfmoma-01.jpg" />
+            <div class="carousel-caption">
+                <h4>Учебный тренажер</h4>
+                @*<p>Многие вещи нам непонятны не потому, что наши понятия слабы; но потому, что сии вещи не входят в круг наших понятий.</p>*@
+            </div>
+        </div>
+    </div>
+    <a class="left carousel-control" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+    <a class="right carousel-control" href="#myCarousel" data-slide="next">&rsaquo;</a>
+</div>
+
+<div class="jumbotron">
+    <h3>Учебный тренажер по теории кодирования</h3>
+    <p class="lead">
+    </p>
+    @if (User.IsInRole("Administrtor"))
+    {
+    <p>@Html.ActionLink("Создать задачу", "Create", "Request", new { area = "" }, new { @class = "buttonS" })</p>
+    }
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>Тренажер</h2>
+        <p>Хотите потренироваться на решении задач?</p>
+        <p>@Html.ActionLink("Перейти->", "Trenager", "Home", new { area = "" }, new { @class = "buttonB" })</p>
+    </div>
+</div>

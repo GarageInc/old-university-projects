@@ -1,0 +1,206 @@
+***********************************************
+* This code inputs speech at 10khz rate.
+* and does feature extraction
+* Copyright (c) 1995 by Brad Stewart
+*
+***********************************************
+
+
+***********************************************
+* Input sampling routine
+***********************************************
+input:
+
+        bset sample_led,ddrb
+        bset sample_led,portb
+
+        lda #time_out        ;was !128
+        sta timeout
+        sta ticks
+
+start_over:
+
+;start by initializing the eerom address
+
+;        lda #0                  ;address pointer
+;        sta addr
+        jsr a2404_start         ;write start
+        lda #W_B0               ;put data in bank zero
+        jsr a2404_write         ;write control byte
+        lda #0                  ;write address
+        jsr a2404_write         ;address 0
+
+        lda #0
+        sta zcross
+        sta bit_count
+        sta sound
+        sta frames
+        sta silence
+        sta sign
+        sta z1
+        sta freq1
+        sta freq2
+        sta temp
+        bset sample_led,portb
+
+main_loop:
+
+********************
+* put in delay loop
+********************
+$IF timer
+
+        lda TCNTR
+        sub ticks
+        bpl positive
+        nega
+
+positive:
+
+         cmp #!50       ;sample rate measured at 110us
+         blo main_loop
+         lda TCNTR
+         sta ticks
+$ENDIF
+
+
+$IF debug1
+        ;toggle port to test sampling rate
+        bclr error_led,portb
+        bset error_led,portb
+$ENDIF
+
+        brclr speech,portb,sign_zero        ; test speech bit
+                                        ;if zero, go to zero_bit
+        ;bset error_led,portb           ;debug only
+        inc z1
+        lda sign
+        bne blort1
+        inc zcross
+
+        ; build up the two freq bytes
+
+        lda z1
+        cmp #freq_limit
+        blo high_f
+        inc freq2
+        bra blort
+high_f:
+       inc freq1
+blort:
+        lda #0
+        sta z1
+        inca
+        sta sign
+        bra blort1
+
+sign_zero:
+       ;bclr error_led,portb ;for debug only--verify it follows input
+       inc z1
+       lda sign
+       beq blort1
+       lda #0
+       sta sign
+
+blort1:
+       inc bit_count
+       inc temp
+       lda #8
+       cmp bit_count
+       bne main_loop
+
+       lda #0
+       sta bit_count
+       cmp temp         ;is temp 0
+       bne main_loop    ;may need to convert to jump
+       inc frames
+       lda frames
+$IF debug
+       cmp #!16
+$ELSEIF
+       cmp #!64         ;filled up memory?
+$ENDIF
+       bne save_data
+
+       bset sample_led,portb   ;turn off led
+       lda #bufull_error
+       sta porta
+error05:
+       rts            ;memory filled error
+
+save_data:
+*******************************************************
+* store freq1 and freq2 to EEPROM
+* NOTE:  you can only do this with the RAMTRON device
+*       as it can accept unlimited sequential writes.
+*       Other devices will require a stop command
+*       after the two bytes are written.
+*******************************************************
+        lda freq1
+        jsr a2404_write
+        lda freq2
+        jsr a2404_write
+
+; reset working registers
+
+       lda #0
+       sta freq1
+       sta freq2
+
+; now check for timeout
+       lda frames
+       cmp #1
+       bne end_point
+       dec timeout
+       bne test1
+
+       lda #to_error
+       sta porta
+error10:
+       rts          ;timeout occured!!!!
+
+test1:
+      lda zcross
+      cmp #z_thresh        ;A-zcross
+      bhs end_point
+      jmp start_over
+
+end_point:
+
+     lda zcross
+     cmp #z_thresh            ;
+     bls blort2        ;
+     inc sound         ;
+; now we are sampling the sound
+; turn on led
+     bclr sample_led,portb
+
+     lda #0
+     sta silence
+     bra finish_ep
+
+blort2:
+       bset sample_led,portb      ;turn off led
+       inc silence
+       lda #0
+       sta z1
+       lda silence
+       cmp #sil_thresh
+       blo finish_ep
+       lda sound
+       cmp #sound_thresh
+       bhs inp_done
+       jmp  start_over
+inp_done:
+      lda frames
+      sub #sil_thresh
+      sta frames
+      lda #0
+      rts            ;good sample returns 0 in acc
+
+finish_ep:
+    lda #0
+    sta zcross
+    jmp main_loop
+
+

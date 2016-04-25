@@ -1,0 +1,100 @@
+MPASM  5.33                          ASM2.ASM   4-14-2014  9:03:31         PAGE  1
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00001 ;--- Шапка программы ---
+Warning[205]: Found directive in column 1. (list)
+                      00002 list p=16f628a
+Warning[205]: Found directive in column 1. (__config)
+2007   3F31           00003 __config b'11111100110001'
+Warning[207]: Found label after column 1. (TRISB)
+  00000006            00004         TRISB   equ  06h ;(1-й банк)
+Warning[207]: Found label after column 1. (PORTB)
+  00000006            00005     PORTB   equ  06h ;(0-й банк)
+Warning[207]: Found label after column 1. (SCRATCH)
+  0000000C            00006         SCRATCH equ  0Ch
+Warning[207]: Found label after column 1. (DIGIT)
+  0000000D            00007         DIGIT   equ  0Dh
+                      00008 ;--- Тело программы ---
+Warning[205]: Found directive in column 1. (org)
+0000                  00009 org 0h
+                      00010 ; можно выполнить 3 команды
+                      00011 ; основной программы
+Warning[203]: Found opcode in column 1. (goto)
+0000   2804           00012 goto  start
+0004                  00013         org 4h
+                      00014 ; подпрограмма обработки
+                      00015 ; прерываний
+                      00016 ; Работа программы:
+                      00017 ;ничего не горит
+                      00018 ;Загорается четверта-пауза
+                      00019 ;Четвертая гаснет, загорается третья-пауза
+                      00020 ;Загорается вторая-пауза
+                      00021 ;Третья и вторая гаснут-пауза
+0004                  00022 start ; продолж. основной программы
+                      00023       ; инициализация
+                      00024       ; решение задачи
+Warning[207]: Found label after column 1. (nachalo)
+0004                  00025         nachalo:        ; это просто метка, чтобы было понятно, куда возвращаться командой goto. Компиля
+                            тор вычислит адрес команды, на которую она указывает (адрес первой команды после метки) и подста
+0004   1586           00026                 bsf PORTB,3     
+0005   200F           00027                         Call pause       ;pause - это метка, которая стоит перед подпрограммой (она указ
+                            ывает на первую команду подпрограммы)
+0006   1186           00028                 bcf PORTB,3
+0007   1506           00029                 bsf PORTB,2     
+0008   200F           00030                         Call pause
+0009   1486           00031                 bsf PORTB,1
+000A   200F           00032                         Call pause
+000B   1106           00033                 bcf PORTB, 2
+000C   1086           00034                 bcf PORTB, 1
+000D   200F           00035                         Call pause
+000E   2804           00036         goto nachalo
+                      00037         
+Warning[207]: Found label after column 1. (pause)
+000F                  00038         pause; примерно 1 секунда=1 Герц
+000F   0000           00039                 nop
+0010   0008           00040         return
+Warning[205]: Found directive in column 1. (end)
+MPASM  5.33                          ASM2.ASM   4-14-2014  9:03:31         PAGE  2
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00041 end
+MPASM  5.33                          ASM2.ASM   4-14-2014  9:03:31         PAGE  3
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+DIGIT                             0000000D
+PORTB                             00000006
+SCRATCH                           0000000C
+TRISB                             00000006
+__16F628A                         00000001
+__DEBUG                           1
+__MPLAB_DEBUGGER_ICD2             1
+nachalo                           00000004
+pause                             0000000F
+start                             00000004
+
+
+MEMORY USAGE MAP ('X' = Used,  '-' = Unused)
+
+0000 : X---XXXXXXXXXXXX X--------------- ---------------- ----------------
+2000 : -------X-------- ---------------- ---------------- ----------------
+
+All other memory blocks unused.
+
+Program Memory Words Used:    14
+Program Memory Words Free:  2034
+
+
+Errors   :     0
+Warnings :    11 reported,     0 suppressed
+Messages :     0 reported,     0 suppressed
+
+

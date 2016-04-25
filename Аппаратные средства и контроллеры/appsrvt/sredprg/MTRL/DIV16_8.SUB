@@ -1,0 +1,40 @@
+
+***************************************************************
+*       divide routine, adapted from math16a.asm
+***************************************************************
+
+
+dvdnd0  equ     working
+DVDND1  equ     working+1           ;Dividend byte 1 (high order)
+
+div16:
+        LDA  #8         ;For Ctr := 8 Downto 1 do
+        STA  CTR
+
+DIV16A  LDA  DVDND1     ;shift dividend right one place
+        ROLA
+        ROL  dvdnd0
+        ROL  DVDND1
+
+        LDA  DVDND1     ;subtract divisor from remainder
+        SUB  DVSOR0
+        STA  DVDND1
+        LDA  DVDND0     ;dividend low bit holds subtract carry}
+        SBC  #0
+        STA  DVDND0
+
+        BRCLR 0,DVDND0,DIV16C   ;if subtract carry = 1
+        LDA  DVDND1             ; Then add divisor back in
+        ADD  DVSOR0
+        STA  DVDND1
+        LDA  DVDND0
+        ADC  #0
+        STA  DVDND0
+        BRA  DIV16D
+DIV16C  BSET 0,DVDND0           ;Else set hi bit := 1
+
+DIV16D  DEC  CTR
+        BNE  DIV16A
+        rts
+
+

@@ -1,0 +1,1005 @@
+
+B16a00.asm             Assembled with CASM08Z  16.05.04  13:33:48  PAGE 1
+
+
+
+ 0000                   1  $Include 'gpgtregs.inc'
+                        2   ; 68HC908GT16/GP32 Equates
+                        3  
+ 0000                   4  PTA    EQU $0000     ; Ports and data direction
+ 0000                   5  PORTA  EQU $0000
+ 0000                   6  PTB    EQU $0001
+ 0000                   7  PORTB  EQU $0001
+ 0000                   8  PTC    EQU $0002
+ 0000                   9  PORTC  EQU $0002
+ 0000                  10  PTD    EQU $0003
+ 0000                  11  PORTD  EQU $0003
+ 0000                  12  DDRA   EQU $0004
+ 0000                  13  DDRB   EQU $0005
+ 0000                  14  DDRC   EQU $0006
+ 0000                  15  DDRD   EQU $0007
+ 0000                  16  PTE    EQU $0008
+ 0000                  17  PORTE  EQU $0008
+                       18  
+ 0000                  19  SCPSC   EQU $0009    ;GT16 Only - Enhanced SCI
+ 0000                  20  SCIACTL EQU $000A    ;GT16 Only
+ 0000                  21  SCIADAT EQU $000B    ;GT16 Only
+                       22  
+ 0000                  23  DDRE    EQU $000C    ; Ports and data direction
+                       24  
+ 0000                  25  PTAPUE  EQU $000D    ; Port pull-up enables
+ 0000                  26  PTCPUE  EQU $000E
+ 0000                  27  PTDPUE  EQU $000F
+                       28  
+ 0000                  29  SPCR    EQU $0010    ; SPI (Syncronous communication
+                                                                             s)
+ 0000                  30  SPSCR   EQU $0011
+ 0000                  31  SPDR    EQU $0012
+                       32  
+ 0000                  33  SCC1    EQU $0013    ; SCI (Asyncronous communicatio
+                                                                            ns)
+ 0000                  34  SCC2    EQU $0014
+ 0000                  35  SCC3    EQU $0015
+ 0000                  36  SCS1    EQU $0016
+ 0000                  37  SCS2    EQU $0017
+ 0000                  38  SCDR    EQU $0018
+ 0000                  39  SCBR    EQU $0019
+                       40  
+ 0000                  41  INTKBSCR EQU $001a   ; Keyboard interrupt control/st
+                                                                           atus
+ 0000                  42  INTKBIER EQU $001b
+                       43  
+ 0000                  44  TBCR    EQU $001c    ; Time base module
+                       45  
+ 0000                  46  INTSCR  EQU $001d    ; IRQ status/control
+                       47  
+ 0000                  48  CONFIG2 EQU $001e    ; System configuration
+ 0000                  49  CONFIG1 EQU $001f
+                       50  
+ 0000                  51  T1SC    EQU $0020    ; Timer 1
+ 0000                  52  T1CNTH  EQU $0021
+ 0000                  53  T1CNTL  EQU $0022
+ 0000                  54  T1MODH  EQU $0023
+ 0000                  55  T1MODL  EQU $0024
+
+
+B16a00.asm             Assembled with CASM08Z  16.05.04  13:33:48  PAGE 2
+
+
+
+ 0000                  56  T1SC0   EQU $0025
+ 0000                  57  T1CH0H  EQU $0026
+ 0000                  58  T1CH0L  EQU $0027
+ 0000                  59  T1SC1   EQU $0028
+ 0000                  60  T1CH1H  EQU $0029
+ 0000                  61  T1CH1L  EQU $002a
+                       62  
+ 0000                  63  T2SC    EQU $002b    ; Timer 2
+ 0000                  64  T2CNTH  EQU $002c
+ 0000                  65  T2CNTL  EQU $002d
+ 0000                  66  T2MODH  EQU $002e
+ 0000                  67  T2MODL  EQU $002f
+ 0000                  68  T2SC0   EQU $0030
+ 0000                  69  T2CH0H  EQU $0031
+ 0000                  70  T2CH0L  EQU $0032
+ 0000                  71  T2SC1   EQU $0033
+ 0000                  72  T2CH1H  EQU $0034
+ 0000                  73  T2CH1L  EQU $0035
+                       74  
+ 0000                  75  PCTL    EQU $0036    ; GP32 Only - Phase lock loop 
+                                                                 (for crystals)
+ 0000                  76  PBWC    EQU $0037    ; GP32 Only
+ 0000                  77  PMSH    EQU $0038    ; GP32 Only
+ 0000                  78  PMSL    EQU $0039    ; GP32 Only
+ 0000                  79  PMRS    EQU $003A    ; GP32 Only
+ 0000                  80  PMDS    EQU $003B    ; GP32 Only
+                       81  
+ 0000                  82  ICGCR   EQU $0036    ; GT16 Only - Internal Clock 
+                                                                      Generator
+ 0000                  83  ICGMR   EQU $0037    ; GT16 Only
+ 0000                  84  ICGTR   EQU $0038    ; GT16 Only
+ 0000                  85  ICGDVR  EQU $0039    ; GT16 Only
+ 0000                  86  ICGDSR  EQU $003A    ; GT16 Only
+ 0000                  87  ICGTR5  EQU $FF80    ; GT16 Only
+ 0000                  88  ICGTR3  EQU $FF81    ; GT16 Only
+                       89  
+ 0000                  90  ADSCR   EQU $003C    ; A to D converter
+ 0000                  91  ADR     EQU $003D
+ 0000                  92  ADCLK   EQU $003E
+                       93  
+ 0000                  94  SBSR    EQU $fe00    ; System integration
+ 0000                  95  SRSR    EQU $fe01
+ 0000                  96  SUBAR   EQU $fe02
+ 0000                  97  SBFCR   EQU $fe03
+                       98  
+ 0000                  99  INT1    EQU $fe04    ; Interrupt status
+ 0000                 100  INT2    EQU $fe05
+ 0000                 101  INT3    EQU $fe06
+                      102  
+ 0000                 103  FLTCR   EQU $fe07    ; Flash test/programming
+ 0000                 104  FLCR    EQU $fe08
+                      105  
+ 0000                 106  BRKH    EQU $fe09    ; Hardware breakpoint
+ 0000                 107  BRKL    EQU $fe0a
+ 0000                 108  BRKSCR  EQU $fe0b
+                      109  
+ 0000                 110  LVISR   EQU $fe0c    ; Low voltage detect
+                      111  
+
+
+B16a00.asm             Assembled with CASM08Z  16.05.04  13:33:48  PAGE 3
+
+
+
+ 0000                 112  FLBPR   EQU $ff80    ; Flash boot protect
+                      113  
+ 0000                 114  COPCTL  EQU $ffff    ; COP (Computer operating 
+                                                              properly) control
+                      115  
+                      116  
+                      117  
+                      118  ; (C)opywrite P&E Microcomputer Systems, 1998, 2002
+                      119  ; http://www.pemicro.com
+                      120  
+                      121  
+ 0000                 122  RAMStart     EQU  $0040
+                      123  
+ 0000                 124  RomStart     EQU  $8000
+                      125  
+ 0000                 126  VectorStart  EQU  $FFDC
+                      127  
+ 0040                 128           org RamStart
+ 0040                 129  i        ds  1
+ 0041                 130  flags    ds  1
+ 0042                 131  time0    ds  1
+ 0043                 132  time1    ds  1
+ 0044                 133  time2    ds  1
+ 0045                 134  timer    ds  1
+ 0046                 135  temprd   ds  2
+ 0048      30313233   136  c0       db  '0123456789ABCDEF'
+           34353637 
+           38394142 
+           43444546 
+ 0058                 137  i_byte   ds  1
+ 0059                 138  o_byte   ds  1
+ 005A                 139  _n       ds  1
+ 005B                 140  loop1    ds  1
+ 005C                 141  loop2    ds  1
+ 005D                 142  i1       ds  1
+ 005E                 143  numlh    ds  2
+ 0060                 144  a        ds  1
+ 0061                 145  tl       ds  1
+ 0062                 146  th       ds  1
+ 0063                 147  thou     ds  1
+ 0064                 148  hund     ds  1
+ 0065                 149  tens     ds  1
+ 0066                 150  ones     ds  1
+ 0067                 151  rab00    ds  1
+ 0068                 152  i2       ds  1
+ 0069                 153  r17      ds  1
+ 006A                 154  r18      ds  1
+ 006B                 155  r25      ds  1
+ 006C                 156  r26      ds  1
+                      157  
+ 8000                 158           org RomStart
+                      159  
+                      160  ****************************************************
+                                                                     **********
+                      161  * Init_SCI - Turns on the asyncronous communications
+                                                                      port    *
+                      162  *            for "transmitting only" at 9600 baud 
+                                                                   N81.       *
+
+
+B16a00.asm             Assembled with CASM08Z  16.05.04  13:33:48  PAGE 4
+
+
+
+                      163  ****************************************************
+                                                                     **********
+                      164  Init_SCI:
+ 8000 [04] 6E0419     165           mov  #$04,SCBR       ; Baud Rate = 9600
+ 8003 [04] 6E4013     166           mov  #$40,SCC1       ; Enable the SCI 
+                                                                     peripheral
+ 8006 [04] 6E0814     167           mov  #$08,SCC2       ; Enable the SCI 
+                                                                    transmitter
+ 8009 [04] 81         168           rts
+                      169  init_lcd:
+ 800A [04] 6E206B     170           mov  #$20,r25
+ 800D [05] CD834A     171           jsr  i_com
+ 8010 [05] CD8336     172           jsr  del
+ 8013 [04] 6E0F6B     173           mov  #$f,r25
+ 8016 [05] CD834A     174           jsr  i_com
+ 8019 [05] CD8336     175           jsr  del
+ 801C [04] 6E206B     176           mov  #$20,r25
+ 801F [05] CD834A     177           jsr  i_com
+ 8022 [05] CD8336     178           jsr  del
+ 8025 [04] 6E016B     179           mov  #$1,r25
+ 8028 [05] CD834A     180           jsr  i_com
+ 802B [05] CD833D     181           jsr  delay
+ 802E [04] 81         182           rts
+                      183  start:
+ 802F [01] 9C         184           rsp
+ 8030 [01] 4F         185           clra                ; Initialize A,X so 
+                                                                 that interrupt
+ 8031 [01] 5F         186           clrx                ; processing doesn't 
+                                                                      stop with
+                      187                               ; uninitialized 
+                                                               register warning
+                      188                               ; when push A,X on the 
+                                                                          stack
+ 8032 [04] ADD6       189           bsr  init_lcd
+ 8034 [04] ADCA       190           bsr  Init_SCI       ; Initialize peripheral
+                                                                              s
+ 8036 [03] 3F00       191           clr  PORTA
+ 8038 [04] 6E0E04     192           mov  #$0e,DDRA
+ 803B [04] 6EF10D     193           mov  #$f1,PTAPUE
+ 803E [03] 3F01       194           clr  PORTB
+ 8040 [03] 3F05       195           clr  DDRB
+ 8042 [03] 3F02       196           clr  PORTC
+ 8044 [04] 6E1F06     197           mov  #$1f,DDRC
+ 8047 [03] 3F03       198           clr  PORTD
+ 8049 [04] 6E0307     199           mov  #$03,DDRD
+ 804C [04] 6E3C0F     200           mov  #$3c,PTDPUE
+ 804F [03] 3F40       201           clr  i
+ 8051 [03] 3F41       202           clr  flags
+ 8053 [05] CD82AA     203           jsr  start_ds
+ 8056 [03] 3F42       204           clr  time0
+ 8058 [03] 3F43       205           clr  time1
+ 805A [03] 3F44       206           clr  time2
+ 805C [03] 3F45       207           clr  timer
+ 805E [04] 6E3620     208           mov  #$36,T1SC     ;Tim1  Stopped i 
+                                                                     Prescaler.
+ 8061 [04] 1B20       209           bclr 5,T1SC        ;zapustili
+ 8063 [02] 9A         210           cli                ; Allow interrupts to 
+                                                                         happen
+
+
+B16a00.asm             Assembled with CASM08Z  16.05.04  13:33:48  PAGE 5
+
+
+
+ 8064 [04] 1B41       211           bclr 5,flags
+ 8066 [04] 1741       212           bclr 3,flags
+ 8068 [04] 6E011E     213           mov  #$1,CONFIG2    ; For GP32 - SCI clock 
+                                                                  source is Bus
+ 806B [05] CD82AA     214           jsr  start_ds
+ 806E [02] A620       215           lda  #$20
+                      216  mg00:
+ 8070 [03] B541       217           bit  flags
+ 8072 [03] 27FC       218           beq  mg00
+ 8074 [05] CD82AA     219           jsr  start_ds
+ 8077 [04] 1B41       220           bclr 5,flags
+ 8079 [02] A620       221           lda  #$20
+                      222  mg01:
+ 807B [03] B541       223           bit  flags
+ 807D [03] 27FC       224           beq  mg01
+                      225  update:
+                      226  
+                      227  
+                      228  
+                      229  mg02:
+ 807F [04] 1541       230           bclr 2,flags
+ 8081 [02] A608       231           lda  #$8
+ 8083 [03] B541       232           bit  flags
+ 8085 [03] 2709       233           beq  mg03
+ 8087 [04] 1E41       234           bset 7,flags
+ 8089 [05] CD819C     235           jsr  conv_t
+ 808C [04] 1F41       236           bclr 7,flags
+ 808E [04] 1741       237           bclr 3,flags
+                      238  mg03:
+ 8090 [02] A620       239           lda  #$20
+ 8092 [03] B541       240           bit  flags
+ 8094 [03] 27E9       241           beq  update
+ 8096 [04] 1B41       242           bclr 5,flags
+ 8098 [04] 1641       243           bset 3,flags
+ 809A [05] CD8285     244           jsr  read_t
+ 809D [05] CD82AA     245           jsr  start_ds
+ 80A0 [02] A4FF       246           and  #$ff
+ 80A2 [03] 26DB       247           bne  update
+ 80A4 [04] 6E065D     248           mov  #6t,i1
+ 80A7 [02] A62D       249           lda  #$2d
+ 80A9 [01] 8C         250           clrh
+ 80AA [02] AE48       251           ldx  #c0
+ 80AC [04] 1E41       252           bset 7,flags
+                      253  mg04:
+ 80AE [02] F7         254           sta  ,x
+ 80AF [01] 5C         255           incx
+ 80B0 [05] 3B5DFB     256           dbnz i1,mg04
+ 80B3 [04] 1F41       257           bclr 7,flags
+ 80B5 [03] 20C8       258           bra  update
+                      259  ****************************************************
+                                                                     **********
+                      260  * T1_ISR - obrabotka Overflow Timera 1              
+                                                                              *
+                      261  ****************************************************
+                                                                     **********
+                      262  t1_isr:
+ 80B7 [02] 8B         263           pshh
+ 80B8 [03] B620       264           lda  T1SC
+
+
+B16a00.asm             Assembled with CASM08Z  16.05.04  13:33:48  PAGE 6
+
+
+
+ 80BA [02] A47F       265           and  #$7f
+ 80BC [03] B720       266           sta  T1SC
+ 80BE [04] 3C42       267           inc  time0
+ 80C0 [02] A664       268           lda  #100t
+ 80C2 [05] 314202     269           cbeq time0,mt100
+ 80C5 [03] 201A       270           bra  l22
+                      271  mt100:
+ 80C7 [03] 3F42       272           clr  time0
+ 80C9 [04] 3C43       273           inc  time1
+ 80CB [04] 3C44       274           inc  time2
+ 80CD [02] A6BB       275           lda  #187t
+ 80CF [05] 314302     276           cbeq time1,mt101
+ 80D2 [03] 2002       277           bra  l18
+                      278  mt101:
+ 80D4 [03] 3F43       279           clr  time1
+                      280  l18:
+ 80D6 [02] A603       281           lda  #3t
+ 80D8 [05] 314402     282           cbeq time2,mt102
+ 80DB [03] 2004       283           bra  l22
+                      284  mt102:
+ 80DD [03] 3F44       285           clr  time2
+ 80DF [04] 1A41       286           bset 5,flags
+                      287  l22:
+                      288  *zdes rabota s LCD i skanirov.klaviaturi
+ 80E1 [05] 0F4102     289           brclr 7,flags,lcd00
+ 80E4 [03] 2023       290           bra  iret
+                      291  lcd00:
+ 80E6 [04] 1203       292           bset 1,PORTD
+ 80E8 [01] 8C         293           clrh
+ 80E9 [03] BE40       294           ldx  i
+ 80EB [03] E648       295           lda  c0,x
+ 80ED [03] 62         296           nsa
+ 80EE [02] A40F       297           and  #$f
+ 80F0 [02] AA10       298           ora  #$10
+ 80F2 [03] B702       299           sta  PORTC
+ 80F4 [04] 1902       300           bclr 4,PORTC
+ 80F6 [03] E648       301           lda  c0,x
+ 80F8 [02] A40F       302           and  #$f
+ 80FA [02] AA10       303           ora  #$10
+ 80FC [03] B702       304           sta  PORTC
+ 80FE [04] 1902       305           bclr 4,PORTC
+ 8100 [04] 3C40       306           inc  i
+ 8102 [05] 314002     307           cbeq i,lcd01
+ 8105 [03] 2002       308           bra  iret
+                      309  lcd01:
+ 8107 [03] 3F40       310           clr  i
+                      311  iret:
+ 8109 [02] 8A         312           pulh
+ 810A [07] 80         313           rti
+                      314  *podprogrammi
+                      315  convert:
+ 810B [03] B75F       316           sta  numlh+1
+ 810D [02] AAF0       317           ora  #$f0
+ 810F [03] B763       318           sta  thou
+ 8111 [03] BB63       319           add  thou
+ 8113 [05] 4E6367     320           mov  thou,rab00
+ 8116 [03] B763       321           sta  thou
+ 8118 [03] B667       322           lda  rab00
+
+
+B16a00.asm             Assembled with CASM08Z  16.05.04  13:33:48  PAGE 7
+
+
+
+ 811A [02] ABE2       323           add  #$e2
+ 811C [03] B764       324           sta  hund
+ 811E [02] AB32       325           add  #$32
+ 8120 [03] B766       326           sta  ones
+ 8122 [03] B65F       327           lda  numlh+1
+ 8124 [02] A40F       328           and  #$f
+ 8126 [03] B767       329           sta  rab00
+ 8128 [03] BB64       330           add  hund
+ 812A [03] BB64       331           add  hund
+ 812C [03] B764       332           sta  hund
+ 812E [03] B667       333           lda  rab00
+ 8130 [03] BB66       334           add  ones
+ 8132 [02] ABE9       335           add  #$e9
+ 8134 [03] B767       336           sta  rab00
+ 8136 [03] B765       337           sta  tens
+ 8138 [03] BB65       338           add  tens
+ 813A [03] BB65       339           add  tens
+ 813C [03] B765       340           sta  tens
+ 813E [03] B65E       341           lda  numlh
+ 8140 [02] A40F       342           and  #$f
+ 8142 [03] B75E       343           sta  numlh
+ 8144 [03] BB65       344           add  tens
+ 8146 [03] B765       345           sta  tens
+ 8148 [03] B65E       346           lda  numlh
+ 814A [03] BB66       347           add  ones
+ 814C [03] B766       348           sta  ones
+ 814E [04] 3965       349           rol  tens
+ 8150 [04] 3966       350           rol  ones
+ 8152 [04] 3366       351           com  ones
+ 8154 [04] 3966       352           rol  ones
+ 8156 [03] B667       353           lda  rab00
+ 8158 [02] A40F       354           and  #$f
+ 815A [03] BB66       355           add  ones
+ 815C [03] B766       356           sta  ones
+ 815E [04] 3963       357           rol  thou
+ 8160 [04] 6E0A67     358           mov  #$a,rab00
+ 8163 [03] B666       359           lda  ones
+                      360  mcv02:
+ 8165 [03] BB67       361           add  rab00
+ 8167 [04] 3A65       362           dec  tens
+ 8169 [03] 24FA       363           bcc  mcv02
+ 816B [03] B766       364           sta  ones
+ 816D [03] B665       365           lda  tens
+                      366  mcv03:
+ 816F [03] BB67       367           add  rab00
+ 8171 [04] 3A64       368           dec  hund
+ 8173 [03] 24FA       369           bcc  mcv03
+ 8175 [03] B765       370           sta  tens
+ 8177 [03] B664       371           lda  hund
+                      372  mcv04:
+ 8179 [03] BB67       373           add  rab00
+ 817B [04] 3A63       374           dec  thou
+ 817D [03] 24FA       375           bcc  mcv04
+ 817F [03] B764       376           sta  hund
+ 8181 [03] B663       377           lda  thou
+                      378  mcv05:
+ 8183 [03] BB67       379           add  rab00
+ 8185 [03] 24FC       380           bcc  mcv05
+
+
+B16a00.asm             Assembled with CASM08Z  16.05.04  13:33:48  PAGE 8
+
+
+
+ 8187 [03] B763       381           sta  thou
+ 8189 [04] 6E0368     382           mov  #3t,i2
+ 818C [01] 8C         383           clrh
+ 818D [02] AE63       384           ldx  #thou
+                      385  mcv00:
+ 818F [02] F6         386           lda  ,x
+ 8190 [02] A40F       387           and  #$f
+ 8192 [03] 2607       388           bne  mcv01
+ 8194 [02] A60A       389           lda  #$a
+ 8196 [02] F7         390           sta  ,x
+ 8197 [01] 5C         391           incx
+ 8198 [05] 3B68F4     392           dbnz i2,mcv00
+                      393  mcv01:
+ 819B [04] 81         394           rts
+                      395  conv_t:
+ 819C [05] 4E465E     396           mov  temprd,numlh
+ 819F [05] 4E475F     397           mov  temprd+1,numlh+1
+ 81A2 [05] 0F471F     398           brclr 7,temprd+1,mcnv00
+ 81A5 [04] 6E0460     399           mov  #$4,a
+                      400  mcnv01:
+ 81A8 [01] 98         401           clc
+ 81A9 [04] 365F       402           ror  numlh+1
+ 81AB [04] 365E       403           ror  numlh
+ 81AD [05] 3B60F8     404           dbnz a,mcnv01
+ 81B0 [02] A6FF       405           lda  #$ff
+ 81B2 [03] B05E       406           sub  numlh
+ 81B4 [03] B762       407           sta  th
+ 81B6 [03] B646       408           lda  temprd
+ 81B8 [02] A40F       409           and  #$f
+ 81BA [03] B75F       410           sta  numlh+1
+ 81BC [02] A6FF       411           lda  #$ff
+ 81BE [03] B05F       412           sub  numlh+1
+ 81C0 [02] A40F       413           and  #$f
+ 81C2 [03] 2012       414           bra  mcnv03
+                      415  mcnv00:
+ 81C4 [04] 6E0460     416           mov  #$4,a
+                      417  mcnv02:
+ 81C7 [01] 98         418           clc
+ 81C8 [04] 365F       419           ror  numlh+1
+ 81CA [04] 365E       420           ror  numlh
+ 81CC [05] 3B60F8     421           dbnz a,mcnv02
+ 81CF [05] 4E5E62     422           mov  numlh,th
+ 81D2 [03] B646       423           lda  temprd
+ 81D4 [02] A40F       424           and  #$f
+                      425  mcnv03:
+ 81D6 [03] B75E       426           sta  numlh
+ 81D8 [03] 3F5F       427           clr  numlh+1
+ 81DA [04] 6E0660     428           mov  #6t,a
+ 81DD [01] 4F         429           clra
+                      430  mcnv04:
+ 81DE [03] BB5E       431           add  numlh
+ 81E0 [05] 3B60FB     432           dbnz a,mcnv04
+ 81E3 [03] B75E       433           sta  numlh
+ 81E5 [05] CD810B     434           jsr  convert
+ 81E8 [02] A60A       435           lda  #$a
+ 81EA [05] 316502     436           cbeq tens,mcnv05
+ 81ED [03] 2002       437           bra  mcnv06
+ 81EF [03] 3F65       438  mcnv05:  clr  tens
+
+
+B16a00.asm             Assembled with CASM08Z  16.05.04  13:33:48  PAGE 9
+
+
+
+ 81F1 [03] B666       439  mcnv06:  lda  ones
+ 81F3 [02] A105       440           cmp  #$5
+ 81F5 [03] 2502       441           bcs  mcnv07
+ 81F7 [04] 3C65       442           inc  tens
+                      443  mcnv07:
+ 81F9 [05] 4E6561     444           mov  tens,tl
+ 81FC [05] 0F4760     445           brclr 7,temprd+1,mcnv08
+                      446  mcnv11:
+ 81FF [02] A663       447           lda  #99t
+ 8201 [03] B062       448           sub  th
+ 8203 [03] 2426       449           bcc  mcnv09
+ 8205 [03] B662       450           lda  th
+ 8207 [05] 4E625E     451           mov  th,numlh
+ 820A [03] 3F5F       452           clr  numlh+1
+ 820C [05] CD810B     453           jsr  convert
+ 820F [04] 6E2048     454           mov  #$20,c0
+ 8212 [04] 6E304D     455           mov  #$30,c0+5
+ 8215 [04] 6E2E4C     456           mov  #$2e,c0+4
+ 8218 [03] B666       457           lda  ones
+ 821A [02] AB30       458           add  #$30
+ 821C [03] B74B       459           sta  c0+3
+ 821E [03] B665       460           lda  tens
+ 8220 [02] AB30       461           add  #$30
+ 8222 [03] B74A       462           sta  c0+2
+ 8224 [03] B664       463           lda  hund
+ 8226 [02] AB30       464           add  #$30
+ 8228 [03] B749       465           sta  c0+1
+ 822A [04] 81         466           rts
+                      467  mcnv09:
+ 822B [03] B661       468           lda  tl
+ 822D [05] 4E615E     469           mov  tl,numlh
+ 8230 [03] 3F5F       470           clr  numlh+1
+ 8232 [05] CD810B     471           jsr  convert
+ 8235 [04] 6E2E4C     472           mov  #$2e,c0+4
+ 8238 [03] B666       473           lda  ones
+ 823A [02] AB30       474           add  #$30
+ 823C [03] B74D       475           sta  c0+5
+ 823E [05] 4E625E     476           mov  th,numlh
+ 8241 [03] 3F5F       477           clr  numlh+1
+ 8243 [05] CD810B     478           jsr  convert
+ 8246 [03] B666       479           lda  ones
+ 8248 [02] AB30       480           add  #$30
+ 824A [03] B74B       481           sta  c0+3
+ 824C [03] B665       482           lda  tens
+ 824E [02] AB30       483           add  #$30
+ 8250 [03] B74A       484           sta  c0+2
+ 8252 [04] 6E2049     485           mov  #$20,c0+1
+ 8255 [04] 6E2048     486           mov  #$20,c0
+ 8258 [05] 0F4703     487           brclr 7,temprd+1,mcnv10
+ 825B [04] 6E2D48     488           mov  #$2d,c0
+                      489  mcnv10:
+ 825E [04] 81         490           rts
+                      491  mcnv08:
+ 825F [02] A613       492           lda  #19t
+ 8261 [03] B062       493           sub  th
+ 8263 [03] 249A       494           bcc  mcnv11
+ 8265 [03] B662       495           lda  th
+ 8267 [05] 4E625E     496           mov  th,numlh
+
+
+B16a00.asm             Assembled with CASM08Z  16.05.04  13:33:48  PAGE 10
+
+
+
+ 826A [03] 3F5F       497           clr  numlh+1
+ 826C [05] CD810B     498           jsr  convert
+ 826F [04] 6E304D     499           mov  #$30,c0+5
+ 8272 [04] 6E2E4C     500           mov  #$2e,c0+4
+ 8275 [04] 6E2D48     501           mov  #$2d,c0
+ 8278 [03] B666       502           lda  ones
+ 827A [02] AB30       503           add  #$30
+ 827C [03] B74A       504           sta  c0+2
+ 827E [03] B665       505           lda  tens
+ 8280 [02] AB30       506           add  #$30
+ 8282 [03] B749       507           sta  c0+1
+ 8284 [04] 81         508           rts
+                      509  read_t:
+ 8285 [04] AD32       510           bsr  init
+ 8287 [04] 6ECC59     511           mov  #$cc,o_byte
+ 828A [04] AD60       512           bsr  out_byte
+ 828C [04] 6EBE59     513           mov  #$be,o_byte
+ 828F [04] AD5B       514           bsr  out_byte
+ 8291 [04] AD35       515           bsr  in_byte
+ 8293 [03] B746       516           sta  temprd
+ 8295 [04] AD31       517           bsr  in_byte
+ 8297 [03] B747       518           sta  temprd+1
+ 8299 [04] AD2D       519           bsr  in_byte
+ 829B [04] AD2B       520           bsr  in_byte
+ 829D [04] AD29       521           bsr  in_byte
+ 829F [04] AD27       522           bsr  in_byte
+ 82A1 [04] AD25       523           bsr  in_byte
+ 82A3 [04] AD23       524           bsr  in_byte
+ 82A5 [04] AD21       525           bsr  in_byte
+ 82A7 [02] A6FF       526           lda  #$ff
+ 82A9 [04] 81         527           rts
+                      528  start_ds:
+ 82AA [04] AD0D       529           bsr  init
+ 82AC [04] 6ECC59     530           mov  #$cc,o_byte
+ 82AF [04] AD3B       531           bsr  out_byte
+ 82B1 [04] 6E4459     532           mov  #$44,o_byte
+ 82B4 [04] AD36       533           bsr  out_byte
+ 82B6 [02] A6FF       534           lda  #$ff
+ 82B8 [04] 81         535           rts
+                      536  init:
+ 82B9 [04] AD4E       537           bsr  pin_hi
+ 82BB [04] AD51       538           bsr  pin_lo
+ 82BD [02] A632       539           lda  #50t
+ 82BF [04] AD68       540           bsr  del_10mk
+ 82C1 [04] AD46       541           bsr  pin_hi
+ 82C3 [02] A632       542           lda  #50t
+ 82C5 [04] AD62       543           bsr  del_10mk
+ 82C7 [04] 81         544           rts
+                      545  in_byte:
+ 82C8 [04] 6E085A     546           mov  #8t,_n
+ 82CB [03] 3F58       547           clr  i_byte
+                      548  min00
+ 82CD [04] AD3F       549           bsr  pin_lo
+ 82CF [01] 9D         550           nop
+ 82D0 [04] AD37       551           bsr  pin_hi
+ 82D2 [01] 9D         552           nop
+ 82D3 [01] 9D         553           nop
+ 82D4 [01] 9D         554           nop
+
+
+B16a00.asm             Assembled with CASM08Z  16.05.04  13:33:48  PAGE 11
+
+
+
+ 82D5 [01] 9D         555           nop
+ 82D6 [01] 9D         556           nop
+ 82D7 [01] 9D         557           nop
+ 82D8 [02] A604       558           lda  #$4
+ 82DA [03] B503       559           bit  PORTD
+ 82DC [01] 98         560           clc
+ 82DD [03] 2701       561           beq  min01
+ 82DF [01] 99         562           sec
+                      563  min01:
+ 82E0 [04] 3658       564           ror  i_byte
+ 82E2 [02] A606       565           lda  #6t
+ 82E4 [04] AD43       566           bsr  del_10mk
+ 82E6 [05] 3B5AE4     567           dbnz _n,min00
+ 82E9 [03] B658       568           lda  i_byte
+ 82EB [04] 81         569           rts
+                      570  out_byte:
+ 82EC [04] 6E085A     571           mov  #8t,_n
+                      572  mou03:
+ 82EF [04] 3659       573           ror  o_byte
+ 82F1 [03] 240C       574           bcc  mou00
+ 82F3 [04] AD19       575           bsr  pin_lo
+ 82F5 [04] AD12       576           bsr  pin_hi
+ 82F7 [02] A606       577           lda  #6t
+ 82F9 [04] AD2E       578           bsr  del_10mk
+                      579  mou02:
+ 82FB [05] 3B5AF1     580           dbnz _n,mou03
+ 82FE [04] 81         581           rts
+ 82FF [04] AD0D       582  mou00:   bsr  pin_lo
+ 8301 [02] A606       583           lda  #6t
+ 8303 [04] AD24       584           bsr  del_10mk
+ 8305 [04] AD02       585           bsr  pin_hi
+ 8307 [03] 20F2       586           bra  mou02
+                      587  pin_hi:
+ 8309 [02] 9B         588           sei
+ 830A [04] 1507       589           bclr 2,DDRD
+ 830C [02] 9A         590           cli
+ 830D [04] 81         591           rts
+                      592  pin_lo:
+ 830E [02] 9B         593           sei
+ 830F [04] 1503       594           bclr 2,PORTD
+ 8311 [04] 1407       595           bset 2,DDRD
+ 8313 [02] 9A         596           cli
+ 8314 [04] 81         597           rts
+                      598  dellng:
+ 8315 [02] A6FA       599           lda  #250t
+                      600  del_n_ms:
+ 8317 [03] B75B       601           sta  loop1
+                      602  outter:
+ 8319 [04] 6E6E5C     603           mov  #110t,loop2
+                      604  inner:
+ 831C [01] 9D         605           nop
+ 831D [01] 9D         606           nop
+ 831E [01] 9D         607           nop
+ 831F [01] 9D         608           nop
+ 8320 [01] 9D         609           nop
+ 8321 [01] 9D         610           nop
+ 8322 [05] 3B5CF7     611           dbnz loop2,inner
+ 8325 [05] 3B5BF1     612           dbnz loop1,outter
+
+
+B16a00.asm             Assembled with CASM08Z  16.05.04  13:33:48  PAGE 12
+
+
+
+ 8328 [04] 81         613           rts
+                      614  del_10mk:
+ 8329 [03] B75B       615           sta  loop1
+                      616  mdel00:
+ 832B [01] 9D         617           nop
+ 832C [01] 9D         618           nop
+ 832D [01] 9D         619           nop
+ 832E [01] 9D         620           nop
+ 832F [01] 9D         621           nop
+ 8330 [01] 9D         622           nop
+ 8331 [01] 9D         623           nop
+ 8332 [05] 3B5BF6     624           dbnz loop1,mdel00
+ 8335 [04] 81         625           rts
+                      626  del:
+ 8336 [04] 6E326A     627           mov  #50t,r18
+                      628  mmdl00:
+ 8339 [05] 3B6AFD     629           dbnz r18,mmdl00
+ 833C [04] 81         630           rts
+                      631  delay:
+ 833D [04] 6E0969     632           mov  #9t,r17
+                      633  mlay00:
+ 8340 [04] 6EFF6A     634           mov  #255t,r18
+                      635  mlay01:
+ 8343 [05] 3B6AFD     636           dbnz r18,mlay01
+ 8346 [05] 3B69F7     637           dbnz r17,mlay00
+ 8349 [04] 81         638           rts
+                      639  i_com:
+ 834A [04] 1103       640           bclr 0,PORTD
+ 834C [04] 1303       641           bclr 1,PORTD
+ 834E [03] B66B       642           lda  r25
+ 8350 [03] 62         643           nsa
+ 8351 [02] A40F       644           and  #$f
+ 8353 [02] AA10       645           ora  #$10
+ 8355 [03] B702       646           sta  PORTC
+ 8357 [04] 1902       647           bclr 4,PORTC
+ 8359 [03] B66B       648           lda  r25
+ 835B [02] A40F       649           and  #$f
+ 835D [02] AA10       650           ora  #$10
+ 835F [03] B702       651           sta  PORTC
+ 8361 [04] 1902       652           bclr 4,PORTC
+ 8363 [04] 81         653           rts
+                      654  
+                      655  ****************************************************
+                                                                     **********
+                      656  * DUMMY_ISR - Dummy Interrupt Service Routine.      
+                                                                              *
+                      657  *             Just does a return from interrupt.    
+                                                                              *
+                      658  ****************************************************
+                                                                     **********
+                      659  dummy_isr:
+                      660  
+ 8364 [07] 80         661           rti           ; return
+                      662  
+                      663  ****************************************************
+                                                                     **********
+                      664  * Vectors - Timer Interrupt Service Routine.        
+                                                                              *
+
+
+B16a00.asm             Assembled with CASM08Z  16.05.04  13:33:48  PAGE 13
+
+
+
+                      665  *             after a RESET.                        
+                                                                              *
+                      666  ****************************************************
+                                                                     **********
+ FFDC                 667           org  VectorStart
+                      668  
+ FFDC      8364       669           dw  dummy_isr    ; Time Base Vector
+ FFDE      8364       670           dw  dummy_isr    ; ADC Conversion Complete
+ FFE0      8364       671           dw  dummy_isr    ; Keyboard Vector
+ FFE2      8364       672           dw  dummy_isr    ; SCI Transmit Vector
+ FFE4      8364       673           dw  dummy_isr    ; SCI Receive Vector
+ FFE6      8364       674           dw  dummy_isr    ; SCI Error Vector
+ FFE8      8364       675           dw  dummy_isr    ; SPI Transmit Vector
+ FFEA      8364       676           dw  dummy_isr    ; SPI Receive Vector
+ FFEC      8364       677           dw  dummy_isr    ; TIM2 Overflow Vector
+ FFEE      8364       678           dw  dummy_isr    ; TIM2 Channel 1 Vector
+ FFF0      8364       679           dw  dummy_isr    ; TIM2 Channel 0 Vector
+ FFF2      80B7       680           dw  t1_isr       ; TIM1 Overflow Vector
+ FFF4      8364       681           dw  dummy_isr    ; TIM1 Channel 1 Vector
+ FFF6      8364       682           dw  dummy_isr    ; TIM1 Channel 0 Vector
+ FFF8      8364       683           dw  dummy_isr    ; ICG/CGM Vector
+ FFFA      8364       684           dw  dummy_isr    ; ~IRQ1 Vector
+ FFFC      8364       685           dw  dummy_isr    ; SWI Vector
+ FFFE      802F       686           dw  start        ; Reset Vector
+                      687  ;programma kursovoj raboti
+                      688  
+                      689   
+
+ Symbol Table 
+
+A                0060
+ADCLK            003E
+ADR              003D
+ADSCR            003C
+BRKH             FE09
+BRKL             FE0A
+BRKSCR           FE0B
+C0               0048
+CONFIG1          001F
+CONFIG2          001E
+CONVERT          810B
+CONV_T           819C
+COPCTL           FFFF
+DDRA             0004
+DDRB             0005
+DDRC             0006
+DDRD             0007
+DDRE             000C
+DEL              8336
+DELAY            833D
+DELLNG           8315
+DEL_10MK         8329
+DEL_N_MS         8317
+DUMMY_ISR        8364
+FLAGS            0041
+FLBPR            FF80
+FLCR             FE08
+FLTCR            FE07
+
+
+B16a00.asm             Assembled with CASM08Z  16.05.04  13:33:48  PAGE 14
+
+
+
+HUND             0064
+I                0040
+I1               005D
+I2               0068
+ICGCR            0036
+ICGDSR           003A
+ICGDVR           0039
+ICGMR            0037
+ICGTR            0038
+ICGTR3           FF81
+ICGTR5           FF80
+INIT             82B9
+INIT_LCD         800A
+INIT_SCI         8000
+INNER            831C
+INT1             FE04
+INT2             FE05
+INT3             FE06
+INTKBIER         001B
+INTKBSCR         001A
+INTSCR           001D
+IN_BYTE          82C8
+IRET             8109
+I_BYTE           0058
+I_COM            834A
+L18              80D6
+L22              80E1
+LCD00            80E6
+LCD01            8107
+LOOP1            005B
+LOOP2            005C
+LVISR            FE0C
+MCNV00           81C4
+MCNV01           81A8
+MCNV02           81C7
+MCNV03           81D6
+MCNV04           81DE
+MCNV05           81EF
+MCNV06           81F1
+MCNV07           81F9
+MCNV08           825F
+MCNV09           822B
+MCNV10           825E
+MCNV11           81FF
+MCV00            818F
+MCV01            819B
+MCV02            8165
+MCV03            816F
+MCV04            8179
+MCV05            8183
+MDEL00           832B
+MG00             8070
+MG01             807B
+MG02             807F
+MG03             8090
+MG04             80AE
+MIN00            82CD
+MIN01            82E0
+
+
+B16a00.asm             Assembled with CASM08Z  16.05.04  13:33:48  PAGE 15
+
+
+
+MLAY00           8340
+MLAY01           8343
+MMDL00           8339
+MOU00            82FF
+MOU02            82FB
+MOU03            82EF
+MT100            80C7
+MT101            80D4
+MT102            80DD
+NUMLH            005E
+ONES             0066
+OUTTER           8319
+OUT_BYTE         82EC
+O_BYTE           0059
+PBWC             0037
+PCTL             0036
+PIN_HI           8309
+PIN_LO           830E
+PMDS             003B
+PMRS             003A
+PMSH             0038
+PMSL             0039
+PORTA            0000
+PORTB            0001
+PORTC            0002
+PORTD            0003
+PORTE            0008
+PTA              0000
+PTAPUE           000D
+PTB              0001
+PTC              0002
+PTCPUE           000E
+PTD              0003
+PTDPUE           000F
+PTE              0008
+R17              0069
+R18              006A
+R25              006B
+R26              006C
+RAB00            0067
+RAMSTART         0040
+READ_T           8285
+ROMSTART         8000
+SBFCR            FE03
+SBSR             FE00
+SCBR             0019
+SCC1             0013
+SCC2             0014
+SCC3             0015
+SCDR             0018
+SCIACTL          000A
+SCIADAT          000B
+SCPSC            0009
+SCS1             0016
+SCS2             0017
+SPCR             0010
+SPDR             0012
+SPSCR            0011
+
+
+B16a00.asm             Assembled with CASM08Z  16.05.04  13:33:48  PAGE 16
+
+
+
+SRSR             FE01
+START            802F
+START_DS         82AA
+SUBAR            FE02
+T1CH0H           0026
+T1CH0L           0027
+T1CH1H           0029
+T1CH1L           002A
+T1CNTH           0021
+T1CNTL           0022
+T1MODH           0023
+T1MODL           0024
+T1SC             0020
+T1SC0            0025
+T1SC1            0028
+T1_ISR           80B7
+T2CH0H           0031
+T2CH0L           0032
+T2CH1H           0034
+T2CH1L           0035
+T2CNTH           002C
+T2CNTL           002D
+T2MODH           002E
+T2MODL           002F
+T2SC             002B
+T2SC0            0030
+T2SC1            0033
+TBCR             001C
+TEMPRD           0046
+TENS             0065
+TH               0062
+THOU             0063
+TIME0            0042
+TIME1            0043
+TIME2            0044
+TIMER            0045
+TL               0061
+UPDATE           807F
+VECTORSTART      FFDC
+_N               005A

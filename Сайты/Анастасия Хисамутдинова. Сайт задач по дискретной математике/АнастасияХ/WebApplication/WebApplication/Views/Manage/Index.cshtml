@@ -1,0 +1,181 @@
+﻿@using WebApplication.Service
+@using Microsoft.AspNet.Identity
+@model WebApplication.Models.IndexViewModel
+
+@{
+    ViewBag.Title = "Управление";
+    var userId = this.User.Identity.GetUserId();
+}
+
+<h2>@ViewBag.Title.</h2>
+
+<p class="text-success">@ViewBag.StatusMessage</p>
+<div>
+    <h4>Изменение параметров учетной записи</h4>
+    <hr />
+<dl class="dl-horizontal">
+    <br />
+    <dt>Пароль:</dt>
+    <dd>
+        [
+        @if (Model.HasPassword)
+        {
+            @Html.ActionLink("Смена пароля", "ChangePassword")
+        }
+        else
+        {
+            @Html.ActionLink("Создать", "SetPassword")
+        }
+        ]
+    </dd>
+    <hr/>
+    <dt>Внешние имена входа:</dt>
+    <dd>
+        @Model.Logins.Count [
+        @Html.ActionLink("Управление", "ManageLogins") ]
+    </dd>
+    <hr/>
+    @*
+            Номера телефонов можно использовать в качестве второго проверочного фактора для системы двухфакторной проверки подлинности.
+             
+             В <a href="http://go.microsoft.com/fwlink/?LinkId=403804">этой статье</a>
+                вы можете узнать, как настроить для этого приложения ASP.NET двухфакторную проверку подлинности с использованием SMS.
+             
+             Настроив двухфакторную проверку подлинности, раскомментируйте следующий блок.
+        *@
+    @*  
+            <dt>Номер телефона:</dt>
+            <dd>
+                @(Model.PhoneNumber ?? "Нет") [
+                @if (Model.PhoneNumber != null)
+                {
+                    @Html.ActionLink("Изменить", "AddPhoneNumber")
+                    @: &nbsp;|&nbsp;
+                    @Html.ActionLink("Удалить", "RemovePhoneNumber")
+                }
+                else
+                {
+                    @Html.ActionLink("Добавить", "AddPhoneNumber")
+                }
+                ]
+            </dd>
+        *@
+    @if (User.IsInRole("Administrator"))
+    {
+        <dt>Двухфакторная проверка подлинности:</dt>
+        <dd>
+            <p>
+                Поставщики двухфакторной проверки подлинности не настроены. В <a href="http://go.microsoft.com/fwlink/?LinkId=403804">этой статье</a>
+                вы можете узнать, как настроить двухфакторную проверку подлинности в этом приложении ASP.NET.
+            </p>
+            @*@if (Model.TwoFactor)
+                {
+                    using (Html.BeginForm("DisableTwoFactorAuthentication", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <text>Включено
+                        <input type="submit" value="Отключить" class="btn btn-link" />
+                        </text>
+                    }
+                }
+                else
+                {
+                    using (Html.BeginForm("EnableTwoFactorAuthentication", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <text>Отключено
+                        <input type="submit" value="Включить" class="btn btn-link" />
+                        </text>
+                    }
+                }*@
+        </dd>
+    }
+    <hr/>
+    <dt>Аватар:</dt>
+    <dd>
+        <p>
+            @{
+                var yes = ApplicationUserDTO.GetUserAvatar(userId).IsEmpty();
+                if (!yes)
+                {
+                    @Html.Raw("<img style='width:100px;' src=\"../../Files/UserAvatarFiles/"
+                              + ApplicationUserDTO.GetUserAvatar(userId) + "\" />")
+                }
+                else
+                {
+                    <h5>Аватар не выбран</h5>
+                }
+            }
+            Загрузить новый?
+            @using (Html.BeginForm("ChangeAvatar", "Manage", FormMethod.Post, new {enctype = "multipart/form-data"}))
+            {
+                <div class="form-group">
+                    <div class="col-md-10">
+                        <input type="file" id="error" class="form-control" name="error" value="Прикрепить файл"/>
+                        <input type="submit" value="Сменить" id="messageButton" class="buttons"/>
+                    </div>
+                </div>
+            }
+        </p>
+    </dd>
+    <hr/>
+    <dt>Карма(статус):</dt>
+    <dd>
+        <p>
+            @ApplicationUserDTO.GetUserKarma(userId)
+        </p>
+    </dd>
+    <hr/>
+    <dt>О себе:</dt>
+    <dd>
+        <p>
+            @ApplicationUserDTO.GetUserInfo(userId)
+        </p>
+        <p>
+            @using (Html.BeginForm("Edit", "Manage"))
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-horizontal">
+                    @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+                    <div class="form-group">
+                        <div class="col-md-10">
+                            <textarea class="form-control" id="UserInfo" name="UserInfo" cols="40" rows="5">Расскажу о себе,</textarea>
+                            <input type="submit" value="Сохранить изменения" class="buttons"/>
+                        </div>
+                    </div>
+
+                </div>
+            }
+        </p>
+    </dd>
+    <hr/>
+
+    <dt>Контакты</dt>
+    <dd>
+        <table class="table">
+            <tr>
+                <th>
+                    Ссылка/номер/адрес
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model.Contacts)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ContactAdress)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Удалить", "Delete", "Contact", new {id = item.Id}, null)
+                    </td>
+                </tr>
+            }
+        </table>
+
+        @Html.Action("CreateContact")
+    </dd>
+
+</dl>
+</div>

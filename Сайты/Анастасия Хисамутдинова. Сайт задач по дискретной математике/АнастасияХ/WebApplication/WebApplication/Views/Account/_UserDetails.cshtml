@@ -1,0 +1,90 @@
+﻿@using WebApplication.Models
+@using WebApplication.Service
+
+@{
+    ApplicationUser item = ViewData["User"] as ApplicationUser;
+}
+
+<div>
+    <hr/>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(modelItem => item.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(modelItem => item.Name)
+        </dd>
+        <br/>
+
+        <dt>Аватар:</dt>
+        <dd>
+            <p>
+                @{
+                    var yes = ApplicationUserDTO.GetUserAvatar(item.Id).IsEmpty();
+                    if (!yes)
+                    {
+                        @Html.Raw("<img style='width:100px;' src=\"../../Files/UserAvatarFiles/"
+                                  + ApplicationUserDTO.GetUserAvatar(item.Id) + "\" />")
+                    }
+                    else
+                    {
+                        <h5>Аватар не выбран</h5>
+                    }
+                }
+            </p>
+        </dd>
+        <br />
+
+        <dt>Карма(статус):</dt>
+        <dd>
+            <p>
+                @ApplicationUserDTO.GetUserKarma(item.Id)
+            </p>
+        </dd>
+        <br />
+
+        <dt>О себе:</dt>
+        <dd>
+            <p>
+                @ApplicationUserDTO.GetUserInfo(item.Id)
+            </p>
+        </dd>
+        <br />
+
+        <dt>
+            @Html.DisplayNameFor(modelItem => item.LastVisition)
+        </dt>
+        <dd>
+            @Html.DisplayFor(modelItem => item.LastVisition)
+        </dd>
+        <br />
+
+        <dt>
+            @Html.DisplayNameFor(modelItem => item.RegistrationDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(modelItem => item.RegistrationDate)
+        </dd>
+        <br />
+
+        @if (item.IsBlocked)
+        {
+            <hr/>
+            <dt>
+                @Html.DisplayNameFor(modelItem => item.BlockDate)
+            </dt>
+            <dd>
+                @Html.DisplayFor(modelItem => item.BlockDate)
+            </dd>
+            <br/>
+
+            <dt>
+                @Html.DisplayNameFor(modelItem => item.BlockReason)
+            </dt>
+            <dd>
+                @Html.DisplayFor(modelItem => item.BlockReason)
+            </dd>
+        }
+    </dl>
+</div>
+

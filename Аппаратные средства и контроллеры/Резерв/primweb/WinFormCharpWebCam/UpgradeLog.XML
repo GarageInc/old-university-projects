@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="WinFormCharpWebCam">
+</Property><Property Name="Файл решения" Value="C:\Users\7\Desktop\Аппаратные средства и контроллеры\Резерв\primweb\WinFormCharpWebCam\WinFormCharpWebCam.sln">
+</Property><Property Name="Date" Value="7 октября 2013 г.">
+</Property><Property Name="Time" Value="9:13:57">
+</Property></Properties><Event ErrorLevel="0" Project="WinFormCharpWebCam" Source="WinFormCharpWebCam.csproj" Description="Успешно создана резервная копия файла проекта: C:\Users\7\Desktop\Аппаратные средства и контроллеры\Резерв\primweb\WinFormCharpWebCam\Backup\WinFormCharpWebCam.csproj">
+</Event><Event ErrorLevel="0" Project="WinFormCharpWebCam" Source="Form1.cs" Description="Успешно создана резервная копия файла C:\Users\7\Desktop\Аппаратные средства и контроллеры\Резерв\primweb\WinFormCharpWebCam\Backup\Form1.cs">
+</Event><Event ErrorLevel="0" Project="WinFormCharpWebCam" Source="Form1.Designer.cs" Description="Успешно создана резервная копия файла C:\Users\7\Desktop\Аппаратные средства и контроллеры\Резерв\primweb\WinFormCharpWebCam\Backup\Form1.Designer.cs">
+</Event><Event ErrorLevel="0" Project="WinFormCharpWebCam" Source="Helper.cs" Description="Успешно создана резервная копия файла C:\Users\7\Desktop\Аппаратные средства и контроллеры\Резерв\primweb\WinFormCharpWebCam\Backup\Helper.cs">
+</Event><Event ErrorLevel="0" Project="WinFormCharpWebCam" Source="Program.cs" Description="Успешно создана резервная копия файла C:\Users\7\Desktop\Аппаратные средства и контроллеры\Резерв\primweb\WinFormCharpWebCam\Backup\Program.cs">
+</Event><Event ErrorLevel="0" Project="WinFormCharpWebCam" Source="Properties\AssemblyInfo.cs" Description="Успешно создана резервная копия файла C:\Users\7\Desktop\Аппаратные средства и контроллеры\Резерв\primweb\WinFormCharpWebCam\Backup\Properties\AssemblyInfo.cs">
+</Event><Event ErrorLevel="0" Project="WinFormCharpWebCam" Source="Properties\Resources.Designer.cs" Description="Успешно создана резервная копия файла C:\Users\7\Desktop\Аппаратные средства и контроллеры\Резерв\primweb\WinFormCharpWebCam\Backup\Properties\Resources.Designer.cs">
+</Event><Event ErrorLevel="0" Project="WinFormCharpWebCam" Source="Properties\Settings.Designer.cs" Description="Успешно создана резервная копия файла C:\Users\7\Desktop\Аппаратные средства и контроллеры\Резерв\primweb\WinFormCharpWebCam\Backup\Properties\Settings.Designer.cs">
+</Event><Event ErrorLevel="0" Project="WinFormCharpWebCam" Source="WebCam.cs" Description="Успешно создана резервная копия файла C:\Users\7\Desktop\Аппаратные средства и контроллеры\Резерв\primweb\WinFormCharpWebCam\Backup\WebCam.cs">
+</Event><Event ErrorLevel="0" Project="WinFormCharpWebCam" Source="Properties\Settings.settings" Description="Успешно создана резервная копия файла C:\Users\7\Desktop\Аппаратные средства и контроллеры\Резерв\primweb\WinFormCharpWebCam\Backup\Properties\Settings.settings">
+</Event><Event ErrorLevel="0" Project="WinFormCharpWebCam" Source="Form1.resx" Description="Успешно создана резервная копия файла C:\Users\7\Desktop\Аппаратные средства и контроллеры\Резерв\primweb\WinFormCharpWebCam\Backup\Form1.resx">
+</Event><Event ErrorLevel="0" Project="WinFormCharpWebCam" Source="Properties\Resources.resx" Description="Успешно создана резервная копия файла C:\Users\7\Desktop\Аппаратные средства и контроллеры\Резерв\primweb\WinFormCharpWebCam\Backup\Properties\Resources.resx">
+</Event><Event ErrorLevel="0" Project="WinFormCharpWebCam" Source="WinFormCharpWebCam.csproj" Description="Проект успешно преобразован">
+</Event><Event ErrorLevel="3" Project="WinFormCharpWebCam" Source="WinFormCharpWebCam.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="WinFormCharpWebCam" Source="WinFormCharpWebCam.csproj" Description="Сканирование завершено: обновление для файлов проекта не требуется.">
+</Event></UpgradeLog>

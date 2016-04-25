@@ -1,0 +1,109 @@
+***********************************************
+* This subroutine reads and writes a byte
+* to the 24c04B EEPROM
+* Copyright 1995 by Brad Stewart
+* Note that you must save ACC and X registers
+* before calling all routines except Write which
+* writes the value in the ACC to the location
+* in ADDR
+***********************************************
+
+*  SDA connected to PB0
+*  SCL connected to PB1
+
+SCL    equ       1
+SDA    equ       0
+
+W_B0   equ       %10100000   ;control byte to write to block 0
+R_B0   equ       %10100001   ;read block 0
+W_B1   equ       %10100010   ;write to block 1
+R_B1   equ       %10100011   ;read block 1
+
+
+
+a2404_start:
+        lda ddrb
+        ora #3
+        sta ddrb
+        lda portb
+        ora #3
+                               ;make both pins output
+        sta portb               ;set scl=1, sda=1
+        bclr SDA,portb          ;now lower data
+        bclr SCL,portb          ;then lower clock
+                                ;on exit, both outputs are low
+        rts
+
+;for stop condition
+a2404_stop:
+        BCLR SDA,PORTB
+        BCLR SCL,PORTB
+        bset SCL,portb          ;now set scl
+        bset SDA,portb          ;then sda
+                                ;on exit, both outputs are high
+        rts
+
+
+;write a byte
+; byte to write is placed in ACC, X register is used
+
+a2404_write:
+                          ;make inputs are low
+        bclr SCL,portb
+        bclr SDA,portb
+        ldx #8
+w2404_10:
+        bclr SCL,portb          ;reset clock pin
+        asla                    ;get next bit into carry
+        bcc w2404_05            ;if zero, set SDA to 0
+        bset SDA,portb          ;else set to one
+        bra w2404_15
+w2404_05:
+        bclr SDA,portb
+w2404_15:
+        bset SCL,portb          ;set clock and write data
+        decx
+        bne w2404_10
+        bclr SCL,portb
+
+;acknowledge
+        bra a2404_ack
+        ;bclr SDA,portb
+        ;bset SDA,ddrb           ;set SDA low
+        ;bset SCL,portb          ;toggle  SCL
+        ;bclr SCL,portb
+        ;rts
+
+************************************************
+*       read a byte from EEROM
+***********************************************
+;result is placed in x register
+a2404_read:
+        bclr SDA,ddrb   ;make data input
+        bclr SCL,portb
+        ldx #8
+r2404_15:
+        bset SCL,portb          ;set clock
+
+        brclr SDA,portb,r2404_20
+        sec
+        bra r2404_25
+r2404_20:
+        clc
+r2404_25:
+        bclr SCL,portb          ;reset clock
+        rola
+        decx
+        bne r2404_15
+        tax                     ;place result in x
+        rts
+
+a2404_ack:
+
+        bclr SDA,portb
+        bset SDA,ddrb           ;set SDA low
+        bset SCL,portb          ;toggle  SCL
+        bclr SCL,portb
+        rts
+
+

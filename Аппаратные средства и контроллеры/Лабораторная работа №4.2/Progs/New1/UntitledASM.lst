@@ -1,0 +1,246 @@
+MPASM  5.33                   UNTITLEDASM.ASM   4-10-2014  0:06:44         PAGE  1
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00001 #include <htc.h>
+                      00001 #ifndef _HTC_H_
+                      00002 #define _HTC_H_
+                      00003 
+                      00004 
+Error[108]  : Illegal character (/)
+                      00005 /* Definitions for _HTC_EDITION_ values */
+                      00006 #define __LITE__ 0
+                      00007 #define __STD__ 1
+                      00008 #define __PRO__ 2
+                      00009 
+Error[108]  : Illegal character (/)
+                      00010 /* common definitions */
+                      00011 
+                      00012 #define ___mkstr1(x)    #x
+                      00013 #define ___mkstr(x)     ___mkstr1(x)
+                      00014 
+                      00015 
+                      00016 
+Error[108]  : Illegal character (/)
+                      00017 /* HI-TECH PICC / PICC-Lite compiler */
+Error[113]  : Symbol not previously defined (defined)
+Error[113]  : Symbol not previously defined (__PICC__)
+Error[112]  : Missing operator
+                      00018 #if     defined(__PICC__) || defined(__PICCLITE__)
+                      00019 #include <pic.h>
+                      00020 #endif
+                      00021 
+Error[108]  : Illegal character (/)
+                      00022 /* HI-TECH PICC-18 compiler */
+Error[113]  : Symbol not previously defined (defined)
+Error[113]  : Symbol not previously defined (__PICC18__)
+Error[112]  : Missing operator
+                      00023 #if     defined(__PICC18__)
+                      00024 #include <pic18.h>
+                      00025 #endif
+                      00026 
+Error[108]  : Illegal character (/)
+                      00027 /* HI-TECH dsPICC compiler */
+Error[113]  : Symbol not previously defined (defined)
+Error[113]  : Symbol not previously defined (__DSPICC__)
+Error[112]  : Missing operator
+                      00028 #if     defined(__DSPICC__)
+                      00029 #include <dspic.h>
+                      00030 #endif
+                      00031 
+Error[108]  : Illegal character (/)
+                      00032 /* HI-TECH HTKC compiler for Holtek MCUs */
+Error[113]  : Symbol not previously defined (defined)
+Error[113]  : Symbol not previously defined (_HTKC_)
+Error[112]  : Missing operator
+                      00033 #if     defined(_HTKC_)
+                      00034 #include <htk.h>
+MPASM  5.33                   UNTITLEDASM.ASM   4-10-2014  0:06:44         PAGE  2
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00035 #endif
+                      00036 
+Error[108]  : Illegal character (/)
+                      00037 /* HI-TECH C for 8051 */
+Error[113]  : Symbol not previously defined (defined)
+Error[113]  : Symbol not previously defined (__HTC8051__)
+Error[112]  : Missing operator
+                      00038 #if     defined(__HTC8051__)
+                      00039 #include <8051.h>
+                      00040 #endif
+                      00041 
+Error[108]  : Illegal character (/)
+                      00042 /* HI-TECH C for MSP430 */
+Error[113]  : Symbol not previously defined (defined)
+Error[113]  : Symbol not previously defined (__MSP430C__)
+Error[112]  : Missing operator
+                      00043 #if     defined(__MSP430C__)
+                      00044 #include <msp430.h>
+                      00045 #endif
+                      00046 
+Error[108]  : Illegal character (/)
+                      00047 /* HI-TECH C for ARM */
+Error[113]  : Symbol not previously defined (defined)
+Error[113]  : Symbol not previously defined (__ARMC__)
+Error[112]  : Missing operator
+                      00048 #if     defined(__ARMC__)
+                      00049 #include <arm.h>
+                      00050 #endif
+                      00051 
+Error[108]  : Illegal character (/)
+                      00052 /* HI-TECH HTFSC compiler for Fortune MCUs */
+Error[113]  : Symbol not previously defined (defined)
+Error[113]  : Symbol not previously defined (__HTFSC__)
+Error[112]  : Missing operator
+                      00053 #if     defined(__HTFSC__) || defined(_HTFSC_)
+                      00054 #include <htfsc.h>
+                      00055 #endif
+                      00056 
+Error[108]  : Illegal character (/)
+                      00057 /* HI-TECH C for PIC32 */
+Error[113]  : Symbol not previously defined (defined)
+Error[113]  : Symbol not previously defined (__PICC32__)
+Error[112]  : Missing operator
+                      00058 #if defined(__PICC32__)
+                      00059 #include <pic32.h>
+                      00060 #endif
+                      00061 
+Error[108]  : Illegal character (/)
+                      00062 /* HI-TECH C for PSOC */
+Error[113]  : Symbol not previously defined (defined)
+Error[113]  : Symbol not previously defined (__HCPSOC__)
+Error[112]  : Missing operator
+                      00063 #if defined(__HCPSOC__)
+MPASM  5.33                   UNTITLEDASM.ASM   4-10-2014  0:06:44         PAGE  3
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00064 #include <psoc.h>
+                      00065 #endif
+                      00066 
+                      00067 #endif
+                      00002 #define _XTAL_FREQ 4000000 
+                      00003 
+                      00004 
+Warning[205]: Found directive in column 1. (__CONFIG)
+Error[113]  : Symbol not previously defined (MCLREN)
+Error[113]  : Symbol not previously defined (UNPROTECT)
+Error[113]  : Symbol not previously defined (WDTDIS)
+0FFF   0000           00005 __CONFIG(MCLREN & UNPROTECT & WDTDIS);;
+                      00006 
+Error[122]  : Illegal opcode (char)
+                      00007 unsigned char i;  
+                      00008 
+Error[122]  : Illegal opcode (main)
+                      00009 void main() {
+Warning[207]: Found label after column 1. (TRISB)
+  00000000            00010     TRISB = 0x00; 
+Warning[207]: Found label after column 1. (PORTB)
+  00000000            00011     PORTB = 0x00; 
+Warning[207]: Found label after column 1. (for)
+Error[108]  : Illegal character (()
+  00000000            00012         for (;;);;)
+Error[108]  : Illegal character ({)
+  00000000            00013         {    
+                      00014 
+Warning[207]: Found label after column 1. (RB0)
+  00000000            00015             RB0 = 0;
+Warning[207]: Found label after column 1. (RB1)
+  00000000            00016             RB1 = 0;
+Warning[207]: Found label after column 1. (RB2)
+  00000000            00017             RB2 = 0;
+Warning[207]: Found label after column 1. (RB3)
+  00000000            00018             RB3 = 0;
+                      00019 
+Warning[207]: Found label after column 1. (__delay_ms)
+Error[108]  : Illegal character (()
+                      00020             __delay_ms(100); ; 
+Warning[207]: Found label after column 1. (__delay_ms)
+Error[108]  : Illegal character (()
+                      00021             __delay_ms(100);;
+Warning[207]: Found label after column 1. (for)
+Error[108]  : Illegal character (()
+                      00022                   for ( i = 0; i < 8; i++) {
+Warning[207]: Found label after column 1. (__delay_ms)
+Error[108]  : Illegal character (()
+                      00023                   __delay_ms(100);;
+Error[108]  : Illegal character (})
+                      00024                   }
+Warning[207]: Found label after column 1. (RB3)
+  00000001            00025             RB3 = 1;
+MPASM  5.33                   UNTITLEDASM.ASM   4-10-2014  0:06:44         PAGE  4
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+Warning[207]: Found label after column 1. (for)
+Error[108]  : Illegal character (()
+  00000001            00026                   for ( i = 0; i < 8; i++) {
+Warning[207]: Found label after column 1. (__delay_ms)
+Error[108]  : Illegal character (()
+  00000001            00027                   __delay_ms(100);;
+Error[108]  : Illegal character (})
+  00000001            00028                   }
+Warning[207]: Found label after column 1. (RB3)
+  00000000            00029             RB3=0;
+Warning[207]: Found label after column 1. (RB2)
+  00000001            00030             RB2=1;
+Warning[207]: Found label after column 1. (for)
+Error[108]  : Illegal character (()
+  00000001            00031                   for ( i = 0; i < 8; i++) {
+Warning[207]: Found label after column 1. (__delay_ms)
+Error[108]  : Illegal character (()
+  00000001            00032                   __delay_ms(100);;
+Error[108]  : Illegal character (})
+  00000001            00033                   }
+Warning[207]: Found label after column 1. (RB2)
+  00000001            00034             RB2=1;
+Warning[207]: Found label after column 1. (for)
+Error[108]  : Illegal character (()
+  00000001            00035                   for ( i = 0; i < 8; i++) {
+Warning[207]: Found label after column 1. (__delay_ms)
+Error[108]  : Illegal character (()
+  00000001            00036                   __delay_ms(100);;
+Error[108]  : Illegal character (})
+  00000001            00037                   }
+Error[108]  : Illegal character (})
+  00000001            00038         }
+                      00039 
+Error[108]  : Illegal character (})
+                      00040 }
+Error[129]  : Expected (END)
+MPASM  5.33                   UNTITLEDASM.ASM   4-10-2014  0:06:44         PAGE  5
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+PORTB                             00000000
+RB0                               00000000
+RB1                               00000000
+RB2                               00000001
+RB3                               00000000
+TRISB                             00000000
+_HTC_H_                           
+_XTAL_FREQ                        4000000
+__16C54                           00000001
+__DEBUG                           1
+__LITE__                          0
+__PRO__                           2
+__STD__                           1
+___mkstr                          ___mkstr1(x)
+___mkstr1                         #x
+
+Errors   :    66
+Warnings :    22 reported,     0 suppressed
+Messages :     0 reported,     0 suppressed
+
+

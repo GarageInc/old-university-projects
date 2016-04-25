@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>EntityFramework.SqlServer.Design</name>
+    </assembly>
+    <members>
+        <member name="M:Microsoft.Data.Entity.SqlServer.Design.Strings.CannotFindForeignKeyMappingForConstraintId(System.Object,System.Object)">
+            <summary>
+            Could not find foreignKeyMapping for ConstraintId {constraintId} for FromColumn {fromColumnId}.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Data.Entity.SqlServer.Design.Strings.CannotFindRelationalPropertyForColumnId(System.Object,System.Object)">
+            <summary>
+            For foreign key ConstraintId {constraintId}, could not find relational property mapped to ToColumn with ColumnId {toColumnId}.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Data.Entity.SqlServer.Design.Strings.CannotFindTableForColumn(System.Object,System.Object)">
+            <summary>
+            For columnId {columnId}. Could not find table with TableId {tableId}. Skipping column.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Data.Entity.SqlServer.Design.Strings.CannotFindToColumnForConstraintId(System.Object,System.Object)">
+            <summary>
+            For foreign key ConstraintId {constraintId}, could not find ToColumn with ColumnId {toColumnId}.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Data.Entity.SqlServer.Design.Strings.CannotFindTypeMappingForColumn(System.Object,System.Object)">
+            <summary>
+            For columnId {columnId}. Could not find type mapping for SQL Server type {sqlServerDataType}. Skipping column.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Data.Entity.SqlServer.Design.Strings.CannotGenerateEntityType(System.Object,System.Object)">
+            <summary>
+            The SQL Server EntityType CodeGenerator is unable to generate EntityType {entityTypeName}. Error message: {errorMessage}.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Data.Entity.SqlServer.Design.Strings.CannotInterpretSqlServerStringLiteral(System.Object)">
+            <summary>
+            Unable to interpret the string {sqlServerStringLiteral} as a SQLServer string literal.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Data.Entity.SqlServer.Design.Strings.DataTypeDoesNotAllowIdentityStrategy(System.Object,System.Object)">
+            <summary>
+            For columnId: {columnId}. The SQL Server data type is {sqlServerDataType}. This will be mapped to CLR type byte which does not allow ValueGenerationStrategy Identity. Generating a matching Property but ignoring the Identity setting.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Data.Entity.SqlServer.Design.Strings.UnableToConvertDefaultValue(System.Object,System.Object,System.Object,System.Object,System.Object)">
+            <summary>
+            For columnId {columnId} unable to convert default value {defaultValue} into type {propertyType}. Will not generate code setting a default value for the property {propertyName} on entity type {entityTypeName}.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Data.Entity.SqlServer.Design.Utilities.SqlServerLiteralUtilities.ConvertSqlServerStringLiteral(System.String)">
+            <summary>
+            Converts a string of the form 'There''s a double single quote in here'
+            (including the outer single quotes) to the string literal
+            "There's a double single quote in here" (not including the double quotes).
+            </summary>
+            <param name="sqlServerStringLiteral"> the string to convert </param>
+            <returns> the converted string, or null if it cannot convert </returns>
+        </member>
+        <member name="M:Microsoft.Data.Entity.SqlServer.Design.Utilities.SqlServerLiteralUtilities.ConvertSqlServerBitLiteral(System.String)">
+            <summary>
+            SQL Server stores the values 0 or 1 in bit columns. Interpret these
+            as false and true respectively.
+            </summary>
+            <param name="sqlServerStringLiteral"> the string to convert </param>
+            <returns>
+            false if the string can be interpreted as 0, true if it can be
+            intrepreted as 1, otherwise null
+            </returns>
+        </member>
+    </members>
+</doc>

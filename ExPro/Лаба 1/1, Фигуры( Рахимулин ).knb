@@ -1,0 +1,197 @@
+<?xml version="1.0"?>
+<BZ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="Вычисление площади фигур" Version="1.14" Author="Рахимулин" IsRelease="false" CreateDate="08.02.2016 13:13:17" UpdateDate="12.03.2016 11:28:44">
+  <Comment />
+  <Rule Name="Выбор фигур">
+    <Act>типфигур=ВЫБОР("Какая фигура?",["квадрат","круг","треугольник"])</Act>
+    <Comment>Выберите фигуру:</Comment>
+    <Enable>true</Enable>
+    <Priority>1</Priority>
+  </Rule>
+  <Rule Name="Выбран квадрат">
+    <Condition>типфигур="квадрат"</Condition>
+    <Act>ст=ВВОД("Сторона равна:")</Act>
+    <Act>S=ст*ст</Act>
+    <Act>ВЫВОД("Площадь квадрта равна:  ",S)</Act>
+    <Act>РИСПРЯМОУГ(10,10,ст,ст,"@RED")</Act>
+    <Enable>true</Enable>
+    <Priority>1</Priority>
+  </Rule>
+  <Rule Name="Выбран круг">
+    <Condition>типфигур="круг"</Condition>
+    <Act>ст=ВВОД("Радиус равен:")</Act>
+    <Act>S=3,14*ст*ст</Act>
+    <Act>ВЫВОД("Площадь круга равна:  ",S)</Act>
+    <Act>РИСКРУГ(150,150,ст,"@RED")</Act>
+    <Comment>Выбран круг</Comment>
+    <Enable>true</Enable>
+    <Priority>1</Priority>
+  </Rule>
+  <Rule Name="Выбран треугольник">
+    <Condition>типфигур="треугольник"</Condition>
+    <Act>вершина1_х=50</Act>
+    <Act>вершина2_х=100</Act>
+    <Act>вершина3_х=150</Act>
+    <Act>вершина1_у=50</Act>
+    <Act>вершина2_у=100</Act>
+    <Act>вершина3_у=150</Act>
+    <Act>ст=1</Act>
+    <Act>ВВОДБЛ("Введите координаты вершин",вершина1_х,вершина1_у,вершина2_х,вершина2_у,вершина3_х,вершина3_у)</Act>
+    <Act>выражение=(вершина1_х-вершина3_х)*(вершина2_у-вершина3_у)-(вершина2_х-вершина3_х)*(вершина1_у-вершина3_у)</Act>
+    <Act>S=0.5*выражение</Act>
+    <Act>ВЫВОД("Площадь треугольника равна: ",S)</Act>
+    <Act>РИСМНОГОУГ(вершина1_х,вершина1_у,вершина2_х,вершина2_у,вершина3_х,вершина3_у,"@RED")</Act>
+    <Comment>Выбран треугольник</Comment>
+    <Enable>true</Enable>
+    <Priority>50</Priority>
+  </Rule>
+  <Variable xsi:type="StringVariable" Name="типфигур" Goal="false">
+    <IsBackward>false</IsBackward>
+    <Goal>False</Goal>
+    <Comment />
+    <StartValue />
+    <Value xsi:type="xsd:string" />
+    <Opredelena>true</Opredelena>
+  </Variable>
+  <Variable xsi:type="Number" Name="ст" Goal="false">
+    <IsBackward>false</IsBackward>
+    <Goal>False</Goal>
+    <Comment />
+    <StartValue>0</StartValue>
+    <Opredelena>false</Opredelena>
+  </Variable>
+  <Variable xsi:type="Number" Name="S" Goal="true">
+    <IsBackward>false</IsBackward>
+    <Goal>True</Goal>
+    <Comment />
+    <StartValue />
+    <Opredelena>false</Opredelena>
+  </Variable>
+  <Variable xsi:type="NoType" Name="вершина1" Goal="false">
+    <IsBackward>false</IsBackward>
+    <Goal>False</Goal>
+    <Comment />
+    <StartValue />
+    <Opredelena>false</Opredelena>
+  </Variable>
+  <Variable xsi:type="NoType" Name="вершина2" Goal="false">
+    <IsBackward>false</IsBackward>
+    <Goal>False</Goal>
+    <Comment />
+    <StartValue />
+    <Opredelena>false</Opredelena>
+  </Variable>
+  <Variable xsi:type="NoType" Name="вершина3" Goal="false">
+    <IsBackward>false</IsBackward>
+    <Goal>False</Goal>
+    <Comment />
+    <StartValue />
+    <Opredelena>false</Opredelena>
+  </Variable>
+  <Variable xsi:type="NoType" Name="вершина1_x" Goal="false">
+    <IsBackward>false</IsBackward>
+    <Goal>False</Goal>
+    <Comment />
+    <StartValue />
+    <Opredelena>false</Opredelena>
+  </Variable>
+  <Variable xsi:type="NoType" Name="вершина2_x" Goal="false">
+    <IsBackward>false</IsBackward>
+    <Goal>False</Goal>
+    <Comment />
+    <StartValue />
+    <Opredelena>false</Opredelena>
+  </Variable>
+  <Variable xsi:type="NoType" Name="вершина3_x" Goal="false">
+    <IsBackward>false</IsBackward>
+    <Goal>False</Goal>
+    <Comment />
+    <StartValue />
+    <Opredelena>false</Opredelena>
+  </Variable>
+  <Variable xsi:type="NoType" Name="вершина1_y" Goal="false">
+    <IsBackward>false</IsBackward>
+    <Goal>False</Goal>
+    <Comment />
+    <StartValue />
+    <Opredelena>false</Opredelena>
+  </Variable>
+  <Variable xsi:type="NoType" Name="вершина2_y" Goal="false">
+    <IsBackward>false</IsBackward>
+    <Goal>False</Goal>
+    <Comment />
+    <StartValue />
+    <Opredelena>false</Opredelena>
+  </Variable>
+  <Variable xsi:type="NoType" Name="вершина3_y" Goal="false">
+    <IsBackward>false</IsBackward>
+    <Goal>False</Goal>
+    <Comment />
+    <StartValue />
+    <Opredelena>false</Opredelena>
+  </Variable>
+  <Variable xsi:type="NoType" Name="s" Goal="false">
+    <IsBackward>false</IsBackward>
+    <Goal>False</Goal>
+    <Comment />
+    <StartValue />
+    <Opredelena>false</Opredelena>
+  </Variable>
+  <Variable xsi:type="NoType" Name="p" Goal="false">
+    <IsBackward>false</IsBackward>
+    <Goal>False</Goal>
+    <Comment />
+    <StartValue />
+    <Opredelena>false</Opredelena>
+  </Variable>
+  <Variable xsi:type="NoType" Name="выражение" Goal="false">
+    <IsBackward>false</IsBackward>
+    <Goal>False</Goal>
+    <Comment />
+    <StartValue />
+    <Opredelena>false</Opredelena>
+  </Variable>
+  <Variable xsi:type="NoType" Name="вершина1_х" Goal="false">
+    <IsBackward>false</IsBackward>
+    <Goal>False</Goal>
+    <Comment />
+    <StartValue />
+    <Opredelena>false</Opredelena>
+  </Variable>
+  <Variable xsi:type="NoType" Name="вершина2_х" Goal="false">
+    <IsBackward>false</IsBackward>
+    <Goal>False</Goal>
+    <Comment />
+    <StartValue />
+    <Opredelena>false</Opredelena>
+  </Variable>
+  <Variable xsi:type="NoType" Name="вершина3_х" Goal="false">
+    <IsBackward>false</IsBackward>
+    <Goal>False</Goal>
+    <Comment />
+    <StartValue />
+    <Opredelena>false</Opredelena>
+  </Variable>
+  <Variable xsi:type="NoType" Name="вершина1_у" Goal="false">
+    <IsBackward>false</IsBackward>
+    <Goal>False</Goal>
+    <Comment />
+    <StartValue />
+    <Opredelena>false</Opredelena>
+  </Variable>
+  <Variable xsi:type="NoType" Name="вершина2_у" Goal="false">
+    <IsBackward>false</IsBackward>
+    <Goal>False</Goal>
+    <Comment />
+    <StartValue />
+    <Opredelena>false</Opredelena>
+  </Variable>
+  <Variable xsi:type="NoType" Name="вершина3_у" Goal="false">
+    <IsBackward>false</IsBackward>
+    <Goal>False</Goal>
+    <Comment />
+    <StartValue />
+    <Opredelena>false</Opredelena>
+  </Variable>
+  <CommentHtml />
+  <SearchStrategy>Прямой вывод</SearchStrategy>
+</BZ>

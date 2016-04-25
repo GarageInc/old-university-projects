@@ -1,0 +1,52 @@
+﻿@using WebApplication.Models
+
+@{
+    var item = ViewData["RequestSolution"] as RequestSolution;
+}
+
+<div>
+    <hr/>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(modelItem => item.Id)
+        </dt>
+        <dd>
+            @Html.DisplayFor(modelItem => item.Id)
+        </dd>
+        
+
+
+        <dt>
+            @Html.DisplayNameFor(modelItem => item.Comment)
+        </dt>
+        <dd>
+            @Html.DisplayFor(modelItem => item.Comment)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(modelItem => item.Document)
+        </dt>
+        <dd>
+            @if (item.Document != null)
+            {
+                <a href="/Document/DownloadRequestSolutionFile/@item.Document.Id"><img src="../../Content/pictures/filey.png" alt='@item.Document.Url' class="tdImage" title="Скачать файл"/></a>
+            }
+            else
+            {
+                <img src="../../Content/pictures/filen.png" alt="без файла изображения" class="tdImage" title="Файл не приложен"/>
+            }
+        </dd>
+
+
+        <dt>
+            @Html.DisplayNameFor(modelItem => item.Author)
+        </dt>
+        <dd>
+            <a class="compItem" href='@Url.Action("Author", "Request", new {id = item.AuthorId}, null)'>
+                @item.Author.Name
+            </a>
+        </dd>
+        
+    </dl>
+</div>
+

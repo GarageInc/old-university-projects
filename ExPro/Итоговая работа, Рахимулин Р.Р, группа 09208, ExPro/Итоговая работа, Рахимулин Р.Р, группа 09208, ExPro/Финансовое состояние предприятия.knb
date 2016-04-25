@@ -1,0 +1,1020 @@
+<?xml version="1.0"?>
+<BZ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="Финансовое состояние предприятия" Version="1.14" Author="Рахимулин Ринат Р., группа 09-208 ИВМиИТ" IsRelease="false" CreateDate="27.03.2016 11:28:50" UpdateDate="27.03.2016 19:23:55">
+  <Comment />
+  <Rule Name="Инициализация основных финансовых показателей">
+    <Act>СС=0</Act>
+    <Act>Б=0</Act>
+    <Act>ЗС=0</Act>
+    <Act>КЗ=0</Act>
+    <Act>ОС=0</Act>
+    <Act>ОбС=0</Act>
+    <Act>КК=0</Act>
+    <Act>ДС=0</Act>
+    <Act>ЦБ=0</Act>
+    <Act>ХП=0</Act>
+    <Act>фп=СостояниеФинансовПредприятия</Act>
+    <Enable>true</Enable>
+    <Priority>50</Priority>
+  </Rule>
+  <Rule Name="Ввод основных финансовых показателей">
+    <Act>ВВОДБЛ("Ввод основных финансовых показателей",СС,Б,ЗС,КЗ)</Act>
+    <Enable>true</Enable>
+    <Priority>50</Priority>
+  </Rule>
+  <Rule Name="Расчет коэффициентов устойчивости и автономии">
+    <Act>фп.Куст=СС/Б</Act>
+    <Act>фп.Кавт=СС/(ЗС+КЗ)</Act>
+    <Act>Кавт=фп.Кавт</Act>
+    <Act>Куст=фп.Куст</Act>
+    <Act>ВЫВОД("Коэффициент устойчивости: ",фп.Куст)</Act>
+    <Act>ВЫВОД("Коэффициент автономии: ",фп.Кавт)</Act>
+    <Enable>true</Enable>
+    <Priority>50</Priority>
+  </Rule>
+  <Rule Name="Ввод основных средств и вложений">
+    <Act>ВВОДБЛ("Основные средства и вложения: ",ОС)</Act>
+    <Enable>true</Enable>
+    <Priority>50</Priority>
+  </Rule>
+  <Rule Name="Расчет собственных оборотных средств">
+    <Act>СОбС=СС-ОС</Act>
+    <Act>ВЫВОД("Собственные оборотные средства: ",СОбС)</Act>
+    <Enable>true</Enable>
+    <Priority>50</Priority>
+  </Rule>
+  <Rule Name="Расчет коэффициента маневренности">
+    <Act>фп.Кман=СОбС/СС</Act>
+    <Act>Кман=фп.Кман</Act>
+    <Act>ВЫВОД("Коэффициент маневренности: ",фп.Кман)</Act>
+    <Enable>true</Enable>
+    <Priority>50</Priority>
+  </Rule>
+  <Rule Name="Ввод оборотных средств и краткосрочных кредитов">
+    <Act>ВВОДБЛ("Ввод оборотных средств и краткосрочных кредитов",ОбС,КК)</Act>
+    <Enable>true</Enable>
+    <Priority>50</Priority>
+  </Rule>
+  <Rule Name="Расчет коэффициента покрытия">
+    <Act>фп.Кпокр=ОбС/(КК+КЗ)</Act>
+    <Act>Кпокр=фп.Кпокр</Act>
+    <Act>ВЫВОД("Коэффициент покрытия: ",фп.Кпокр)</Act>
+    <Enable>true</Enable>
+    <Priority>50</Priority>
+  </Rule>
+  <Rule Name="Ввод денежных средств и ценных бумаг">
+    <Act>ВВОДБЛ("Ввод денежных средств и ценных бумаг",ДС,ЦБ)</Act>
+    <Enable>true</Enable>
+    <Priority>50</Priority>
+  </Rule>
+  <Rule Name="Расчет коэффициента абсолютной ликвидности">
+    <Act>фп.Кабсликв=(ДС+ЦБ)/(КК+КЗ)</Act>
+    <Act>Кабсликв=фп.Кабсликв</Act>
+    <Act>ВЫВОД("Коэффициент абсолютной ликвидности: ",фп.Кабсликв)</Act>
+    <Enable>true</Enable>
+    <Priority>50</Priority>
+  </Rule>
+  <Rule Name="Ввод чистой прибыли предприятия">
+    <Act>ВВОДБЛ("Чистая прибыль предприятия: ",ХП)</Act>
+    <Enable>true</Enable>
+    <Priority>50</Priority>
+  </Rule>
+  <Rule Name="Расчет рентабельности предприятия">
+    <Act>фп.РП=100*ХП/Б</Act>
+    <Act>РП=фп.РП</Act>
+    <Act>ВЫВОД("Рентабельность предприятия: ",фп.РП,"%")</Act>
+    <Enable>true</Enable>
+    <Priority>50</Priority>
+  </Rule>
+  <Rule Name="Расчет рентабельности собственного капитала предприятия ">
+    <Act>фп.РСК=100*ХП/СС</Act>
+    <Act>РСК=фп.РСК</Act>
+    <Act>ВЫВОД("Рентабельноть собственного капитала предприятия: ",фп.РСК,"%")</Act>
+    <Enable>true</Enable>
+    <Priority>50</Priority>
+  </Rule>
+  <Rule Name="Вывод баланса предприятия (в агрегированном виде) ">
+    <Act>докБаланс=ДОКУМЕНТ(ДокументБалансПредприятия)</Act>
+    <Act>ЗАПИСЬ(докБаланс,"Balance.htm")</Act>
+    <Enable>true</Enable>
+    <Priority>50</Priority>
+  </Rule>
+  <Rule Name="Вывод показателей, характеризующих финансовое состояние предприятия">
+    <Act>докФинансСостояние=ДОКУМЕНТ(ДокументФинансовоеСостояние)</Act>
+    <Act>ЗАПИСЬ(докФинансСостояние,"Finance.htm")</Act>
+    <Act>конец=1</Act>
+    <Enable>true</Enable>
+    <Priority>50</Priority>
+  </Rule>
+  <Variable xsi:type="NoType" Name="СС" Goal="false">
+    <IsBackward>false</IsBackward>
+    <Goal>False</Goal>
+    <Comment />
+    <StartValue />
+    <Opredelena>false</Opredelena>
+  </Variable>
+  <Variable xsi:type="NoType" Name="Б" Goal="false">
+    <IsBackward>false</IsBackward>
+    <Goal>False</Goal>
+    <Comment />
+    <StartValue />
+    <Opredelena>false</Opredelena>
+  </Variable>
+  <Variable xsi:type="NoType" Name="ЗС" Goal="false">
+    <IsBackward>false</IsBackward>
+    <Goal>False</Goal>
+    <Comment />
+    <StartValue />
+    <Opredelena>false</Opredelena>
+  </Variable>
+  <Variable xsi:type="NoType" Name="СОбС" Goal="false">
+    <IsBackward>false</IsBackward>
+    <Goal>False</Goal>
+    <Comment />
+    <StartValue />
+    <Opredelena>false</Opredelena>
+  </Variable>
+  <Variable xsi:type="NoType" Name="ОС" Goal="false">
+    <IsBackward>false</IsBackward>
+    <Goal>False</Goal>
+    <Comment />
+    <StartValue />
+    <Opredelena>false</Opredelena>
+  </Variable>
+  <Variable xsi:type="NoType" Name="ОбС" Goal="false">
+    <IsBackward>false</IsBackward>
+    <Goal>False</Goal>
+    <Comment />
+    <StartValue />
+    <Opredelena>false</Opredelena>
+  </Variable>
+  <Variable xsi:type="NoType" Name="КК" Goal="false">
+    <IsBackward>false</IsBackward>
+    <Goal>False</Goal>
+    <Comment />
+    <StartValue />
+    <Opredelena>false</Opredelena>
+  </Variable>
+  <Variable xsi:type="NoType" Name="ДС" Goal="false">
+    <IsBackward>false</IsBackward>
+    <Goal>False</Goal>
+    <Comment />
+    <StartValue />
+    <Opredelena>false</Opredelena>
+  </Variable>
+  <Variable xsi:type="NoType" Name="ЦБ" Goal="false">
+    <IsBackward>false</IsBackward>
+    <Goal>False</Goal>
+    <Comment />
+    <StartValue />
+    <Opredelena>false</Opredelena>
+  </Variable>
+  <Variable xsi:type="NoType" Name="ХП" Goal="false">
+    <IsBackward>false</IsBackward>
+    <Goal>False</Goal>
+    <Comment />
+    <StartValue />
+    <Opredelena>false</Opredelena>
+  </Variable>
+  <Variable xsi:type="NoType" Name="докБаланс" Goal="false">
+    <IsBackward>false</IsBackward>
+    <Goal>False</Goal>
+    <Comment />
+    <StartValue />
+    <Opredelena>false</Opredelena>
+  </Variable>
+  <Variable xsi:type="NoType" Name="докФинансСостояние" Goal="false">
+    <IsBackward>false</IsBackward>
+    <Goal>False</Goal>
+    <Comment />
+    <StartValue />
+    <Opredelena>false</Opredelena>
+  </Variable>
+  <Variable xsi:type="NoType" Name="фп" Goal="false">
+    <IsBackward>false</IsBackward>
+    <Goal>False</Goal>
+    <Comment />
+    <StartValue />
+    <Opredelena>false</Opredelena>
+  </Variable>
+  <Variable xsi:type="Number" Name="Куст" Goal="false">
+    <IsBackward>false</IsBackward>
+    <Goal>False</Goal>
+    <Comment />
+    <StartValue />
+    <Opredelena>false</Opredelena>
+  </Variable>
+  <Variable xsi:type="Number" Name="КЗ" Goal="false">
+    <IsBackward>false</IsBackward>
+    <Goal>False</Goal>
+    <Comment />
+    <StartValue />
+    <Opredelena>false</Opredelena>
+  </Variable>
+  <Variable xsi:type="Number" Name="Кавт" Goal="false">
+    <IsBackward>false</IsBackward>
+    <Goal>False</Goal>
+    <Comment />
+    <StartValue />
+    <Opredelena>false</Opredelena>
+  </Variable>
+  <Variable xsi:type="Number" Name="Кман" Goal="false">
+    <IsBackward>false</IsBackward>
+    <Goal>False</Goal>
+    <Comment />
+    <StartValue />
+    <Opredelena>false</Opredelena>
+  </Variable>
+  <Variable xsi:type="Number" Name="Кпокр" Goal="false">
+    <IsBackward>false</IsBackward>
+    <Goal>False</Goal>
+    <Comment />
+    <StartValue />
+    <Opredelena>false</Opredelena>
+  </Variable>
+  <Variable xsi:type="Number" Name="Кабсликв" Goal="false">
+    <IsBackward>false</IsBackward>
+    <Goal>False</Goal>
+    <Comment />
+    <StartValue />
+    <Opredelena>false</Opredelena>
+  </Variable>
+  <Variable xsi:type="Number" Name="РП" Goal="false">
+    <IsBackward>false</IsBackward>
+    <Goal>False</Goal>
+    <Comment />
+    <StartValue />
+    <Opredelena>false</Opredelena>
+  </Variable>
+  <Variable xsi:type="Number" Name="РСК" Goal="false">
+    <IsBackward>false</IsBackward>
+    <Goal>False</Goal>
+    <Comment />
+    <StartValue />
+    <Opredelena>false</Opredelena>
+  </Variable>
+  <Variable xsi:type="NoType" Name="конец" Goal="true">
+    <IsBackward>false</IsBackward>
+    <Goal>True</Goal>
+    <Comment />
+    <StartValue />
+    <Opredelena>false</Opredelena>
+  </Variable>
+  <CommentHtml />
+  <SearchStrategy>Прямой вывод</SearchStrategy>
+  <Obj Name="СостояниеФинансовПредприятия">
+    <Comment />
+    <BaseClass />
+    <Property>
+      <Variable xsi:type="Number" Name="Кавт" Goal="false">
+        <IsBackward>false</IsBackward>
+        <Goal>False</Goal>
+        <Comment />
+        <StartValue>0</StartValue>
+        <Opredelena>false</Opredelena>
+      </Variable>
+      <Modifiers>Public</Modifiers>
+    </Property>
+    <Property>
+      <Variable xsi:type="Number" Name="Куст" Goal="false">
+        <IsBackward>false</IsBackward>
+        <Goal>False</Goal>
+        <Comment />
+        <StartValue>0</StartValue>
+        <Opredelena>false</Opredelena>
+      </Variable>
+      <Modifiers>Public</Modifiers>
+    </Property>
+    <Property>
+      <Variable xsi:type="Number" Name="Кман" Goal="false">
+        <IsBackward>false</IsBackward>
+        <Goal>False</Goal>
+        <Comment />
+        <StartValue>0</StartValue>
+        <Opredelena>false</Opredelena>
+      </Variable>
+      <Modifiers>Public</Modifiers>
+    </Property>
+    <Property>
+      <Variable xsi:type="Number" Name="Кпокр" Goal="false">
+        <IsBackward>false</IsBackward>
+        <Goal>False</Goal>
+        <Comment />
+        <StartValue>0</StartValue>
+        <Opredelena>false</Opredelena>
+      </Variable>
+      <Modifiers>Public</Modifiers>
+    </Property>
+    <Property>
+      <Variable xsi:type="Number" Name="Кабсликв" Goal="false">
+        <IsBackward>false</IsBackward>
+        <Goal>False</Goal>
+        <Comment />
+        <StartValue>0</StartValue>
+        <Opredelena>false</Opredelena>
+      </Variable>
+      <Modifiers>Public</Modifiers>
+    </Property>
+    <Property>
+      <Variable xsi:type="Number" Name="РП" Goal="false">
+        <IsBackward>false</IsBackward>
+        <Goal>False</Goal>
+        <Comment />
+        <StartValue>0</StartValue>
+        <Opredelena>false</Opredelena>
+      </Variable>
+      <Modifiers>Public</Modifiers>
+    </Property>
+    <Property>
+      <Variable xsi:type="Number" Name="РСК" Goal="false">
+        <IsBackward>false</IsBackward>
+        <Goal>False</Goal>
+        <Comment />
+        <StartValue>0</StartValue>
+        <Opredelena>false</Opredelena>
+      </Variable>
+      <Modifiers>Public</Modifiers>
+    </Property>
+  </Obj>
+  <Templates Name="ДокументБалансПредприятия">
+    <Comment />
+    <Value>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"&gt;
+&lt;HTML&gt;&lt;HEAD&gt;
+&lt;META content="text/html; charset=unicode" http-equiv=Content-Type&gt;
+&lt;META name=GENERATOR content="MSHTML 11.00.9600.17631"&gt;&lt;/HEAD&gt;
+&lt;BODY&gt;
+&lt;P class=a6 
+style="WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(0,0,0); TEXT-ALIGN: justify; FONT: medium 'Times New Roman'; MARGIN: 0cm 0cm 0pt; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 22.7pt; -webkit-text-stroke-width: 0px"&gt;&lt;B&gt;&lt;I&gt;Баланс 
+предприятия (в агрегированном виде) Млн. руб.&lt;/I&gt;&lt;/B&gt;&lt;/P&gt;
+&lt;TABLE class=MsoNormalTable 
+style="FONT-FAMILY: 'Times New Roman'; WORD-SPACING: 0px; BORDER-COLLAPSE: collapse; TEXT-TRANSFORM: none; MARGIN-LEFT: 2pt; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px" 
+cellSpacing=0 cellPadding=0 border=0&gt;
+  &lt;TBODY&gt;
+  &lt;TR style="HEIGHT: 19pt"&gt;
+    &lt;TD 
+    style="BORDER-TOP: windowtext 1pt solid; HEIGHT: 19pt; WIDTH: 112pt; BORDER-BOTTOM-STYLE: none; PADDING-BOTTOM: 0cm; PADDING-TOP: 0cm; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 2pt; BORDER-LEFT: windowtext 1pt solid; PADDING-RIGHT: 2pt" 
+    vAlign=top width=149&gt;
+      &lt;P class=Normalb 
+      style="FONT-SIZE: 10pt; FONT-FAMILY: 'Times New Roman'; TEXT-ALIGN: left; MARGIN: 1pt 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm" 
+      align=left&gt;&lt;SPAN 
+      style="FONT-SIZE: 8pt; FONT-FAMILY: Arial"&gt;Актив&lt;/SPAN&gt;&lt;/P&gt;&lt;/TD&gt;
+    &lt;TD 
+    style="BORDER-TOP: windowtext 1pt solid; HEIGHT: 19pt; WIDTH: 42pt; BORDER-BOTTOM-STYLE: none; PADDING-BOTTOM: 0cm; PADDING-TOP: 0cm; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 2pt; BORDER-LEFT-STYLE: none; PADDING-RIGHT: 2pt" 
+    vAlign=top width=56&gt;
+      &lt;P class=Normalb 
+      style="FONT-SIZE: 10pt; FONT-FAMILY: 'Times New Roman'; TEXT-ALIGN: left; MARGIN: 1pt 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm" 
+      align=left&gt;&amp;nbsp;&lt;/P&gt;
+      &lt;P class=Normalb 
+      style="FONT-SIZE: 10pt; FONT-FAMILY: 'Times New Roman'; TEXT-ALIGN: left; MARGIN: 1pt 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm" 
+      align=left&gt;&amp;nbsp;&lt;/P&gt;&lt;/TD&gt;
+    &lt;TD 
+    style="BORDER-TOP: windowtext 1pt solid; HEIGHT: 19pt; WIDTH: 110pt; BORDER-BOTTOM-STYLE: none; PADDING-BOTTOM: 0cm; PADDING-TOP: 0cm; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 2pt; BORDER-LEFT-STYLE: none; PADDING-RIGHT: 2pt" 
+    vAlign=top width=147&gt;
+      &lt;P class=Normalb 
+      style="FONT-SIZE: 10pt; FONT-FAMILY: 'Times New Roman'; TEXT-ALIGN: left; MARGIN: 1pt 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm" 
+      align=left&gt;&lt;SPAN 
+      style="FONT-SIZE: 8pt; FONT-FAMILY: Arial"&gt;Пассив&lt;/SPAN&gt;&lt;/P&gt;&lt;/TD&gt;
+    &lt;TD 
+    style="BORDER-TOP: windowtext 1pt solid; HEIGHT: 19pt; BORDER-RIGHT: windowtext 1pt solid; WIDTH: 43pt; BORDER-BOTTOM-STYLE: none; PADDING-BOTTOM: 0cm; PADDING-TOP: 0cm; PADDING-LEFT: 2pt; BORDER-LEFT-STYLE: none; PADDING-RIGHT: 2pt" 
+    vAlign=top width=57&gt;
+      &lt;P class=Normalb 
+      style="FONT-SIZE: 10pt; FONT-FAMILY: 'Times New Roman'; TEXT-ALIGN: left; MARGIN: 1pt 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm" 
+      align=left&gt;&amp;nbsp;&lt;/P&gt;
+      &lt;P class=Normalb 
+      style="FONT-SIZE: 10pt; FONT-FAMILY: 'Times New Roman'; TEXT-ALIGN: left; MARGIN: 1pt 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm" 
+      align=left&gt;&amp;nbsp;&lt;/P&gt;&lt;/TD&gt;&lt;/TR&gt;
+  &lt;TR style="HEIGHT: 15pt"&gt;
+    &lt;TD 
+    style="BORDER-TOP-STYLE: none; HEIGHT: 15pt; WIDTH: 112pt; BORDER-BOTTOM-STYLE: none; PADDING-BOTTOM: 0cm; PADDING-TOP: 0cm; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 2pt; BORDER-LEFT: windowtext 1pt solid; PADDING-RIGHT: 2pt" 
+    vAlign=top width=149&gt;
+      &lt;P class=Normalb 
+      style="FONT-SIZE: 10pt; FONT-FAMILY: 'Times New Roman'; TEXT-ALIGN: left; MARGIN: 1pt 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm" 
+      align=left&gt;&lt;SPAN style="FONT-SIZE: 8pt; FONT-FAMILY: Arial"&gt;Основные 
+      средства&lt;/SPAN&gt;&lt;/P&gt;&lt;/TD&gt;
+    &lt;TD 
+    style="HEIGHT: 15pt; WIDTH: 42pt; PADDING-BOTTOM: 0cm; PADDING-TOP: 0cm; PADDING-LEFT: 2pt; PADDING-RIGHT: 2pt" 
+    vAlign=top width=56&gt;
+      &lt;P class=Normalb 
+      style="FONT-SIZE: 10pt; FONT-FAMILY: 'Times New Roman'; TEXT-ALIGN: left; MARGIN: 1pt 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm" 
+      align=left&gt;&lt;SPAN 
+    style="FONT-SIZE: 8pt; FONT-FAMILY: Arial"&gt;#ОС&lt;/SPAN&gt;&lt;/P&gt;&lt;/TD&gt;
+    &lt;TD 
+    style="HEIGHT: 15pt; WIDTH: 110pt; PADDING-BOTTOM: 0cm; PADDING-TOP: 0cm; PADDING-LEFT: 2pt; PADDING-RIGHT: 2pt" 
+    vAlign=top width=147&gt;
+      &lt;P class=Normalb 
+      style="FONT-SIZE: 10pt; FONT-FAMILY: 'Times New Roman'; TEXT-ALIGN: left; MARGIN: 1pt 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm" 
+      align=left&gt;&lt;SPAN style="FONT-SIZE: 8pt; FONT-FAMILY: Arial"&gt;Источники 
+      собствен&amp;shy;&lt;/SPAN&gt;&lt;/P&gt;&lt;/TD&gt;
+    &lt;TD 
+    style="BORDER-TOP-STYLE: none; HEIGHT: 15pt; BORDER-RIGHT: windowtext 1pt solid; WIDTH: 43pt; BORDER-BOTTOM-STYLE: none; PADDING-BOTTOM: 0cm; PADDING-TOP: 0cm; PADDING-LEFT: 2pt; BORDER-LEFT-STYLE: none; PADDING-RIGHT: 2pt" 
+    vAlign=top width=57&gt;
+      &lt;P class=Normalb 
+      style="FONT-SIZE: 10pt; FONT-FAMILY: 'Times New Roman'; TEXT-ALIGN: left; MARGIN: 1pt 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm" 
+      align=left&gt;&lt;SPAN 
+    style="FONT-SIZE: 8pt; FONT-FAMILY: Arial"&gt;#СС&lt;/SPAN&gt;&lt;/P&gt;&lt;/TD&gt;&lt;/TR&gt;
+  &lt;TR style="HEIGHT: 8pt"&gt;
+    &lt;TD 
+    style="BORDER-TOP-STYLE: none; HEIGHT: 8pt; WIDTH: 112pt; BORDER-BOTTOM-STYLE: none; PADDING-BOTTOM: 0cm; PADDING-TOP: 0cm; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 2pt; BORDER-LEFT: windowtext 1pt solid; PADDING-RIGHT: 2pt" 
+    vAlign=top width=149&gt;
+      &lt;P class=Normalb 
+      style="FONT-SIZE: 10pt; FONT-FAMILY: 'Times New Roman'; TEXT-ALIGN: left; MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm" 
+      align=left&gt;&lt;SPAN style="FONT-SIZE: 8pt; FONT-FAMILY: Arial"&gt;и 
+      вложения&lt;/SPAN&gt;&lt;/P&gt;&lt;/TD&gt;
+    &lt;TD 
+    style="HEIGHT: 8pt; WIDTH: 42pt; PADDING-BOTTOM: 0cm; PADDING-TOP: 0cm; PADDING-LEFT: 2pt; PADDING-RIGHT: 2pt" 
+    vAlign=top width=56&gt;
+      &lt;P class=Normalb 
+      style="FONT-SIZE: 10pt; FONT-FAMILY: 'Times New Roman'; TEXT-ALIGN: left; MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm" 
+      align=left&gt;&amp;nbsp;&lt;/P&gt;
+      &lt;P class=Normalb 
+      style="FONT-SIZE: 10pt; FONT-FAMILY: 'Times New Roman'; TEXT-ALIGN: left; MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm" 
+      align=left&gt;&amp;nbsp;&lt;/P&gt;&lt;/TD&gt;
+    &lt;TD 
+    style="HEIGHT: 8pt; WIDTH: 110pt; PADDING-BOTTOM: 0cm; PADDING-TOP: 0cm; PADDING-LEFT: 2pt; PADDING-RIGHT: 2pt" 
+    vAlign=top width=147&gt;
+      &lt;P class=Normalb 
+      style="FONT-SIZE: 10pt; FONT-FAMILY: 'Times New Roman'; TEXT-ALIGN: left; MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm" 
+      align=left&gt;&lt;SPAN style="FONT-SIZE: 8pt; FONT-FAMILY: Arial"&gt;ных 
+      средств&lt;/SPAN&gt;&lt;/P&gt;&lt;/TD&gt;
+    &lt;TD 
+    style="BORDER-TOP-STYLE: none; HEIGHT: 8pt; BORDER-RIGHT: windowtext 1pt solid; WIDTH: 43pt; BORDER-BOTTOM-STYLE: none; PADDING-BOTTOM: 0cm; PADDING-TOP: 0cm; PADDING-LEFT: 2pt; BORDER-LEFT-STYLE: none; PADDING-RIGHT: 2pt" 
+    vAlign=top width=57&gt;
+      &lt;P class=Normalb 
+      style="FONT-SIZE: 10pt; FONT-FAMILY: 'Times New Roman'; TEXT-ALIGN: left; MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm" 
+      align=left&gt;&amp;nbsp;&lt;/P&gt;
+      &lt;P class=Normalb 
+      style="FONT-SIZE: 10pt; FONT-FAMILY: 'Times New Roman'; TEXT-ALIGN: left; MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm" 
+      align=left&gt;&amp;nbsp;&lt;/P&gt;&lt;/TD&gt;&lt;/TR&gt;
+  &lt;TR style="HEIGHT: 10pt"&gt;
+    &lt;TD 
+    style="BORDER-TOP-STYLE: none; HEIGHT: 10pt; WIDTH: 112pt; BORDER-BOTTOM-STYLE: none; PADDING-BOTTOM: 0cm; PADDING-TOP: 0cm; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 2pt; BORDER-LEFT: windowtext 1pt solid; PADDING-RIGHT: 2pt" 
+    vAlign=top width=149&gt;
+      &lt;P class=Normalb 
+      style="FONT-SIZE: 10pt; FONT-FAMILY: 'Times New Roman'; TEXT-ALIGN: left; MARGIN: 1pt 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm" 
+      align=left&gt;&lt;SPAN style="FONT-SIZE: 8pt; FONT-FAMILY: Arial"&gt;Запасы и 
+      затраты&lt;/SPAN&gt;&lt;/P&gt;&lt;/TD&gt;
+    &lt;TD 
+    style="HEIGHT: 10pt; WIDTH: 42pt; PADDING-BOTTOM: 0cm; PADDING-TOP: 0cm; PADDING-LEFT: 2pt; PADDING-RIGHT: 2pt" 
+    vAlign=top width=56&gt;
+      &lt;P class=Normalb 
+      style="FONT-SIZE: 10pt; FONT-FAMILY: 'Times New Roman'; TEXT-ALIGN: left; MARGIN: 1pt 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm" 
+      align=left&gt;&lt;SPAN 
+    style="FONT-SIZE: 8pt; FONT-FAMILY: Arial"&gt;#ОбС&lt;/SPAN&gt;&lt;/P&gt;&lt;/TD&gt;
+    &lt;TD 
+    style="HEIGHT: 10pt; WIDTH: 110pt; PADDING-BOTTOM: 0cm; PADDING-TOP: 0cm; PADDING-LEFT: 2pt; PADDING-RIGHT: 2pt" 
+    vAlign=top width=147&gt;
+      &lt;P class=Normalb 
+      style="FONT-SIZE: 10pt; FONT-FAMILY: 'Times New Roman'; TEXT-ALIGN: left; MARGIN: 1pt 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm" 
+      align=left&gt;&amp;nbsp;&lt;/P&gt;
+      &lt;P class=Normalb 
+      style="FONT-SIZE: 10pt; FONT-FAMILY: 'Times New Roman'; TEXT-ALIGN: left; MARGIN: 1pt 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm" 
+      align=left&gt;&amp;nbsp;&lt;/P&gt;&lt;/TD&gt;
+    &lt;TD 
+    style="BORDER-TOP-STYLE: none; HEIGHT: 10pt; BORDER-RIGHT: windowtext 1pt solid; WIDTH: 43pt; BORDER-BOTTOM-STYLE: none; PADDING-BOTTOM: 0cm; PADDING-TOP: 0cm; PADDING-LEFT: 2pt; BORDER-LEFT-STYLE: none; PADDING-RIGHT: 2pt" 
+    vAlign=top width=57&gt;
+      &lt;P class=Normalb 
+      style="FONT-SIZE: 10pt; FONT-FAMILY: 'Times New Roman'; TEXT-ALIGN: left; MARGIN: 1pt 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm" 
+      align=left&gt;&amp;nbsp;&lt;/P&gt;
+      &lt;P class=Normalb 
+      style="FONT-SIZE: 10pt; FONT-FAMILY: 'Times New Roman'; TEXT-ALIGN: left; MARGIN: 1pt 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm" 
+      align=left&gt;&amp;nbsp;&lt;/P&gt;&lt;/TD&gt;&lt;/TR&gt;
+  &lt;TR style="HEIGHT: 10pt"&gt;
+    &lt;TD 
+    style="BORDER-TOP-STYLE: none; HEIGHT: 10pt; WIDTH: 112pt; BORDER-BOTTOM-STYLE: none; PADDING-BOTTOM: 0cm; PADDING-TOP: 0cm; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 2pt; BORDER-LEFT: windowtext 1pt solid; PADDING-RIGHT: 2pt" 
+    vAlign=top width=149&gt;
+      &lt;P class=Normalb 
+      style="FONT-SIZE: 10pt; FONT-FAMILY: 'Times New Roman'; TEXT-ALIGN: left; MARGIN: 1pt 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm" 
+      align=left&gt;&amp;nbsp;&lt;/P&gt;&lt;/TD&gt;
+    &lt;TD 
+    style="HEIGHT: 10pt; WIDTH: 42pt; PADDING-BOTTOM: 0cm; PADDING-TOP: 0cm; PADDING-LEFT: 2pt; PADDING-RIGHT: 2pt" 
+    vAlign=top width=56&gt;
+      &lt;P class=Normalb 
+      style="FONT-SIZE: 10pt; FONT-FAMILY: 'Times New Roman'; TEXT-ALIGN: left; MARGIN: 1pt 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm" 
+      align=left&gt;&lt;SPAN 
+      style="FONT-SIZE: 8pt; FONT-FAMILY: Arial"&gt;&lt;/SPAN&gt;&amp;nbsp;&lt;/P&gt;&lt;/TD&gt;
+    &lt;TD 
+    style="HEIGHT: 10pt; WIDTH: 110pt; PADDING-BOTTOM: 0cm; PADDING-TOP: 0cm; PADDING-LEFT: 2pt; PADDING-RIGHT: 2pt" 
+    vAlign=top width=147&gt;
+      &lt;P class=Normalb 
+      style="FONT-SIZE: 10pt; FONT-FAMILY: 'Times New Roman'; TEXT-ALIGN: left; MARGIN: 1pt 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm" 
+      align=left&gt;&lt;SPAN style="FONT-SIZE: 8pt; FONT-FAMILY: Arial"&gt;Кредиты и 
+      другие&lt;/SPAN&gt;&lt;/P&gt;&lt;/TD&gt;
+    &lt;TD 
+    style="BORDER-TOP-STYLE: none; HEIGHT: 10pt; BORDER-RIGHT: windowtext 1pt solid; WIDTH: 43pt; BORDER-BOTTOM-STYLE: none; PADDING-BOTTOM: 0cm; PADDING-TOP: 0cm; PADDING-LEFT: 2pt; BORDER-LEFT-STYLE: none; PADDING-RIGHT: 2pt" 
+    vAlign=top width=57&gt;
+      &lt;P class=Normalb 
+      style="FONT-SIZE: 10pt; FONT-FAMILY: 'Times New Roman'; TEXT-ALIGN: left; MARGIN: 1pt 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm" 
+      align=left&gt;&lt;SPAN 
+      style="FONT-SIZE: 8pt; FONT-FAMILY: Arial"&gt;#ЗС+#КЗ&lt;/SPAN&gt;&lt;/P&gt;&lt;/TD&gt;&lt;/TR&gt;
+  &lt;TR style="HEIGHT: 11pt"&gt;
+    &lt;TD 
+    style="BORDER-TOP-STYLE: none; HEIGHT: 11pt; WIDTH: 112pt; BORDER-BOTTOM-STYLE: none; PADDING-BOTTOM: 0cm; PADDING-TOP: 0cm; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 2pt; BORDER-LEFT: windowtext 1pt solid; PADDING-RIGHT: 2pt" 
+    vAlign=top width=149&gt;
+      &lt;P class=Normalb 
+      style="FONT-SIZE: 10pt; FONT-FAMILY: 'Times New Roman'; TEXT-ALIGN: left; MARGIN: 1pt 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm" 
+      align=left&gt;&lt;SPAN 
+      style="FONT-SIZE: 8pt; FONT-FAMILY: Arial"&gt;&lt;/SPAN&gt;&amp;nbsp;&lt;/P&gt;&lt;/TD&gt;
+    &lt;TD 
+    style="HEIGHT: 11pt; WIDTH: 42pt; PADDING-BOTTOM: 0cm; PADDING-TOP: 0cm; PADDING-LEFT: 2pt; PADDING-RIGHT: 2pt" 
+    vAlign=top width=56&gt;
+      &lt;P class=Normalb 
+      style="FONT-SIZE: 10pt; FONT-FAMILY: 'Times New Roman'; TEXT-ALIGN: left; MARGIN: 1pt 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm" 
+      align=left&gt;&amp;nbsp;&lt;/P&gt;
+      &lt;P class=Normalb 
+      style="FONT-SIZE: 10pt; FONT-FAMILY: 'Times New Roman'; TEXT-ALIGN: left; MARGIN: 1pt 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm" 
+      align=left&gt;&amp;nbsp;&lt;/P&gt;&lt;/TD&gt;
+    &lt;TD 
+    style="HEIGHT: 11pt; WIDTH: 110pt; PADDING-BOTTOM: 0cm; PADDING-TOP: 0cm; PADDING-LEFT: 2pt; PADDING-RIGHT: 2pt" 
+    vAlign=top width=147&gt;
+      &lt;P class=Normalb 
+      style="FONT-SIZE: 10pt; FONT-FAMILY: 'Times New Roman'; TEXT-ALIGN: left; MARGIN: 1pt 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm" 
+      align=left&gt;&lt;SPAN style="FONT-SIZE: 8pt; FONT-FAMILY: Arial"&gt;заемные 
+      средства&lt;/SPAN&gt;&lt;/P&gt;&lt;/TD&gt;
+    &lt;TD 
+    style="BORDER-TOP-STYLE: none; HEIGHT: 11pt; BORDER-RIGHT: windowtext 1pt solid; WIDTH: 43pt; BORDER-BOTTOM-STYLE: none; PADDING-BOTTOM: 0cm; PADDING-TOP: 0cm; PADDING-LEFT: 2pt; BORDER-LEFT-STYLE: none; PADDING-RIGHT: 2pt" 
+    vAlign=top width=57&gt;
+      &lt;P class=Normalb 
+      style="FONT-SIZE: 10pt; FONT-FAMILY: 'Times New Roman'; TEXT-ALIGN: left; MARGIN: 1pt 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm" 
+      align=left&gt;&amp;nbsp;&lt;/P&gt;
+      &lt;P class=Normalb 
+      style="FONT-SIZE: 10pt; FONT-FAMILY: 'Times New Roman'; TEXT-ALIGN: left; MARGIN: 1pt 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm" 
+      align=left&gt;&amp;nbsp;&lt;/P&gt;&lt;/TD&gt;&lt;/TR&gt;
+  &lt;TR style="HEIGHT: 7pt"&gt;
+    &lt;TD 
+    style="BORDER-TOP-STYLE: none; HEIGHT: 7pt; WIDTH: 112pt; BORDER-BOTTOM-STYLE: none; PADDING-BOTTOM: 0cm; PADDING-TOP: 0cm; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 2pt; BORDER-LEFT: windowtext 1pt solid; PADDING-RIGHT: 2pt" 
+    vAlign=top width=149&gt;
+      &lt;P class=Normalb 
+      style="FONT-SIZE: 10pt; FONT-FAMILY: 'Times New Roman'; TEXT-ALIGN: left; MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm" 
+      align=left&gt;&lt;SPAN 
+      style="FONT-SIZE: 8pt; FONT-FAMILY: Arial"&gt;&lt;/SPAN&gt;&amp;nbsp;&lt;/P&gt;&lt;/TD&gt;
+    &lt;TD 
+    style="HEIGHT: 7pt; WIDTH: 42pt; PADDING-BOTTOM: 0cm; PADDING-TOP: 0cm; PADDING-LEFT: 2pt; PADDING-RIGHT: 2pt" 
+    vAlign=top width=56&gt;
+      &lt;P class=Normalb 
+      style="FONT-SIZE: 10pt; FONT-FAMILY: 'Times New Roman'; TEXT-ALIGN: left; MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm" 
+      align=left&gt;&amp;nbsp;&lt;/P&gt;
+      &lt;P class=Normalb 
+      style="FONT-SIZE: 10pt; FONT-FAMILY: 'Times New Roman'; TEXT-ALIGN: left; MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm" 
+      align=left&gt;&amp;nbsp;&lt;/P&gt;&lt;/TD&gt;
+    &lt;TD 
+    style="HEIGHT: 7pt; WIDTH: 110pt; PADDING-BOTTOM: 0cm; PADDING-TOP: 0cm; PADDING-LEFT: 2pt; PADDING-RIGHT: 2pt" 
+    vAlign=top width=147&gt;
+      &lt;P class=Normalb 
+      style="FONT-SIZE: 10pt; FONT-FAMILY: 'Times New Roman'; TEXT-ALIGN: left; MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm" 
+      align=left&gt;&amp;nbsp;&lt;/P&gt;
+      &lt;P class=Normalb 
+      style="FONT-SIZE: 10pt; FONT-FAMILY: 'Times New Roman'; TEXT-ALIGN: left; MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm" 
+      align=left&gt;&amp;nbsp;&lt;/P&gt;&lt;/TD&gt;
+    &lt;TD 
+    style="BORDER-TOP-STYLE: none; HEIGHT: 7pt; BORDER-RIGHT: windowtext 1pt solid; WIDTH: 43pt; BORDER-BOTTOM-STYLE: none; PADDING-BOTTOM: 0cm; PADDING-TOP: 0cm; PADDING-LEFT: 2pt; BORDER-LEFT-STYLE: none; PADDING-RIGHT: 2pt" 
+    vAlign=top width=57&gt;
+      &lt;P class=Normalb 
+      style="FONT-SIZE: 10pt; FONT-FAMILY: 'Times New Roman'; TEXT-ALIGN: left; MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm" 
+      align=left&gt;&amp;nbsp;&lt;/P&gt;
+      &lt;P class=Normalb 
+      style="FONT-SIZE: 10pt; FONT-FAMILY: 'Times New Roman'; TEXT-ALIGN: left; MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm" 
+      align=left&gt;&amp;nbsp;&lt;/P&gt;&lt;/TD&gt;&lt;/TR&gt;
+  &lt;TR style="HEIGHT: 8pt"&gt;
+    &lt;TD 
+    style="BORDER-TOP-STYLE: none; HEIGHT: 8pt; WIDTH: 112pt; BORDER-BOTTOM-STYLE: none; PADDING-BOTTOM: 0cm; PADDING-TOP: 0cm; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 2pt; BORDER-LEFT: windowtext 1pt solid; PADDING-RIGHT: 2pt" 
+    vAlign=top width=149&gt;
+      &lt;P class=Normalb 
+      style="FONT-SIZE: 10pt; FONT-FAMILY: 'Times New Roman'; TEXT-ALIGN: left; MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm" 
+      align=left&gt;&lt;SPAN 
+      style="FONT-SIZE: 8pt; FONT-FAMILY: Arial"&gt;&lt;/SPAN&gt;&amp;nbsp;&lt;/P&gt;&lt;/TD&gt;
+    &lt;TD 
+    style="HEIGHT: 8pt; WIDTH: 42pt; PADDING-BOTTOM: 0cm; PADDING-TOP: 0cm; PADDING-LEFT: 2pt; PADDING-RIGHT: 2pt" 
+    vAlign=top width=56&gt;
+      &lt;P class=Normalb 
+      style="FONT-SIZE: 10pt; FONT-FAMILY: 'Times New Roman'; TEXT-ALIGN: left; MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm" 
+      align=left&gt;&amp;nbsp;&lt;/P&gt;
+      &lt;P class=Normalb 
+      style="FONT-SIZE: 10pt; FONT-FAMILY: 'Times New Roman'; TEXT-ALIGN: left; MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm" 
+      align=left&gt;&amp;nbsp;&lt;/P&gt;&lt;/TD&gt;
+    &lt;TD 
+    style="HEIGHT: 8pt; WIDTH: 110pt; PADDING-BOTTOM: 0cm; PADDING-TOP: 0cm; PADDING-LEFT: 2pt; PADDING-RIGHT: 2pt" 
+    vAlign=top width=147&gt;
+      &lt;P class=Normalb 
+      style="FONT-SIZE: 10pt; FONT-FAMILY: 'Times New Roman'; TEXT-ALIGN: left; MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm" 
+      align=left&gt;&lt;SPAN style="FONT-SIZE: 8pt; FONT-FAMILY: Arial"&gt;В том 
+      числе:&lt;/SPAN&gt;&lt;/P&gt;&lt;/TD&gt;
+    &lt;TD 
+    style="BORDER-TOP-STYLE: none; HEIGHT: 8pt; BORDER-RIGHT: windowtext 1pt solid; WIDTH: 43pt; BORDER-BOTTOM-STYLE: none; PADDING-BOTTOM: 0cm; PADDING-TOP: 0cm; PADDING-LEFT: 2pt; BORDER-LEFT-STYLE: none; PADDING-RIGHT: 2pt" 
+    vAlign=top width=57&gt;
+      &lt;P class=Normalb 
+      style="FONT-SIZE: 10pt; FONT-FAMILY: 'Times New Roman'; TEXT-ALIGN: left; MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm" 
+      align=left&gt;&amp;nbsp;&lt;/P&gt;
+      &lt;P class=Normalb 
+      style="FONT-SIZE: 10pt; FONT-FAMILY: 'Times New Roman'; TEXT-ALIGN: left; MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm" 
+      align=left&gt;&amp;nbsp;&lt;/P&gt;&lt;/TD&gt;&lt;/TR&gt;
+  &lt;TR style="HEIGHT: 11pt"&gt;
+    &lt;TD 
+    style="BORDER-TOP-STYLE: none; HEIGHT: 11pt; WIDTH: 112pt; BORDER-BOTTOM-STYLE: none; PADDING-BOTTOM: 0cm; PADDING-TOP: 0cm; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 2pt; BORDER-LEFT: windowtext 1pt solid; PADDING-RIGHT: 2pt" 
+    vAlign=top width=149&gt;
+      &lt;P class=Normalb 
+      style="FONT-SIZE: 10pt; FONT-FAMILY: 'Times New Roman'; TEXT-ALIGN: left; MARGIN: 1pt 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm" 
+      align=left&gt;&lt;SPAN 
+      style="FONT-SIZE: 8pt; FONT-FAMILY: Arial"&gt;&lt;/SPAN&gt;&amp;nbsp;&lt;/P&gt;&lt;/TD&gt;
+    &lt;TD 
+    style="HEIGHT: 11pt; WIDTH: 42pt; PADDING-BOTTOM: 0cm; PADDING-TOP: 0cm; PADDING-LEFT: 2pt; PADDING-RIGHT: 2pt" 
+    vAlign=top width=56&gt;
+      &lt;P class=Normalb 
+      style="FONT-SIZE: 10pt; FONT-FAMILY: 'Times New Roman'; TEXT-ALIGN: left; MARGIN: 1pt 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm" 
+      align=left&gt;&lt;SPAN 
+      style="FONT-SIZE: 8pt; FONT-FAMILY: Arial"&gt;&lt;/SPAN&gt;&amp;nbsp;&lt;/P&gt;&lt;/TD&gt;
+    &lt;TD 
+    style="HEIGHT: 11pt; WIDTH: 110pt; PADDING-BOTTOM: 0cm; PADDING-TOP: 0cm; PADDING-LEFT: 2pt; PADDING-RIGHT: 2pt" 
+    vAlign=top width=147&gt;
+      &lt;P class=Normalb 
+      style="FONT-SIZE: 10pt; FONT-FAMILY: 'Times New Roman'; TEXT-ALIGN: left; MARGIN: 1pt 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm" 
+      align=left&gt;&lt;SPAN style="FONT-SIZE: 8pt; FONT-FAMILY: Arial"&gt;краткосрочные 
+      кре&amp;shy;&lt;/SPAN&gt;&lt;/P&gt;&lt;/TD&gt;
+    &lt;TD 
+    style="BORDER-TOP-STYLE: none; HEIGHT: 11pt; BORDER-RIGHT: windowtext 1pt solid; WIDTH: 43pt; BORDER-BOTTOM-STYLE: none; PADDING-BOTTOM: 0cm; PADDING-TOP: 0cm; PADDING-LEFT: 2pt; BORDER-LEFT-STYLE: none; PADDING-RIGHT: 2pt" 
+    vAlign=top width=57&gt;
+      &lt;P class=Normalb 
+      style="FONT-SIZE: 10pt; FONT-FAMILY: 'Times New Roman'; TEXT-ALIGN: left; MARGIN: 1pt 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm" 
+      align=left&gt;&lt;SPAN 
+      style="FONT-SIZE: 8pt; FONT-FAMILY: Arial"&gt;#КК+#ЗС&lt;/SPAN&gt;&lt;/P&gt;&lt;/TD&gt;&lt;/TR&gt;
+  &lt;TR style="HEIGHT: 10pt"&gt;
+    &lt;TD 
+    style="BORDER-TOP-STYLE: none; HEIGHT: 10pt; WIDTH: 112pt; BORDER-BOTTOM-STYLE: none; PADDING-BOTTOM: 0cm; PADDING-TOP: 0cm; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 2pt; BORDER-LEFT: windowtext 1pt solid; PADDING-RIGHT: 2pt" 
+    vAlign=top width=149&gt;
+      &lt;P class=Normalb 
+      style="FONT-SIZE: 10pt; FONT-FAMILY: 'Times New Roman'; TEXT-ALIGN: left; MARGIN: 1pt 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm" 
+      align=left&gt;&lt;SPAN 
+      style="FONT-SIZE: 8pt; FONT-FAMILY: Arial"&gt;&lt;/SPAN&gt;&amp;nbsp;&lt;/P&gt;&lt;/TD&gt;
+    &lt;TD 
+    style="HEIGHT: 10pt; WIDTH: 42pt; PADDING-BOTTOM: 0cm; PADDING-TOP: 0cm; PADDING-LEFT: 2pt; PADDING-RIGHT: 2pt" 
+    vAlign=top width=56&gt;
+      &lt;P class=Normalb 
+      style="FONT-SIZE: 10pt; FONT-FAMILY: 'Times New Roman'; TEXT-ALIGN: left; MARGIN: 1pt 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm" 
+      align=left&gt;&amp;nbsp;&lt;/P&gt;
+      &lt;P class=Normalb 
+      style="FONT-SIZE: 10pt; FONT-FAMILY: 'Times New Roman'; TEXT-ALIGN: left; MARGIN: 1pt 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm" 
+      align=left&gt;&amp;nbsp;&lt;/P&gt;&lt;/TD&gt;
+    &lt;TD 
+    style="HEIGHT: 10pt; WIDTH: 110pt; PADDING-BOTTOM: 0cm; PADDING-TOP: 0cm; PADDING-LEFT: 2pt; PADDING-RIGHT: 2pt" 
+    vAlign=top width=147&gt;
+      &lt;P class=Normalb 
+      style="FONT-SIZE: 10pt; FONT-FAMILY: 'Times New Roman'; TEXT-ALIGN: left; MARGIN: 1pt 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm" 
+      align=left&gt;&lt;SPAN style="FONT-SIZE: 8pt; FONT-FAMILY: Arial"&gt;диты и 
+      заемные&lt;/SPAN&gt;&lt;/P&gt;&lt;/TD&gt;
+    &lt;TD 
+    style="BORDER-TOP-STYLE: none; HEIGHT: 10pt; BORDER-RIGHT: windowtext 1pt solid; WIDTH: 43pt; BORDER-BOTTOM-STYLE: none; PADDING-BOTTOM: 0cm; PADDING-TOP: 0cm; PADDING-LEFT: 2pt; BORDER-LEFT-STYLE: none; PADDING-RIGHT: 2pt" 
+    vAlign=top width=57&gt;
+      &lt;P class=Normalb 
+      style="FONT-SIZE: 10pt; FONT-FAMILY: 'Times New Roman'; TEXT-ALIGN: left; MARGIN: 1pt 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm" 
+      align=left&gt;&amp;nbsp;&lt;/P&gt;
+      &lt;P class=Normalb 
+      style="FONT-SIZE: 10pt; FONT-FAMILY: 'Times New Roman'; TEXT-ALIGN: left; MARGIN: 1pt 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm" 
+      align=left&gt;&amp;nbsp;&lt;/P&gt;&lt;/TD&gt;&lt;/TR&gt;
+  &lt;TR style="HEIGHT: 7pt"&gt;
+    &lt;TD 
+    style="BORDER-TOP-STYLE: none; HEIGHT: 7pt; WIDTH: 112pt; BORDER-BOTTOM-STYLE: none; PADDING-BOTTOM: 0cm; PADDING-TOP: 0cm; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 2pt; BORDER-LEFT: windowtext 1pt solid; PADDING-RIGHT: 2pt" 
+    vAlign=top width=149&gt;
+      &lt;P class=Normalb 
+      style="FONT-SIZE: 10pt; FONT-FAMILY: 'Times New Roman'; TEXT-ALIGN: left; MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm" 
+      align=left&gt;&lt;SPAN 
+      style="FONT-SIZE: 8pt; FONT-FAMILY: Arial"&gt;&lt;/SPAN&gt;&amp;nbsp;&lt;/P&gt;&lt;/TD&gt;
+    &lt;TD 
+    style="HEIGHT: 7pt; WIDTH: 42pt; PADDING-BOTTOM: 0cm; PADDING-TOP: 0cm; PADDING-LEFT: 2pt; PADDING-RIGHT: 2pt" 
+    vAlign=top width=56&gt;
+      &lt;P class=Normalb 
+      style="FONT-SIZE: 10pt; FONT-FAMILY: 'Times New Roman'; TEXT-ALIGN: left; MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm" 
+      align=left&gt;&amp;nbsp;&lt;/P&gt;
+      &lt;P class=Normalb 
+      style="FONT-SIZE: 10pt; FONT-FAMILY: 'Times New Roman'; TEXT-ALIGN: left; MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm" 
+      align=left&gt;&amp;nbsp;&lt;/P&gt;&lt;/TD&gt;
+    &lt;TD 
+    style="HEIGHT: 7pt; WIDTH: 110pt; PADDING-BOTTOM: 0cm; PADDING-TOP: 0cm; PADDING-LEFT: 2pt; PADDING-RIGHT: 2pt" 
+    vAlign=top width=147&gt;
+      &lt;P class=Normalb 
+      style="FONT-SIZE: 10pt; FONT-FAMILY: 'Times New Roman'; TEXT-ALIGN: left; MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm" 
+      align=left&gt;&lt;SPAN 
+      style="FONT-SIZE: 8pt; FONT-FAMILY: Arial"&gt;средства&lt;/SPAN&gt;&lt;/P&gt;&lt;/TD&gt;
+    &lt;TD 
+    style="BORDER-TOP-STYLE: none; HEIGHT: 7pt; BORDER-RIGHT: windowtext 1pt solid; WIDTH: 43pt; BORDER-BOTTOM-STYLE: none; PADDING-BOTTOM: 0cm; PADDING-TOP: 0cm; PADDING-LEFT: 2pt; BORDER-LEFT-STYLE: none; PADDING-RIGHT: 2pt" 
+    vAlign=top width=57&gt;
+      &lt;P class=Normalb 
+      style="FONT-SIZE: 10pt; FONT-FAMILY: 'Times New Roman'; TEXT-ALIGN: left; MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm" 
+      align=left&gt;&amp;nbsp;&lt;/P&gt;
+      &lt;P class=Normalb 
+      style="FONT-SIZE: 10pt; FONT-FAMILY: 'Times New Roman'; TEXT-ALIGN: left; MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm" 
+      align=left&gt;&amp;nbsp;&lt;/P&gt;&lt;/TD&gt;&lt;/TR&gt;
+  &lt;TR style="HEIGHT: 11pt"&gt;
+    &lt;TD 
+    style="BORDER-TOP-STYLE: none; HEIGHT: 11pt; WIDTH: 112pt; BORDER-BOTTOM-STYLE: none; PADDING-BOTTOM: 0cm; PADDING-TOP: 0cm; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 2pt; BORDER-LEFT: windowtext 1pt solid; PADDING-RIGHT: 2pt" 
+    vAlign=top width=149&gt;
+      &lt;P class=Normalb 
+      style="FONT-SIZE: 10pt; FONT-FAMILY: 'Times New Roman'; TEXT-ALIGN: left; MARGIN: 1pt 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm" 
+      align=left&gt;&lt;SPAN 
+      style="FONT-SIZE: 8pt; FONT-FAMILY: Arial"&gt;&lt;/SPAN&gt;&amp;nbsp;&lt;/P&gt;&lt;/TD&gt;
+    &lt;TD 
+    style="HEIGHT: 11pt; WIDTH: 42pt; PADDING-BOTTOM: 0cm; PADDING-TOP: 0cm; PADDING-LEFT: 2pt; PADDING-RIGHT: 2pt" 
+    vAlign=top width=56&gt;
+      &lt;P class=Normalb 
+      style="FONT-SIZE: 10pt; FONT-FAMILY: 'Times New Roman'; TEXT-ALIGN: left; MARGIN: 1pt 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm" 
+      align=left&gt;&lt;SPAN 
+      style="FONT-SIZE: 8pt; FONT-FAMILY: Arial"&gt;&lt;/SPAN&gt;&amp;nbsp;&lt;/P&gt;&lt;/TD&gt;
+    &lt;TD 
+    style="HEIGHT: 11pt; WIDTH: 110pt; PADDING-BOTTOM: 0cm; PADDING-TOP: 0cm; PADDING-LEFT: 2pt; PADDING-RIGHT: 2pt" 
+    vAlign=top width=147&gt;
+      &lt;P class=Normalb 
+      style="FONT-SIZE: 10pt; FONT-FAMILY: 'Times New Roman'; TEXT-ALIGN: left; MARGIN: 1pt 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm" 
+      align=left&gt;&lt;SPAN style="FONT-SIZE: 8pt; FONT-FAMILY: Arial"&gt;долгосрочные 
+      креди&amp;shy;&lt;/SPAN&gt;&lt;/P&gt;&lt;/TD&gt;
+    &lt;TD 
+    style="BORDER-TOP-STYLE: none; HEIGHT: 11pt; BORDER-RIGHT: windowtext 1pt solid; WIDTH: 43pt; BORDER-BOTTOM-STYLE: none; PADDING-BOTTOM: 0cm; PADDING-TOP: 0cm; PADDING-LEFT: 2pt; BORDER-LEFT-STYLE: none; PADDING-RIGHT: 2pt" 
+    vAlign=top width=57&gt;
+      &lt;P class=Normalb 
+      style="FONT-SIZE: 10pt; FONT-FAMILY: 'Times New Roman'; TEXT-ALIGN: left; MARGIN: 1pt 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm" 
+      align=left&gt;&lt;SPAN 
+    style="FONT-SIZE: 8pt; FONT-FAMILY: Arial"&gt;#КЗ&lt;/SPAN&gt;&lt;/P&gt;&lt;/TD&gt;&lt;/TR&gt;
+  &lt;TR style="HEIGHT: 9pt"&gt;
+    &lt;TD 
+    style="BORDER-TOP-STYLE: none; HEIGHT: 9pt; WIDTH: 112pt; BORDER-BOTTOM-STYLE: none; PADDING-BOTTOM: 0cm; PADDING-TOP: 0cm; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 2pt; BORDER-LEFT: windowtext 1pt solid; PADDING-RIGHT: 2pt" 
+    vAlign=top width=149&gt;
+      &lt;P class=Normalb 
+      style="FONT-SIZE: 10pt; FONT-FAMILY: 'Times New Roman'; TEXT-ALIGN: left; MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm" 
+      align=left&gt;&lt;SPAN 
+      style="FONT-SIZE: 8pt; FONT-FAMILY: Arial"&gt;&lt;/SPAN&gt;&amp;nbsp;&lt;/P&gt;&lt;/TD&gt;
+    &lt;TD 
+    style="HEIGHT: 9pt; WIDTH: 42pt; PADDING-BOTTOM: 0cm; PADDING-TOP: 0cm; PADDING-LEFT: 2pt; PADDING-RIGHT: 2pt" 
+    vAlign=top width=56&gt;
+      &lt;P class=Normalb 
+      style="FONT-SIZE: 10pt; FONT-FAMILY: 'Times New Roman'; TEXT-ALIGN: left; MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm" 
+      align=left&gt;&amp;nbsp;&lt;/P&gt;
+      &lt;P class=Normalb 
+      style="FONT-SIZE: 10pt; FONT-FAMILY: 'Times New Roman'; TEXT-ALIGN: left; MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm" 
+      align=left&gt;&amp;nbsp;&lt;/P&gt;&lt;/TD&gt;
+    &lt;TD 
+    style="HEIGHT: 9pt; WIDTH: 110pt; PADDING-BOTTOM: 0cm; PADDING-TOP: 0cm; PADDING-LEFT: 2pt; PADDING-RIGHT: 2pt" 
+    vAlign=top width=147&gt;
+      &lt;P class=Normalb 
+      style="FONT-SIZE: 10pt; FONT-FAMILY: 'Times New Roman'; TEXT-ALIGN: left; MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm" 
+      align=left&gt;&lt;SPAN style="FONT-SIZE: 8pt; FONT-FAMILY: Arial"&gt;ты и 
+      заемные&lt;/SPAN&gt;&lt;/P&gt;&lt;/TD&gt;
+    &lt;TD 
+    style="BORDER-TOP-STYLE: none; HEIGHT: 9pt; BORDER-RIGHT: windowtext 1pt solid; WIDTH: 43pt; BORDER-BOTTOM-STYLE: none; PADDING-BOTTOM: 0cm; PADDING-TOP: 0cm; PADDING-LEFT: 2pt; BORDER-LEFT-STYLE: none; PADDING-RIGHT: 2pt" 
+    vAlign=top width=57&gt;
+      &lt;P class=Normalb 
+      style="FONT-SIZE: 10pt; FONT-FAMILY: 'Times New Roman'; TEXT-ALIGN: left; MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm" 
+      align=left&gt;&amp;nbsp;&lt;/P&gt;
+      &lt;P class=Normalb 
+      style="FONT-SIZE: 10pt; FONT-FAMILY: 'Times New Roman'; TEXT-ALIGN: left; MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm" 
+      align=left&gt;&amp;nbsp;&lt;/P&gt;&lt;/TD&gt;&lt;/TR&gt;
+  &lt;TR style="HEIGHT: 8pt"&gt;
+    &lt;TD 
+    style="BORDER-TOP-STYLE: none; HEIGHT: 8pt; WIDTH: 112pt; BORDER-BOTTOM-STYLE: none; PADDING-BOTTOM: 0cm; PADDING-TOP: 0cm; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 2pt; BORDER-LEFT: windowtext 1pt solid; PADDING-RIGHT: 2pt" 
+    vAlign=top width=149&gt;
+      &lt;P class=Normalb 
+      style="FONT-SIZE: 10pt; FONT-FAMILY: 'Times New Roman'; TEXT-ALIGN: left; MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm" 
+      align=left&gt;&amp;nbsp;&lt;/P&gt;
+      &lt;P class=Normalb 
+      style="FONT-SIZE: 10pt; FONT-FAMILY: 'Times New Roman'; TEXT-ALIGN: left; MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm" 
+      align=left&gt;&amp;nbsp;&lt;/P&gt;&lt;/TD&gt;
+    &lt;TD 
+    style="HEIGHT: 8pt; WIDTH: 42pt; PADDING-BOTTOM: 0cm; PADDING-TOP: 0cm; PADDING-LEFT: 2pt; PADDING-RIGHT: 2pt" 
+    vAlign=top width=56&gt;
+      &lt;P class=Normalb 
+      style="FONT-SIZE: 10pt; FONT-FAMILY: 'Times New Roman'; TEXT-ALIGN: left; MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm" 
+      align=left&gt;&amp;nbsp;&lt;/P&gt;
+      &lt;P class=Normalb 
+      style="FONT-SIZE: 10pt; FONT-FAMILY: 'Times New Roman'; TEXT-ALIGN: left; MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm" 
+      align=left&gt;&amp;nbsp;&lt;/P&gt;&lt;/TD&gt;
+    &lt;TD 
+    style="HEIGHT: 8pt; WIDTH: 110pt; PADDING-BOTTOM: 0cm; PADDING-TOP: 0cm; PADDING-LEFT: 2pt; PADDING-RIGHT: 2pt" 
+    vAlign=top width=147&gt;
+      &lt;P class=Normalb 
+      style="FONT-SIZE: 10pt; FONT-FAMILY: 'Times New Roman'; TEXT-ALIGN: left; MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm" 
+      align=left&gt;&lt;SPAN 
+      style="FONT-SIZE: 8pt; FONT-FAMILY: Arial"&gt;&lt;/SPAN&gt;&amp;nbsp;&lt;/P&gt;&lt;/TD&gt;
+    &lt;TD 
+    style="BORDER-TOP-STYLE: none; HEIGHT: 8pt; BORDER-RIGHT: windowtext 1pt solid; WIDTH: 43pt; BORDER-BOTTOM-STYLE: none; PADDING-BOTTOM: 0cm; PADDING-TOP: 0cm; PADDING-LEFT: 2pt; BORDER-LEFT-STYLE: none; PADDING-RIGHT: 2pt" 
+    vAlign=top width=57&gt;
+      &lt;P class=Normalb 
+      style="FONT-SIZE: 10pt; FONT-FAMILY: 'Times New Roman'; TEXT-ALIGN: left; MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm" 
+      align=left&gt;&amp;nbsp;&lt;/P&gt;
+      &lt;P class=Normalb 
+      style="FONT-SIZE: 10pt; FONT-FAMILY: 'Times New Roman'; TEXT-ALIGN: left; MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm" 
+      align=left&gt;&amp;nbsp;&lt;/P&gt;&lt;/TD&gt;&lt;/TR&gt;
+  &lt;TR style="HEIGHT: 10pt"&gt;
+    &lt;TD 
+    style="BORDER-TOP-STYLE: none; HEIGHT: 10pt; WIDTH: 112pt; BORDER-BOTTOM-STYLE: none; PADDING-BOTTOM: 0cm; PADDING-TOP: 0cm; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 2pt; BORDER-LEFT: windowtext 1pt solid; PADDING-RIGHT: 2pt" 
+    vAlign=top width=149&gt;
+      &lt;P class=Normalb 
+      style="FONT-SIZE: 10pt; FONT-FAMILY: 'Times New Roman'; TEXT-ALIGN: left; MARGIN: 1pt 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm" 
+      align=left&gt;&amp;nbsp;&lt;/P&gt;
+      &lt;P class=Normalb 
+      style="FONT-SIZE: 10pt; FONT-FAMILY: 'Times New Roman'; TEXT-ALIGN: left; MARGIN: 1pt 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm" 
+      align=left&gt;&amp;nbsp;&lt;/P&gt;&lt;/TD&gt;
+    &lt;TD 
+    style="HEIGHT: 10pt; WIDTH: 42pt; PADDING-BOTTOM: 0cm; PADDING-TOP: 0cm; PADDING-LEFT: 2pt; PADDING-RIGHT: 2pt" 
+    vAlign=top width=56&gt;
+      &lt;P class=Normalb 
+      style="FONT-SIZE: 10pt; FONT-FAMILY: 'Times New Roman'; TEXT-ALIGN: left; MARGIN: 1pt 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm" 
+      align=left&gt;&amp;nbsp;&lt;/P&gt;
+      &lt;P class=Normalb 
+      style="FONT-SIZE: 10pt; FONT-FAMILY: 'Times New Roman'; TEXT-ALIGN: left; MARGIN: 1pt 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm" 
+      align=left&gt;&amp;nbsp;&lt;/P&gt;&lt;/TD&gt;
+    &lt;TD 
+    style="HEIGHT: 10pt; WIDTH: 110pt; PADDING-BOTTOM: 0cm; PADDING-TOP: 0cm; PADDING-LEFT: 2pt; PADDING-RIGHT: 2pt" 
+    vAlign=top width=147&gt;
+      &lt;P class=Normalb 
+      style="FONT-SIZE: 10pt; FONT-FAMILY: 'Times New Roman'; TEXT-ALIGN: left; MARGIN: 1pt 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm" 
+      align=left&gt;&lt;SPAN 
+      style="FONT-SIZE: 8pt; FONT-FAMILY: Arial"&gt;&lt;/SPAN&gt;&amp;nbsp;&lt;/P&gt;&lt;/TD&gt;
+    &lt;TD 
+    style="BORDER-TOP-STYLE: none; HEIGHT: 10pt; BORDER-RIGHT: windowtext 1pt solid; WIDTH: 43pt; BORDER-BOTTOM-STYLE: none; PADDING-BOTTOM: 0cm; PADDING-TOP: 0cm; PADDING-LEFT: 2pt; BORDER-LEFT-STYLE: none; PADDING-RIGHT: 2pt" 
+    vAlign=top width=57&gt;
+      &lt;P class=Normalb 
+      style="FONT-SIZE: 10pt; FONT-FAMILY: 'Times New Roman'; TEXT-ALIGN: left; MARGIN: 1pt 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm" 
+      align=left&gt;&lt;SPAN 
+      style="FONT-SIZE: 8pt; FONT-FAMILY: Arial"&gt;&lt;/SPAN&gt;&amp;nbsp;&lt;/P&gt;&lt;/TD&gt;&lt;/TR&gt;
+  &lt;TR style="HEIGHT: 8pt"&gt;
+    &lt;TD 
+    style="BORDER-TOP-STYLE: none; HEIGHT: 8pt; WIDTH: 112pt; BORDER-BOTTOM-STYLE: none; PADDING-BOTTOM: 0cm; PADDING-TOP: 0cm; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 2pt; BORDER-LEFT: windowtext 1pt solid; PADDING-RIGHT: 2pt" 
+    vAlign=top width=149&gt;
+      &lt;P class=Normalb 
+      style="FONT-SIZE: 10pt; FONT-FAMILY: 'Times New Roman'; TEXT-ALIGN: left; MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm" 
+      align=left&gt;&amp;nbsp;&lt;/P&gt;
+      &lt;P class=Normalb 
+      style="FONT-SIZE: 10pt; FONT-FAMILY: 'Times New Roman'; TEXT-ALIGN: left; MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm" 
+      align=left&gt;&amp;nbsp;&lt;/P&gt;&lt;/TD&gt;
+    &lt;TD 
+    style="HEIGHT: 8pt; WIDTH: 42pt; PADDING-BOTTOM: 0cm; PADDING-TOP: 0cm; PADDING-LEFT: 2pt; PADDING-RIGHT: 2pt" 
+    vAlign=top width=56&gt;
+      &lt;P class=Normalb 
+      style="FONT-SIZE: 10pt; FONT-FAMILY: 'Times New Roman'; TEXT-ALIGN: left; MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm" 
+      align=left&gt;&amp;nbsp;&lt;/P&gt;
+      &lt;P class=Normalb 
+      style="FONT-SIZE: 10pt; FONT-FAMILY: 'Times New Roman'; TEXT-ALIGN: left; MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm" 
+      align=left&gt;&amp;nbsp;&lt;/P&gt;&lt;/TD&gt;
+    &lt;TD 
+    style="HEIGHT: 8pt; WIDTH: 110pt; PADDING-BOTTOM: 0cm; PADDING-TOP: 0cm; PADDING-LEFT: 2pt; PADDING-RIGHT: 2pt" 
+    vAlign=top width=147&gt;
+      &lt;P class=Normalb 
+      style="FONT-SIZE: 10pt; FONT-FAMILY: 'Times New Roman'; TEXT-ALIGN: left; MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm" 
+      align=left&gt;&lt;SPAN 
+      style="FONT-SIZE: 8pt; FONT-FAMILY: Arial"&gt;&lt;/SPAN&gt;&amp;nbsp;&lt;/P&gt;&lt;/TD&gt;
+    &lt;TD 
+    style="BORDER-TOP-STYLE: none; HEIGHT: 8pt; BORDER-RIGHT: windowtext 1pt solid; WIDTH: 43pt; BORDER-BOTTOM-STYLE: none; PADDING-BOTTOM: 0cm; PADDING-TOP: 0cm; PADDING-LEFT: 2pt; BORDER-LEFT-STYLE: none; PADDING-RIGHT: 2pt" 
+    vAlign=top width=57&gt;
+      &lt;P class=Normalb 
+      style="FONT-SIZE: 10pt; FONT-FAMILY: 'Times New Roman'; TEXT-ALIGN: left; MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm" 
+      align=left&gt;&amp;nbsp;&lt;/P&gt;
+      &lt;P class=Normalb 
+      style="FONT-SIZE: 10pt; FONT-FAMILY: 'Times New Roman'; TEXT-ALIGN: left; MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm" 
+      align=left&gt;&amp;nbsp;&lt;/P&gt;&lt;/TD&gt;&lt;/TR&gt;
+  &lt;TR style="HEIGHT: 19pt"&gt;
+    &lt;TD 
+    style="BORDER-TOP-STYLE: none; HEIGHT: 19pt; WIDTH: 112pt; BORDER-BOTTOM: windowtext 1pt solid; PADDING-BOTTOM: 0cm; PADDING-TOP: 0cm; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 2pt; BORDER-LEFT: windowtext 1pt solid; PADDING-RIGHT: 2pt" 
+    vAlign=top width=149&gt;
+      &lt;P class=Normalb 
+      style="FONT-SIZE: 10pt; FONT-FAMILY: 'Times New Roman'; TEXT-ALIGN: left; MARGIN: 1pt 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm" 
+      align=left&gt;&lt;SPAN 
+      style="FONT-SIZE: 8pt; FONT-FAMILY: Arial"&gt;Баланс&lt;/SPAN&gt;&lt;/P&gt;&lt;/TD&gt;
+    &lt;TD 
+    style="BORDER-TOP-STYLE: none; HEIGHT: 19pt; WIDTH: 42pt; BORDER-BOTTOM: windowtext 1pt solid; PADDING-BOTTOM: 0cm; PADDING-TOP: 0cm; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 2pt; BORDER-LEFT-STYLE: none; PADDING-RIGHT: 2pt" 
+    vAlign=top width=56&gt;
+      &lt;P class=Normalb 
+      style="FONT-SIZE: 10pt; FONT-FAMILY: 'Times New Roman'; TEXT-ALIGN: left; MARGIN: 1pt 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm" 
+      align=left&gt;&lt;SPAN 
+    style="FONT-SIZE: 8pt; FONT-FAMILY: Arial"&gt;#Б&lt;/SPAN&gt;&lt;/P&gt;&lt;/TD&gt;
+    &lt;TD 
+    style="BORDER-TOP-STYLE: none; HEIGHT: 19pt; WIDTH: 110pt; BORDER-BOTTOM: windowtext 1pt solid; PADDING-BOTTOM: 0cm; PADDING-TOP: 0cm; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 2pt; BORDER-LEFT-STYLE: none; PADDING-RIGHT: 2pt" 
+    vAlign=top width=147&gt;
+      &lt;P class=Normalb 
+      style="FONT-SIZE: 10pt; FONT-FAMILY: 'Times New Roman'; TEXT-ALIGN: left; MARGIN: 1pt 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm" 
+      align=left&gt;&lt;SPAN 
+      style="FONT-SIZE: 8pt; FONT-FAMILY: Arial"&gt;&lt;/SPAN&gt;&amp;nbsp;&lt;/P&gt;&lt;/TD&gt;
+    &lt;TD 
+    style="BORDER-TOP-STYLE: none; HEIGHT: 19pt; BORDER-RIGHT: windowtext 1pt solid; WIDTH: 43pt; BORDER-BOTTOM: windowtext 1pt solid; PADDING-BOTTOM: 0cm; PADDING-TOP: 0cm; PADDING-LEFT: 2pt; BORDER-LEFT-STYLE: none; PADDING-RIGHT: 2pt" 
+    vAlign=top width=57&gt;
+      &lt;P class=Normalb 
+      style="FONT-SIZE: 10pt; FONT-FAMILY: 'Times New Roman'; TEXT-ALIGN: left; MARGIN: 1pt 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm" 
+      align=left&gt;&lt;SPAN 
+      style="FONT-SIZE: 8pt; FONT-FAMILY: Arial"&gt;&lt;/SPAN&gt;&amp;nbsp;&lt;/P&gt;&lt;/TD&gt;&lt;/TR&gt;&lt;/TBODY&gt;&lt;/TABLE&gt;&lt;/BODY&gt;&lt;/HTML&gt;
+</Value>
+  </Templates>
+  <Templates Name="ДокументФинансовоеСостояние">
+    <Comment />
+    <Value>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"&gt;
+&lt;HTML&gt;&lt;HEAD&gt;
+&lt;META content="text/html; charset=unicode" http-equiv=Content-Type&gt;
+&lt;META name=GENERATOR content="MSHTML 11.00.9600.17631"&gt;&lt;/HEAD&gt;
+&lt;BODY&gt;
+&lt;P class=a6 
+style="WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(0,0,0); TEXT-ALIGN: justify; FONT: medium 'Times New Roman'; MARGIN: 0cm 0cm 0pt; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 22.7pt; -webkit-text-stroke-width: 0px"&gt;&lt;B&gt;&lt;I&gt;Показатели, 
+характеризующие финансовое состояние предприятия&lt;/I&gt;&lt;/B&gt;&lt;/P&gt;
+&lt;TABLE class=MsoNormalTable 
+style="FONT-FAMILY: 'Times New Roman'; WORD-SPACING: 0px; BORDER-COLLAPSE: collapse; TEXT-TRANSFORM: none; MARGIN-LEFT: 2pt; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px" 
+cellSpacing=0 cellPadding=0 border=0&gt;
+  &lt;TBODY&gt;
+  &lt;TR&gt;
+    &lt;TD 
+    style="BORDER-TOP: windowtext 1pt solid; WIDTH: 18pt; BORDER-BOTTOM-STYLE: none; PADDING-BOTTOM: 0cm; PADDING-TOP: 0cm; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 2pt; BORDER-LEFT: windowtext 1pt solid; PADDING-RIGHT: 2pt" 
+    vAlign=top width=24&gt;
+      &lt;P class=Normalb 
+      style="FONT-SIZE: 10pt; FONT-FAMILY: 'Times New Roman'; TEXT-ALIGN: left; MARGIN: 2pt 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm" 
+      align=left&gt;&lt;SPAN style="FONT-SIZE: 8pt; FONT-FAMILY: Arial"&gt;1. 
+      2.&lt;/SPAN&gt;&lt;/P&gt;&lt;/TD&gt;
+    &lt;TD 
+    style="BORDER-TOP: windowtext 1pt solid; WIDTH: 127pt; BORDER-BOTTOM-STYLE: none; PADDING-BOTTOM: 0cm; PADDING-TOP: 0cm; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 2pt; BORDER-LEFT-STYLE: none; PADDING-RIGHT: 2pt" 
+    vAlign=top width=169&gt;
+      &lt;P class=Normalb 
+      style="FONT-SIZE: 10pt; FONT-FAMILY: 'Times New Roman'; TEXT-ALIGN: left; MARGIN: 2pt 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm" 
+      align=left&gt;&lt;SPAN style="FONT-SIZE: 8pt; FONT-FAMILY: Arial"&gt;Коэффициент 
+      автономии Коэффициент финансовой устойчивости&lt;/SPAN&gt;&lt;/P&gt;&lt;/TD&gt;
+    &lt;TD 
+    style="BORDER-TOP: windowtext 1pt solid; BORDER-RIGHT: windowtext 1pt solid; WIDTH: 161pt; BORDER-BOTTOM-STYLE: none; PADDING-BOTTOM: 0cm; PADDING-TOP: 0cm; PADDING-LEFT: 2pt; BORDER-LEFT-STYLE: none; PADDING-RIGHT: 2pt" 
+    vAlign=top width=215&gt;&lt;SPAN style="FONT-SIZE: 8pt; FONT-FAMILY: Arial"&gt;
+      &lt;P class=Normalb 
+      style="FONT-SIZE: 10pt; FONT-FAMILY: 'Times New Roman'; TEXT-ALIGN: left; MARGIN: 2pt 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm" 
+      align=left&gt;&lt;SPAN style="FONT-SIZE: 8pt; FONT-FAMILY: Arial"&gt;[#СС : 
+      (#ЗС+#КЗ)] = #Куст&lt;/SPAN&gt;&lt;/P&gt;
+      &lt;P class=Normalb 
+      style="FONT-SIZE: 10pt; FONT-FAMILY: 'Times New Roman'; TEXT-ALIGN: left; MARGIN: 2pt 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm" 
+      align=left&gt;(#СС : #Б) = #Кавт&lt;/SPAN&gt;&lt;/P&gt;
+      &lt;P class=Normalb 
+      style="FONT-SIZE: 10pt; FONT-FAMILY: 'Times New Roman'; TEXT-ALIGN: left; MARGIN: 2pt 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm" 
+      align=left&gt;&amp;nbsp;&lt;/P&gt;&lt;/TD&gt;&lt;/TR&gt;
+  &lt;TR&gt;
+    &lt;TD 
+    style="BORDER-TOP-STYLE: none; WIDTH: 18pt; BORDER-BOTTOM-STYLE: none; PADDING-BOTTOM: 0cm; PADDING-TOP: 0cm; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 2pt; BORDER-LEFT: windowtext 1pt solid; PADDING-RIGHT: 2pt" 
+    vAlign=top width=24&gt;
+      &lt;P class=Normalb 
+      style="FONT-SIZE: 10pt; FONT-FAMILY: 'Times New Roman'; TEXT-ALIGN: left; MARGIN: 1pt 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm" 
+      align=left&gt;&lt;SPAN 
+    style="FONT-SIZE: 8pt; FONT-FAMILY: Arial"&gt;3.&lt;/SPAN&gt;&lt;/P&gt;&lt;/TD&gt;
+    &lt;TD 
+    style="WIDTH: 127pt; PADDING-BOTTOM: 0cm; PADDING-TOP: 0cm; PADDING-LEFT: 2pt; PADDING-RIGHT: 2pt" 
+    vAlign=top width=169&gt;
+      &lt;P class=Normalb 
+      style="FONT-SIZE: 10pt; FONT-FAMILY: 'Times New Roman'; TEXT-ALIGN: left; MARGIN: 1pt 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm" 
+      align=left&gt;&lt;SPAN style="FONT-SIZE: 8pt; FONT-FAMILY: Arial"&gt;Коэффициент 
+      маневренности&lt;/SPAN&gt;&lt;/P&gt;&lt;/TD&gt;
+    &lt;TD 
+    style="BORDER-TOP-STYLE: none; BORDER-RIGHT: windowtext 1pt solid; WIDTH: 161pt; BORDER-BOTTOM-STYLE: none; PADDING-BOTTOM: 0cm; PADDING-TOP: 0cm; PADDING-LEFT: 2pt; BORDER-LEFT-STYLE: none; PADDING-RIGHT: 2pt" 
+    vAlign=top width=215&gt;
+      &lt;P class=Normalb 
+      style="FONT-SIZE: 10pt; FONT-FAMILY: 'Times New Roman'; TEXT-ALIGN: left; MARGIN: 1pt 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm" 
+      align=left&gt;&lt;SPAN style="FONT-SIZE: 8pt; FONT-FAMILY: Arial"&gt;[(#СС - 
+      #ОС)/#СС]&lt;SPAN class=Apple-converted-space&gt;&amp;nbsp;&lt;/SPAN&gt;&lt;I&gt;=&lt;/I&gt;&lt;SPAN 
+      class=Apple-converted-space&gt;&amp;nbsp;#Кман&lt;/SPAN&gt;&lt;/SPAN&gt;&lt;/P&gt;&lt;/TD&gt;&lt;/TR&gt;
+  &lt;TR&gt;
+    &lt;TD 
+    style="BORDER-TOP-STYLE: none; WIDTH: 18pt; BORDER-BOTTOM-STYLE: none; PADDING-BOTTOM: 0cm; PADDING-TOP: 0cm; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 2pt; BORDER-LEFT: windowtext 1pt solid; PADDING-RIGHT: 2pt" 
+    vAlign=top width=24&gt;
+      &lt;P class=Normalb 
+      style="FONT-SIZE: 10pt; FONT-FAMILY: 'Times New Roman'; TEXT-ALIGN: left; MARGIN: 2pt 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm" 
+      align=left&gt;&lt;SPAN style="FONT-SIZE: 8pt; FONT-FAMILY: Arial"&gt;4. 
+      5.&lt;/SPAN&gt;&lt;/P&gt;&lt;/TD&gt;
+    &lt;TD 
+    style="WIDTH: 127pt; PADDING-BOTTOM: 0cm; PADDING-TOP: 0cm; PADDING-LEFT: 2pt; PADDING-RIGHT: 2pt" 
+    vAlign=top width=169&gt;
+      &lt;P class=Normalb 
+      style="FONT-SIZE: 10pt; FONT-FAMILY: 'Times New Roman'; TEXT-ALIGN: left; MARGIN: 2pt 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm" 
+      align=left&gt;&lt;SPAN style="FONT-SIZE: 8pt; FONT-FAMILY: Arial"&gt;Коэффициент 
+      покрытия Коэффициент абсолют&amp;shy; ной ликвидности&lt;/SPAN&gt;&lt;/P&gt;&lt;/TD&gt;
+    &lt;TD 
+    style="BORDER-TOP-STYLE: none; BORDER-RIGHT: windowtext 1pt solid; WIDTH: 161pt; BORDER-BOTTOM-STYLE: none; PADDING-BOTTOM: 0cm; PADDING-TOP: 0cm; PADDING-LEFT: 2pt; BORDER-LEFT-STYLE: none; PADDING-RIGHT: 2pt" 
+    vAlign=top width=215&gt;
+      &lt;P class=Normalb 
+      style="FONT-SIZE: 10pt; FONT-FAMILY: 'Times New Roman'; TEXT-ALIGN: left; MARGIN: 2pt 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm" 
+      align=left&gt;&lt;SPAN style="FONT-SIZE: 8pt; FONT-FAMILY: Arial"&gt;[#ОбС / (#КК + 
+      #КЗ)] = #Кпокр&lt;/SPAN&gt;&lt;/P&gt;
+      &lt;P class=Normalb 
+      style="FONT-SIZE: 10pt; FONT-FAMILY: 'Times New Roman'; TEXT-ALIGN: left; MARGIN: 2pt 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm" 
+      align=left&gt;&lt;SPAN style="FONT-SIZE: 8pt; FONT-FAMILY: Arial"&gt;[(#ДС + #ЦБ) / 
+      (#КК + #КЗ)] = #Кабсликв&lt;/SPAN&gt;&lt;/P&gt;&lt;/TD&gt;&lt;/TR&gt;
+  &lt;TR&gt;
+    &lt;TD 
+    style="BORDER-TOP-STYLE: none; WIDTH: 18pt; BORDER-BOTTOM: windowtext 1pt solid; PADDING-BOTTOM: 0cm; PADDING-TOP: 0cm; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 2pt; BORDER-LEFT: windowtext 1pt solid; PADDING-RIGHT: 2pt" 
+    vAlign=top width=24&gt;
+      &lt;P class=Normalb 
+      style="FONT-SIZE: 10pt; FONT-FAMILY: 'Times New Roman'; TEXT-ALIGN: left; MARGIN: 2pt 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm" 
+      align=left&gt;&lt;SPAN style="FONT-SIZE: 8pt; FONT-FAMILY: Arial"&gt;6. 
+      7.&lt;/SPAN&gt;&lt;/P&gt;&lt;/TD&gt;
+    &lt;TD 
+    style="BORDER-TOP-STYLE: none; WIDTH: 127pt; BORDER-BOTTOM: windowtext 1pt solid; PADDING-BOTTOM: 0cm; PADDING-TOP: 0cm; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 2pt; BORDER-LEFT-STYLE: none; PADDING-RIGHT: 2pt" 
+    vAlign=top width=169&gt;
+      &lt;P class=Normalb 
+      style="FONT-SIZE: 10pt; FONT-FAMILY: 'Times New Roman'; TEXT-ALIGN: left; MARGIN: 2pt 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm" 
+      align=left&gt;&lt;SPAN style="FONT-SIZE: 8pt; FONT-FAMILY: Arial"&gt;Общая 
+      рентабельность Рентабельность собствен&amp;shy;ного капитала&lt;/SPAN&gt;&lt;/P&gt;&lt;/TD&gt;
+    &lt;TD 
+    style="BORDER-TOP-STYLE: none; BORDER-RIGHT: windowtext 1pt solid; WIDTH: 161pt; BORDER-BOTTOM: windowtext 1pt solid; PADDING-BOTTOM: 0cm; PADDING-TOP: 0cm; PADDING-LEFT: 2pt; BORDER-LEFT-STYLE: none; PADDING-RIGHT: 2pt" 
+    vAlign=top width=215&gt;
+      &lt;P class=Normalb 
+      style="FONT-SIZE: 10pt; FONT-FAMILY: 'Times New Roman'; TEXT-ALIGN: left; MARGIN: 2pt 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm" 
+      align=left&gt;&lt;SPAN style="FONT-SIZE: 8pt; FONT-FAMILY: Arial"&gt;(#ХП / 
+      #Б)х100% = #РП %&lt;/SPAN&gt;&lt;/P&gt;
+      &lt;P class=Normalb 
+      style="FONT-SIZE: 10pt; FONT-FAMILY: 'Times New Roman'; TEXT-ALIGN: left; MARGIN: 2pt 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm" 
+      align=left&gt;&lt;SPAN style="FONT-SIZE: 8pt; FONT-FAMILY: Arial"&gt;(#ХП / 
+      #СС)х100% = #РСК %&lt;/SPAN&gt;&lt;/P&gt;&lt;/TD&gt;&lt;/TR&gt;&lt;/TBODY&gt;&lt;/TABLE&gt;&lt;BR 
+class=Apple-interchange-newline&gt;&lt;/BODY&gt;&lt;/HTML&gt;
+</Value>
+  </Templates>
+</BZ>

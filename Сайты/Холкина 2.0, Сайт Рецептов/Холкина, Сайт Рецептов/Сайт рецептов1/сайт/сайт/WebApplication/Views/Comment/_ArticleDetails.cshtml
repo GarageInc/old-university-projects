@@ -1,0 +1,76 @@
+﻿@using WebApplication.Models
+@using WebApplication.Service
+
+@{
+    Article item = ViewData["Article"] as Article;
+}
+<div>
+    <hr/>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(modelItem => item.Id)
+        </dt>
+        <dd>
+            @Html.DisplayFor(modelItem => item.Id)
+        </dd>
+
+        <dt>
+            Категория
+        </dt>
+        <dd>
+            @item.Type.Name
+        </dd>
+        
+        <dt>
+            @Html.DisplayNameFor(modelItem => item.Description)
+        </dt>
+        <dd>
+            @Html.DisplayFor(modelItem => item.Description)
+        </dd>
+        
+        <dt>
+            @Html.DisplayNameFor(modelItem => item.Ingridients)
+        </dt>
+        <dd>
+            <ul>
+                @foreach (var i in item.Ingridients)
+                {
+                    <li>
+                        @i.Name
+                    </li>
+                }
+            </ul>
+            
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(modelItem => item.Author)
+        </dt>
+        <dd>
+            <a class="compItem" href='@Url.Action("Author", "Article", new {id = item.AuthorId}, null)'>
+                @item.Author.Name
+            </a>
+        </dd>
+
+        <dt>
+             Фото:
+        </dt>
+        <dd>
+            @{
+                var yes = ArticleService.GetArticleAvatar(item.Id.ToString()).IsEmpty();
+                if (!yes)
+                {
+                    @Html.Raw("<img style='width:300px;' src=\"../../Files/ArticleFiles/"
+                                  + ArticleService.GetArticleAvatar(item.Id.ToString()) + "\" />")
+                }
+                else
+                {
+                    <h5>Фото не приложено</h5>
+                }
+            }
+        </dd>
+           
+
+    </dl>
+</div>
+

@@ -1,0 +1,22 @@
+*********************************************
+* delays the number of ms passed in ACCUM
+* copied and modified from the Motorola
+* application note AN1239.
+* By Brad Stewart
+**********************************************
+
+delayms:
+
+delayms05       ldx #$f8
+delayms10       decx
+                nop
+                bne delayms10
+                ;stx COPR       ;use this for watchdog
+                                ;otherwise do next two instructions
+                brn *
+                nop
+
+                brn *           ;three more cycles
+                deca            ;dec # of ms
+                bne delayms05
+                rts
