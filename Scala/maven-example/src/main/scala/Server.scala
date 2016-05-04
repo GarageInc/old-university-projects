@@ -1,15 +1,13 @@
 import java.nio.channels.ClosedChannelException
-
 import akka.actor.ActorSystem
 import io.netty.channel.Channel
 import isc.FaviconException
-import isc.annotations.ServiceMethod
+import isc.annotations.{Param, ServiceMethod}
 import isc.api.http.{HttpToXmlApiServer, HttpService, HttpApi}
 import ru.dogma.netty.http.{FullHttpResponse, FullHttpRequest}
 
-/**
-  * Created by RinatF on 28.04.2016.
-  */
+import java.util.{Calendar, Iterator}
+
 
 object Server extends  App{
 
@@ -21,22 +19,14 @@ object MyApi extends HttpApi{
   override type ServiceBase = HttpService
 
   val services:ServiceMap = {
-    case "myservice" => classOf[ MyController ]
-  }
-}
-
-class MyController extends HttpService{
-
-  @ServiceMethod
-  def func(): Unit ={
-    println("bla bla 2")
+    case "myservice" => classOf[ ImageService ]
   }
 }
 
 object MyServer extends HttpToXmlApiServer{
 
   val api = MyApi
-  
+
   val system = ActorSystem("test-system")
 
   override def handler_exception(ch: Channel, httpRequest:FullHttpRequest): PartialFunction[Throwable, Unit] = {

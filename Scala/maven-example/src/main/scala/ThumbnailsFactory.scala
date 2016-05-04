@@ -16,15 +16,29 @@ object ThumbnailsFactory {
     params.foreach(println(_))
   }
 
-  def createBy( width:Int, height:Int, sourceFilePath:String, thumbFilePath:String ){
+  def createThumbnails(thumbnailsDir:String, filePath:String, uploaded_at:Long): Unit ={
 
-//    val thumbnailName = s"thumb_$widthx%s$height%s.jpg"
+    var width = 400;
+    var height = 235;
+    createBy( width, height, filePath, "%s/%sx%s_%s.jpg" format (thumbnailsDir,width,height,uploaded_at) );
+
+    width = 130;
+    height = 77;
+    createBy( width, height, filePath, "%s/%sx%s_%s.jpg" format (thumbnailsDir,width,height,uploaded_at) );
+  }
+
+  def createBy( width:Int, height:Int, sourceFilePath:String, thumbFilePath:String ){
 
     val command = f"vipsthumbnail $sourceFilePath%s --size $width%sx$height%s -o $thumbFilePath%s"
 
-    var executor = new DefaultExecutor();
+    val executor = new DefaultExecutor();
 
     val exitResult = executor.execute( CommandLine.parse(command) );
+
+    println("exit-result:")
+    println(exitResult)
   }
+
+
 
 }
