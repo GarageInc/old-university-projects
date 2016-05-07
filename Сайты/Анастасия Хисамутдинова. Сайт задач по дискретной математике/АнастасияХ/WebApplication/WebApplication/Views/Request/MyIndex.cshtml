@@ -1,5 +1,5 @@
 ﻿@using WebApplication.Models
-@model IEnumerable<Request>
+@model IEnumerable<MathTask>
 @using Microsoft.AspNet.Identity
 
 @{
@@ -12,7 +12,7 @@
 </div>
 
 <h2>Список моих задач</h2>
-<p>Всего задач: @(Model.Count<Request>())</p>
+<p>Всего задач: @(Model.Count<MathTask>())</p>
 
 <br />
 <div id="toolbar">
@@ -142,7 +142,7 @@
                     </td>
 
                     <td>
-                        @if (item.RightRequestSolution == null)
+                        @if (item.RightMathTaskSolution == null)
                         {
                             <a class="compItem" href="/RequestSolution/CreateRightSolution/@item.Id">
                                 Загрузить правильное решение

@@ -160,7 +160,7 @@ namespace WebApplication.Controllers
         /// <returns></returns>
         public FileResult DownloadSolution(int id)
         {
-            var reqDoc = db.RequestSolutions.First(x => x.Request.Id == id).Document;//...Find(id).Documents.Find(id);//.Document;
+            var reqDoc = db.RequestSolutions.First(x => x.MathTask.Id == id).Document;//...Find(id).Documents.Find(id);//.Document;
 
             byte[] fileBytes = System.IO.File.ReadAllBytes(Server.MapPath("~/Files/RequestSolutionFiles/" + reqDoc.Url));
             string fileName = reqDoc.Id + reqDoc.Type;

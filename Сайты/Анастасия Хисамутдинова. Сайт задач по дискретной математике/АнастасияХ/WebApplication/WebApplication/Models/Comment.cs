@@ -34,7 +34,7 @@ namespace WebApplication.Models
 
         [Display(Name = "задача")]
         [ForeignKey("ReqId")]
-        public virtual RequestSolution Req { get; set; }
+        public virtual MathTaskSolution Req { get; set; }
 
         
     }

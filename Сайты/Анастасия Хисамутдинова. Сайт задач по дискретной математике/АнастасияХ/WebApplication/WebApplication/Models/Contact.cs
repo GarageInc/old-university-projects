@@ -2,10 +2,8 @@
 {
     using System.ComponentModel.DataAnnotations;
 
-    public class Contact
+    public class Contact : BaseModel
     {
-        [Key]
-        public int Id { get; set; }
 
         [Required(ErrorMessage = "Обязательно для заполнения!")]
         [Display(Name = "Адрес, номер, страница в соц. сети и т.п.")]

@@ -26,9 +26,9 @@
             var requestSolutions = db.RequestSolutions
                 .Include(r => r.Author)
                 .Include(r => r.Document)
-                .Include(r => r.Request)
-                .Where(r=>r.Request.AuthorId==curId)
-                .Where(r=>!r.IsRightSolution);// Не выводим те правильные решения, которые загрузил этот пользователь
+                .Include(r => r.MathTask)
+                .Where(r=>r.MathTask.AuthorId==curId)
+                .Where(r=>!r.IsRight);// Не выводим те правильные решения, которые загрузил этот пользователь
             return View(await requestSolutions.ToListAsync());
         }
         
@@ -40,7 +40,7 @@
             var requestSolutions = db.RequestSolutions
                 .Include(r => r.Author)
                 .Include(r => r.Document)
-                .Include(r => r.Request)//                .Where(r => !r.IsRightSolution)
+                .Include(r => r.MathTask)//                .Where(r => !r.IsRightSolution)
                 .Where(r=>r.Author.Id== curId);
             return View(await requestSolutions.ToListAsync());
         }
@@ -52,14 +52,14 @@
             var requestSolutions = db.RequestSolutions
                 .Include(r => r.Author)
                 .Include(r => r.Document)
-                .Include(r => r.Request).ToList();
+                .Include(r => r.MathTask).ToList();
             var res=requestSolutions
                 .Where(r => r.Author.Id == curId);
 
             return View(res);
         }
 
-        // GET: RequestSolution/Create
+        // GET: MathTaskSolution/Create
         public ActionResult Create()
         {
             var curId = this.User.Identity.GetUserId();
@@ -69,12 +69,12 @@
             return View();
         }
 
-        // POST: RequestSolution/Create
+        // POST: MathTaskSolution/Create
         // Чтобы защититься от атак чрезмерной передачи данных, включите определенные свойства, для которых следует установить привязку. Дополнительные 
         // сведения см. в статье http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Comment,RequestId")] RequestSolution requestSolution, HttpPostedFileBase error)
+        public ActionResult Create([Bind(Include = "Id,Name,Comment,MathTaskId")] MathTaskSolution mathTaskSolution, HttpPostedFileBase error)
         {
             var curId = this.User.Identity.GetUserId();
 
@@ -96,53 +96,53 @@
                     error.SaveAs(Server.MapPath("~/Files/RequestSolutionFiles/" + path));
                     doc.Url = path;
 
-                    requestSolution.Document = doc;
+                    mathTaskSolution.Document = doc;
                     db.Documents.Add(doc);
                 }
                 else
-                    requestSolution.Document = null;
+                    mathTaskSolution.Document = null;
 
-                var req = db.Requests.Find(requestSolution.RequestId);
-                requestSolution.Request = req;
-                requestSolution.Author = user;
-                requestSolution.AuthorId = user.Id;
-                requestSolution.Right = false;
-                requestSolution.Date = DateTime.Now;
+                var req = db.Requests.Find(mathTaskSolution.MathTaskId);
+                mathTaskSolution.MathTask = req;
+                mathTaskSolution.Author = user;
+                mathTaskSolution.AuthorId = user.Id;
+                mathTaskSolution.IsRight = false;
+                mathTaskSolution.Date = DateTime.Now;
 
                 // Отметим, что решение относится к этой задаче
-                req.RequestSolutions.Add(requestSolution);
+                req.RequestSolutions.Add(mathTaskSolution);
                 req.Executors.Add(user);
                 db.Entry(req).State = EntityState.Modified;
 
-                db.RequestSolutions.Add(requestSolution);
+                db.RequestSolutions.Add(mathTaskSolution);
 
                 db.SaveChanges();
                 return RedirectToAction("MyIndex");
             }
 
             ViewBag.Requests = new SelectList(db.Requests.Where(x => x.Executors.Count(y => y.Id == curId) == 0), "Id", "Name");
-            return View(requestSolution);
+            return View(mathTaskSolution);
         }
         
-        // GET: RequestSolution/Delete/5
+        // GET: MathTaskSolution/Delete/5
         public async Task<ActionResult> Delete(int? id)
         {
-            RequestSolution requestSolution = await db.RequestSolutions.FindAsync(id);
+            MathTaskSolution mathTaskSolution = await db.RequestSolutions.FindAsync(id);
 
             // Нельзя удалить уже проверенное решение 
-            if (requestSolution.IsChecked)
+            if (mathTaskSolution.IsChecked)
             {
                 return RedirectToAction("MyIndex");
             }
             // Удалим информацию, что данный пользователь уже решал данную задачу.
-            var req = db.Requests.Find(requestSolution.RequestId);
+            var req = db.Requests.Find(mathTaskSolution.MathTaskId);
             var curId = this.User.Identity.GetUserId();
             var user = db.Users.Find(curId);
             req.Executors.Remove(user);
-            req.RequestSolutions.Remove(requestSolution);
+            req.RequestSolutions.Remove(mathTaskSolution);
 
             db.Entry(req).State = EntityState.Modified;;
-            db.RequestSolutions.Remove(requestSolution);
+            db.RequestSolutions.Remove(mathTaskSolution);
             await db.SaveChangesAsync();
             return RedirectToAction("MyIndex");
         }
@@ -159,25 +159,25 @@
                 return RedirectToAction("LogOff", "Account");
             }
 
-            RequestSolution req = db.RequestSolutions.Find(requestSolutionId);
+            MathTaskSolution req = db.RequestSolutions.Find(requestSolutionId);
             switch (status)
             {
                 case 0:
                     {
                         req.IsChecked = false;
-                        req.Right = false;
+                        req.IsRight = false;
                         break;
                     }
                 case 1:
                     {
                         req.IsChecked = true;
-                        req.Right = true;
+                        req.IsRight = true;
                         break;
                     }
                 case 2:
                     {
                         req.IsChecked = true;
-                        req.Right = false;
+                        req.IsRight = false;
                         break;
                     }
             }
@@ -203,7 +203,7 @@
 
         //Загрузка правильного решения
 
-        // GET: RequestSolution/Create
+        // GET: MathTaskSolution/Create
         public ActionResult CreateRightSolution(string id)
         {
             // Выбираем те задачи, для которых ещё не загружено правильное решение
@@ -212,12 +212,12 @@
             return PartialView("_CreateRightSolution");
         }
 
-        // POST: RequestSolution/Create
+        // POST: MathTaskSolution/Create
         // Чтобы защититься от атак чрезмерной передачи данных, включите определенные свойства, для которых следует установить привязку. Дополнительные 
         // сведения см. в статье http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateRightSolution([Bind(Include = "Id,Name,Comment,RequestId")] RequestSolution requestSolution, HttpPostedFileBase error)
+        public ActionResult CreateRightSolution([Bind(Include = "Id,Name,Comment,MathTaskId")] MathTaskSolution mathTaskSolution, HttpPostedFileBase error)
         {
             var curId = this.User.Identity.GetUserId();
 
@@ -239,31 +239,31 @@
                     error.SaveAs(Server.MapPath("~/Files/RequestSolutionFiles/" + path));
                     doc.Url = path;
 
-                    requestSolution.Document = doc;
+                    mathTaskSolution.Document = doc;
                     db.Documents.Add(doc);
                 }
                 else
-                    requestSolution.Document = null;
+                    mathTaskSolution.Document = null;
 
-                var req = db.Requests.Find(requestSolution.RequestId);
-                requestSolution.Request = req;
-                requestSolution.Author = user;
-                requestSolution.AuthorId = user.Id;
-                requestSolution.Right = false;
-                requestSolution.Date = DateTime.Now;
-                requestSolution.IsRightSolution = true;
+                var req = db.Requests.Find(mathTaskSolution.MathTaskId);
+                mathTaskSolution.MathTask = req;
+                mathTaskSolution.Author = user;
+                mathTaskSolution.AuthorId = user.Id;
+                mathTaskSolution.IsRight = false;
+                mathTaskSolution.Date = DateTime.Now;
+                mathTaskSolution.IsRight = true;
 
                 // Отметим, что решение относится к этой задаче
-                req.RequestSolutions.Add(requestSolution);
+                req.RequestSolutions.Add(mathTaskSolution);
                 req.Executors.Add(user);
 
                 // Поставим как правильное решение
-                req.RightRequestSolution = requestSolution;
-                req.RightRequestSolutionId = requestSolution.Id;
+                req.RightMathTaskSolution = mathTaskSolution;
+                req.RightRequestSolutionId = mathTaskSolution.Id;
 
                 db.Entry(req).State = EntityState.Modified;
 
-                db.RequestSolutions.Add(requestSolution);
+                db.RequestSolutions.Add(mathTaskSolution);
 
                 db.SaveChanges();
                 return RedirectToAction("MyRightSolutions");
@@ -275,25 +275,25 @@
 
         public async Task<ActionResult> DeleteRightSolution(int? id)
         {
-            RequestSolution requestSolution = await db.RequestSolutions.FindAsync(id);
+            MathTaskSolution mathTaskSolution = await db.RequestSolutions.FindAsync(id);
 
             // Нельзя удалить уже проверенное решение 
-            if (requestSolution.IsChecked)
+            if (mathTaskSolution.IsChecked)
             {
                 return RedirectToAction("MyRightSolutions");
             }
             // Удалим информацию, что данный пользователь уже решал данную задачу.
-            var req = db.Requests.Find(requestSolution.RequestId);
+            var req = db.Requests.Find(mathTaskSolution.MathTaskId);
             var curId = this.User.Identity.GetUserId();
             var user = db.Users.Find(curId);
 
             req.Executors.Remove(user);
-            req.RequestSolutions.Remove(requestSolution);
+            req.RequestSolutions.Remove(mathTaskSolution);
 
-            req.RightRequestSolution = null;
+            req.RightMathTaskSolution = null;
 
             db.Entry(req).State = EntityState.Modified; ;
-            db.RequestSolutions.Remove(requestSolution);
+            db.RequestSolutions.Remove(mathTaskSolution);
             await db.SaveChangesAsync();
             return RedirectToAction("MyRightSolutions");
         }
@@ -302,8 +302,8 @@
         {
             var curId = int.Parse(id);
             var reqSol = db.RequestSolutions.Find(curId);
-            var idReq = reqSol.Request.Id;
-            var model = db.Requests.Find(idReq).RightRequestSolution;
+            var idReq = reqSol.MathTask.Id;
+            var model = db.Requests.Find(idReq).RightMathTaskSolution;
 
             return PartialView("_ShowRightSolution", model);
         }

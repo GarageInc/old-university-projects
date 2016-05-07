@@ -1,4 +1,4 @@
-﻿@model IEnumerable<WebApplication.Models.RequestSolution>
+﻿@model IEnumerable<WebApplication.Models.MathTaskSolution>
 @using WebApplication.Models
 
 @{
@@ -10,7 +10,7 @@
 </div>
 
 <h2>Список правильных решений к задачам</h2>
-<p>Всего задач: @(Model.Count<RequestSolution>())</p>
+<p>Всего задач: @(Model.Count<MathTaskSolution>())</p>
 
 <div id="toolbar">
     <button id="remove" class="btn btn-warning" disabled>
@@ -42,7 +42,7 @@
         <tr>
             <th></th>
             <th>
-                 @Html.DisplayNameFor(model => model.Request.Name) родительской задачи
+                 @Html.DisplayNameFor(model => model.MathTask.Name) родительской задачи
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Author.Name)
@@ -68,7 +68,7 @@
                 <tr>
                     <td></td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Request.Name)
+                        @Html.DisplayFor(modelItem => item.MathTask.Name)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Author.Name)

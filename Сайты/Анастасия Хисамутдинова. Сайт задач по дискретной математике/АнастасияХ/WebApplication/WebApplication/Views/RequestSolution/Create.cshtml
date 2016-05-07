@@ -1,4 +1,4 @@
-﻿@model WebApplication.Models.RequestSolution
+﻿@model WebApplication.Models.MathTaskSolution
 
 @{
     ViewBag.Title = "Загрузка решения";
@@ -30,9 +30,9 @@
         </div>
         
         <div class="form-group">
-            @Html.LabelFor(model => model.Request, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.MathTask, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.RequestId, ViewBag.Requests as SelectList, new { @class = "form-control" })
+                @Html.DropDownListFor(model => model.MathTaskId, ViewBag.Requests as SelectList, new { @class = "form-control" })
             </div>
         </div>
 
@@ -67,7 +67,7 @@
 }
 
 <div>
-    @Html.ActionLink("Назад к списку", "MyIndex", "RequestSolution",new { @class = "buttonB" })
+    @Html.ActionLink("Назад к списку", "MyIndex", "MathTaskSolution",new { @class = "buttonB" })
 </div>
 
 @section Scripts {

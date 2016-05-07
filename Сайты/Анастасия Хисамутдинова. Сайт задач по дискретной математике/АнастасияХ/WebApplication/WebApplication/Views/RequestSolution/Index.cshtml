@@ -1,4 +1,4 @@
-﻿@model IEnumerable<WebApplication.Models.RequestSolution>
+﻿@model IEnumerable<WebApplication.Models.MathTaskSolution>
 @using Microsoft.AspNet.Identity
 @using WebApplication.Models
 
@@ -13,11 +13,11 @@
 <h2>Все решения</h2>
 
 <p>
-    @Html.ActionLink("Новое решение", "Create", "RequestSolution", new { @class = "buttonS" })
+    @Html.ActionLink("Новое решение", "Create", "MathTaskSolution", new { @class = "buttonS" })
 </p>
 
 <h2>Список задач</h2>
-<p>Всего задач: @(Model.Count<RequestSolution>())</p>
+<p>Всего задач: @(Model.Count<MathTaskSolution>())</p>
 
 <div id="toolbar">
     <button id="remove" class="btn btn-warning" disabled>
@@ -68,7 +68,7 @@
                 @Html.DisplayNameFor(model => model.IsChecked)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Right)
+                @Html.DisplayNameFor(model => model.IsRight)
             </th>
             <th></th>
         </tr>
@@ -106,13 +106,13 @@
                     <td>
                         @if (item.IsChecked)
                         {
-                            if (item.Right)
+                            if (item.IsRight)
                             {
                                 <h5>Решение верное!</h5>
                             }
                             else
                             {
-                                if (item.Request.RightRequestSolution != null)
+                                if (item.MathTask.RightMathTaskSolution != null)
                                 {
                                     <h5>Решение не верное!</h5>
                                     <a class="compItem" href="/RequestSolution/ShowRightSolution/@item.Id">
@@ -135,7 +135,7 @@
                     <td>
                         @using (Html.BeginForm("DistributeChangeStatus", "RequestSolution"))
                         {
-                            @Html.Hidden("requestSolutionId", item.Id)
+                            @Html.Hidden("MathTaskSolutionId", item.Id)
                             @Html.DropDownList("status",
                                 new[]
                                 {

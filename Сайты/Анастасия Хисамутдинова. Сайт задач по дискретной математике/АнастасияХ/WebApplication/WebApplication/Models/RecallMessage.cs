@@ -8,12 +8,8 @@ namespace WebApplication.Models
     /// <summary>
     ///  Отзыв
     /// </summary>
-    public class RecallMessage
+    public class RecallMessage : BaseModel
     {
-        [Key]
-        [Display(Name = "ID сообщения")]
-        public virtual int Id { get; set; }
-
         [Display(Name = "Текст")]
         [Required(ErrorMessage = "Обязательно для заполнения!")]
         public virtual string Text { get; set; }

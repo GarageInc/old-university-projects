@@ -1,4 +1,6 @@
 ﻿
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace WebApplication.Models
 {
     using System.Security.Claims;
@@ -29,19 +31,23 @@ namespace WebApplication.Models
         public virtual ICollection<Document> Avatar { get; set; }
 
         [Display(Name = "Задачи")]
-        public virtual ICollection<Request> Requests { get; set; }
+        public virtual ICollection<MathTask> Requests { get; set; }
         [Display(Name = "Решения задач")]
-        public virtual ICollection<RequestSolution> RequestSolutions { get; set; }
+        public virtual ICollection<MathTaskSolution> RequestSolutions { get; set; }
 
         [Display(Name = "Дата последнего посещения")]
         public virtual DateTime LastVisition { get; set; } 
 
         [Display(Name = "Оставленные отзывы")]
         public virtual ICollection<RecallMessage> RecallMessages { get; set; }
-
-        //[Display(Name = "Сообщения об ошибках")]
-        //public virtual ICollection<ErrorMessage> ErrorMessages { get; set; }
         
+        [Display(Name = "ID группы")]
+        public virtual int? StudentGroupId { get; set; }
+
+        [Display(Name = "Группа")]
+        [ForeignKey("StudentGroupId")]
+        public virtual StudentGroup StudentGroup { get; set; }
+
         [Display(Name = "Контакты")]
         public virtual ICollection<Contact> Contacts { get; set; }
 
@@ -53,6 +59,9 @@ namespace WebApplication.Models
 
         [Display(Name = "Комментарии")]
         public virtual ICollection<Comment> Comments { get; set; }
+
+        [Display(Name = "Курируемые группы")]
+        public virtual ICollection<StudentGroup> SupervisedGroups { get; set; }
 
         [Display(Name = "Заблокирован?")]
         public  virtual bool IsBlocked { get; set; }

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<WebApplication.Models.RequestSolution>
+﻿@model IEnumerable<WebApplication.Models.MathTaskSolution>
 @using Microsoft.AspNet.Identity
 @using WebApplication.Models
 
@@ -13,10 +13,10 @@
 <h2>Мои решения</h2>
 
 <p>
-    @Html.ActionLink("Новое решение", "Create", "RequestSolution", new { @class = "buttonS" })
+    @Html.ActionLink("Новое решение", "Create", "MathTaskSolution", new { @class = "buttonS" })
 </p>
 
-<p>Всего решений: @(Model.Count<RequestSolution>())</p>
+<p>Всего решений: @(Model.Count<MathTaskSolution>())</p>
 
 <div id="toolbar">
     <button id="remove" class="btn btn-warning" disabled>
@@ -102,13 +102,13 @@
                     <td>
                         @if (item.IsChecked)
                         {
-                            if (item.Right)
+                            if (item.IsRight)
                             {
                                 <h5>Решение верное!</h5>
                             }
                             else
                             {
-                                if (item.Request.RightRequestSolution != null)
+                                if (item.MathTask.RightMathTaskSolution != null)
                                 {
                                     <h5>Решение не верное!</h5>
                                     <a class="compItem" href="/RequestSolution/ShowRightSolution/@item.Id">

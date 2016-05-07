@@ -6450,7 +6450,7 @@ var ralpha = /alpha\([^)]*\)/i,
 	rrelNum = /^([\-+])=([\-+.\de]+)/,
 
 	cssShow = { position: "absolute", visibility: "hidden", display: "block" },
-	cssWidth = [ "Left", "Right" ],
+	cssWidth = [ "Left", "IsRight" ],
 	cssHeight = [ "Top", "Bottom" ],
 	curCSS,
 
@@ -7019,7 +7019,7 @@ jQuery.fn.extend({
 
 		var self = this;
 
-		// Request the remote document
+		// MathTask the remote document
 		jQuery.ajax({
 			url: url,
 			type: type,

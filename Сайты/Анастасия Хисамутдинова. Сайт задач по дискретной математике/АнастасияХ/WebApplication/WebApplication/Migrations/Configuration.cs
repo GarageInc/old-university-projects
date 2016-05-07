@@ -21,7 +21,8 @@ namespace WebApplication.Migrations
             var rm = new RoleManager<IdentityRole>
                 (new RoleStore<IdentityRole>(context));
             rm.Create(new IdentityRole("Administrator"));
-            rm.Create(new IdentityRole("User"));
+            rm.Create(new IdentityRole("Teacher"));
+            rm.Create(new IdentityRole("Student"));
 
             ApplicationDbContext db = new ApplicationDbContext();
             

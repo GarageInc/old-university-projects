@@ -40,7 +40,7 @@ namespace WebApplication.Controllers
                 };
 
                 ViewBag.requestSolutionId = requestSolutionId;
-                ViewData["RequestSolution"] = requestSolution;
+                ViewData["MathTaskSolution"] = requestSolution;
 
                 return View(model);
             }

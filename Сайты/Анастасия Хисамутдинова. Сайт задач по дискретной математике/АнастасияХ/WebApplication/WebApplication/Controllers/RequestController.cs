@@ -18,7 +18,7 @@
         
         public ActionResult Index()
         {
-            IEnumerable<Request> allReqs = null;
+            IEnumerable<MathTask> allReqs = null;
             
                 allReqs = db.Requests
                     //.Where(x=>x.Checked)
@@ -53,7 +53,7 @@
         // Создание новой задачи
         [HttpPost]
         //[Authorize]
-        public ActionResult Create(Request request, HttpPostedFileBase error)
+        public ActionResult Create(MathTask request, HttpPostedFileBase error)
         {
             var curId = HttpContext.User.Identity.GetUserId();
             // получаем текущего пользователя
@@ -125,11 +125,11 @@
             var currentId = HttpContext.User.Identity.GetUserId();
             // получаем текущего пользователя
             ApplicationUser user = db.Users.Where(m => m.Id == currentId).FirstOrDefault();
-            IEnumerable<Request> allReqs = null;
+            IEnumerable<MathTask> allReqs = null;
                 allReqs = db.Requests
                     .Where(r => r.Author.Id == user.Id) //получаем задачи для текущего пользователя
                     .Include(r => r.Author)// добавляем данные о пользователях
-                    .Include(r=>r.RightRequestSolution)
+                    .Include(r=>r.RightMathTaskSolution)
                     .ToList();         
             
             return View(allReqs);
@@ -143,7 +143,7 @@
         /// <returns></returns>
         public ActionResult MyDetails(int id)
         {
-            Request request = db.Requests.Find(id);
+            MathTask request = db.Requests.Find(id);
 
             if (request != null)
             {
@@ -169,7 +169,7 @@
         //[Authorize]
         public ActionResult MyDelete(int id)
         {
-            Request request = db.Requests.Find(id);
+            MathTask request = db.Requests.Find(id);
             // получаем текущего пользователя
             var curId = HttpContext.User.Identity.GetUserId();
             ApplicationUser user = db.Users.First(m => m.Id == curId);
@@ -203,7 +203,7 @@
         /// <returns></returns>
         public ActionResult Details(int id)
         {
-            Request request = db.Requests.Find(id);
+            MathTask request = db.Requests.Find(id);
 
             if (request != null)
             {
@@ -247,7 +247,7 @@
         //[Authorize]
         public ActionResult Delete(int id)
         {
-            Request request = db.Requests.Find(id);
+            MathTask request = db.Requests.Find(id);
             var curId = HttpContext.User.Identity.GetUserId();
             // получаем текущего пользователя
             ApplicationUser user = db.Users.First(m => m.Id == curId);
@@ -287,7 +287,7 @@
             {
                 return RedirectToAction("MyIndex");
             }
-            Request req = db.Requests.Find(requestId);
+            MathTask req = db.Requests.Find(requestId);
             ApplicationUser ex = db.Users.Find(executorId);
             if (req == null && ex == null)
             {

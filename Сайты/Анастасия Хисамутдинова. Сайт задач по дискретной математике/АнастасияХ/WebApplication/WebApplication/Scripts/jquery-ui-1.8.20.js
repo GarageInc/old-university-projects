@@ -128,7 +128,7 @@ $.fn.extend({
 });
 
 $.each( [ "Width", "Height" ], function( i, name ) {
-	var side = name === "Width" ? [ "Left", "Right" ] : [ "Top", "Bottom" ],
+	var side = name === "Width" ? [ "Left", "IsRight" ] : [ "Top", "Bottom" ],
 		type = name.toLowerCase(),
 		orig = {
 			innerWidth: $.fn.innerWidth,
@@ -1702,7 +1702,7 @@ $.ui.intersect = function(draggable, droppable, toleranceMode) {
 				&& t <= y1 && y2 <= b);
 			break;
 		case 'intersect':
-			return (l < x1 + (draggable.helperProportions.width / 2) // Right Half
+			return (l < x1 + (draggable.helperProportions.width / 2) // IsRight Half
 				&& x2 - (draggable.helperProportions.width / 2) < r // Left Half
 				&& t < y1 + (draggable.helperProportions.height / 2) // Bottom Half
 				&& y2 - (draggable.helperProportions.height / 2) < b ); // Top Half
@@ -1720,7 +1720,7 @@ $.ui.intersect = function(draggable, droppable, toleranceMode) {
 					(y1 < t && y2 > b)		// Surrounded vertically
 				) && (
 					(x1 >= l && x1 <= r) ||	// Left edge touching
-					(x2 >= l && x2 <= r) ||	// Right edge touching
+					(x2 >= l && x2 <= r) ||	// IsRight edge touching
 					(x1 < l && x2 > r)		// Surrounded horizontally
 				);
 			break;
@@ -1954,7 +1954,7 @@ $.widget("ui.resizable", $.ui.mouse, {
 					var padPos = [ 'padding',
 						/ne|nw|n/.test(i) ? 'Top' :
 						/se|sw|s/.test(i) ? 'Bottom' :
-						/^e$/.test(i) ? 'Right' : 'Left' ].join("");
+						/^e$/.test(i) ? 'IsRight' : 'Left' ].join("");
 
 					target.css(padPos, padWrapper);
 
@@ -2486,7 +2486,7 @@ $.ui.plugin.add("resizable", "containment", {
 		// i'm a node, so compute top, left, right, bottom
 		else {
 			var element = $(ce), p = [];
-			$([ "Top", "Right", "Left", "Bottom" ]).each(function(i, name) { p[i] = num(element.css("padding" + name)); });
+			$([ "Top", "IsRight", "Left", "Bottom" ]).each(function(i, name) { p[i] = num(element.css("padding" + name)); });
 
 			self.containerOffset = element.offset();
 			self.containerPosition = element.position();
@@ -3326,7 +3326,7 @@ $.widget("ui.sortable", $.ui.mouse, {
 			return isOverElement;
 		} else {
 
-			return (l < x1 + (this.helperProportions.width / 2) // Right Half
+			return (l < x1 + (this.helperProportions.width / 2) // IsRight Half
 				&& x2 - (this.helperProportions.width / 2) < r // Left Half
 				&& t < y1 + (this.helperProportions.height / 2) // Bottom Half
 				&& y2 - (this.helperProportions.height / 2) < b ); // Top Half

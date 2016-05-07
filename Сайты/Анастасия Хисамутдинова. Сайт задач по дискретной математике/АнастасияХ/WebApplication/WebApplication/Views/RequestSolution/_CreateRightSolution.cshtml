@@ -1,4 +1,4 @@
-﻿@model WebApplication.Models.RequestSolution
+﻿@model WebApplication.Models.MathTaskSolution
 
 <div class="modal-content">
     <div class="modal-header">
@@ -30,9 +30,9 @@
                 </div>
 
                     <div class="form-group">
-                        @Html.LabelFor(model => model.Request, htmlAttributes: new { @class = "control-label col-md-2" })
+                        @Html.LabelFor(model => model.MathTask, htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-10">
-                            @Html.DropDownListFor(model => model.RequestId, ViewBag.Requests as SelectList, new { @class = "form-control" })
+                            @Html.DropDownListFor(model => model.MathTaskId, ViewBag.Requests as SelectList, new { @class = "form-control" })
                         </div>
                     </div>
 

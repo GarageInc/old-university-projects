@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Request>
+﻿@model IEnumerable<MathTask>
 @using Microsoft.AspNet.Identity
 @using WebApplication.Models
 
@@ -10,7 +10,7 @@
 </div>
 
 <h2>Список всех задач</h2>
-<p>Всего задач: @(Model.Count<Request>())</p>
+<p>Всего задач: @(Model.Count<MathTask>())</p>
 
 <br />
 <div id="toolbar">

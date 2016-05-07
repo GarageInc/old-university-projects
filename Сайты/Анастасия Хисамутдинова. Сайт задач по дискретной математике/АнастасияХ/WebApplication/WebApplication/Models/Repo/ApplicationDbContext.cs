@@ -16,8 +16,8 @@ namespace WebApplication.Models
 
         }
         //public DbSet<ApplicationUser> ApplicationUsers { get; set; }
-        public DbSet<Request> Requests { get; set; }
-        public DbSet<RequestSolution> RequestSolutions { get; set; }
+        public DbSet<MathTask> Requests { get; set; }
+        public DbSet<MathTaskSolution> RequestSolutions { get; set; }
         public DbSet<RecallMessage> RecallMessages { get; set; }
         //public DbSet<ErrorMessage> ErrorMessages { get; set; }
 
@@ -26,6 +26,8 @@ namespace WebApplication.Models
         public DbSet<Contact> Contacts { get; set; }
         
         public DbSet<Comment> Comments { get; set; }
+
+        public DbSet<StudentGroup> StudentsGroups { get; set; }
 
         public static ApplicationDbContext Create()
         {
@@ -38,7 +40,6 @@ namespace WebApplication.Models
 
             modelBuilder.Entity<ApplicationUser>().HasMany(c => c.Requests);
             modelBuilder.Entity<ApplicationUser>().HasMany(c => c.RequestSolutions);
-            //modelBuilder.Entity<ApplicationUser>().HasMany(c => c.ErrorMessages);
             modelBuilder.Entity<ApplicationUser>().HasMany(c => c.RecallMessages);
             modelBuilder.Entity<ApplicationUser>().HasMany(c => c.Contacts);
             modelBuilder.Entity<ApplicationUser>().HasMany(c => c.Comments);
@@ -46,13 +47,15 @@ namespace WebApplication.Models
             modelBuilder.Entity<ApplicationUser>().HasMany(c => c.DownComments);
             modelBuilder.Entity<ApplicationUser>().HasMany(c => c.UpRecalls);
             modelBuilder.Entity<ApplicationUser>().HasMany(c => c.DownRecalls);
+            modelBuilder.Entity<ApplicationUser>().HasMany(c => c.SupervisedGroups);
 
 
-            modelBuilder.Entity<Request>().HasMany(c => c.RequestSolutions);
-            modelBuilder.Entity<Request>().HasMany(c => c.Comments);
-            
-            //modelBuilder.Entity<Request>().HasMany(c => c.Documents);
-            //modelBuilder.Entity<RequestSolution>().HasMany(c => c.Documents);
+            modelBuilder.Entity<MathTask>().HasMany(c => c.RequestSolutions);
+            modelBuilder.Entity<MathTask>().HasMany(c => c.Comments);
+
+            modelBuilder.Entity<StudentGroup>().HasMany(c => c.Students);
+            // modelBuilder.Entity<MathTask>().HasMany(c => c.Documents);
+            // modelBuilder.Entity<MathTaskSolution>().HasMany(c => c.Documents);
         }
     }
 }

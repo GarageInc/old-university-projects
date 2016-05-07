@@ -2,10 +2,8 @@
 namespace WebApplication.Models
 {
     using System.ComponentModel.DataAnnotations;
-    public class Document
+    public class Document : BaseModel
     {
-        public int Id { get; set; }
-
         [Display(Name = "Ссылка")]
         public virtual string Url { get; set; }
 
