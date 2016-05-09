@@ -159,11 +159,13 @@ namespace Research
             double t = 0, pc = 0, x = 0, sum2=0, sum = 0, sum1 = 0, xl2 = 0, c4 = 0.493091099368767, c5 = 0.150757555616266, c6 = 0.174762639299271;// sum dlya x^8
             x = 10;
 
+            double rbV_C = double.Parse(textBoxС_V.Text);
+
             t = 0.333333333333333;
 
             StreamReader file = new StreamReader("prost.txt");
             
-            kil = 0; pc = 0; sum = 0; sum1 = 0; i = System.Convert.ToInt32(helpl.Text);
+            kil = 0; pc = 0; sum = 0; sum1 = 0;
 
             while (x <= 100000000)
             {
@@ -176,11 +178,11 @@ namespace Research
                     if (pc < x)
                     {
 
-                        if (rb4.Checked)
+                        if (rbG.Checked)
                             sum1 += Math.Log(pc, Math.E) / (pc * pc);
-                        else if (rb5.Checked)
+                        else if (rbD.Checked)
                             sum1 += Math.Log(pc, Math.E) / (pc * pc * pc);
-                        else if (rb6.Checked)
+                        else if (rbE.Checked)
                             sum1 += (1 / (pc * pc * pc));
                         else
                         {
@@ -190,47 +192,49 @@ namespace Research
 
                     } //else kil++;
                 }
-                if (rb6.Checked)
+
+                if (rbE.Checked)
                     table.Rows[i].Cells[0].Value = (sum1).ToString();
-                else if (rb5.Checked)
+                else if (rbD.Checked)
                     table.Rows[i].Cells[0].Value = (sum1).ToString();
-                else if(rb4.Checked)
+                else if(rbG.Checked)
                     table.Rows[i].Cells[0].Value = (sum1).ToString();
                 else
                     table.Rows[i].Cells[0].Value = (sum).ToString();
 
                 kil++;
 
-                if (rb1.Checked)
+                if (rbA.Checked)
                     xl2 = Math.Sqrt(x);
-                else if (rb2.Checked)
+                else if (rbB.Checked)
                     xl2 = Math.Sqrt(x) * Math.Log(x, Math.E);
-                else if (rb3.Checked)
-                    xl2 = (-1) * (Math.Log(x, Math.E) / Math.Sqrt(x));
-                else if (rb5.Checked)
+                else if (rbV.Checked)
+                    xl2 = x - Math.Sqrt(x) - rbV_C * (Math.Log(x, Math.E) / Math.Sqrt(x));
+                else if (rbD.Checked)
                     xl2 = c5 - (1 / (x * x));
-                else if (rb6.Checked)
-                    xl2 = c6 - 1 / (2 * x * x * Math.Log(x, Math.E));
+                else if (rbE.Checked)
+                    xl2 = c6 - 1 / ( x * x * Math.Log(x, Math.E));
                 else
                     xl2 = c4 - (1 / x);
 
                 table.Rows[i].Cells[1].Value = (xl2).ToString();
 
-                if (rb6.Checked)
+                if (rbE.Checked)
                     table.Rows[i].Cells[2].Value = (sum1 / xl2).ToString();
-                else if (rb4.Checked)
+                else if (rbG.Checked)
                     table.Rows[i].Cells[2].Value = (sum1 / xl2).ToString();
-                else if (rb5.Checked)
+                else if (rbD.Checked)
                     table.Rows[i].Cells[2].Value = (sum1 / xl2).ToString();
                 else
                     table.Rows[i].Cells[2].Value = (sum / xl2).ToString();
 
                 table.Rows[i].Cells[3].Value = (x).ToString();
 
-                if (rb4.Checked) sum1 += (Math.Log(pc, Math.E)) / (pc * pc);
-                else if (rb5.Checked)
+                if (rbG.Checked)
+                    sum1 += (Math.Log(pc, Math.E)) / (pc * pc);
+                else if (rbD.Checked)
                     sum1 += Math.Log(pc, Math.E) / (pc * pc * pc);
-                else if (rb6.Checked)
+                else if (rbE.Checked)
                     sum1 += (1 / (pc * pc * pc));
                 else
                 {
