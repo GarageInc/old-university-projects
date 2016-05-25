@@ -11,3 +11,16 @@ C:\Users\7\Downloads\WpfApplication1\WpfApplication1\obj\x86\Debug\WpfApplicatio
 C:\Users\7\Downloads\WpfApplication1\WpfApplication1\obj\x86\Debug\WpfApplication1.csproj.GenerateResource.Cache
 C:\Users\7\Downloads\WpfApplication1\WpfApplication1\obj\x86\Debug\WpfApplication1.exe
 C:\Users\7\Downloads\WpfApplication1\WpfApplication1\obj\x86\Debug\WpfApplication1.pdb
+C:\Data\all\C#\WPF\Гелюся - рисование эллипса\WpfApplication1\WpfApplication1\bin\Debug\WpfApplication1.exe.config
+C:\Data\all\C#\WPF\Гелюся - рисование эллипса\WpfApplication1\WpfApplication1\bin\Debug\WpfApplication1.exe
+C:\Data\all\C#\WPF\Гелюся - рисование эллипса\WpfApplication1\WpfApplication1\bin\Debug\WpfApplication1.pdb
+C:\Data\all\C#\WPF\Гелюся - рисование эллипса\WpfApplication1\WpfApplication1\obj\x86\Debug\WpfApplication1.csprojResolveAssemblyReference.cache
+C:\Data\all\C#\WPF\Гелюся - рисование эллипса\WpfApplication1\WpfApplication1\obj\x86\Debug\MainWindow.baml
+C:\Data\all\C#\WPF\Гелюся - рисование эллипса\WpfApplication1\WpfApplication1\obj\x86\Debug\MainWindow.g.cs
+C:\Data\all\C#\WPF\Гелюся - рисование эллипса\WpfApplication1\WpfApplication1\obj\x86\Debug\App.g.cs
+C:\Data\all\C#\WPF\Гелюся - рисование эллипса\WpfApplication1\WpfApplication1\obj\x86\Debug\WpfApplication1_MarkupCompile.cache
+C:\Data\all\C#\WPF\Гелюся - рисование эллипса\WpfApplication1\WpfApplication1\obj\x86\Debug\WpfApplication1.g.resources
+C:\Data\all\C#\WPF\Гелюся - рисование эллипса\WpfApplication1\WpfApplication1\obj\x86\Debug\WpfApplication1.Properties.Resources.resources
+C:\Data\all\C#\WPF\Гелюся - рисование эллипса\WpfApplication1\WpfApplication1\obj\x86\Debug\WpfApplication1.csproj.GenerateResource.Cache
+C:\Data\all\C#\WPF\Гелюся - рисование эллипса\WpfApplication1\WpfApplication1\obj\x86\Debug\WpfApplication1.exe
+C:\Data\all\C#\WPF\Гелюся - рисование эллипса\WpfApplication1\WpfApplication1\obj\x86\Debug\WpfApplication1.pdb

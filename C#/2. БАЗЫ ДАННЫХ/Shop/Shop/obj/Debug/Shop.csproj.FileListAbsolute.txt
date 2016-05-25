@@ -39,3 +39,4 @@ F:\AllProjects\Опытные\C#\2. БАЗЫ ДАННЫХ\Shop\Shop\obj\Debug\Sh
 F:\AllProjects\Опытные\C#\2. БАЗЫ ДАННЫХ\Shop\Shop\obj\Debug\Shop.Migrations.Initial.resources
 F:\AllProjects\Опытные\C#\2. БАЗЫ ДАННЫХ\Shop\Shop\bin\Debug\Database.mdf
 F:\AllProjects\Опытные\C#\2. БАЗЫ ДАННЫХ\Shop\Shop\bin\Debug\Database_log.ldf
+C:\Data\all\C#\2. БАЗЫ ДАННЫХ\Shop\Shop\bin\Debug\Shop.exe.config

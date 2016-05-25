@@ -14,3 +14,4 @@ C:\Users\9-b-r_000\Desktop\Shop\Shop\obj\Debug\Shop.csproj.GenerateResource.Cach
 C:\Users\9-b-r_000\Desktop\Shop\Shop\obj\Debug\Shop.exe
 C:\Users\9-b-r_000\Desktop\Shop\Shop\obj\Debug\Shop.pdb
 C:\Users\9-b-r_000\Desktop\Shop\Shop\obj\Debug\Shop.Migrations.Initial.resources
+C:\Data\all\C#\2. БАЗЫ ДАННЫХ\Магазин с базой данных, типа 1С — копия\Shop\bin\Debug\Shop.exe.config

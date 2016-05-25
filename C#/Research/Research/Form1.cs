@@ -179,66 +179,67 @@ namespace Research
                     {
 
                         if (rbG.Checked)
-                            sum1 += Math.Log(pc, Math.E) / (pc * pc);
+                            sum1 += Math.Abs(Math.Log(pc, Math.E) / (pc * pc));
                         else if (rbD.Checked)
-                            sum1 += Math.Log(pc, Math.E) / (pc * pc * pc);
+                            sum1 += Math.Abs(Math.Log(pc, Math.E) / (pc * pc * pc));
                         else if (rbE.Checked)
-                            sum1 += (1 / (pc * pc * pc));
+                            sum1 += Math.Abs((1 / (pc * pc * pc)));
                         else
                         {
-                            sum2 += Math.Log(pc);
-                            sum = sum2 - x + Math.Sqrt(x);
+                            sum2 += Math.Abs(Math.Log(pc, Math.E));
+                            sum = sum2;//Math.Abs(sum2 - x + Math.Sqrt(x));
                         }
 
                     } //else kil++;
                 }
 
                 if (rbE.Checked)
-                    table.Rows[i].Cells[0].Value = (sum1).ToString();
+                    table.Rows[i].Cells[0].Value = Math.Abs(sum1).ToString();
                 else if (rbD.Checked)
-                    table.Rows[i].Cells[0].Value = (sum1).ToString();
+                    table.Rows[i].Cells[0].Value = Math.Abs(sum1).ToString();
                 else if(rbG.Checked)
-                    table.Rows[i].Cells[0].Value = (sum1).ToString();
+                    table.Rows[i].Cells[0].Value = Math.Abs(sum1).ToString();
                 else
-                    table.Rows[i].Cells[0].Value = (sum).ToString();
+                    table.Rows[i].Cells[0].Value = Math.Abs(sum).ToString();
 
                 kil++;
 
                 if (rbA.Checked)
-                    xl2 = Math.Sqrt(x);
+                    xl2 = Math.Abs(Math.Sqrt(x));
                 else if (rbB.Checked)
-                    xl2 = Math.Sqrt(x) * Math.Log(x, Math.E);
+                    xl2 = Math.Abs(Math.Sqrt(x) * Math.Log(x, Math.E));
                 else if (rbV.Checked)
-                    xl2 = x - Math.Sqrt(x) - rbV_C * (Math.Log(x, Math.E) / Math.Sqrt(x));
+                    xl2 = Math.Abs(x - Math.Sqrt(x) - rbV_C * (Math.Log(x, Math.E) / Math.Sqrt(x)));
                 else if (rbD.Checked)
-                    xl2 = c5 - (1 / (x * x));
+                    xl2 = Math.Abs(c5 - (1 / (x * x)));
                 else if (rbE.Checked)
-                    xl2 = c6 - 1 / ( x * x * Math.Log(x, Math.E));
+                    xl2 = Math.Abs(c6 - 1 / ( x * x * Math.Log(x, Math.E)));
                 else
-                    xl2 = c4 - (1 / x);
+                    xl2 = Math.Abs(c4 - (1 / x));
 
                 table.Rows[i].Cells[1].Value = (xl2).ToString();
 
+                sum1 = Math.Abs(sum1);
                 if (rbE.Checked)
-                    table.Rows[i].Cells[2].Value = (sum1 / xl2).ToString();
+                    table.Rows[i].Cells[2].Value = Math.Abs((sum1 / xl2)).ToString();
                 else if (rbG.Checked)
-                    table.Rows[i].Cells[2].Value = (sum1 / xl2).ToString();
+                    table.Rows[i].Cells[2].Value = Math.Abs((sum1 / xl2)).ToString();
                 else if (rbD.Checked)
-                    table.Rows[i].Cells[2].Value = (sum1 / xl2).ToString();
+                    table.Rows[i].Cells[2].Value = Math.Abs((sum1 / xl2)).ToString();
                 else
-                    table.Rows[i].Cells[2].Value = (sum / xl2).ToString();
+                    table.Rows[i].Cells[2].Value = Math.Abs((sum / xl2)).ToString();
 
                 table.Rows[i].Cells[3].Value = (x).ToString();
 
                 if (rbG.Checked)
-                    sum1 += (Math.Log(pc, Math.E)) / (pc * pc);
+                    sum1 += Math.Abs((Math.Log(pc, Math.E)) / (pc * pc));
                 else if (rbD.Checked)
-                    sum1 += Math.Log(pc, Math.E) / (pc * pc * pc);
+                    sum1 += Math.Abs(Math.Log(pc, Math.E) / (pc * pc * pc));
                 else if (rbE.Checked)
-                    sum1 += (1 / (pc * pc * pc));
+                    sum1 += Math.Abs((1 / (pc * pc * pc)));
                 else
                 {
-                    sum2 += Math.Log(pc, Math.E);
+                    sum2 += Math.Abs(Math.Log(pc, Math.E));
                     sum = sum2 - x + Math.Sqrt(x);
                 }
                 i++;

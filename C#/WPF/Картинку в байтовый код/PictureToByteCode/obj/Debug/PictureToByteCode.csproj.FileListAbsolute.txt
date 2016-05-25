@@ -4,3 +4,9 @@ C:\Users\7\Desktop\Опытные\C#\PictureToByteCode\PictureToByteCode\bin\Deb
 C:\Users\7\Desktop\Опытные\C#\PictureToByteCode\PictureToByteCode\obj\Debug\PictureToByteCode.csprojResolveAssemblyReference.cache
 C:\Users\7\Desktop\Опытные\C#\PictureToByteCode\PictureToByteCode\obj\Debug\PictureToByteCode.exe
 C:\Users\7\Desktop\Опытные\C#\PictureToByteCode\PictureToByteCode\obj\Debug\PictureToByteCode.pdb
+C:\Data\all\C#\WPF\Картинку в байтовый код\PictureToByteCode\bin\Debug\PictureToByteCode.exe.config
+C:\Data\all\C#\WPF\Картинку в байтовый код\PictureToByteCode\bin\Debug\PictureToByteCode.exe
+C:\Data\all\C#\WPF\Картинку в байтовый код\PictureToByteCode\bin\Debug\PictureToByteCode.pdb
+C:\Data\all\C#\WPF\Картинку в байтовый код\PictureToByteCode\obj\Debug\PictureToByteCode.csprojResolveAssemblyReference.cache
+C:\Data\all\C#\WPF\Картинку в байтовый код\PictureToByteCode\obj\Debug\PictureToByteCode.exe
+C:\Data\all\C#\WPF\Картинку в байтовый код\PictureToByteCode\obj\Debug\PictureToByteCode.pdb

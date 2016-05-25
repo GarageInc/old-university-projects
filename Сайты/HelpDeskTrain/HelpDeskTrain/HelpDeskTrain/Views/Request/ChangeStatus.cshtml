@@ -1,0 +1,106 @@
+﻿@model IEnumerable<Request>
+@using HelpDeskTrain.Models
+@{
+    ViewBag.Title = "Список заявок";
+    int i = 0;
+}
+
+<h2>Изменить статус заявки</h2>
+<p>Всего заявок: @(Model.Count<Request>())</p>
+<table>
+
+@foreach (var item in Model)
+{
+    i++;
+    <tr>
+        <td><b>@i</b></td>
+        <td>
+        @if (item.Status == (int)RequestStatus.Distributed)
+        { 
+             <img src="../../Content/pictures/status2.png" title="Заявка распределена" class="tdImage" />
+        }
+         else if (item.Status == (int)RequestStatus.Proccesing)
+         {
+            <img src="../../Content/pictures/status3.png" title="Заявка в процессе" class="tdImage" />
+         }
+         else if (item.Status == (int)RequestStatus.Checking)
+         {
+            <img src="../../Content/pictures/status4.png" title="Заявка на проверке" class="tdImage" />
+         } 
+        </td>
+        <td>
+            @if (item.Priority == (int)RequestPriority.Low)
+            { 
+             <img src="../../Content/pictures/prior1.png" title="Низкий приоритет" class="tdImage" />
+            }
+            else if (item.Priority == (int)RequestPriority.Medium)
+            { 
+             <img src="../../Content/pictures/prior2.png" title="Средний приоритет"  class="tdImage" />
+            }
+            else if (item.Priority == (int)RequestPriority.High)
+            {
+            <img src="../../Content/pictures/prior3.png" title="Высокий приоритет" class="tdImage" />
+            }
+            else if (item.Priority == (int)RequestPriority.Critical)
+            {
+            <img src="../../Content/pictures/prior4.png" title="Критичный приоритет" class="tdImage" />
+            }
+        </td>
+        <td>
+        @if (item.File != null)
+        { 
+            <a href="/Request/Download/@item.Id"><img src="../../Content/pictures/filey.png" title='@item.File' class="tdImage" /></a>
+        }
+        else
+        { 
+            <img src="../../Content/pictures/filen.png" title="без файла изображения" class="tdImage" />
+        }
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Lifecycle.Opened)
+        </td>
+        <td>
+                @Html.DisplayFor(modelItem => item.User.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Activ.CabNumber)
+            </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        
+        <td>
+            <div><a class="openDialog" data-dialog-id="infoDialog" data-dialog-title="Описание заявки" 
+               href="/Request/Details/@item.Id">
+               <img src="../../Content/pictures/info.png" class="tdImage" title="Описание заявки" />
+         </a></div>
+        </td>
+        @using (Html.BeginForm())
+        {
+        <td>
+            @Html.Hidden("requestId", item.Id)
+            @if (item.Status == (int)RequestStatus.Distributed)
+            {
+             @Html.DropDownList("status", new[] { new SelectListItem() { Text = "В процессе", Value = "3" }, 
+        new SelectListItem() { Text = "На проверке", Value = "4" }, new SelectListItem() { Text = "Закрыта", Value = "5" }})
+            }
+            else if (item.Status == (int)RequestStatus.Proccesing)
+            {
+             @Html.DropDownList("status", new[] { new SelectListItem() { Text = "На проверке", Value = "4" }, new SelectListItem() { Text = "Закрыта", Value = "5" } })
+            }
+            else if (item.Status == (int)RequestStatus.Checking)
+            {
+             @Html.DropDownList("status", new[] { new SelectListItem() { Text = "Закрыта", Value = "5" } })
+            }
+        </td>
+          <td>
+             <input type="submit" value="Изменить статус" />
+          </td>
+        }
+    </tr>
+}
+</table>
+@Styles.Render("~/Content/themes/base/css")
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryui")
+}

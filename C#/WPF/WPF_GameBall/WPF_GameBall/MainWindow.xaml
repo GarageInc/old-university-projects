@@ -1,0 +1,31 @@
+﻿<Window x:Class="WPF_GameBall.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Height="500" Width="700" Background="AliceBlue" Name="полеИгры" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" SizeToContent="Manual">
+    <Canvas Width="700" Height="500">
+        <Menu VerticalAlignment="Top" HorizontalAlignment="Left"            
+             Height="20" Width="700" Background="AliceBlue" Foreground="Blue">
+            <MenuItem Header="Меню">
+                <MenuItem Header="Старт" Background="AliceBlue" Click="НачатьИгру"></MenuItem>
+                <MenuItem Header="Выход" Background="AliceBlue" Click="ЗавершитьИгру"></MenuItem>
+            </MenuItem>
+        </Menu>
+
+        <Grid Height="462" Width="700">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="700*" />
+                <ColumnDefinition Width="0*" />
+                <ColumnDefinition Width="0*" />
+            </Grid.ColumnDefinitions>
+            <Rectangle Margin="114,132,0,0" Name="мяч" Stroke="BlanchedAlmond" RadiusX="120" RadiusY="120" Fill="Green" Height="38" VerticalAlignment="Top" Stretch="UniformToFill" HorizontalAlignment="Left" Width="38">
+                <Rectangle.BitmapEffect>
+                    <BevelBitmapEffect BevelWidth="11" />
+                </Rectangle.BitmapEffect>
+                <Rectangle.BitmapEffectInput>
+                    <BitmapEffectInput />
+                </Rectangle.BitmapEffectInput>
+            </Rectangle>
+            <Rectangle Height="13" Margin="200,390,0,0" Name="платформа" Stroke="Black" VerticalAlignment="Bottom" Fill="DarkOrange" HorizontalAlignment="Left" Width="100" />
+        </Grid>
+    </Canvas>
+</Window>

@@ -1,0 +1,170 @@
+﻿body {
+    font-size: .85em;
+    font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif;
+    color: #696969;
+    background-color:#eee;
+}
+
+header, footer, nav, section {
+    display: block;
+}
+
+
+/* Styles for basic forms
+-----------------------------------------------------------*/
+fieldset {
+    border: 1px solid #ddd;
+    padding: 0 1.4em 1.4em 1.4em;
+    margin: 0 0 1.5em 0;
+}
+
+legend {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+textarea {
+    min-height: 75px;
+}
+
+.editor-label {
+    margin: 1em 0 0 0;
+}
+
+.editor-field {
+    margin: 0.5em 0 0 0;
+}
+
+
+/* Styles for validation helpers
+-----------------------------------------------------------*/
+.field-validation-error {
+    color: #f00;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+.input-validation-error {
+    border: 1px solid #f00;
+    background-color: #fee;
+}
+
+.validation-summary-errors {
+    font-weight: bold;
+    color: #f00;
+}
+
+.validation-summary-valid {
+    display: none;
+}
+
+/* TABLE
+----------------------------------------------------------*/
+
+table .border{
+    border: solid 1px #e8eef4;
+    border-collapse: collapse;
+}
+
+table .border td {
+    border: solid 1px #e8eef4;
+}
+
+table td {
+    padding: 5px;
+    vertical-align:top;
+}
+
+table th {
+    padding: 6px 5px;
+    text-align: left;
+    background-color: #e8eef4;
+    border: solid 1px #e8eef4;
+}
+
+/*класс изображений*/
+ .tdImage{
+     
+    width:30px;
+    height:25px;
+}
+
+/* Меню */
+.menu {
+    font-family: Arial, Sans-Serif; 
+    width:99%; 
+    height:50px; 
+    position:relative;
+    z-index:100;
+}
+.menu ul li a, .menu ul li a:visited {
+    display:block; 
+    text-decoration:none;
+    width:104px; 
+    max-height:100px; 
+    text-align:center; 
+    color:#fff; 
+    border:1px solid #fff; 
+    background:silver; 
+    line-height:30px; 
+    font-size:13px; 
+    overflow:hidden; 
+    vertical-align: middle;
+}
+.menu ul {
+    padding:0; 
+    margin:0; 
+    list-style: none;
+}
+.menu ul li {
+    float:left; 
+    position:relative;
+    vertical-align: middle;
+}
+.menu ul li ul {
+    display: none;
+    opacity:0.8;
+}
+
+.menu ul li:hover a {
+    color:#fff; 
+    background:grey;
+}
+.menu ul li:hover ul {
+    display:block; 
+    position:absolute; 
+    top:25px; 
+    left:0;
+    width:105px;
+}
+.menu ul li:hover ul li a.hide {
+    background:#6a3; 
+    color:#fff;
+}
+.menu ul li:hover ul li:hover a.hide {
+    background:grey; 
+    color:#000;
+}
+.menu ul li:hover ul li ul {
+    display: none;
+}
+.menu ul li:hover ul li a {
+    display:block; 
+    background:#ddd; 
+    color:#000;
+}
+.menu ul li:hover ul li a:hover {
+    background:grey; 
+    color:#000;
+}
+.menu ul li:hover ul li:hover ul {
+    display:block; 
+    position:absolute; 
+    left:105px; 
+    top:0;
+}
+.menu ul li:hover ul li:hover ul.left {
+    left:-105px;
+}
