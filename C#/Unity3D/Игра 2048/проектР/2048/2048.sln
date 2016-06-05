@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2015
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "2048.CSharp", "2048.CSharp.csproj", "{D4DEAF26-D009-0833-301F-6438605E78F4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "2048.CSharp.Editor", "2048.CSharp.Editor.csproj", "{692580B7-91BA-36F2-2B4C-DEDB3047EDED}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D4DEAF26-D009-0833-301F-6438605E78F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4DEAF26-D009-0833-301F-6438605E78F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D4DEAF26-D009-0833-301F-6438605E78F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D4DEAF26-D009-0833-301F-6438605E78F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{692580B7-91BA-36F2-2B4C-DEDB3047EDED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{692580B7-91BA-36F2-2B4C-DEDB3047EDED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{692580B7-91BA-36F2-2B4C-DEDB3047EDED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{692580B7-91BA-36F2-2B4C-DEDB3047EDED}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

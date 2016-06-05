@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Решето Аткина", "Решето Аткина\Решето Аткина.vcxproj", "{599C615C-7AC4-4676-8401-8205E10F21DB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{599C615C-7AC4-4676-8401-8205E10F21DB}.Debug|Win32.ActiveCfg = Debug|Win32
+		{599C615C-7AC4-4676-8401-8205E10F21DB}.Debug|Win32.Build.0 = Debug|Win32
+		{599C615C-7AC4-4676-8401-8205E10F21DB}.Release|Win32.ActiveCfg = Release|Win32
+		{599C615C-7AC4-4676-8401-8205E10F21DB}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
