@@ -1,0 +1,104 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    
+</head>
+<body>
+    
+
+    <div class="container body-content" id="content">
+        <div class="row-fluid">
+            <!-- В зависимости от роли пользователя устанавливаем определенное меню -->
+            @if (ViewContext.HttpContext.User.IsInRole("Администратор"))
+            {
+                <h2>Меню администратора: вы вошли как superadmin</h2>
+                <div class="menu">
+                    <ul>
+                        <li>
+                            <a>Справочники</a>
+                            <ul>
+                                <li>@Html.ActionLink("Отделы", "Departments", "Service")</li>
+                                <li>@Html.ActionLink("Активы", "Activ", "Service")</li>
+                                <li>@Html.ActionLink("Категории", "Categories", "Service")</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a >Заявки</a>
+                            <ul>
+                                <li>@Html.ActionLink("Мои заявки", "Index", "Request")</li>
+                                <li>@Html.ActionLink("Все заявки", "RequestList", "Request")</li>
+                                <li>@Html.ActionLink("Новая", "Create", "Request")</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a >Пользователи</a>
+                            <ul>
+                                <li>@Html.ActionLink("Добавление", "Create", "User")</li>
+                                <li>@Html.ActionLink("Просмотр", "Index", "User")</li>
+                            </ul>
+                        </li>
+                        <li>@Html.ActionLink("Выйти", "LogOff", "Account")</li>
+                    </ul>
+                </div>
+            }
+            else if (ViewContext.HttpContext.User.IsInRole("Модератор"))
+            {
+                <h2>Меню диспетчера</h2>
+                <div class="menu">
+                    <ul>
+                        <li>
+                            <a >Заявки</a>
+                            <ul>
+                                <li>@Html.ActionLink("Мои заявки", "Index", "Request")</li>
+                                <li>@Html.ActionLink("Распределить", "Distribute", "Request")</li>
+                                <li>@Html.ActionLink("Новая", "Create", "Request")</li>
+                            </ul>
+                        </li>
+                        <li>@Html.ActionLink("Пользователи", "Index", "User")</li>
+                        <li>@Html.ActionLink("Выйти", "LogOff", "Account")</li>
+                    </ul>
+                </div>
+            }
+            else if (ViewContext.HttpContext.User.IsInRole("Исполнитель"))
+            {
+                <h2>Меню исполнителя</h2>
+                <div class="menu">
+                    <ul>
+                        <li>
+                            <a >Заявки</a>
+                            <ul>
+                                <li>@Html.ActionLink("Мои заявки", "Index", "Request")</li>
+                                <li>@Html.ActionLink("Изменить статус", "ChangeStatus", "Request")</li>
+                                <li>@Html.ActionLink("Новая", "Create", "Request")</li>
+                            </ul>
+                        </li>
+                        <li>@Html.ActionLink("Пользователи", "Index", "User")</li>
+                        <li>@Html.ActionLink("Выйти", "LogOff", "Account")</li>
+                    </ul>
+                </div>
+            }
+            else if (ViewContext.HttpContext.User.IsInRole("Пользователь"))
+            {
+                <h2>Приветствую, @ViewContext.HttpContext.User.Identity.Name</h2>
+                <div class="menu">
+                    <ul>
+                        <li>@Html.ActionLink("Подать заявку", "Create", "Request")</li>
+                        <li>@Html.ActionLink("Мои заявки", "Index", "Request")</li>
+                        <li>@Html.ActionLink("Выйти", "LogOff", "Account")</li>
+                    </ul>
+                </div>
+            }
+            <br/>
+            @RenderBody()
+        </div>
+    </div>
+
+        @Scripts.Render("~/bundles/jquery")
+        @RenderSection("scripts", required: false)
+</body>
+</html>
