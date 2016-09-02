@@ -1,0 +1,21 @@
+﻿  main.cpp
+c:\data\all\all\c++\миллер-рабин\millerrabintest\main.cpp(4): warning C4305: инициализация: усечение из "__int64" к "int"
+c:\data\all\all\c++\миллер-рабин\millerrabintest\main.cpp(4): warning C4309: инициализация: усечение константного значения
+c:\data\all\all\c++\миллер-рабин\millerrabintest\primegen.h(116): warning C4244: инициализация: преобразование "uint64_t" в "unsigned int", возможна потеря данных
+c:\data\all\all\c++\миллер-рабин\millerrabintest\official_algorithm_tuples.h(14): warning C4244: инициализация: преобразование "uint64_t" в "int", возможна потеря данных
+c:\data\all\all\c++\миллер-рабин\millerrabintest\official_algorithm_tuples.h(30): warning C4244: аргумент: преобразование "uint64_t" в "const unsigned int", возможна потеря данных
+c:\data\all\all\c++\миллер-рабин\millerrabintest\official_algorithm_tuples.h(33): warning C4244: аргумент: преобразование "uint64_t" в "const unsigned int", возможна потеря данных
+c:\data\all\all\c++\миллер-рабин\millerrabintest\official_algorithm_tuples.h(130): warning C4244: инициализация: преобразование "uint64_t" в "unsigned int", возможна потеря данных
+c:\data\all\all\c++\миллер-рабин\millerrabintest\official_algorithm_tuples.h(187): warning C4244: инициализация: преобразование "uint64_t" в "unsigned int", возможна потеря данных
+c:\data\all\all\c++\миллер-рабин\millerrabintest\official_algorithm_pq_pqr.h(45): warning C4244: аргумент: преобразование "uint64_t" в "const unsigned int", возможна потеря данных
+c:\data\all\all\c++\миллер-рабин\millerrabintest\official_algorithm_pq_pqr.h(48): warning C4244: аргумент: преобразование "uint64_t" в "const unsigned int", возможна потеря данных
+c:\data\all\all\c++\миллер-рабин\millerrabintest\official_algorithm_pq_pqr.h(100): warning C4244: инициализация: преобразование "uint64_t" в "unsigned int", возможна потеря данных
+c:\data\all\all\c++\миллер-рабин\millerrabintest\official_algorithm_pq_pqr.h(116): warning C4244: аргумент: преобразование "uint64_t" в "int", возможна потеря данных
+c:\data\all\all\c++\миллер-рабин\millerrabintest\official_algorithm_pq_pqr.h(168): warning C4244: аргумент: преобразование "uint64_t" в "const unsigned int", возможна потеря данных
+c:\data\all\all\c++\миллер-рабин\millerrabintest\official_algorithm_pq_pqr.h(171): warning C4244: аргумент: преобразование "uint64_t" в "const unsigned int", возможна потеря данных
+c:\data\all\all\c++\миллер-рабин\millerrabintest\official_algorithm_pq_pqr.h(237): warning C4244: инициализация: преобразование "uint64_t" в "unsigned int", возможна потеря данных
+c:\data\all\all\c++\миллер-рабин\millerrabintest\official_algorithm_pq_pqr.h(253): warning C4244: аргумент: преобразование "uint64_t" в "int", возможна потеря данных
+c:\data\all\all\c++\миллер-рабин\millerrabintest\exhaustive_search.h(45): warning C4244: аргумент: преобразование "uint64_t" в "int", возможна потеря данных
+c:\data\all\all\c++\миллер-рабин\millerrabintest\mult_simples_pq.h(47): warning C4244: инициализация: преобразование "uint64_t" в "unsigned int", возможна потеря данных
+c:\data\all\all\c++\миллер-рабин\millerrabintest\mult_simples_pq.h(63): warning C4244: аргумент: преобразование "uint64_t" в "int", возможна потеря данных
+  MillerRabinTest.vcxproj -> C:\Data\all\all\C++\Миллер-Рабин\Debug\MillerRabinTest.exe

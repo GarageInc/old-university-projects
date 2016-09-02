@@ -22,11 +22,11 @@
         <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
-        <module name="maven-example" />
+        <module name="osago-bb" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="maven-example" target="1.8" />
+      <module name="osago-bb" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

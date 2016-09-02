@@ -8,37 +8,47 @@ import math
 
 from shutil import copyfile
 
-photoPath="/work/work/image.jpg"
+screenshotPath="/tmp/image.jpg"
 
 def executeCommand( command ):
     print( command )
     subprocess.call( command, shell=True, stderr=subprocess.STDOUT)
 	
-def makePhoto():
-    global photoPath
+def makeScreenshot():
+    global screenshotPath
     command = "/usr/bin/scrot {0}".format(
-		photoPath)
+		screenshotPath)
     executeCommand( command )
     
-def uploadPhoto():
+def uploadScreenshot():
     GATEWAY_UPLOAD_URL = "127.0.0.1:80/upload_image/"
-    ID_TERMINAL = 3
+    ID_TERMINAL = 1
 
-    global photoPath
+    global screenshotPath
 
     command = " /usr/bin/curl -i \
- -F cmd=myservice.func \
- -F id_terminal=3 \
+ -F cmd=bb.upload_screenshot \
+ -F id_terminal={0} \
  -F name=file \
  -F file=@{1} {2}".format( 
      ID_TERMINAL, 
-     photoPath, 
+     screenshotPath, 
      GATEWAY_UPLOAD_URL )
     
     executeCommand( command )
 
 
-makePhoto()
-print("maked photo...")
-uploadPhoto()
-print("...uploaded photo")
+makeScreenshot()
+print("maked screenshot...")
+uploadScreenshot()
+print("...uploaded screenshot")
+
+def testScreenshotsDirs():
+	url = "127.0.0.1:9001/"
+	command = " /usr/bin/curl -i \
+-F cmd=bb.screenshots_dates \
+-F id_terminal={0} {1}".format(1,url)
+
+	executeCommand( command )
+
+testScreenshotsDirs()

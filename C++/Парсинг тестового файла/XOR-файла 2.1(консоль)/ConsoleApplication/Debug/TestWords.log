@@ -1,0 +1,4 @@
+﻿  Form1.cpp
+  FileReader.obj : /DEBUG:FASTLINK не поддерживается, если присутствует управляемый код; выполняется перезапуск компоновки с /DEBUG:FULL
+  TestWords.vcxproj -> C:\Users\RinatF\Desktop\TestWords\TestWords\Debug\TestWords.exe
+  TestWords.vcxproj -> C:\Users\RinatF\Desktop\TestWords\TestWords\Debug\TestWords.pdb (Partial PDB)

@@ -1,0 +1,9 @@
+﻿C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets(392,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (TestWords.vcxproj).  This can lead to incorrect clean and rebuild behavior.
+  Source.cpp
+  FileReader.cpp
+c:\users\rinatf\desktop\парсинг текстового файла\парсинг тестового файла\xor-файла 2.1(консоль)\consoleapplication\filereader.cpp(77): warning C4244: =: преобразование "std::streamsize" в "int", возможна потеря данных
+c:\users\rinatf\desktop\парсинг текстового файла\парсинг тестового файла\xor-файла 2.1(консоль)\consoleapplication\filereader.cpp(151): warning C4554: ^: проверьте порядок применения операторов на наличие ошибки; для четкого задания порядка используйте скобки
+c:\users\rinatf\desktop\парсинг текстового файла\парсинг тестового файла\xor-файла 2.1(консоль)\consoleapplication\filereader.cpp(158): warning C4554: ^: проверьте порядок применения операторов на наличие ошибки; для четкого задания порядка используйте скобки
+c:\users\rinatf\desktop\парсинг текстового файла\парсинг тестового файла\xor-файла 2.1(консоль)\consoleapplication\filereader.cpp(164): warning C4554: ^: проверьте порядок применения операторов на наличие ошибки; для четкого задания порядка используйте скобки
+  Создание кода...
+  ConsoleApplication.vcxproj -> C:\Users\RinatF\Desktop\Парсинг текстового файла\Парсинг тестового файла\XOR-файла 2.1(консоль)\Debug\ConsoleApplication.exe
