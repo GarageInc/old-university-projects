@@ -7,3 +7,4 @@ C:\Users\7\Desktop\Опытные\C#\CryptoChat\CryptoChat\bin\Debug\CryptoChat.
 C:\Users\7\Desktop\Опытные\C#\CryptoChat\CryptoChat\obj\Debug\CryptoChat.exe
 C:\Users\7\Desktop\Опытные\C#\CryptoChat\CryptoChat\obj\Debug\CryptoChat.pdb
 C:\Users\7\Desktop\Опытные\C#\CryptoChat\CryptoChat\obj\Debug\CryptoChat.csprojResolveAssemblyReference.cache
+C:\Data\all\C#\1. Криптография, сжатие, шифры\CryptoChat\CryptoChat\bin\Debug\CryptoChat.exe.config

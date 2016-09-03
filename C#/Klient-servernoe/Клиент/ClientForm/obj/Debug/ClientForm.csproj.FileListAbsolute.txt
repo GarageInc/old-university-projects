@@ -100,3 +100,4 @@ F:\Projects\Опытные\all\C#\Klient-servernoe\Клиент\ClientForm\obj\D
 F:\Projects\Опытные\all\C#\Klient-servernoe\Клиент\ClientForm\obj\Debug\ClientForm.Form1.resources
 F:\Projects\Опытные\all\C#\Klient-servernoe\Клиент\ClientForm\obj\Debug\ClientForm.Properties.Resources.resources
 F:\Projects\Опытные\all\C#\Klient-servernoe\Клиент\ClientForm\obj\Debug\ClientForm.csproj.GenerateResource.Cache
+C:\Data\all\C#\Klient-servernoe\Клиент\ClientForm\bin\Debug\ClientForm.exe.config
