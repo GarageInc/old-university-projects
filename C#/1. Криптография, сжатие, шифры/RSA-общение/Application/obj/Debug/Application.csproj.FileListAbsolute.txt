@@ -34,3 +34,12 @@ C:\Data\Новая папка\all\C#\1. Криптография, сжатие, 
 C:\Data\Новая папка\all\C#\1. Криптография, сжатие, шифры\RSA-общение\Application\obj\Debug\Application.csproj.GenerateResource.Cache
 C:\Data\Новая папка\all\C#\1. Криптография, сжатие, шифры\RSA-общение\Application\obj\Debug\Application.exe
 C:\Data\Новая папка\all\C#\1. Криптография, сжатие, шифры\RSA-общение\Application\obj\Debug\Application.pdb
+C:\data\all\C#\1. Криптография, сжатие, шифры\RSA-общение\Application\bin\Debug\Application.exe.config
+C:\data\all\C#\1. Криптография, сжатие, шифры\RSA-общение\Application\obj\Debug\Application.exe
+C:\data\all\C#\1. Криптография, сжатие, шифры\RSA-общение\Application\obj\Debug\Application.pdb
+C:\data\all\C#\1. Криптография, сжатие, шифры\RSA-общение\Application\bin\Debug\Application.exe
+C:\data\all\C#\1. Криптография, сжатие, шифры\RSA-общение\Application\bin\Debug\Application.pdb
+C:\data\all\C#\1. Криптография, сжатие, шифры\RSA-общение\Application\obj\Debug\Application.csprojResolveAssemblyReference.cache
+C:\data\all\C#\1. Криптография, сжатие, шифры\RSA-общение\Application\obj\Debug\ApplicationMain.Form1.resources
+C:\data\all\C#\1. Криптография, сжатие, шифры\RSA-общение\Application\obj\Debug\Application.Properties.Resources.resources
+C:\data\all\C#\1. Криптография, сжатие, шифры\RSA-общение\Application\obj\Debug\Application.csproj.GenerateResource.Cache

@@ -23,3 +23,4 @@ C:\Users\7\Desktop\Опытные\C#\2. БАЗЫ ДАННЫХ\Грузопере
 F:\AllProjects\Опытные\C#\2. БАЗЫ ДАННЫХ\Грузоперевозки, Маша Николаева\Cargo\bin\Debug\Cargo.exe.config
 F:\AllProjects\Опытные\C#\2. БАЗЫ ДАННЫХ\Грузоперевозки, Маша Николаева\Cargo\obj\Debug\Cargo.exe
 F:\AllProjects\Опытные\C#\2. БАЗЫ ДАННЫХ\Грузоперевозки, Маша Николаева\Cargo\obj\Debug\Cargo.pdb
+C:\data\all\C#\2. БАЗЫ ДАННЫХ\Грузоперевозки, Маша Николаева\Cargo\bin\Debug\Cargo.exe.config

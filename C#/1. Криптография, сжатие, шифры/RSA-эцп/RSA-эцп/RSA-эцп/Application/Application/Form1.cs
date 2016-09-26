@@ -242,7 +242,7 @@ namespace ApplicationMain
             // Установим константу 'e'
             r = new Random();
 
-            E_bob = E_alice;// (BigInteger)new long[] { 65537, 257, 17 }[r.Next(0, 3)];// Одно из 3х простых чисел Ферма
+            E_bob = (BigInteger)new long[] { 65537, 257, 17 }[r.Next(0, 3)];// Одно из 3х простых чисел Ферма
             eBobTextBox.Text = E_bob.ToString();
 
             // Найдем константу 'd_bob' - закрытый ключ Боба
